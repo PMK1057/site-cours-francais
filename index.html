@@ -17,7 +17,7 @@
                 <button class="nav-btn" onclick="showSection('pronoms')">💬 Pronoms</button>
                 <button class="nav-btn" onclick="showSection('expressions')">💡 Expressions & Vocabulaire</button>
                 <button class="nav-btn" onclick="showSection('textes')">📝 Textes</button>
-                <button class="nav-btn" onclick="showSection('exercices')">✍️ Exercices</button>
+                <button class="nav-btn" onclick="showSection('textes-a-trous')">🧩 Textes à trous</button>
             </nav>
         </div>
     </header>
@@ -27,7 +27,7 @@
             <div class="home-welcome">
                 <h2>Bienvenue sur votre plateforme de français !</h2>
                 <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
-                    🔰 Les Bases • 📚 Grammaire • 🔄 Conjugaison • 💬 Pronoms • 💡 Expressions • 📝 Textes • ✍️ Exercices
+                    🔰 Les Bases • 📚 Grammaire • 🔄 Conjugaison • 💬 Pronoms • 💡 Expressions • 📝 Textes • 🧩 Textes à trous
                 </p>
                 <p style="font-size: 1.1em; color: #888; margin-top: 30px;">
                     <strong>Tous niveaux :</strong> Débutant, Intermédiaire, Avancé
@@ -44,7 +44,7 @@
                         <li><strong>5 cours de Pronoms</strong> (Possessifs, Démonstratifs, COD/COI, Toniques, EN/Y)</li>
                         <li><strong>2 cours d'Expressions & Vocabulaire</strong> (Expressions courantes, Contractions)</li>
                         <li><strong>1 section Textes</strong> (Mix Passé Composé/Présent A2)</li>
-                        <li><strong>3 exercices interactifs</strong> avec corrections automatiques</li>
+                        <li><strong>3 textes à trous + 3 exercices interactifs</strong> avec corrections automatiques</li>
                     </ul>
                 </div>
             </div>
@@ -233,6 +233,11 @@
                     <h3>📖 SUBJONCTIF PRÉSENT</h3>
                     <p>Textes avec verbes au subjonctif présent (réguliers et irréguliers)</p>
                 </div>
+            </div>
+        </div>
+        <!-- TEXTES À TROUS -->
+        <div id="textes-a-trous" class="section">
+            <div class="section-menu">
                 <div class="section-card level-intermediate" onclick="showCourse('geographie_france')">
                     <h3>🗺️ GÉOGRAPHIE DE LA FRANCE</h3>
                     <p>Textes à trous sur montagnes, fleuves et régions (présent / passé composé)</p>
@@ -241,11 +246,6 @@
                     <h3>⭐ FEMMES FRANÇAISES CÉLÈBRES</h3>
                     <p>Texte à trous avancé sur Baker, Piaf, Curie, Veil (multi-temps)</p>
                 </div>
-            </div>
-        </div>
-        <!-- EXERCICES MIXTES -->
-        <div id="exercices" class="section">
-            <div class="section-menu">
                 <div class="section-card level-intermediate" onclick="showCourse('exercice-cod-coi')">
                     <h3>💬 Exercice COD/COI</h3>
                     <p>12 phrases à compléter</p>

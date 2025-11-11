@@ -407,7 +407,7 @@
                 <button class="nav-btn" onclick="showSection('conjugaison')">🔄 Conjugaison</button>
                 <button class="nav-btn" onclick="showSection('pronoms')">💬 Pronoms</button>
                 <button class="nav-btn" onclick="showSection('expressions')">💡 Expressions & Vocabulaire</button>
-                <button class="nav-btn" onclick="showSection('exercices')">✍️ Exercices</button>
+                <button class="nav-btn" onclick="showSection('textes-a-trous')">🧩 Textes à trous</button>
             </nav>
         </div>
     </header>
@@ -418,7 +418,7 @@
             <div class="home-welcome">
                 <h2>Bienvenue sur votre plateforme de français !</h2>
                 <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
-                    📚 Grammaire • 🔄 Conjugaison • 💬 Pronoms • 💡 Expressions • ✍️ Exercices
+                    📚 Grammaire • 🔄 Conjugaison • 💬 Pronoms • 💡 Expressions • 🧩 Textes à trous
                 </p>
                 <p style="font-size: 1.1em; color: #888; margin-top: 30px;">
                     <strong>Tous niveaux :</strong> Débutant, Intermédiaire, Avancé
@@ -434,7 +434,7 @@
                         <li><strong>8 cours de Conjugaison</strong> (Passé Composé, Imparfait, Plus-que-parfait, Conditionnels, Subjonctifs)</li>
                         <li><strong>5 cours de Pronoms</strong> (Possessifs, Démonstratifs, COD/COI, Toniques, EN/Y)</li>
                         <li><strong>3 cours d'Expressions & Vocabulaire</strong> (Expressions courantes, Contractions, Vocabulaire thématique)</li>
-                        <li><strong>3 exercices interactifs</strong> avec corrections automatiques</li>
+                        <li><strong>3 textes à trous + 3 exercices interactifs</strong> avec corrections automatiques</li>
                     </ul>
                 </div>
             </div>
@@ -702,9 +702,17 @@
             </div>
         </div>
 
-        <!-- EXERCICES MIXTES -->
-        <div id="exercices" class="section">
+        <!-- TEXTES À TROUS -->
+        <div id="textes-a-trous" class="section">
             <div class="section-menu">
+                <div class="section-card" onclick="showCourse('geographie_france')">
+                    <h3>🗺️ GÉOGRAPHIE DE LA FRANCE</h3>
+                    <p>Textes à trous sur montagnes, fleuves et régions (présent / passé composé)</p>
+                </div>
+                <div class="section-card" onclick="showCourse('femmes_francaises_celebres')">
+                    <h3>⭐ FEMMES FRANÇAISES CÉLÈBRES</h3>
+                    <p>Texte à trous avancé sur Baker, Piaf, Curie, Veil (multi-temps)</p>
+                </div>
                 <div class="section-card" onclick="showCourse('exercice-cod-coi')">
                     <h3>💬 Exercice COD/COI</h3>
                     <p>12 phrases à compléter</p>
@@ -2780,7 +2788,7 @@
 
         <!-- EXERCICE: COD/COI -->
         <div id="exercice-cod-coi" class="course-content">
-            <button class="back-btn" onclick="backToSection('exercices')">← Retour</button>
+            <button class="back-btn" onclick="backToSection('textes-a-trous')">← Retour</button>
             
             <h2>✍️ Exercice : Pronoms COD et COI</h2>
             
@@ -2850,7 +2858,7 @@
 
         <!-- EXERCICE: Pronoms & Déterminants avec traductions -->
         <div id="exercice-pronoms-determinants" class="course-content">
-            <button class="back-btn" onclick="backToSection('exercices')">← Retour</button>
+            <button class="back-btn" onclick="backToSection('textes-a-trous')">← Retour</button>
             
             <h2>✍️ Exercice : Pronoms & Déterminants (avec traductions)</h2>
             
@@ -2907,7 +2915,7 @@
 
         <!-- EXERCICE: Conjugaison Mixte -->
         <div id="exercice-conjugaison-mixte" class="course-content">
-            <button class="back-btn" onclick="backToSection('exercices')">← Retour</button>
+            <button class="back-btn" onclick="backToSection('textes-a-trous')">← Retour</button>
             
             <h2>✍️ Exercice : Conjugaison Mixte (Présent, Passé Composé, Imparfait)</h2>
             
