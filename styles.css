@@ -105,6 +105,8 @@ nav {
     cursor: pointer;
     transition: all 0.3s;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 /* Couleurs par niveau - Débutant */
@@ -149,6 +151,21 @@ nav {
     font-size: 0.9em;
     opacity: 0.95;
     color: white;
+}
+
+.level-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.75em;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 /* Contenu des cours */
