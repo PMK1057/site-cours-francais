@@ -1,0 +1,67 @@
+
+    <button class="back-btn" onclick="backToSection('exercices')">← Retour</button>
+    
+    <h2>✍️ Exercice : Pronoms COD et COI</h2>
+    
+    <div class="info-box">
+        <p><strong>Rappel :</strong></p>
+        <ul>
+            <li><strong>COD</strong> : me, te, le, la, nous, vous, les</li>
+            <li><strong>COI</strong> : me, te, lui, nous, vous, leur</li>
+        </ul>
+    </div>
+
+    <div class="exercise">
+        <h4>Complétez avec le bon pronom</h4>
+        <div class="question">
+            1. Marie aime ce livre. Je <input type="text" id="ex_cod_1" class="answer"> prends pour elle.
+            <br><small>(le livre → COD)</small>
+        </div>
+        <div class="question">
+            2. Mes parents attendent une réponse. Je <input type="text" id="ex_cod_2" class="answer"> donne la réponse demain.
+            <br><small>(à mes parents → COI)</small>
+        </div>
+        <div class="question">
+            3. Tu ressembles à ton frère. Tout le monde <input type="text" id="ex_cod_3" class="answer"> dit.
+            <br><small>(cette chose → COD)</small>
+        </div>
+        <div class="question">
+            4. Sophie veut un cadeau. Je <input type="text" id="ex_cod_4" class="answer"> offre un livre.
+            <br><small>(à Sophie → COI)</small>
+        </div>
+        <div class="question">
+            5. Vous aimez ces chaussures ? Je <input type="text" id="ex_cod_5" class="answer"> achète !
+            <br><small>(les chaussures → COD)</small>
+        </div>
+        <div class="question">
+            6. Mon frère attend le bus. Je <input type="text" id="ex_cod_6" class="answer"> attends avec lui.
+            <br><small>(le bus → COD)</small>
+        </div>
+        <div class="question">
+            7. Tu donnes un cadeau à ta sœur ? Oui, je <input type="text" id="ex_cod_7" class="answer"> donne un collier.
+            <br><small>(à ta sœur → COI)</small>
+        </div>
+        <div class="question">
+            8. Ces magazines sont intéressants. Tu <input type="text" id="ex_cod_8" class="answer"> lis souvent ?
+            <br><small>(ces magazines → COD)</small>
+        </div>
+        <div class="question">
+            9. Nous écrivons à nos amis. Nous <input type="text" id="ex_cod_9" class="answer"> écrivons chaque semaine.
+            <br><small>(à nos amis → COI)</small>
+        </div>
+        <div class="question">
+            10. Paul cherche ses clés. Tu <input type="text" id="ex_cod_10" class="answer"> vois quelque part ?
+            <br><small>(ses clés → COD)</small>
+        </div>
+        <div class="question">
+            11. Tes enfants ressemblent à qui ? Ils <input type="text" id="ex_cod_11" class="answer"> ressemblent beaucoup.
+            <br><small>(à toi → COI)</small>
+        </div>
+        <div class="question">
+            12. J'offre des fleurs à ma mère. Je <input type="text" id="ex_cod_12" class="answer"> offre pour son anniversaire.
+            <br><small>(à ma mère → COI)</small>
+        </div>
+        <button onclick="checkExCOD()">Vérifier</button>
+        <button onclick="resetExCOD()">Recommencer</button>
+        <div id="result-ex-cod" class="result"></div>
+    </div>

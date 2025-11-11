@@ -1,0 +1,49 @@
+
+    <button class="back-btn" onclick="backToSection('exercices')">← Retour</button>
+    
+    <h2>✍️ Exercice : Conjugaison Mixte (Présent, Passé Composé, Imparfait)</h2>
+    
+    <div class="info-box">
+        <p><strong>Conjuguez les verbes entre parenthèses au temps approprié.</strong></p>
+    </div>
+
+    <div class="exercise">
+        <h4>Texte 1 : Weekend à la plage 🏖️</h4>
+        <p>
+            Le weekend dernier, Marc <input type="text" id="conj_1" class="answer" style="width:120px"> (voyager - PC) en Andalousie. 
+            Il <input type="text" id="conj_2" class="answer" style="width:120px"> (faire - IMP) très beau. 
+            Marc <input type="text" id="conj_3" class="answer" style="width:120px"> (nager - PC) dans la mer toute la journée. 
+            Le soir, il <input type="text" id="conj_4" class="answer" style="width:120px"> (être - IMP) fatigué mais content. 
+            Aujourd'hui, il <input type="text" id="conj_5" class="answer" style="width:120px"> (avoir - PRÉSENT) de beaux souvenirs.
+        </p>
+        <br>
+        <h4>Texte 2 : L'enfance de Sophie 👧</h4>
+        <p>
+            Quand Sophie <input type="text" id="conj_6" class="answer" style="width:120px"> (être - IMP) petite, 
+            elle <input type="text" id="conj_7" class="answer" style="width:120px"> (aller - IMP) à la plage tous les étés. 
+            Elle <input type="text" id="conj_8" class="answer" style="width:120px"> (aimer - IMP) beaucoup nager. 
+            Un jour, elle <input type="text" id="conj_9" class="answer" style="width:120px"> (rencontrer - PC) son meilleur ami Pierre. 
+            Maintenant, elle <input type="text" id="conj_10" class="answer" style="width:120px"> (habiter - PRÉSENT) loin de la mer.
+        </p>
+        <br>
+        <h4>Texte 3 : Hier soir 🌙</h4>
+        <p>
+            Hier soir, je <input type="text" id="conj_11" class="answer" style="width:120px"> (dormir - IMP) 
+            quand le téléphone <input type="text" id="conj_12" class="answer" style="width:120px"> (sonner - PC). 
+            C' <input type="text" id="conj_13" class="answer" style="width:120px"> (être - IMP) mon ami Paul. 
+            Il <input type="text" id="conj_14" class="answer" style="width:120px"> (vouloir - IMP) sortir en boîte. 
+            Je <input type="text" id="conj_15" class="answer" style="width:120px"> (dire - PC) oui et 
+            nous <input type="text" id="conj_16" class="answer" style="width:120px"> (passer - PC) une super soirée !
+        </p>
+
+        <div class="info-box" style="margin-top: 30px;">
+            <p><strong>Légende :</strong></p>
+            <p>PC = Passé Composé ⚡ (action terminée)</p>
+            <p>IMP = Imparfait 🎬 (description, habitude, contexte)</p>
+            <p>PRÉSENT = Maintenant ✨</p>
+        </div>
+
+        <button onclick="checkConj()">Vérifier</button>
+        <button onclick="resetConj()">Recommencer</button>
+        <div id="result-conj" class="result"></div>
+    </div>

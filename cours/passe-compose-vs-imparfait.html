@@ -1,0 +1,102 @@
+
+    <button class="back-btn" onclick="backToSection('conjugaison')">← Retour</button>
+    
+    <h2>⚡ PASSÉ COMPOSÉ vs 🎬 IMPARFAIT</h2>
+    
+    <div class="info-box">
+        <h3>💡 L'astuce du film</h3>
+        <p><strong>Imagine un film 🎬 :</strong></p>
+        <ul>
+            <li><strong>IMPARFAIT</strong> = La scène, le décor, l'ambiance (ce qui se passe en arrière-plan)</li>
+            <li><strong>PASSÉ COMPOSÉ</strong> = L'action principale (ce qui fait avancer l'histoire)</li>
+        </ul>
+    </div>
+
+    <h3>Quand les utiliser ?</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>PASSÉ COMPOSÉ ⚡</th>
+                <th>IMPARFAIT 🎬</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>⚡ Une action terminée / un événement précis</td>
+                <td>🎨 Une description (décor, personnes, météo)</td>
+            </tr>
+            <tr>
+                <td>➡️➡️➡️ Une succession d'actions</td>
+                <td>🔁 Une habitude dans le passé</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>⏳ Une action en cours d'accomplissement</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>💭 Un état d'esprit, sentiment ou statut</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Exemples</h3>
+    
+    <div class="example-box">
+        <h4>PASSÉ COMPOSÉ ⚡</h4>
+        <ul>
+            <li>Hier, <strong>j'ai mangé</strong> une pizza.</li>
+            <li>Elle <strong>est arrivée</strong> à 8h.</li>
+            <li>Je <strong>me suis levé</strong>, <strong>j'ai pris</strong> mon petit-déjeuner et je <strong>suis parti</strong> au travail.</li>
+        </ul>
+    </div>
+
+    <div class="example-box">
+        <h4>IMPARFAIT 🎬</h4>
+        <ul>
+            <li>Il <strong>faisait</strong> beau, le soleil <strong>brillait</strong>.</li>
+            <li>Elle <strong>portait</strong> une robe rouge.</li>
+            <li>Quand <strong>j'étais</strong> petit, <strong>j'allais</strong> à la plage tous les étés.</li>
+            <li>Je <strong>dormais</strong> quand tu as appelé.</li>
+            <li><strong>J'étais</strong> fatigué. Il <strong>avait</strong> 20 ans.</li>
+        </ul>
+    </div>
+
+    <div class="warning-box">
+        <h4>IMPARFAIT + PASSÉ COMPOSÉ ensemble</h4>
+        <p><strong>Exemple :</strong> Pendant que je <strong>marchais</strong> (🎬), je <strong>suis tombé</strong> (⚡)</p>
+        <p><strong>Exemple :</strong> Quand <strong>j'étais</strong> petit (🎬), <strong>j'ai rencontré</strong> mon meilleur ami (⚡)</p>
+    </div>
+
+    <h3>Exercices</h3>
+    <div class="exercise">
+        <h4>Exercice : Choisissez le bon temps (PC = Passé Composé, IMP = Imparfait)</h4>
+        <div class="question">
+            1. Hier, il ________ (faire) beau. 
+            <input type="text" id="pc_imp_1" class="answer" placeholder="faisait ou a fait ?">
+        </div>
+        <div class="question">
+            2. Je ________ (partir) à 8 heures ce matin.
+            <input type="text" id="pc_imp_2" class="answer" placeholder="partais ou suis parti ?">
+        </div>
+        <div class="question">
+            3. Quand j'________ (être) enfant, j'adorais le chocolat.
+            <input type="text" id="pc_imp_3" class="answer" placeholder="étais ou ai été ?">
+        </div>
+        <div class="question">
+            4. Nous ________ (visiter) le musée lundi dernier.
+            <input type="text" id="pc_imp_4" class="answer" placeholder="visitions ou avons visité ?">
+        </div>
+        <div class="question">
+            5. Elle ________ (porter) une jolie robe rouge.
+            <input type="text" id="pc_imp_5" class="answer" placeholder="portait ou a porté ?">
+        </div>
+        <div class="question">
+            6. Pendant que je ________ (dormir), le téléphone a sonné.
+            <input type="text" id="pc_imp_6" class="answer" placeholder="dormais ou ai dormi ?">
+        </div>
+        <button onclick="checkPCImp()">Vérifier</button>
+        <button onclick="resetPCImp()">Recommencer</button>
+        <div id="result-pc-imp" class="result"></div>
+    </div>

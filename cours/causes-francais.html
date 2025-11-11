@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exprimer la Cause en Français</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #11998e;
+            text-align: center;
+            border-bottom: 3px solid #11998e;
+            padding-bottom: 15px;
+        }
+        h2 {
+            color: #38ef7d;
+            margin-top: 30px;
+        }
+        .section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #11998e;
+        }
+        .exemple {
+            background: #e8f5e9;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-style: italic;
+        }
+        .formule {
+            background: #fff9c4;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: bold;
+            text-align: center;
+            border: 2px dashed #fbc02d;
+        }
+        .note {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #2196f3;
+        }
+        .attention {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ff9800;
+        }
+        .exercice {
+            background: #fce4ec;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        input[type="text"], select {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        select {
+            width: 85%;
+            cursor: pointer;
+        }
+        button {
+            background: #11998e;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #38ef7d;
+        }
+        .resultat {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .correct {
+            background: #d4edda;
+            color: #155724;
+        }
+        .incorrect {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .score {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #11998e;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #11998e;
+            color: white;
+        }
+        .vs {
+            text-align: center;
+            font-weight: bold;
+            color: #11998e;
+            margin: 10px 0;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤔 Exprimer la Cause en Français</h1>
+        
+        <div class="section">
+            <h2>1. Pourquoi ? (La Question)</h2>
+            <div class="formule">Pourquoi + sujet + verbe ?</div>
+            <div class="exemple">✨ <strong>Pourquoi</strong> es-tu fatigué ?</div>
+            <div class="exemple">✨ <strong>Pourquoi</strong> Marie n'est pas venue ?</div>
+            <div class="note">💡 <strong>Pourquoi</strong> sert à poser la question sur la cause.</div>
+        </div>
+
+        <div class="section">
+            <h2>2. Parce que (La Réponse Simple)</h2>
+            <div class="formule">Parce que + sujet + verbe</div>
+            <div class="exemple">✨ Je suis fatigué <strong>parce que</strong> j'ai mal dormi.</div>
+            <div class="exemple">✨ Elle est contente <strong>parce qu'</strong>elle a réussi son examen.</div>
+            <div class="note">💡 <strong>Parce que</strong> est la réponse directe à "pourquoi". C'est l'expression la plus courante et familière.</div>
+            <div class="attention">⚠️ <strong>Parce qu'</strong> devant une voyelle (a, e, i, o, u, h)</div>
+        </div>
+
+        <div class="section">
+            <h2>3. Car (Plus Formel)</h2>
+            <div class="formule">Phrase 1, car + sujet + verbe</div>
+            <div class="exemple">✨ Il ne viendra pas, <strong>car</strong> il est malade.</div>
+            <div class="exemple">✨ Elle a réussi, <strong>car</strong> elle a beaucoup travaillé.</div>
+            <div class="note">💡 <strong>Car</strong> est plus formel et littéraire. Il introduit une explication.</div>
+            <div class="attention">⚠️ <strong>Car</strong> ne commence jamais une phrase et ne s'élide jamais (pas de car').</div>
+        </div>
+
+        <div class="section">
+            <h2>4. Comme (En Début de Phrase)</h2>
+            <div class="formule">Comme + sujet + verbe, phrase principale</div>
+            <div class="exemple">✨ <strong>Comme</strong> il pleut, je reste à la maison.</div>
+            <div class="exemple">✨ <strong>Comme</strong> j'avais faim, j'ai mangé un sandwich.</div>
+            <div class="note">💡 <strong>Comme</strong> s'utilise en début de phrase pour donner la cause en premier.</div>
+        </div>
+
+        <div class="section">
+            <h2>5. À cause de / Grâce à (+ Nom)</h2>
+            <div class="formule">à cause de + nom (négatif) / grâce à + nom (positif)</div>
+            <div class="exemple">❌ Je suis en retard <strong>à cause du</strong> traffic.</div>
+            <div class="exemple">❌ Le match est annulé <strong>à cause de</strong> la pluie.</div>
+            <div class="exemple">✅ J'ai réussi <strong>grâce à</strong> ton aide.</div>
+            <div class="exemple">✅ Nous sommes arrivés tôt <strong>grâce au</strong> GPS.</div>
+            <div class="note">💡 <strong>À cause de</strong> = raison négative / <strong>Grâce à</strong> = raison positive</div>
+        </div>
+
+        <div class="section">
+            <h2>6. Puisque (Cause Évidente)</h2>
+            <div class="formule">Puisque + sujet + verbe</div>
+            <div class="exemple">✨ <strong>Puisque</strong> tu es libre, viens avec nous !</div>
+            <div class="exemple">✨ <strong>Puisqu'</strong>il ne veut pas venir, partons sans lui.</div>
+            <div class="note">💡 <strong>Puisque</strong> exprime une cause connue ou évidente pour les deux personnes.</div>
+        </div>
+
+        <div class="section">
+            <h2>7. Comparatifs et Superlatifs</h2>
+            <div class="formule">Comparatif : plus / moins / aussi + adjectif + que</div>
+            <div class="exemple">✨ Marie est <strong>plus rapide que</strong> Paul. (comparatif de supériorité)</div>
+            <div class="exemple">✨ Cet exercice est <strong>moins difficile que</strong> le précédent. (comparatif d'infériorité)</div>
+            <div class="exemple">✨ Ton idée est <strong>aussi pertinente que</strong> la mienne. (comparatif d'égalité)</div>
+            <div class="formule">Superlatif : le / la / les + plus / moins + adjectif</div>
+            <div class="exemple">✨ C'est <strong>le plus simple</strong> des exercices.</div>
+            <div class="exemple">✨ Elle est <strong>la moins grande</strong> de la classe.</div>
+            <div class="note">💡 N'oubliez pas d'accorder l'article (<strong>le / la / les</strong>) et parfois l'adjectif : <strong>les plus rapides</strong>, <strong>la moins intéressée</strong>, etc.</div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Tableau Comparatif</h2>
+            <table>
+                <tr>
+                    <th>Expression</th>
+                    <th>Usage</th>
+                    <th>Niveau</th>
+                    <th>Position</th>
+                </tr>
+                <tr>
+                    <td><strong>Parce que</strong></td>
+                    <td>Réponse directe à "pourquoi"</td>
+                    <td>Courant</td>
+                    <td>Milieu/fin</td>
+                </tr>
+                <tr>
+                    <td><strong>Car</strong></td>
+                    <td>Explication, justification</td>
+                    <td>Formel/écrit</td>
+                    <td>Milieu (après virgule)</td>
+                </tr>
+                <tr>
+                    <td><strong>Comme</strong></td>
+                    <td>Cause en premier plan</td>
+                    <td>Courant</td>
+                    <td>Début uniquement</td>
+                </tr>
+                <tr>
+                    <td><strong>Puisque</strong></td>
+                    <td>Cause évidente/connue</td>
+                    <td>Courant</td>
+                    <td>Début/milieu</td>
+                </tr>
+                <tr>
+                    <td><strong>À cause de</strong></td>
+                    <td>Raison négative + nom</td>
+                    <td>Courant</td>
+                    <td>Milieu/fin</td>
+                </tr>
+                <tr>
+                    <td><strong>Grâce à</strong></td>
+                    <td>Raison positive + nom</td>
+                    <td>Courant</td>
+                    <td>Milieu/fin</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="exercice">
+            <h2>🎯 Exercice 1 : Choisissez la bonne expression</h2>
+            <p><strong>Sélectionnez l'expression de cause appropriée :</strong></p>
+            
+            <div class="question">
+                <p>1. __________ pleut-il ? — Il pleut __________ c'est l'automne.</p>
+                <select id="q1a">
+                    <option value="">-- Choisir --</option>
+                    <option value="pourquoi">Pourquoi</option>
+                    <option value="parce que">Parce que</option>
+                    <option value="car">Car</option>
+                    <option value="comme">Comme</option>
+                </select>
+                <select id="q1b">
+                    <option value="">-- Choisir --</option>
+                    <option value="pourquoi">pourquoi</option>
+                    <option value="parce que">parce que</option>
+                    <option value="car">car</option>
+                    <option value="comme">comme</option>
+                </select>
+                <div id="r1" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>2. Je ne peux pas sortir __________ j'ai trop de travail.</p>
+                <select id="q2">
+                    <option value="">-- Choisir --</option>
+                    <option value="pourquoi">pourquoi</option>
+                    <option value="parce que">parce que</option>
+                    <option value="grâce à">grâce à</option>
+                    <option value="à cause de">à cause de</option>
+                </select>
+                <div id="r2" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>3. __________ il fait beau, nous allons à la plage.</p>
+                <select id="q3">
+                    <option value="">-- Choisir --</option>
+                    <option value="Parce que">Parce que</option>
+                    <option value="Car">Car</option>
+                    <option value="Comme">Comme</option>
+                    <option value="Grâce à">Grâce à</option>
+                </select>
+                <div id="r3" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>4. Il est en forme __________ sport.</p>
+                <select id="q4">
+                    <option value="">-- Choisir --</option>
+                    <option value="parce que le">parce que le</option>
+                    <option value="grâce au">grâce au</option>
+                    <option value="à cause du">à cause du</option>
+                    <option value="car le">car le</option>
+                </select>
+                <div id="r4" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>5. Le vol est annulé __________ mauvais temps.</p>
+                <select id="q5">
+                    <option value="">-- Choisir --</option>
+                    <option value="parce que">parce que</option>
+                    <option value="grâce au">grâce au</option>
+                    <option value="à cause du">à cause du</option>
+                    <option value="comme">comme</option>
+                </select>
+                <div id="r5" class="resultat" style="display:none;"></div>
+            </div>
+
+            <button onclick="verifierExo1()">Vérifier Exercice 1</button>
+            <button onclick="reinitialiserExo1()">Recommencer</button>
+            
+            <div id="score1" class="score" style="display:none;"></div>
+        </div>
+
+        <div class="exercice">
+            <h2>🎯 Exercice 2 : Complétez les phrases</h2>
+            <p><strong>Écrivez l'expression de cause appropriée :</strong></p>
+            
+            <div class="question">
+                <p>6. __________ tu es là, aide-moi s'il te plaît ! (cause évidente)</p>
+                <input type="text" id="q6" placeholder="Votre réponse">
+                <div id="r6" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>7. Je suis heureux __________ tes encouragements. (positif + nom)</p>
+                <input type="text" id="q7" placeholder="Votre réponse">
+                <div id="r7" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>8. Elle ne viendra pas, __________ elle est occupée. (formel)</p>
+                <input type="text" id="q8" placeholder="Votre réponse">
+                <div id="r8" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>9. Nous sommes fatigués __________ nous avons marché longtemps. (courant)</p>
+                <input type="text" id="q9" placeholder="Votre réponse">
+                <div id="r9" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>10. __________ j'avais soif, j'ai bu de l'eau. (début de phrase)</p>
+                <input type="text" id="q10" placeholder="Votre réponse">
+                <div id="r10" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>11. Le magasin est fermé __________ vacances. (négatif + nom)</p>
+                <input type="text" id="q11" placeholder="Votre réponse">
+                <div id="r11" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>12. __________ vous ne voulez pas venir, restez ici. (cause connue)</p>
+                <input type="text" id="q12" placeholder="Votre réponse">
+                <div id="r12" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>13. J'ai réussi l'examen __________ j'ai bien étudié. (réponse à pourquoi)</p>
+                <input type="text" id="q13" placeholder="Votre réponse">
+                <div id="r13" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>14. Nous avons gagné __________ travail d'équipe. (positif + nom)</p>
+                <input type="text" id="q14" placeholder="Votre réponse">
+                <div id="r14" class="resultat" style="display:none;"></div>
+            </div>
+
+            <div class="question">
+                <p>15. Il dort mal __________ stress. (négatif + nom)</p>
+                <input type="text" id="q15" placeholder="Votre réponse">
+                <div id="r15" class="resultat" style="display:none;"></div>
+            </div>
+
+            <button onclick="verifierExo2()">Vérifier Exercice 2</button>
+            <button onclick="reinitialiserExo2()">Recommencer</button>
+            
+            <div id="score2" class="score" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        // Exercice 1 - Réponses
+        const reponsesExo1 = {
+            q1a: 'pourquoi',
+            q1b: 'parce que',
+            q2: 'parce que',
+            q3: 'Comme',
+            q4: 'grâce au',
+            q5: 'à cause du'
+        };
+
+        // Exercice 2 - Réponses
+        const reponsesExo2 = {
+            q6: ['puisque', "puisqu'"],
+            q7: ['grâce à', 'grace a'],
+            q8: ['car'],
+            q9: ['parce que', "parce qu'"],
+            q10: ['comme'],
+            q11: ['à cause des', 'a cause des'],
+            q12: ['puisque', "puisqu'"],
+            q13: ['parce que', "parce qu'"],
+            q14: ['grâce au', 'grace au'],
+            q15: ['à cause du', 'a cause du']
+        };
+
+        function normaliser(texte) {
+            return texte.toLowerCase().trim().replace(/\s+/g, ' ');
+        }
+
+        function verifierExo1() {
+            let score = 0;
+            let total = 0;
+
+            // Question 1 avec deux parties
+            let q1a = document.getElementById('q1a').value;
+            let q1b = document.getElementById('q1b').value;
+            let r1 = document.getElementById('r1');
+            
+            if (q1a === reponsesExo1.q1a && q1b === reponsesExo1.q1b) {
+                r1.className = 'resultat correct';
+                r1.innerHTML = '✅ Correct !';
+                score++;
+            } else {
+                r1.className = 'resultat incorrect';
+                r1.innerHTML = '❌ Réponse correcte : Pourquoi / parce que';
+            }
+            r1.style.display = 'block';
+            total++;
+
+            // Questions 2-5
+            for (let i = 2; i <= 5; i++) {
+                let select = document.getElementById('q' + i);
+                let resultat = document.getElementById('r' + i);
+                let reponseUser = select.value;
+                
+                resultat.style.display = 'block';
+                
+                if (reponseUser === reponsesExo1['q' + i]) {
+                    resultat.className = 'resultat correct';
+                    resultat.innerHTML = '✅ Correct !';
+                    score++;
+                } else {
+                    resultat.className = 'resultat incorrect';
+                    resultat.innerHTML = '❌ Réponse correcte : ' + reponsesExo1['q' + i];
+                }
+                total++;
+            }
+
+            let scoreDiv = document.getElementById('score1');
+            scoreDiv.style.display = 'block';
+            scoreDiv.innerHTML = `Score Exercice 1 : ${score}/${total} 🎉`;
+            
+            if (score === total) {
+                scoreDiv.innerHTML += '<br>Parfait ! 🌟';
+            } else if (score >= total * 0.7) {
+                scoreDiv.innerHTML += '<br>Très bien ! 👍';
+            } else {
+                scoreDiv.innerHTML += '<br>Continue ! 💪';
+            }
+        }
+
+        function reinitialiserExo1() {
+            document.getElementById('q1a').value = '';
+            document.getElementById('q1b').value = '';
+            for (let i = 2; i <= 5; i++) {
+                document.getElementById('q' + i).value = '';
+                document.getElementById('r' + i).style.display = 'none';
+            }
+            document.getElementById('r1').style.display = 'none';
+            document.getElementById('score1').style.display = 'none';
+        }
+
+        function verifierExo2() {
+            let score = 0;
+            let total = Object.keys(reponsesExo2).length;
+
+            for (let i = 6; i <= 15; i++) {
+                let input = document.getElementById('q' + i);
+                let resultat = document.getElementById('r' + i);
+                let reponseUser = normaliser(input.value);
+                let bonnesReponses = reponsesExo2['q' + i];
+                
+                let correct = bonnesReponses.some(rep => normaliser(rep) === reponseUser);
+                
+                resultat.style.display = 'block';
+                
+                if (correct) {
+                    resultat.className = 'resultat correct';
+                    resultat.innerHTML = '✅ Correct !';
+                    score++;
+                } else {
+                    resultat.className = 'resultat incorrect';
+                    resultat.innerHTML = '❌ Réponse possible : ' + bonnesReponses[0];
+                }
+            }
+
+            let scoreDiv = document.getElementById('score2');
+            scoreDiv.style.display = 'block';
+            scoreDiv.innerHTML = `Score Exercice 2 : ${score}/${total} 🎉`;
+            
+            if (score === total) {
+                scoreDiv.innerHTML += '<br>Excellent travail ! 🌟';
+            } else if (score >= total * 0.7) {
+                scoreDiv.innerHTML += '<br>Bien joué ! 👍';
+            } else {
+                scoreDiv.innerHTML += '<br>Continue à pratiquer ! 💪';
+            }
+        }
+
+        function reinitialiserExo2() {
+            for (let i = 6; i <= 15; i++) {
+                document.getElementById('q' + i).value = '';
+                document.getElementById('r' + i).style.display = 'none';
+            }
+            document.getElementById('score2').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

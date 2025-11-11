@@ -1,0 +1,131 @@
+
+    <button class="back-btn" onclick="backToSection('grammaire')">← Retour</button>
+    
+    <h2>CE, CET, CETTE, CES : Les Déterminants Démonstratifs</h2>
+    
+    <div class="info-box">
+        <h3>📌 Introduction</h3>
+        <p>Les déterminants démonstratifs servent à désigner quelque chose ou quelqu'un de manière précise. Ils se placent <strong>devant le nom</strong> et s'accordent en genre et en nombre avec ce nom.</p>
+    </div>
+
+    <h3>Tableau des Déterminants Démonstratifs</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Masculin</th>
+                <th>Féminin</th>
+                <th>Pluriel (M+F)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>ce</strong> (devant consonne)</td>
+                <td rowspan="2"><strong>cette</strong></td>
+                <td rowspan="2"><strong>ces</strong></td>
+            </tr>
+            <tr>
+                <td><strong>cet</strong> (devant voyelle/h muet)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Tableau Comparatif : Français - Anglais - Espagnol</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Français</th>
+                <th>Anglais</th>
+                <th>Espagnol</th>
+                <th>Exemple (FR)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>ce / cet</td>
+                <td>this (singular)</td>
+                <td>este</td>
+                <td>ce livre, cet homme</td>
+            </tr>
+            <tr>
+                <td>cette</td>
+                <td>this (singular)</td>
+                <td>esta</td>
+                <td>cette maison</td>
+            </tr>
+            <tr>
+                <td>ces</td>
+                <td>these (plural)</td>
+                <td>estos / estas</td>
+                <td>ces livres, ces maisons</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Règles d'Utilisation</h3>
+    
+    <div class="example-box">
+        <h4>1. CE vs CET (masculin)</h4>
+        <p>Pour le masculin singulier :</p>
+        <ul>
+            <li><strong>CE</strong> devant une consonne : <em>ce livre, ce garçon, ce chat</em></li>
+            <li><strong>CET</strong> devant une voyelle ou h muet : <em>cet ami, cet homme, cet ordinateur</em></li>
+        </ul>
+    </div>
+
+    <div class="example-box">
+        <h4>2. CETTE (féminin)</h4>
+        <p><strong>CETTE</strong> est toujours la même, peu importe si le nom commence par une consonne ou une voyelle.</p>
+        <ul>
+            <li>cette maison</li>
+            <li>cette amie</li>
+            <li>cette école</li>
+        </ul>
+    </div>
+
+    <div class="example-box">
+        <h4>3. CES (pluriel)</h4>
+        <p><strong>CES</strong> est unique pour le pluriel, masculin ET féminin.</p>
+        <ul>
+            <li>ces livres (masculin pluriel)</li>
+            <li>ces maisons (féminin pluriel)</li>
+            <li>ces enfants (mixte)</li>
+        </ul>
+    </div>
+
+    <div class="warning-box">
+        <h4>⚠️ Différence démonstratif vs possessif</h4>
+        <p><strong>Démonstratif</strong> = montrer / désigner : <em>"regarde <strong>ce</strong> chien !"</em></p>
+        <p><strong>Possessif</strong> = appartenir : <em>"c'est <strong>mon</strong> chien"</em></p>
+    </div>
+
+    <h3>Exercices</h3>
+    <div class="exercise">
+        <h4>Exercice : Complétez avec le bon déterminant démonstratif</h4>
+        <div class="question">
+            1. <input type="text" id="det_demo_1" class="answer"> livre est intéressant.
+        </div>
+        <div class="question">
+            2. <input type="text" id="det_demo_2" class="answer"> maison est grande.
+        </div>
+        <div class="question">
+            3. <input type="text" id="det_demo_3" class="answer"> enfants jouent dehors.
+        </div>
+        <div class="question">
+            4. <input type="text" id="det_demo_4" class="answer"> homme est gentil.
+        </div>
+        <div class="question">
+            5. <input type="text" id="det_demo_5" class="answer"> amie habite à Paris.
+        </div>
+        <div class="question">
+            6. <input type="text" id="det_demo_6" class="answer"> ordinateur ne marche pas.
+        </div>
+        <div class="question">
+            7. <input type="text" id="det_demo_7" class="answer"> voitures sont rapides.
+        </div>
+        <div class="question">
+            8. <input type="text" id="det_demo_8" class="answer"> exercice est facile.
+        </div>
+        <button onclick="checkDetDemo()">Vérifier</button>
+        <button onclick="resetDetDemo()">Recommencer</button>
+        <div id="result-det-demo" class="result"></div>
+    </div>

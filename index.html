@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours de Français - Tous Niveaux</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <nav>
+                <button class="nav-btn active" onclick="showSection('home')">🏠 Accueil</button>
+                <button class="nav-btn" onclick="showSection('bases')">🔰 Les Bases</button>
+                <button class="nav-btn" onclick="showSection('grammaire')">📚 Grammaire</button>
+                <button class="nav-btn" onclick="showSection('conjugaison')">🔄 Conjugaison</button>
+                <button class="nav-btn" onclick="showSection('pronoms')">💬 Pronoms</button>
+                <button class="nav-btn" onclick="showSection('expressions')">💡 Expressions & Vocabulaire</button>
+                <button class="nav-btn" onclick="showSection('textes')">📝 Textes</button>
+                <button class="nav-btn" onclick="showSection('exercices')">✍️ Exercices</button>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <!-- HOME -->
+        <div id="home" class="section active">
+            <div class="home-welcome">
+                <h2>Bienvenue sur votre plateforme de français !</h2>
+                <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
+                    🔰 Les Bases • 📚 Grammaire • 🔄 Conjugaison • 💬 Pronoms • 💡 Expressions • 📝 Textes • ✍️ Exercices
+                </p>
+                <p style="font-size: 1.1em; color: #888; margin-top: 30px;">
+                    <strong>Tous niveaux :</strong> Débutant, Intermédiaire, Avancé
+                </p>
+                <p style="font-size: 1em; color: #888; margin-top: 20px;">
+                    👆 Choisissez une section dans le menu ci-dessus pour commencer
+                </p>
+                <div style="margin-top: 50px; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    <h3 style="color: #667eea; margin-bottom: 20px;">📊 Contenu disponible :</h3>
+                    <ul style="line-height: 2; color: #555;">
+                        <li><strong>7 cours des Bases</strong> (Chiffres, Temps, Présentations, Famille, Expressions, Nationalités, Couleurs)</li>
+                        <li><strong>8 cours de Grammaire</strong> (Déterminants Possessifs, Déterminants Démonstratifs, Prépositions, De/Des/Du, Locutions Impersonnelles, Eux vs Leur, Comparaisons, Causes en français)</li>
+                        <li><strong>9 cours de Conjugaison</strong> (Futur Proche, Passé Composé, Imparfait, Plus-que-parfait, Conditionnels, Subjonctifs)</li>
+                        <li><strong>5 cours de Pronoms</strong> (Possessifs, Démonstratifs, COD/COI, Toniques, EN/Y)</li>
+                        <li><strong>2 cours d'Expressions & Vocabulaire</strong> (Expressions courantes, Contractions)</li>
+                        <li><strong>1 section Textes</strong> (Mix Passé Composé/Présent A2)</li>
+                        <li><strong>3 exercices interactifs</strong> avec corrections automatiques</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- LES BASES -->
+        <div id="bases" class="section">
+            <div class="section-menu">
+                <div class="section-card level-beginner" onclick="showCourse('chiffres-nombres')">
+                    <h3>🔢 CHIFFRES & NOMBRES</h3>
+                    <p>Zéro, un, deux... jusqu'à un million</p>
+                </div>
+                <div class="section-card level-beginner" onclick="showCourse('reperes-temporels')">
+                    <h3>📅 REPÈRES TEMPORELS</h3>
+                    <p>Aujourd'hui, demain, les heures, les mois...</p>
+                </div>
+                <div class="section-card level-beginner" onclick="showCourse('presentations')">
+                    <h3>👋 PRÉSENTATIONS</h3>
+                    <p>Je m'appelle, bonjour, comment ça va...</p>
+                </div>
+                <div class="section-card level-beginner" onclick="showCourse('famille')">
+                    <h3>👨‍👩‍👧‍👦 LA FAMILLE</h3>
+                    <p>Père, mère, sœur, frère...</p>
+                </div>
+                <div class="section-card level-beginner" onclick="showCourse('expressions-essentielles')">
+                    <h3>💬 EXPRESSIONS ESSENTIELLES</h3>
+                    <p>Merci, s'il vous plaît, excusez-moi...</p>
+                </div>
+                <div class="section-card level-beginner" onclick="showCourse('nationalites')">
+                    <h3>🌍 NATIONALITÉS</h3>
+                    <p>Je suis français, tu es espagnol...</p>
+                </div>
+                <div class="section-card level-beginner" onclick="showCourse('couleurs')">
+                    <h3>🎨 LES COULEURS</h3>
+                    <p>Blanc, noir, rouge, bleu, vert...</p>
+                </div>
+            </div>
+        </div>
+        <!-- GRAMMAIRE -->
+        <div id="grammaire" class="section">
+            <div class="section-menu">
+                <div class="section-card level-beginner" onclick="showCourse('determinants-possessifs')">
+                    <h3>MON, MA, MES</h3>
+                    <p>Les Déterminants Possessifs</p>
+                </div>
+                <div class="section-card level-beginner" onclick="showCourse('determinants-demonstratifs')">
+                    <h3>CE, CET, CETTE, CES</h3>
+                    <p>Les Déterminants Démonstratifs</p>
+                </div>
+                <div class="section-card level-orange" onclick="showCourse('prepositions')">
+                    <h3>📍 LES PRÉPOSITIONS</h3>
+                    <p>À, en, dans, sur, sous, avec, pour...</p>
+                </div>
+                <div class="section-card level-orange" onclick="showCourse('de-des-du')">
+                    <h3>🔤 DE / DES / DU</h3>
+                    <p>Quand utiliser "de" au lieu de "des" ou "du"</p>
+                </div>
+                <div class="section-card level-orange" onclick="showCourse('locutions-impersonnelles')">
+                    <h3>🧠 LOCUTIONS IMPERSONNELLES</h3>
+                    <p>Il faut, il est, c'est vs il est...</p>
+                </div>
+                <div class="section-card level-orange" onclick="showCourse('eux-vs-leur')">
+                    <h3>👥 EUX vs LEUR</h3>
+                    <p>Pronoms toniques vs compléments indirects</p>
+                </div>
+                <div class="section-card level-orange" onclick="showCourse('comparaisons-francais')">
+                    <h3>⚖️ COMPARAISONS</h3>
+                    <p>Plus, moins, autant, meilleur/mieux</p>
+                </div>
+                <div class="section-card level-orange" onclick="showCourse('causes-francais')">
+                    <h3>🌦️ LA CAUSE</h3>
+                    <p>Parce que, car, à cause de, grâce à...</p>
+                </div>
+            </div>
+        </div>
+        <!-- CONJUGAISON -->
+        <div id="conjugaison" class="section">
+            <div class="section-menu">
+                <div class="section-card level-beginner" onclick="showCourse('present-indicatif')">
+                    <h3>PRÉSENT DE L'INDICATIF</h3>
+                    <p>Je parle, tu finis, il va...</p>
+                </div>
+                <div class="section-card level-beginner" onclick="showCourse('futur-proche')">
+                    <h3>🔮 FUTUR PROCHE</h3>
+                    <p>Je vais manger, tu vas parler...</p>
+                </div>
+                <div class="section-card level-beginner" onclick="showCourse('passe-compose')">
+                    <h3>PASSÉ COMPOSÉ</h3>
+                    <p>Formation et usage</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('imparfait')">
+                    <h3>IMPARFAIT</h3>
+                    <p>Formation et usage</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('passe-compose-vs-imparfait')">
+                    <h3>PASSÉ COMPOSÉ vs IMPARFAIT</h3>
+                    <p>Quand les utiliser ?</p>
+                </div>
+                <div class="section-card level-advanced" onclick="showCourse('plus-que-parfait')">
+                    <h3>PLUS-QUE-PARFAIT</h3>
+                    <p>Le passé du passé</p>
+                </div>
+                <div class="section-card level-advanced" onclick="showCourse('conditionnel-present')">
+                    <h3>CONDITIONNEL PRÉSENT</h3>
+                    <p>Je voudrais, tu serais, nous verrions...</p>
+                </div>
+                <div class="section-card level-advanced" onclick="showCourse('conditionnel-passe')">
+                    <h3>CONDITIONNEL PASSÉ</h3>
+                    <p>J'aurais dû...</p>
+                </div>
+                <div class="section-card level-advanced" onclick="showCourse('subjonctif-present')">
+                    <h3>SUBJONCTIF PRÉSENT</h3>
+                    <p>Il faut que je...</p>
+                </div>
+                <div class="section-card level-advanced" onclick="showCourse('subjonctif-passe')">
+                    <h3>SUBJONCTIF PASSÉ</h3>
+                    <p>Bien que j'aie...</p>
+                </div>
+                <div class="section-card level-green" onclick="showCourse('verbes-pronominaux')">
+                    <h3>🔄 VERBES PRONOMINAUX</h3>
+                    <p>Se réveiller, se laver, s'habiller...</p>
+                </div>
+            </div>
+        </div>
+        <!-- PRONOMS -->
+        <div id="pronoms" class="section">
+            <div class="section-menu">
+                <div class="section-card level-beginner" onclick="showCourse('pronoms-possessifs')">
+                    <h3>MIEN, MIENNE</h3>
+                    <p>Les Pronoms Possessifs</p>
+                </div>
+                <div class="section-card level-beginner" onclick="showCourse('pronoms-demonstratifs')">
+                    <h3>CELUI, CELLE</h3>
+                    <p>Les Pronoms Démonstratifs</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('cod-coi')">
+                    <h3>LE, LA, LES / LUI, LEUR</h3>
+                    <p>Pronoms COD et COI</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('pronoms-toniques')">
+                    <h3>MOI, TOI, LUI, ELLE</h3>
+                    <p>Pronoms Toniques</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('en-y')">
+                    <h3>EN et Y</h3>
+                    <p>Cas particuliers</p>
+                </div>
+            </div>
+        </div>
+        <!-- EXPRESSIONS & VOCABULAIRE -->
+        <div id="expressions" class="section">
+            <div class="section-menu">
+                <div class="section-card level-beginner" onclick="showCourse('expressions-courantes')">
+                    <h3>🗣️ EXPRESSIONS COURANTES</h3>
+                    <p>Avoir la pêche, avoir peur bleue...</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('contractions-oral')">
+                    <h3>🎤 CONTRACTIONS À L'ORAL</h3>
+                    <p>Je sais pas, t'as vu...</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('faux-amis-anglophones')">
+                    <h3>🎭 FAUX AMIS (Anglophones)</h3>
+                    <p>Actuellement ≠ actually, attendre ≠ to attend...</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('faux-amis-hispanophones')">
+                    <h3>🎭 FAUX AMIS (Hispanophones)</h3>
+                    <p>Embarazada ≠ embarrassée, éxito ≠ exit...</p>
+                </div>
+            </div>
+        </div>
+        <!-- TEXTES -->
+        <div id="textes" class="section">
+            <div class="section-menu">
+                <div class="section-card level-intermediate" onclick="showCourse('textes_francais_debutants')">
+                    <h3>📖 MIX PASSÉ COMPOSÉ/PRÉSENT A2</h3>
+                    <p>Textes pour débutants avec présent et passé composé</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('textes_passe_compose_imparfait')">
+                    <h3>📖 MIX PASSÉ COMPOSÉ/IMPARFAIT</h3>
+                    <p>Textes avec passé composé et imparfait avec explications</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('textes_subjonctif_present')">
+                    <h3>📖 SUBJONCTIF PRÉSENT</h3>
+                    <p>Textes avec verbes au subjonctif présent (réguliers et irréguliers)</p>
+                </div>
+            </div>
+        </div>
+        <!-- EXERCICES MIXTES -->
+        <div id="exercices" class="section">
+            <div class="section-menu">
+                <div class="section-card level-intermediate" onclick="showCourse('exercice-cod-coi')">
+                    <h3>💬 Exercice COD/COI</h3>
+                    <p>12 phrases à compléter</p>
+                </div>
+                <div class="section-card level-beginner" onclick="showCourse('exercice-pronoms-determinants')">
+                    <h3>📚 Exercice Pronoms & Déterminants</h3>
+                    <p>Tout mélangé avec traductions</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('exercice-conjugaison-mixte')">
+                    <h3>🔄 Exercice Conjugaison Mixte</h3>
+                    <p>Présent + Passé Composé + Imparfait</p>
+                </div>
+            </div>
+        </div>
+            </div>
+    <script src="scripts.js"></script>
+</body>
+</html>

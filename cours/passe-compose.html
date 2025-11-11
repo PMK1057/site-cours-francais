@@ -1,0 +1,285 @@
+
+    <button class="back-btn" onclick="backToSection('conjugaison')">← Retour</button>
+    
+    <h2>⚡ LE PASSÉ COMPOSÉ</h2>
+    
+    <div class="info-box">
+        <h3>📌 Qu'est-ce que c'est ?</h3>
+        <p>Le passé composé est un temps du passé qui exprime une <strong>action terminée</strong> ou un <strong>événement précis</strong> dans le passé.</p>
+    </div>
+
+    <h3>Formation</h3>
+    <p><strong>Passé composé = <span class="auxiliaire">Auxiliaire (avoir/être) au présent</span> + <span class="participe-passe">Participe passé</span></strong></p>
+    
+    <div class="example-box">
+        <h4>Avec AVOIR (majorité des verbes)</h4>
+        <ul>
+            <li>J'<span class="auxiliaire">ai</span> <span class="participe-passe">mangé</span> une pizza</li>
+            <li>Tu <span class="auxiliaire">as</span> <span class="participe-passe">fini</span> tes devoirs</li>
+            <li>Il <span class="auxiliaire">a</span> <span class="participe-passe">travaillé</span> hier</li>
+            <li>Nous <span class="auxiliaire">avons</span> <span class="participe-passe">vu</span> un film</li>
+        </ul>
+    </div>
+
+    <div class="example-box">
+        <h4>Avec ÊTRE (verbes de mouvement + verbes pronominaux)</h4>
+        <ul>
+            <li>Je <span class="auxiliaire">suis</span> <span class="participe-passe">allé(e)</span> à Paris</li>
+            <li>Elle <span class="auxiliaire">est</span> <span class="participe-passe">arrivée</span> en retard</li>
+            <li>Nous <span class="auxiliaire">sommes</span> <span class="participe-passe">partis</span> tôt</li>
+            <li>Je <span class="auxiliaire">me suis</span> <span class="participe-passe">levé(e)</span> à 7h</li>
+        </ul>
+        <p><em>⚠️ Avec ÊTRE, le participe passé s'accorde avec le sujet !</em></p>
+    </div>
+
+    <h3>Verbes avec ÊTRE (à mémoriser)</h3>
+    <p><strong>Les 16 verbes de mouvement :</strong></p>
+    <ul>
+        <li>aller / venir</li>
+        <li>arriver / partir</li>
+        <li>entrer / sortir</li>
+        <li>monter / descendre</li>
+        <li>naître / mourir</li>
+        <li>rester / tomber</li>
+        <li>retourner / passer (par)</li>
+        <li>rentrer / revenir</li>
+    </ul>
+    <p><strong>+ TOUS les verbes pronominaux</strong> (se lever, se coucher, s'habiller, etc.)</p>
+
+    <h3>Participes passés irréguliers courants</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Infinitif</th>
+                <th>Participe passé</th>
+                <th>Exemple</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>être</td><td>été</td><td>j'ai été</td></tr>
+            <tr><td>avoir</td><td>eu</td><td>j'ai eu</td></tr>
+            <tr><td>faire</td><td>fait</td><td>j'ai fait</td></tr>
+            <tr><td>dire</td><td>dit</td><td>j'ai dit</td></tr>
+            <tr><td>voir</td><td>vu</td><td>j'ai vu</td></tr>
+            <tr><td>prendre</td><td>pris</td><td>j'ai pris</td></tr>
+            <tr><td>mettre</td><td>mis</td><td>j'ai mis</td></tr>
+            <tr><td>pouvoir</td><td>pu</td><td>j'ai pu</td></tr>
+            <tr><td>vouloir</td><td>voulu</td><td>j'ai voulu</td></tr>
+            <tr><td>devoir</td><td>dû</td><td>j'ai dû</td></tr>
+            <tr><td>savoir</td><td>su</td><td>j'ai su</td></tr>
+            <tr><td>venir</td><td>venu</td><td>je suis venu(e)</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Quand l'utiliser ?</h3>
+    <div class="warning-box">
+        <ul>
+            <li>⚡ Action terminée : <em>Hier, j'ai mangé une pizza</em></li>
+            <li>🎯 Événement précis : <em>Elle est arrivée à 8h</em></li>
+            <li>➡️➡️➡️ Succession d'actions : <em>Je me suis levé, j'ai pris mon petit-déjeuner et je suis parti</em></li>
+        </ul>
+    </div>
+
+    <h3>✍️ Exercices : Complète avec le passé composé</h3>
+    
+    <div class="exercise">
+        <h4>1️⃣ Verbes réguliers en -ER</h4>
+        <div class="question">
+            <p>Hier, je <input type="text" id="pc_er_1" placeholder="passé composé"> (manger) au restaurant.</p>
+            <button class="check-btn" onclick="checkPC('pc_er_1', 'ai mangé', 'Correct ! J\'ai mangé = auxiliaire AVOIR + participe passé mangé')">Vérifier</button>
+            <div id="explanation-pc_er_1" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Tu <input type="text" id="pc_er_2" placeholder="passé composé"> (parler) avec ton ami.</p>
+            <button class="check-btn" onclick="checkPC('pc_er_2', 'as parlé', 'Correct ! Tu as parlé = auxiliaire AVOIR + participe passé parlé')">Vérifier</button>
+            <div id="explanation-pc_er_2" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Elle <input type="text" id="pc_er_3" placeholder="passé composé"> (regarder) un film.</p>
+            <button class="check-btn" onclick="checkPC('pc_er_3', 'a regardé', 'Correct ! Elle a regardé = auxiliaire AVOIR + participe passé regardé')">Vérifier</button>
+            <div id="explanation-pc_er_3" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Nous <input type="text" id="pc_er_4" placeholder="passé composé"> (jouer) au football.</p>
+            <button class="check-btn" onclick="checkPC('pc_er_4', 'avons joué', 'Correct ! Nous avons joué = auxiliaire AVOIR + participe passé joué')">Vérifier</button>
+            <div id="explanation-pc_er_4" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Vous <input type="text" id="pc_er_5" placeholder="passé composé"> (habiter) en France.</p>
+            <button class="check-btn" onclick="checkPC('pc_er_5', 'avez habité', 'Correct ! Vous avez habité = auxiliaire AVOIR + participe passé habité')">Vérifier</button>
+            <div id="explanation-pc_er_5" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Ils <input type="text" id="pc_er_6" placeholder="passé composé"> (travailler) toute la journée.</p>
+            <button class="check-btn" onclick="checkPC('pc_er_6', 'ont travaillé', 'Correct ! Ils ont travaillé = auxiliaire AVOIR + participe passé travaillé')">Vérifier</button>
+            <div id="explanation-pc_er_6" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Hier soir, je <input type="text" id="pc_er_7" placeholder="passé composé"> (écouter) de la musique.</p>
+            <button class="check-btn" onclick="checkPC('pc_er_7', 'ai écouté', 'Correct ! J\'ai écouté = auxiliaire AVOIR + participe passé écouté')">Vérifier</button>
+            <div id="explanation-pc_er_7" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Tu <input type="text" id="pc_er_8" placeholder="passé composé"> (aimer) ce livre ?</p>
+            <button class="check-btn" onclick="checkPC('pc_er_8', 'as aimé', 'Correct ! Tu as aimé = auxiliaire AVOIR + participe passé aimé')">Vérifier</button>
+            <div id="explanation-pc_er_8" class="explanation"></div>
+        </div>
+    </div>
+
+    <div class="exercise">
+        <h4>2️⃣ Verbes réguliers en -IR</h4>
+        <div class="question">
+            <p>Je <input type="text" id="pc_ir_1" placeholder="passé composé"> (finir) mes devoirs.</p>
+            <button class="check-btn" onclick="checkPC('pc_ir_1', 'ai fini', 'Correct ! J\'ai fini = auxiliaire AVOIR + participe passé fini')">Vérifier</button>
+            <div id="explanation-pc_ir_1" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Tu <input type="text" id="pc_ir_2" placeholder="passé composé"> (choisir) une belle robe.</p>
+            <button class="check-btn" onclick="checkPC('pc_ir_2', 'as choisi', 'Correct ! Tu as choisi = auxiliaire AVOIR + participe passé choisi')">Vérifier</button>
+            <div id="explanation-pc_ir_2" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Il <input type="text" id="pc_ir_3" placeholder="passé composé"> (réussir) son examen.</p>
+            <button class="check-btn" onclick="checkPC('pc_ir_3', 'a réussi', 'Correct ! Il a réussi = auxiliaire AVOIR + participe passé réussi')">Vérifier</button>
+            <div id="explanation-pc_ir_3" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Nous <input type="text" id="pc_ir_4" placeholder="passé composé"> (grandir) dans cette ville.</p>
+            <button class="check-btn" onclick="checkPC('pc_ir_4', 'avons grandi', 'Correct ! Nous avons grandi = auxiliaire AVOIR + participe passé grandi')">Vérifier</button>
+            <div id="explanation-pc_ir_4" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Vous <input type="text" id="pc_ir_5" placeholder="passé composé"> (obéir) à vos parents.</p>
+            <button class="check-btn" onclick="checkPC('pc_ir_5', 'avez obéi', 'Correct ! Vous avez obéi = auxiliaire AVOIR + participe passé obéi')">Vérifier</button>
+            <div id="explanation-pc_ir_5" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Elles <input type="text" id="pc_ir_6" placeholder="passé composé"> (réfléchir) avant de répondre.</p>
+            <button class="check-btn" onclick="checkPC('pc_ir_6', 'ont réfléchi', 'Correct ! Elles ont réfléchi = auxiliaire AVOIR + participe passé réfléchi')">Vérifier</button>
+            <div id="explanation-pc_ir_6" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Hier, je <input type="text" id="pc_ir_7" placeholder="passé composé"> (agir) rapidement.</p>
+            <button class="check-btn" onclick="checkPC('pc_ir_7', 'ai agi', 'Correct ! J\'ai agi = auxiliaire AVOIR + participe passé agi')">Vérifier</button>
+            <div id="explanation-pc_ir_7" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Tu <input type="text" id="pc_ir_8" placeholder="passé composé"> (réagir) de manière positive.</p>
+            <button class="check-btn" onclick="checkPC('pc_ir_8', 'as réagi', 'Correct ! Tu as réagi = auxiliaire AVOIR + participe passé réagi')">Vérifier</button>
+            <div id="explanation-pc_ir_8" class="explanation"></div>
+        </div>
+    </div>
+
+    <div class="exercise">
+        <h4>3️⃣ Verbes irréguliers</h4>
+        <div class="question">
+            <p>Je <input type="text" id="pc_irreg_1" placeholder="passé composé"> (faire) mes devoirs.</p>
+            <button class="check-btn" onclick="checkPC('pc_irreg_1', 'ai fait', 'Correct ! J\'ai fait = auxiliaire AVOIR + participe passé fait (irrégulier)')">Vérifier</button>
+            <div id="explanation-pc_irreg_1" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Tu <input type="text" id="pc_irreg_2" placeholder="passé composé"> (voir) un film intéressant.</p>
+            <button class="check-btn" onclick="checkPC('pc_irreg_2', 'as vu', 'Correct ! Tu as vu = auxiliaire AVOIR + participe passé vu (irrégulier)')">Vérifier</button>
+            <div id="explanation-pc_irreg_2" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Il <input type="text" id="pc_irreg_3" placeholder="passé composé"> (prendre) un café.</p>
+            <button class="check-btn" onclick="checkPC('pc_irreg_3', 'a pris', 'Correct ! Il a pris = auxiliaire AVOIR + participe passé pris (irrégulier)')">Vérifier</button>
+            <div id="explanation-pc_irreg_3" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Nous <input type="text" id="pc_irreg_4" placeholder="passé composé"> (mettre) nos manteaux.</p>
+            <button class="check-btn" onclick="checkPC('pc_irreg_4', 'avons mis', 'Correct ! Nous avons mis = auxiliaire AVOIR + participe passé mis (irrégulier)')">Vérifier</button>
+            <div id="explanation-pc_irreg_4" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Vous <input type="text" id="pc_irreg_5" placeholder="passé composé"> (dire) la vérité.</p>
+            <button class="check-btn" onclick="checkPC('pc_irreg_5', 'avez dit', 'Correct ! Vous avez dit = auxiliaire AVOIR + participe passé dit (irrégulier)')">Vérifier</button>
+            <div id="explanation-pc_irreg_5" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Ils <input type="text" id="pc_irreg_6" placeholder="passé composé"> (pouvoir) venir.</p>
+            <button class="check-btn" onclick="checkPC('pc_irreg_6', 'ont pu', 'Correct ! Ils ont pu = auxiliaire AVOIR + participe passé pu (irrégulier)')">Vérifier</button>
+            <div id="explanation-pc_irreg_6" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Elle <input type="text" id="pc_irreg_7" placeholder="passé composé"> (vouloir) partir tôt.</p>
+            <button class="check-btn" onclick="checkPC('pc_irreg_7', 'a voulu', 'Correct ! Elle a voulu = auxiliaire AVOIR + participe passé voulu (irrégulier)')">Vérifier</button>
+            <div id="explanation-pc_irreg_7" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Je <input type="text" id="pc_irreg_8" placeholder="passé composé"> (devoir) travailler.</p>
+            <button class="check-btn" onclick="checkPC('pc_irreg_8', 'ai dû', 'Correct ! J\'ai dû = auxiliaire AVOIR + participe passé dû (irrégulier, avec accent)')">Vérifier</button>
+            <div id="explanation-pc_irreg_8" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Tu <input type="text" id="pc_irreg_9" placeholder="passé composé"> (savoir) la réponse.</p>
+            <button class="check-btn" onclick="checkPC('pc_irreg_9', 'as su', 'Correct ! Tu as su = auxiliaire AVOIR + participe passé su (irrégulier)')">Vérifier</button>
+            <div id="explanation-pc_irreg_9" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Nous <input type="text" id="pc_irreg_10" placeholder="passé composé"> (avoir) un bon moment.</p>
+            <button class="check-btn" onclick="checkPC('pc_irreg_10', 'avons eu', 'Correct ! Nous avons eu = auxiliaire AVOIR + participe passé eu (irrégulier)')">Vérifier</button>
+            <div id="explanation-pc_irreg_10" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Ils <input type="text" id="pc_irreg_11" placeholder="passé composé"> (être) à Paris.</p>
+            <button class="check-btn" onclick="checkPC('pc_irreg_11', 'ont été', 'Correct ! Ils ont été = auxiliaire AVOIR + participe passé été (irrégulier)')">Vérifier</button>
+            <div id="explanation-pc_irreg_11" class="explanation"></div>
+        </div>
+        
+        <div class="question">
+            <p>Je <input type="text" id="pc_irreg_12" placeholder="passé composé"> (venir) en France l'année dernière.</p>
+            <button class="check-btn" onclick="checkPC('pc_irreg_12', 'suis venu', 'Correct ! Je suis venu = auxiliaire ÊTRE + participe passé venu (avec ÊTRE car verbe de mouvement)')">Vérifier</button>
+            <div id="explanation-pc_irreg_12" class="explanation"></div>
+        </div>
+    </div>
+
+    <script>
+        function checkPC(inputId, correctAnswer, explanation) {
+            const input = document.getElementById(inputId);
+            const explanationDiv = document.getElementById('explanation-' + inputId);
+            const userAnswer = input.value.trim().toLowerCase().replace(/\s+/g, ' ');
+            
+            // Normaliser la réponse correcte aussi
+            const normalizedCorrect = correctAnswer.toLowerCase().replace(/\s+/g, ' ');
+            
+            if (userAnswer === normalizedCorrect) {
+                input.classList.remove('incorrect');
+                input.classList.add('correct');
+                explanationDiv.innerHTML = '<span style="color: #4caf50; font-weight: bold;">✓ ' + explanation + '</span>';
+                explanationDiv.style.display = 'block';
+                explanationDiv.className = 'explanation correct';
+            } else {
+                input.classList.remove('correct');
+                input.classList.add('incorrect');
+                explanationDiv.innerHTML = '<span style="color: #f44336; font-weight: bold;">✗ Incorrect. Réponse attendue : <strong>' + correctAnswer + '</strong><br>' + explanation + '</span>';
+                explanationDiv.style.display = 'block';
+                explanationDiv.className = 'explanation incorrect';
+            }
+        }
+    </script>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EUX vs LEUR - Guide interactif</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .rule-box {
+            background: #f0f4ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .rule-title {
+            font-size: 1.3em;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .example {
+            background: #fff3cd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .correct {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .incorrect {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .exercise {
+            background: #e8f5e9;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px solid #4caf50;
+        }
+        
+        .question {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        
+        .option-btn {
+            padding: 12px 25px;
+            font-size: 1em;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .option-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .option-btn.selected-correct {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+        
+        .option-btn.selected-incorrect {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+        
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .feedback.show {
+            display: block;
+        }
+        
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .score {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        .tip {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-title {
+            font-weight: bold;
+            color: #0c5460;
+            margin-bottom: 5px;
+        }
+        
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 EUX vs LEUR</h1>
+            <p>Maîtrise les pronoms compléments en français !</p>
+        </header>
+        
+        <div class="content">
+            <button class="back-btn" onclick="backToSection('grammaire')">← Retour</button>
+
+<h2>👥 EUX vs LEUR</h2>
+
+<style>
+    .eux-section {
+        margin: 25px 0;
+    }
+    .eux-highlight {
+        color: #667eea;
+        font-weight: 600;
+    }
+    .eux-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .eux-table th {
+        background: #667eea;
+        color: white;
+        padding: 12px;
+        text-align: left;
+    }
+    .eux-table td {
+        padding: 12px;
+        border: 1px solid #e5e7eb;
+        background: white;
+    }
+    .eux-table tr:nth-child(even) td {
+        background: #f8fafc;
+    }
+    .eux-exercise-card {
+        background: #f5f7ff;
+        border: 1px solid #dfe4ff;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 18px;
+        box-shadow: 0 6px 12px rgba(102,126,234,0.12);
+    }
+    .eux-question {
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 12px;
+    }
+    .eux-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .eux-option-btn {
+        padding: 10px 20px;
+        border-radius: 999px;
+        border: 2px solid #667eea;
+        background: white;
+        color: #667eea;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .eux-option-btn:hover:not([disabled]) {
+        background: #667eea;
+        color: white;
+        transform: translateY(-1px);
+    }
+    .eux-option-btn.correct {
+        background: #22c55e;
+        border-color: #22c55e;
+        color: white;
+    }
+    .eux-option-btn.incorrect {
+        background: #ef4444;
+        border-color: #ef4444;
+        color: white;
+    }
+    .eux-feedback {
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        display: none;
+    }
+    .eux-feedback.show {
+        display: block;
+    }
+    .eux-feedback.good {
+        background: #dcfce7;
+        color: #166534;
+        border: 1px solid #bbf7d0;
+    }
+    .eux-feedback.bad {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+    }
+    .eux-score {
+        background: #667eea;
+        color: white;
+        padding: 16px;
+        border-radius: 12px;
+        text-align: center;
+        font-weight: 700;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="info-box">
+    <h3>📌 À retenir</h3>
+    <p><strong>Leur</strong> remplace un groupe introduit par <strong>à</strong> devant le verbe. <strong>Eux</strong> s'utilise après une préposition ou pour insister.</p>
+    <p style="color: #2196f3;"><em>'Leur' replaces an indirect object (à + personne) before the verb. 'Eux' follows a preposition or is used for emphasis.</em></p>
+</div>
+
+<div class="eux-section">
+    <h3>🎯 Quand utiliser <span class="eux-highlight">leur</span> ?</h3>
+    <div class="warning-box">
+        <p><strong>Leur</strong> = pronom objet indirect (COI).</p>
+        <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+            <li>Verbes suivis de <strong>à</strong> : parler à, donner à, téléphoner à, écrire à...</li>
+            <li>Toujours <strong>avant</strong> le verbe conjugué : <em>Je leur explique.</em></li>
+            <li>Ne prend jamais de <strong>s</strong> même au pluriel : <em>Je leur raconte</em>.</li>
+        </ul>
+    </div>
+    <div class="example-box">
+        <ul style="margin-left: 18px; line-height: 1.8;">
+            <li>Je <span class="eux-highlight">leur</span> parle tous les jours.</li>
+            <li>Tu <span class="eux-highlight">leur</span> prêtes tes notes.</li>
+            <li>Nous <span class="eux-highlight">leur</span> envoyons un message.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="eux-section">
+    <h3>🧭 Quand utiliser <span class="eux-highlight">eux</span> ?</h3>
+    <div class="info-box">
+        <p><strong>Eux</strong> = pronom tonique.</p>
+        <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+            <li>Après une préposition : avec, sans, pour, chez, devant...</li>
+            <li>Pour insister ou contraster : <em>Eux, ils comprennent.</em></li>
+            <li>Après certains verbes qui gardent la préposition : <em>penser à</em>, <em>s'intéresser à</em>, etc.</li>
+        </ul>
+    </div>
+    <div class="example-box">
+        <ul style="margin-left: 18px; line-height: 1.8;">
+            <li>Je sors avec <span class="eux-highlight">eux</span> ce soir.</li>
+            <li>C'est pour <span class="eux-highlight">eux</span>.</li>
+            <li>Sans <span class="eux-highlight">eux</span>, ce serait difficile.</li>
+            <li><span class="eux-highlight">Eux</span>, ils ont déjà terminé.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="eux-section">
+    <h3>📊 Tableau comparatif rapide</h3>
+    <table class="eux-table">
+        <thead>
+            <tr>
+                <th>LEUR</th>
+                <th>EUX</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Avant le verbe : <em>Je leur écris.</em></td>
+                <td>Après une préposition : <em>Je vais avec eux.</em></td>
+            </tr>
+            <tr>
+                <td>Répond à « À qui ? »</td>
+                <td>Met en valeur : <em>Eux, ils savent.</em></td>
+            </tr>
+            <tr>
+                <td>Pas de préposition visible</td>
+                <td>Préposition obligatoire (avec, pour, chez...)</td>
+            </tr>
+            <tr>
+                <td>➡️ Verbes + à : parler à, offrir à...</td>
+                <td>➡️ Constructions fixes : penser à eux, c'est pour eux...</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="eux-section">
+    <h3>🔄 Règle clé : me / te / lui / nous / vous / leur</h3>
+    <div class="info-box">
+        <p>Avec les verbes qui acceptent un COI, on remplace <em>à + personne</em> par un pronom <strong>avant le verbe</strong>.</p>
+        <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+            <li>Il <span class="eux-highlight">me</span> parle (≠ Il parle à moi).</li>
+            <li>Il <span class="eux-highlight">te</span> répond (≠ Il répond à toi).</li>
+            <li>Il <span class="eux-highlight">leur</span> écrit (≠ Il écrit à eux).</li>
+        </ul>
+    </div>
+    <div class="warning-box">
+        <p><strong>Exception pour insister :</strong> on peut garder la préposition.</p>
+        <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+            <li>Il parle à moi, pas à toi ! (mise en relief)</li>
+            <li>Je pense à eux (verbe qui garde la préposition)</li>
+            <li>Je compte sur eux pour venir.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="eux-section">
+    <h3>✏️ Exercices auto-corrigés</h3>
+    <p>Choisis la bonne option : <strong>leur</strong> ou <strong>eux</strong>.</p>
+    <div id="eux-exercises"></div>
+    <div id="eux-score" class="eux-score">Score : 0 / 0</div>
+</div>
+
+<script>
+    const euxExercises = [
+        { sentence: "Je vais _____ téléphoner ce soir.", correct: "leur", tip: "Téléphoner à quelqu'un → COI avant le verbe." },
+        { sentence: "Je pars en vacances avec _____.", correct: "eux", tip: "Après une préposition (avec) on utilise 'eux'." },
+        { sentence: "Il _____ donne des conseils.", correct: "leur", tip: "Donner à → pronom COI devant le verbe." },
+        { sentence: "Sans _____, je ne peux pas réussir.", correct: "eux", tip: "Après 'sans' (préposition) → 'eux'." },
+        { sentence: "Tu _____ envoies un message ?", correct: "leur", tip: "Envoyer à → pronom COI 'leur'." },
+        { sentence: "Je pense souvent à _____.", correct: "eux", tip: "Penser à garde la préposition 'à'." },
+        { sentence: "Elle _____ achète des cadeaux.", correct: "leur", tip: "Acheter à → 'leur' devant le verbe." },
+        { sentence: "C'est pour _____.", correct: "eux", tip: "Après 'pour' on garde 'eux'." },
+        { sentence: "Nous _____ demandons de l'aide.", correct: "leur", tip: "Demander à → 'leur'." },
+        { sentence: "Je travaille chez _____.", correct: "eux", tip: "Après 'chez' → 'eux'." }
+    ];
+
+    let euxScore = 0;
+    let euxAnswered = 0;
+
+    function renderEuxExercises() {
+        const container = document.getElementById('eux-exercises');
+        euxExercises.forEach((ex, index) => {
+            const card = document.createElement('div');
+            card.className = 'eux-exercise-card';
+            card.id = `eux-exercise-${index}`;
+            card.innerHTML = `
+                <div class="eux-question">${index + 1}. ${ex.sentence}</div>
+                <div class="eux-options">
+                    <button class="eux-option-btn" data-answer="leur" onclick="handleEuxAnswer(${index}, 'leur', this)">leur</button>
+                    <button class="eux-option-btn" data-answer="eux" onclick="handleEuxAnswer(${index}, 'eux', this)">eux</button>
+                </div>
+                <div class="eux-feedback" id="eux-feedback-${index}"></div>
+            `;
+            container.appendChild(card);
+        });
+        updateEuxScore();
+    }
+
+    function handleEuxAnswer(index, choice, btn) {
+        const ex = euxExercises[index];
+        const card = document.getElementById(`eux-exercise-${index}`);
+        const buttons = card.querySelectorAll('.eux-option-btn');
+        const feedback = document.getElementById(`eux-feedback-${index}`);
+
+        buttons.forEach(button => {
+            button.disabled = true;
+            if (button.dataset.answer === ex.correct) {
+                button.classList.add('correct');
+            }
+            if (button === btn && choice !== ex.correct) {
+                button.classList.add('incorrect');
+            }
+        });
+
+        if (choice === ex.correct) {
+            feedback.textContent = `✅ Bravo ! ${ex.tip}`;
+            feedback.className = 'eux-feedback show good';
+            euxScore++;
+        } else {
+            feedback.textContent = `❌ Oups ! ${ex.tip}`;
+            feedback.className = 'eux-feedback show bad';
+        }
+
+        euxAnswered++;
+        updateEuxScore();
+    }
+
+    function updateEuxScore() {
+        const scoreDiv = document.getElementById('eux-score');
+        scoreDiv.textContent = `Score : ${euxScore} / ${euxAnswered}`;
+    }
+
+    renderEuxExercises();
+</script>

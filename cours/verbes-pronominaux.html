@@ -1,0 +1,208 @@
+    <button class="back-btn" onclick="backToSection('conjugaison')">← Retour</button>
+    
+    <h2>🔄 LES VERBES PRONOMINAUX</h2>
+    
+    <div class="info-box">
+        <h3>📌 Introduction</h3>
+        <p>Les verbes pronominaux utilisent les pronoms réfléchis : <strong>me, te, se, nous, vous, se</strong></p>
+    </div>
+
+    <div class="warning-box">
+        <h4>⚠️ Attention aux élisions !</h4>
+        <p><strong>me → m'</strong> et <strong>te → t'</strong> devant une voyelle ou un h muet</p>
+        <p><em>Exemple : Je <strong>m'</strong>habille, Tu <strong>t'</strong>amuses</em></p>
+    </div>
+
+    <h3>📚 Tableau de Conjugaison</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Pronom</th>
+                <th>Se réveiller</th>
+                <th>Se laver</th>
+                <th>S'habiller</th>
+                <th>Se baigner (PC)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Je</strong></td><td><span style="color: #667eea; font-weight: bold;">me</span> réveille</td><td><span style="color: #667eea; font-weight: bold;">me</span> lave</td><td><span style="color: #667eea; font-weight: bold;">m'</span>habille</td><td><span style="color: #667eea; font-weight: bold;">me</span> suis baigné(e)</td></tr>
+            <tr><td><strong>Tu</strong></td><td><span style="color: #667eea; font-weight: bold;">te</span> réveilles</td><td><span style="color: #667eea; font-weight: bold;">te</span> laves</td><td><span style="color: #667eea; font-weight: bold;">t'</span>habilles</td><td><span style="color: #667eea; font-weight: bold;">t'</span>es baigné(e)</td></tr>
+            <tr><td><strong>Il/Elle/On</strong></td><td><span style="color: #667eea; font-weight: bold;">se</span> réveille</td><td><span style="color: #667eea; font-weight: bold;">se</span> lave</td><td><span style="color: #667eea; font-weight: bold;">s'</span>habille</td><td><span style="color: #667eea; font-weight: bold;">s'</span>est baigné(e)</td></tr>
+            <tr><td><strong>Nous</strong></td><td><span style="color: #667eea; font-weight: bold;">nous</span> réveillons</td><td><span style="color: #667eea; font-weight: bold;">nous</span> lavons</td><td><span style="color: #667eea; font-weight: bold;">nous</span> habillons</td><td><span style="color: #667eea; font-weight: bold;">nous</span> sommes baigné(e)s</td></tr>
+            <tr><td><strong>Vous</strong></td><td><span style="color: #667eea; font-weight: bold;">vous</span> réveillez</td><td><span style="color: #667eea; font-weight: bold;">vous</span> lavez</td><td><span style="color: #667eea; font-weight: bold;">vous</span> habillez</td><td><span style="color: #667eea; font-weight: bold;">vous</span> êtes baigné(e)(s)</td></tr>
+            <tr><td><strong>Ils/Elles</strong></td><td><span style="color: #667eea; font-weight: bold;">se</span> réveillent</td><td><span style="color: #667eea; font-weight: bold;">se</span> lavent</td><td><span style="color: #667eea; font-weight: bold;">s'</span>habillent</td><td><span style="color: #667eea; font-weight: bold;">se</span> sont baigné(e)s</td></tr>
+        </tbody>
+    </table>
+
+    <h3>✏️ Exercice 1 : Présent</h3>
+    <div class="exercise">
+        <div class="question">
+            <p>1. Chaque matin, je <input type="text" id="q1" class="answer"> (se réveiller) à 7 heures.</p>
+        </div>
+        <div class="question">
+            <p>2. Tu <input type="text" id="q2" class="answer"> (s'habiller) rapidement pour aller au travail.</p>
+        </div>
+        <div class="question">
+            <p>3. Elle <input type="text" id="q3" class="answer"> (se maquiller) devant le miroir.</p>
+        </div>
+        <div class="question">
+            <p>4. Nous <input type="text" id="q4" class="answer"> (se promener) dans le parc tous les dimanches.</p>
+        </div>
+        <div class="question">
+            <p>5. Vous <input type="text" id="q5" class="answer"> (se reposer) après le déjeuner.</p>
+        </div>
+        <div class="question">
+            <p>6. Marie <input type="text" id="q6" class="answer"> (se coucher) tard tous les soirs.</p>
+        </div>
+        <div class="question">
+            <p>7. Nous <input type="text" id="q7" class="answer"> (se rencontrer) au café demain.</p>
+        </div>
+        <div class="question">
+            <p>8. Vous <input type="text" id="q8" class="answer"> (s'ennuyer) pendant le cours ?</p>
+        </div>
+        <button onclick="checkVerbesPronominauxPresent()">Vérifier mes réponses</button>
+        <button onclick="resetVerbesPronominauxPresent()">Recommencer</button>
+        <div id="result-verbes-pronominaux-present" class="result"></div>
+    </div>
+
+    <h3>✏️ Exercice 2 : Passé Composé</h3>
+    <div class="exercise">
+        <div class="question">
+            <p>1. Hier, ils <input type="text" id="q9" class="answer"> (se baigner) dans la mer.</p>
+        </div>
+        <div class="question">
+            <p>2. Je <input type="text" id="q10" class="answer"> (s'amuser) beaucoup à la fête hier soir.</p>
+        </div>
+        <div class="question">
+            <p>3. Tu <input type="text" id="q11" class="answer"> (se lever) tôt ce matin ?</p>
+        </div>
+        <div class="question">
+            <p>4. Les enfants <input type="text" id="q12" class="answer"> (se laver) les mains avant de manger.</p>
+        </div>
+        <div class="question">
+            <p>5. Je <input type="text" id="q13" class="answer"> (s'intéresser) à ce film la semaine dernière.</p>
+        </div>
+        <div class="question">
+            <p>6. Tu <input type="text" id="q14" class="answer"> (se souvenir) de notre première rencontre hier ?</p>
+        </div>
+        <div class="question">
+            <p>7. Elles <input type="text" id="q15" class="answer"> (se préparer) pour la soirée hier.</p>
+        </div>
+        <div class="question">
+            <p>8. Elle <input type="text" id="q16" class="answer"> (se reposer) après son voyage.</p>
+        </div>
+        <button onclick="checkVerbesPronominauxPC()">Vérifier mes réponses</button>
+        <button onclick="resetVerbesPronominauxPC()">Recommencer</button>
+        <div id="result-verbes-pronominaux-pc" class="result"></div>
+    </div>
+
+    <script>
+        const correctAnswersPresent = {
+            q1: ["me réveille", "me reveille"],
+            q2: ["t'habilles", "t habilles"],
+            q3: ["se maquille"],
+            q4: ["nous promenons", "nous baladons"],
+            q5: ["vous reposez"],
+            q6: ["se couche"],
+            q7: ["nous rencontrons", "nous retrouvons"],
+            q8: ["vous ennuyez"]
+        };
+
+        const correctAnswersPC = {
+            q9: ["se sont baignés", "se sont baignes", "se sont baignées", "se sont baignees"],
+            q10: ["me suis amusé", "me suis amusée", "me suis amuse", "me suis amusee"],
+            q11: ["t'es levé", "t'es levée", "t es leve", "t es levee", "t'es levé(e)", "t'es levee"],
+            q12: ["se sont lavés", "se sont laves", "se sont lavées", "se sont lavees"],
+            q13: ["m'intéressé", "m interesse", "me suis intéressé", "me suis interesse", "me suis intéressée", "me suis interessée"],
+            q14: ["t'es souvenu", "t'es souvenue", "t es souvenu", "t es souvenue"],
+            q15: ["se sont préparées", "se sont preparées", "se sont prepares", "se sont préparés"],
+            q16: ["s'est reposée", "s'est reposee", "s'est repose"]
+        };
+
+        function normalizeAnswer(answer) {
+            return answer.toLowerCase().trim().replace(/\s+/g, ' ');
+        }
+
+        function checkVerbesPronominauxPresent() {
+            let correct = 0;
+            const total = Object.keys(correctAnswersPresent).length;
+
+            Object.keys(correctAnswersPresent).forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = normalizeAnswer(input.value || '');
+                const validAnswers = correctAnswersPresent[id].map(a => normalizeAnswer(a));
+                
+                if (validAnswers.includes(userAnswer)) {
+                    input.className = 'answer correct';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                }
+            });
+
+            const result = document.getElementById('result-verbes-pronominaux-present');
+            const percentage = Math.round((correct / total) * 100);
+
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Excellent ! Vous avez ${correct}/${total} bonnes réponses (${percentage}%)`;
+            } else if (percentage >= 60) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Bien ! Vous avez ${correct}/${total} bonnes réponses (${percentage}%)`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `📚 Continuez à pratiquer ! Vous avez ${correct}/${total} bonnes réponses (${percentage}%)`;
+            }
+        }
+
+        function resetVerbesPronominauxPresent() {
+            Object.keys(correctAnswersPresent).forEach(id => {
+                const input = document.getElementById(id);
+                input.value = '';
+                input.className = 'answer';
+            });
+            document.getElementById('result-verbes-pronominaux-present').className = 'result';
+        }
+
+        function checkVerbesPronominauxPC() {
+            let correct = 0;
+            const total = Object.keys(correctAnswersPC).length;
+
+            Object.keys(correctAnswersPC).forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = normalizeAnswer(input.value || '');
+                const validAnswers = correctAnswersPC[id].map(a => normalizeAnswer(a));
+                
+                if (validAnswers.includes(userAnswer)) {
+                    input.className = 'answer correct';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                }
+            });
+
+            const result = document.getElementById('result-verbes-pronominaux-pc');
+            const percentage = Math.round((correct / total) * 100);
+
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Excellent ! Vous avez ${correct}/${total} bonnes réponses (${percentage}%)`;
+            } else if (percentage >= 60) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Bien ! Vous avez ${correct}/${total} bonnes réponses (${percentage}%)`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `📚 Continuez à pratiquer ! Vous avez ${correct}/${total} bonnes réponses (${percentage}%)`;
+            }
+        }
+
+        function resetVerbesPronominauxPC() {
+            Object.keys(correctAnswersPC).forEach(id => {
+                const input = document.getElementById(id);
+                input.value = '';
+                input.className = 'answer';
+            });
+            document.getElementById('result-verbes-pronominaux-pc').className = 'result';
+        }
+    </script>
+

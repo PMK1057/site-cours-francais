@@ -1,0 +1,152 @@
+
+    <button class="back-btn" onclick="backToSection('pronoms')">← Retour</button>
+    
+    <h2>MIEN, MIENNE : Les Pronoms Possessifs</h2>
+    
+    <div class="info-box">
+        <h3>📌 Introduction</h3>
+        <p>Les pronoms possessifs <strong>remplacent</strong> un nom précédé d'un déterminant possessif. Ils s'accordent en genre et en nombre avec l'objet possédé.</p>
+        <p><strong>Exemple :</strong> C'est <em>mon</em> livre → C'est <strong>le mien</strong></p>
+    </div>
+
+    <h3>Tableau des Pronoms Possessifs</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Possesseur</th>
+                <th>Masculin Singulier</th>
+                <th>Féminin Singulier</th>
+                <th>Masculin Pluriel</th>
+                <th>Féminin Pluriel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>je</strong></td>
+                <td>le mien</td>
+                <td>la mienne</td>
+                <td>les miens</td>
+                <td>les miennes</td>
+            </tr>
+            <tr>
+                <td><strong>tu</strong></td>
+                <td>le tien</td>
+                <td>la tienne</td>
+                <td>les tiens</td>
+                <td>les tiennes</td>
+            </tr>
+            <tr>
+                <td><strong>il/elle</strong></td>
+                <td>le sien</td>
+                <td>la sienne</td>
+                <td>les siens</td>
+                <td>les siennes</td>
+            </tr>
+            <tr>
+                <td><strong>nous</strong></td>
+                <td>le nôtre</td>
+                <td>la nôtre</td>
+                <td>les nôtres</td>
+                <td>les nôtres</td>
+            </tr>
+            <tr>
+                <td><strong>vous</strong></td>
+                <td>le vôtre</td>
+                <td>la vôtre</td>
+                <td>les vôtres</td>
+                <td>les vôtres</td>
+            </tr>
+            <tr>
+                <td><strong>ils/elles</strong></td>
+                <td>le leur</td>
+                <td>la leur</td>
+                <td>les leurs</td>
+                <td>les leurs</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Tableau Comparatif : Français - Anglais - Espagnol</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Français</th>
+                <th>Anglais</th>
+                <th>Espagnol</th>
+                <th>Exemple (FR)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>le mien / la mienne</td>
+                <td>mine</td>
+                <td>el mío / la mía</td>
+                <td>C'est le mien</td>
+            </tr>
+            <tr>
+                <td>le tien / la tienne</td>
+                <td>yours</td>
+                <td>el tuyo / la tuya</td>
+                <td>C'est le tien</td>
+            </tr>
+            <tr>
+                <td>le sien / la sienne</td>
+                <td>his / hers</td>
+                <td>el suyo / la suya</td>
+                <td>C'est le sien</td>
+            </tr>
+            <tr>
+                <td>le nôtre / la nôtre</td>
+                <td>ours</td>
+                <td>el nuestro / la nuestra</td>
+                <td>C'est le nôtre</td>
+            </tr>
+            <tr>
+                <td>le vôtre / la vôtre</td>
+                <td>yours</td>
+                <td>el vuestro / la vuestra</td>
+                <td>C'est le vôtre</td>
+            </tr>
+            <tr>
+                <td>le leur / la leur</td>
+                <td>theirs</td>
+                <td>el suyo / la suya (de ellos)</td>
+                <td>C'est le leur</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="warning-box">
+        <h4>⚠️ Points importants</h4>
+        <ul>
+            <li>Les pronoms possessifs sont <strong>toujours précédés d'un article</strong> (le, la, les)</li>
+            <li>Ils s'accordent avec l'<strong>objet possédé</strong>, pas avec le possesseur</li>
+            <li><strong>Accent circonflexe</strong> sur nôtre/vôtre (pour les différencier de notre/votre)</li>
+        </ul>
+    </div>
+
+    <h3>Exercices</h3>
+    <div class="exercise">
+        <h4>Exercice : Remplacez par le pronom possessif correct</h4>
+        <div class="question">
+            1. C'est mon livre → C'est <input type="text" id="pron_poss_1" class="answer">.
+        </div>
+        <div class="question">
+            2. Ce sont tes clés → Ce sont <input type="text" id="pron_poss_2" class="answer">.
+        </div>
+        <div class="question">
+            3. C'est sa voiture → C'est <input type="text" id="pron_poss_3" class="answer">.
+        </div>
+        <div class="question">
+            4. C'est notre maison → C'est <input type="text" id="pron_poss_4" class="answer">.
+        </div>
+        <div class="question">
+            5. Ce sont vos idées → Ce sont <input type="text" id="pron_poss_5" class="answer">.
+        </div>
+        <div class="question">
+            6. C'est leur problème → C'est <input type="text" id="pron_poss_6" class="answer">.
+        </div>
+        <button onclick="checkPronPoss()">Vérifier</button>
+        <button onclick="resetPronPoss()">Recommencer</button>
+        <div id="result-pron-poss" class="result"></div>
+    </div>

@@ -1,0 +1,1073 @@
+    <button class="back-btn" onclick="backToSection('expressions')">← Retour</button>
+    
+    <div id="expressions-courantes-container">
+        <div class="expressions-header">
+            <h2>🇫🇷 Expressions Françaises</h2>
+            <p class="expressions-subtitle">Guide contextuel des expressions courantes</p>
+        </div>
+
+        <div class="expressions-filters">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Rechercher une expression..." 
+                    class="search-input"
+                />
+            </div>
+
+            <div class="filters-bar">
+                <div class="level-filters">
+                    <button class="level-btn active" data-level="all">Tous</button>
+                    <button class="level-btn" data-level="familier">🟠 Familier</button>
+                    <button class="level-btn" data-level="courant">🔵 Courant</button>
+                    <button class="level-btn" data-level="soutenu">🟣 Soutenu</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="expressions-grid" class="expressions-grid"></div>
+
+        <div id="no-results" class="no-results" style="display: none;">
+            <p>Aucune expression trouvée 🤷‍♂️</p>
+        </div>
+
+        <div class="expressions-footer">
+            <p class="expressions-count"><strong id="count">0</strong> expressions</p>
+            <div class="expressions-legend">
+                <span>🟠 Familier : usage décontracté entre amis</span>
+                <span>🔵 Courant : usage quotidien standard</span>
+                <span>🟣 Soutenu : usage formel ou professionnel</span>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        #expressions-courantes-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .expressions-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .expressions-header h2 {
+            font-size: 3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .expressions-subtitle {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .expressions-filters {
+            margin-bottom: 30px;
+        }
+
+        .search-container {
+            margin-bottom: 15px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid #fff;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .filters-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .level-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .level-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+
+        .level-btn[data-level="all"] {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .level-btn[data-level="all"].active {
+            background: linear-gradient(to right, #4b5563, #374151);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .level-btn[data-level="familier"] {
+            background: #fed7aa;
+            color: #9a3412;
+        }
+
+        .level-btn[data-level="familier"].active {
+            background: linear-gradient(to right, #f97316, #ef4444);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .level-btn[data-level="courant"] {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .level-btn[data-level="courant"].active {
+            background: linear-gradient(to right, #3b82f6, #06b6d4);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .level-btn[data-level="soutenu"] {
+            background: #e9d5ff;
+            color: #6b21a8;
+        }
+
+        .level-btn[data-level="soutenu"].active {
+            background: linear-gradient(to right, #a855f7, #6366f1);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .lang-filters {
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #e5e7eb;
+            color: #4b5563;
+        }
+
+        .lang-btn.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .expressions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .expression-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .expression-card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .expression-header {
+            padding: 16px;
+            color: white;
+        }
+
+        .expression-header.familier {
+            background: linear-gradient(to right, #f97316, #ef4444);
+        }
+
+        .expression-header.courant {
+            background: linear-gradient(to right, #3b82f6, #06b6d4);
+        }
+
+        .expression-header.soutenu {
+            background: linear-gradient(to right, #a855f7, #6366f1);
+        }
+
+        .expression-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .expression-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .expression-audio-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            cursor: pointer;
+            font-size: 0.8em;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .expression-audio-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .expression-level-badge {
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.75em;
+            font-weight: 600;
+            border: 2px solid;
+        }
+
+        .expression-level-badge.familier {
+            background: #fed7aa;
+            color: #9a3412;
+            border-color: #f97316;
+        }
+
+        .expression-level-badge.courant {
+            background: #dbeafe;
+            color: #1e40af;
+            border-color: #3b82f6;
+        }
+
+        .expression-level-badge.soutenu {
+            background: #e9d5ff;
+            color: #6b21a8;
+            border-color: #a855f7;
+        }
+
+        .expression-body {
+            padding: 20px;
+        }
+
+        .expression-translations {
+            margin-bottom: 16px;
+        }
+
+        .expression-translation-item {
+            display: flex;
+            align-items: start;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: #374151;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .expression-translation-item .flag {
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+
+        .expression-translation-item strong {
+            color: #1e40af;
+        }
+
+        .expression-context {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #e5e7eb;
+        }
+
+        .expression-example-context {
+            margin-top: 8px;
+            padding-left: 12px;
+        }
+
+        .expression-examples {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 16px;
+        }
+
+        .expression-examples-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .expression-examples-icon {
+            color: #10b981;
+        }
+
+        .expression-examples-title {
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.9em;
+        }
+
+        .expression-example {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 12px;
+            border-left: 4px solid #10b981;
+            margin-bottom: 8px;
+        }
+
+        .expression-example:last-child {
+            margin-bottom: 0;
+        }
+
+        .expression-example-text {
+            color: #374151;
+            font-size: 0.85em;
+            font-style: italic;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 48px 20px;
+        }
+
+        .no-results p {
+            font-size: 1.5em;
+            color: #6b7280;
+        }
+
+        .expressions-footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .expressions-count {
+            font-size: 0.9em;
+            color: #4b5563;
+            margin-bottom: 12px;
+        }
+
+        .expressions-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            font-size: 0.75em;
+            color: #6b7280;
+        }
+    </style>
+
+    <script>
+        const expressions = [
+            {
+                fr: "Ça marche",
+                level: "courant",
+                translations: {
+                    fr: "D'accord, c'est entendu, on est sur la même longueur d'onde",
+                    en: "Okay, it works, we agree / That's fine with me",
+                    es: "Vale, de acuerdo, funciona"
+                },
+                context: "Used to express agreement or acceptance. Common in daily conversations when confirming plans or accepting suggestions.",
+                examples: [
+                    "- On se retrouve à 15h ? - Oui, ça marche !",
+                    "Tu peux m'aider demain ? - Ça marche, pas de problème.",
+                    "Si on partage les frais, ça te va ? - Ouais, ça marche."
+                ]
+            },
+            {
+                fr: "Ça roule",
+                level: "familier",
+                translations: {
+                    fr: "Tout va bien, c'est bon, pas de problème (plus décontracté que 'ça marche')",
+                    en: "Everything's good, it's all rolling smoothly / How's it going? (when used as a question)",
+                    es: "Todo bien, sin problema / ¿Qué tal? / ¿Cómo va? (cuando se usa como pregunta)"
+                },
+                context: "Very casual expression used among friends. More relaxed than 'ça marche'. Used to say everything is fine or to agree casually. Can also be used as a question 'Ça roule?' meaning 'How's it going?' (equivalent to 'How are things?' in English, '¿Qué tal?' in Spanish).",
+                examples: [
+                    "- Comment ça va au boulot ? - Ça roule !",
+                    "- Ça roule ? - Oui, ça roule !",
+                    "- On fait comme prévu ? - Ouais, ça roule.",
+                    "T'inquiète pas pour moi, ça roule."
+                ]
+            },
+            {
+                fr: "C'est parti",
+                level: "courant",
+                translations: {
+                    fr: "On commence, allons-y, c'est lancé",
+                    en: "Let's go, here we go, we're starting",
+                    es: "Vamos, empezamos"
+                },
+                context: "Enthusiastic expression used to signal the start of something. Common when beginning an activity, project, or event. Creates energy and momentum.",
+                examples: [
+                    "Tout le monde est prêt ? Alors c'est parti !",
+                    "J'ai validé le projet, c'est parti pour trois mois de travail.",
+                    "Allez, on y va, c'est parti !"
+                ]
+            },
+            {
+                fr: "Vas-y",
+                level: "courant",
+                translations: {
+                    fr: "Commence, fais-le, je t'écoute / Continue",
+                    en: "Go ahead, do it, I'm listening",
+                    es: "Adelante, hazlo, continúa"
+                },
+                context: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'. Very common in conversations to show you're ready to listen or support someone's action.",
+                examples: [
+                    "- Je peux te poser une question ? - Vas-y, je t'écoute.",
+                    "Vas-y, lance-toi, n'aie pas peur !",
+                    "Tu voulais me dire quelque chose ? Vas-y, je suis là."
+                ]
+            },
+            {
+                fr: "Carrément",
+                level: "familier",
+                translations: {
+                    fr: "Absolument, totalement, complètement d'accord",
+                    en: "Absolutely, totally, definitely",
+                    es: "Totalmente, absolutamente"
+                },
+                context: "Very casual and emphatic way to express strong agreement or to emphasize something. Used among friends and in informal settings. Can be used as an interjection or to intensify an adjective.",
+                examples: [
+                    "- C'était bien le concert ? - Carrément ! C'était génial.",
+                    "Il fait carrément froid aujourd'hui.",
+                    "- Tu viens ce soir ? - Carrément, j'y serai !"
+                ]
+            },
+            {
+                fr: "Nickel",
+                level: "familier",
+                translations: {
+                    fr: "Parfait, impeccable, exactement comme il faut",
+                    en: "Perfect, spotless, exactly right",
+                    es: "Perfecto, impecable"
+                },
+                context: "Casual expression meaning 'perfect' or 'spotless'. Very common in spoken French to express satisfaction or approval. More informal than 'impeccable'.",
+                examples: [
+                    "Le travail est fini ? - Oui, c'est nickel.",
+                    "Ta chambre est nickel, bravo !",
+                    "L'organisation était nickel, rien à redire."
+                ]
+            },
+            {
+                fr: "Impeccable",
+                level: "courant",
+                translations: {
+                    fr: "Parfait, sans défaut, excellent (légèrement plus formel que 'nickel')",
+                    en: "Flawless, perfect, excellent",
+                    es: "Impecable, perfecto"
+                },
+                context: "Standard expression meaning 'flawless' or 'perfect'. Slightly more formal than 'nickel' but still commonly used in daily conversations. Suitable for both casual and semi-formal contexts.",
+                examples: [
+                    "Ta peinture sur le mur est impeccable, beau travail !",
+                    "Ton exposé était impeccable, félicitations.",
+                    "Le service au restaurant était impeccable."
+                ]
+            },
+            {
+                fr: "Pas de souci",
+                level: "courant",
+                translations: {
+                    fr: "Aucun problème, ne t'inquiète pas",
+                    en: "No worries, no problem at all",
+                    es: "Sin problema, no te preocupes"
+                },
+                context: "Very common and friendly way to say 'no problem' or 'no worries'. Used to reassure someone or to accept a request casually. Very popular in daily conversations.",
+                examples: [
+                    "- Désolé pour le retard ! - Pas de souci, j'arrive aussi.",
+                    "Tu peux garder mon chat ce weekend ? - Oui, pas de souci.",
+                    "Pas de souci, on trouvera une solution."
+                ]
+            },
+            {
+                fr: "T'inquiète (pas)",
+                level: "familier",
+                translations: {
+                    fr: "Ne t'inquiète pas, pas de stress (forme raccourcie très courante)",
+                    en: "Don't worry, no stress (short form)",
+                    es: "No te preocupes, tranquilo"
+                },
+                context: "Very casual shortened form of 'ne t'inquiète pas' (don't worry). Extremely common in spoken French, especially among friends. The 'pas' is optional but both forms are widely used.",
+                examples: [
+                    "- J'ai oublié d'acheter le pain ! - T'inquiète, j'en ai pris.",
+                    "T'inquiète pas, ça va s'arranger.",
+                    "Je gère tout, t'inquiète."
+                ]
+            },
+            {
+                fr: "Laisse tomber",
+                level: "familier",
+                translations: {
+                    fr: "Oublie ça, abandonne, ce n'est pas grave / N'en parlons plus",
+                    en: "Forget it, drop it, never mind",
+                    es: "Déjalo, olvídalo"
+                },
+                context: "Casual expression meaning 'forget it' or 'drop it'. Used when you want to abandon a topic, stop worrying about something, or tell someone not to bother. Can sometimes express resignation or frustration.",
+                examples: [
+                    "- Je vais essayer de le convaincre... - Laisse tomber, c'est inutile.",
+                    "C'est trop compliqué à expliquer, laisse tomber.",
+                    "Tu lui as prêté de l'argent ? Laisse tomber, tu le reverras jamais."
+                ]
+            },
+            {
+                fr: "Tant pis",
+                level: "courant",
+                translations: {
+                    fr: "C'est dommage mais on l'accepte, peu importe maintenant",
+                    en: "Too bad, oh well, it can't be helped",
+                    es: "Qué pena, mala suerte"
+                },
+                context: "Expression of resignation meaning 'too bad' or 'oh well'. Used when accepting a disappointing situation. Can also be used judgmentally ('tant pis pour lui' = too bad for him).",
+                examples: [
+                    "On n'a pas de places pour le concert ? Tant pis, on ira une autre fois.",
+                    "Il ne veut pas venir ? Tant pis pour lui.",
+                    "J'ai raté le train. Tant pis, je prendrai le suivant."
+                ]
+            },
+            {
+                fr: "Tant mieux",
+                level: "courant",
+                translations: {
+                    fr: "C'est une bonne chose, heureusement, c'est positif",
+                    en: "So much the better, that's good, great",
+                    es: "Tanto mejor, qué bien"
+                },
+                context: "Positive expression meaning 'so much the better' or 'that's good'. Used to express relief or satisfaction about a positive situation. Opposite of 'tant pis'.",
+                examples: [
+                    "- Je n'ai plus mal au dos. - Ah tant mieux !",
+                    "Il ne pleut plus ? Tant mieux, on pourra sortir.",
+                    "Tu te sens mieux aujourd'hui ? Tant mieux !"
+                ]
+            },
+            {
+                fr: "Ça dépend",
+                level: "courant",
+                translations: {
+                    fr: "C'est selon les circonstances, pas de réponse fixe",
+                    en: "It depends, depends on the situation",
+                    es: "Depende, según las circunstancias"
+                },
+                context: "Common expression meaning 'it depends'. Used when the answer varies according to circumstances. Often followed by 'de' (on) to specify what it depends on.",
+                examples: [
+                    "- Il est sympa ton collègue ? - Ça dépend des jours.",
+                    "C'est cher ou pas cher ? Ça dépend de ce que tu compares.",
+                    "- C'est bien ce restaurant ? - Ça dépend ce que tu aimes."
+                ]
+            },
+            {
+                fr: "Ça y est",
+                level: "courant",
+                translations: {
+                    fr: "C'est fait, c'est terminé, c'est accompli, enfin !",
+                    en: "That's it, it's done, finally",
+                    es: "Ya está, está hecho, listo"
+                },
+                context: "Expression of completion meaning 'that's it' or 'it's done'. Can express relief after finishing something, confirmation that something is happening, or emphasis that a moment has arrived.",
+                examples: [
+                    "Ça y est, j'ai fini mes devoirs !",
+                    "Ça y est, tu as compris maintenant ?",
+                    "Attention, je lance la vidéo... ça y est, c'est parti !"
+                ]
+            },
+            {
+                fr: "C'est pas mal",
+                level: "courant",
+                translations: {
+                    fr: "C'est plutôt bien, c'est correct, pas mauvais (souvent un compliment modéré)",
+                    en: "That's not bad, pretty good, decent",
+                    es: "No está mal, está bien"
+                },
+                context: "Moderate compliment meaning 'not bad' or 'pretty good'. In French culture, this is often a positive comment (understatement), unlike in English where 'not bad' can sound lukewarm. Can be used genuinely or diplomatically.",
+                examples: [
+                    "- Comment tu trouves mon dessin ? - C'est pas mal !",
+                    "Le film était comment ? - C'est pas mal, je me suis pas ennuyé.",
+                    "Ton appartement est pas mal du tout !"
+                ]
+            },
+            {
+                fr: "Pourquoi pas",
+                level: "courant",
+                translations: {
+                    fr: "C'est une possibilité, je suis ouvert à l'idée, peut-être",
+                    en: "Why not, that's a possibility, I'm open to it",
+                    es: "Por qué no, es posible"
+                },
+                context: "Open and non-committal response meaning 'why not'. Shows openness to an idea without strong enthusiasm. Can be neutral or slightly positive depending on tone.",
+                examples: [
+                    "- On pourrait aller au ciné ? - Pourquoi pas.",
+                    "Tu veux essayer ce nouveau restaurant ? Pourquoi pas !",
+                    "Un voyage en Espagne ? Pourquoi pas, c'est une bonne idée."
+                ]
+            },
+            {
+                fr: "Tranquille",
+                level: "familier",
+                translations: {
+                    fr: "Cool, détendu, sans stress, calmement / Facile, sans problème",
+                    en: "Chill, relaxed, calm, easy",
+                    es: "Tranquilo, relajado, fácil"
+                },
+                context: "Very versatile casual word meaning 'chill', 'relaxed', or 'easy'. Can describe a person's state, a situation's difficulty level, or a way of doing something. Very common in spoken French.",
+                examples: [
+                    "- Comment s'est passé ton weekend ? - Tranquille, j'ai rien fait.",
+                    "C'était difficile l'examen ? - Non, tranquille.",
+                    "On reste tranquille à la maison ce soir ?"
+                ]
+            },
+            {
+                fr: "On verra bien",
+                level: "courant",
+                translations: {
+                    fr: "Le futur le dira, attendons de voir ce qui se passe",
+                    en: "We'll see, time will tell, let's wait and see",
+                    es: "Ya veremos, el tiempo dirá"
+                },
+                context: "Expression of uncertainty meaning 'we'll see' or 'time will tell'. Used when you're not sure about an outcome and prefer to wait before making decisions. Shows a relaxed, patient attitude.",
+                examples: [
+                    "Tu penses qu'il va accepter ? On verra bien.",
+                    "Je sais pas si ça va marcher, on verra bien.",
+                    "Pour les vacances, on verra bien selon le budget."
+                ]
+            },
+            {
+                fr: "Ça suffit",
+                level: "courant",
+                translations: {
+                    fr: "C'est assez, arrête, stop (souvent avec un ton ferme)",
+                    en: "That's enough, stop it",
+                    es: "Es suficiente, basta"
+                },
+                context: "Firm expression meaning 'that's enough' or 'stop it'. Used to put an end to something, often with authority. Can be used when you've had enough of something or to tell someone to stop a behavior.",
+                examples: [
+                    "Ça suffit maintenant, arrêtez de vous disputer !",
+                    "Tu as assez mangé ? - Oui, ça suffit merci.",
+                    "Ça suffit les bêtises, au travail !"
+                ]
+            },
+            {
+                fr: "Comme tu veux",
+                level: "courant",
+                translations: {
+                    fr: "À ta guise, tu décides, je m'adapte (peut être neutre ou agacé selon le ton)",
+                    en: "As you wish, whatever you want",
+                    es: "Como quieras, tú decides"
+                },
+                context: "Expression meaning 'as you wish' or 'whatever you want'. Can be genuinely flexible and accommodating, or slightly annoyed depending on tone. Context and intonation are key to understanding the speaker's attitude.",
+                examples: [
+                    "- On va au resto ou on cuisine ? - Comme tu veux.",
+                    "Tu préfères partir demain ? Comme tu veux.",
+                    "Bon, comme tu veux, je te laisse décider."
+                ]
+            },
+            {
+                fr: "Tout à l'heure",
+                level: "courant",
+                translations: {
+                    fr: "Il y a peu de temps (passé) ou dans peu de temps (futur)",
+                    en: "Earlier / in a bit (depending on context)",
+                    es: "Hace un rato / dentro de un rato"
+                },
+                context: "This expression has different meanings depending on context: past ('a little while ago') or future ('in a little while'). The context of the sentence determines which meaning applies.",
+                examples: [
+                    {
+                        text: "Je t'ai appelé tout à l'heure, tu n'as pas répondu.",
+                        context: "Past context: means 'a little while ago'"
+                    },
+                    {
+                        text: "On se voit tout à l'heure pour le café ?",
+                        context: "Future context: means 'in a little while'"
+                    },
+                    {
+                        text: "Tout à l'heure, j'ai vu ton frère au supermarché.",
+                        context: "Past context: means 'a little while ago'"
+                    }
+                ]
+            },
+            {
+                fr: "À tout à l'heure",
+                level: "courant",
+                translations: {
+                    fr: "À bientôt, on se voit dans peu de temps (même journée)",
+                    en: "See you soon, see you in a bit",
+                    es: "Hasta luego, nos vemos pronto"
+                },
+                context: "Standard farewell meaning 'see you later' (same day). Used when you expect to see someone again within a few hours, typically the same day. More specific than 'à bientôt' which can be used for any future meeting.",
+                examples: [
+                    "Je sors faire des courses, à tout à l'heure !",
+                    "On se voit après la réunion, à tout à l'heure.",
+                    "Bon courage pour ton exam, à tout à l'heure !"
+                ]
+            },
+            {
+                fr: "À plus",
+                level: "familier",
+                translations: {
+                    fr: "À plus tard, au revoir (très décontracté, souvent à l'écrit)",
+                    en: "See you later, bye (casual)",
+                    es: "Hasta luego, nos vemos"
+                },
+                context: "Very casual shortened form of 'à plus tard' (see you later). Extremely common in text messages and casual spoken French. Can be written as 'A+' in SMS. Used among friends and in very informal settings.",
+                examples: [
+                    "Bon ben salut, à plus !",
+                    "Je dois y aller, à plus les gars.",
+                    "À plus tard ! (peut s'écrire 'A+' en SMS)"
+                ]
+            },
+            {
+                fr: "Volontiers",
+                level: "soutenu",
+                translations: {
+                    fr: "Avec plaisir, je serais ravi d'accepter",
+                    en: "Gladly, with pleasure, I'd be happy to",
+                    es: "Con mucho gusto, encantado"
+                },
+                context: "Polite and elegant way to accept an offer meaning 'gladly' or 'with pleasure'. More formal than 'avec plaisir' but still warm. Used in semi-formal to formal contexts, or when you want to sound refined.",
+                examples: [
+                    "- Vous prendrez un café ? - Volontiers, merci.",
+                    "Tu veux venir dîner ? - Volontiers, c'est gentil.",
+                    "Je vous aide à porter ça ? - Volontiers, merci beaucoup."
+                ]
+            },
+            {
+                fr: "En effet",
+                level: "soutenu",
+                translations: {
+                    fr: "Effectivement, c'est exact, c'est bien le cas",
+                    en: "Indeed, in fact, that's correct",
+                    es: "En efecto, efectivamente"
+                },
+                context: "Formal expression meaning 'indeed' or 'in fact'. Used to confirm or acknowledge that something is correct. More sophisticated than 'oui' or 'exactement'. Common in professional or academic contexts.",
+                examples: [
+                    "Vous aviez prévu cette situation ? - En effet.",
+                    "C'est vous qui avez écrit ce livre ? - En effet.",
+                    "Vous aviez raison, en effet, c'était fermé."
+                ]
+            },
+            {
+                fr: "Certes",
+                level: "soutenu",
+                translations: {
+                    fr: "Certainement, c'est vrai (souvent suivi d'un 'mais')",
+                    en: "Certainly, admittedly, granted",
+                    es: "Ciertamente, es verdad"
+                },
+                context: "Formal concessive word meaning 'certainly' or 'admittedly'. Often followed by 'mais' (but) to acknowledge a point before making a counterargument. Used in sophisticated speech and writing to show nuanced thinking.",
+                examples: [
+                    "C'est cher, certes, mais c'est de qualité.",
+                    "Certes, il a fait une erreur, mais il l'a reconnue.",
+                    "Le projet est ambitieux, certes, mais réalisable."
+                ]
+            },
+            {
+                fr: "Néanmoins",
+                level: "soutenu",
+                translations: {
+                    fr: "Cependant, malgré cela, toutefois",
+                    en: "Nevertheless, however, nonetheless",
+                    es: "Sin embargo, no obstante"
+                },
+                context: "Formal conjunction meaning 'nevertheless' or 'however'. Used to introduce a contrast or contradiction. More sophisticated than 'mais' (but). Common in written French, academic texts, and formal speeches.",
+                examples: [
+                    "Il pleut, néanmoins nous allons sortir.",
+                    "C'est difficile, néanmoins je vais essayer.",
+                    "Le résultat n'est pas parfait, néanmoins c'est satisfaisant."
+                ]
+            }
+        ];
+
+        let selectedLevel = 'all';
+        let searchTerm = '';
+        let audioUrls = {};
+
+        // Mapping des expressions françaises vers leurs noms de fichiers
+        const expressionToFilename = {
+            "Ça marche": "ca_marche",
+            "Ça roule": "ca_roule",
+            "C'est parti": "cest_parti",
+            "Vas-y": "vas_y",
+            "Carrément": "carrement",
+            "Nickel": "nickel",
+            "Impeccable": "impeccable",
+            "Pas de souci": "pas_de_souci",
+            "T'inquiète (pas)": "t_inquiete",
+            "T'inquiète": "t_inquiete",
+            "Laisse tomber": "laisse_tomber",
+            "Tant pis": "tant_pis",
+            "Tant mieux": "tant_mieux",
+            "Ça dépend": "ca_depend",
+            "Ça y est": "ca_y_est",
+            "C'est pas mal": "cest_pas_mal",
+            "Pourquoi pas": "pourquoi_pas",
+            "Tranquille": "tranquille",
+            "On verra bien": "on_verra_bien",
+            "Ça suffit": "ca_suffit",
+            "Comme tu veux": "comme_tu_veux",
+            "Tout à l'heure": "tout_a_lheure",
+            "À tout à l'heure": "a_tout_a_lheure",
+            "À plus": "a_plus",
+            "Volontiers": "volontiers",
+            "En effet": "en_effet",
+            "Certes": "certes",
+            "Néanmoins": "neanmoins"
+        };
+
+        // Charger les URLs audio
+        async function loadAudioUrls() {
+            try {
+                const response = await fetch('audio_urls.json');
+                const data = await response.json();
+                audioUrls = data;
+            } catch (error) {
+                console.error('Erreur lors du chargement des URLs audio:', error);
+            }
+        }
+
+        // Obtenir l'URL audio pour une expression
+        function getAudioUrl(expression) {
+            const filename = expressionToFilename[expression];
+            if (!filename) return null;
+            
+            const audioData = audioUrls[filename];
+            if (!audioData) return null;
+            
+            return typeof audioData === 'string' ? audioData : audioData.url;
+        }
+
+        function filterExpressions() {
+            const filtered = expressions.filter(exp => {
+                const matchesSearch = exp.fr.toLowerCase().includes(searchTerm.toLowerCase());
+                const matchesLevel = selectedLevel === 'all' || exp.level === selectedLevel;
+                return matchesSearch && matchesLevel;
+            });
+
+            renderExpressions(filtered);
+            document.getElementById('count').textContent = filtered.length;
+            document.getElementById('no-results').style.display = filtered.length === 0 ? 'block' : 'none';
+        }
+
+        function renderExpressions(expressionsToShow) {
+            const grid = document.getElementById('expressions-grid');
+            grid.innerHTML = '';
+
+            expressionsToShow.forEach(exp => {
+                const card = document.createElement('div');
+                card.className = 'expression-card';
+
+                const header = document.createElement('div');
+                header.className = `expression-header ${exp.level}`;
+
+                const titleRow = document.createElement('div');
+                titleRow.className = 'expression-title-row';
+
+                const title = document.createElement('h3');
+                title.className = 'expression-title';
+                
+                const titleText = document.createElement('span');
+                titleText.textContent = exp.fr;
+                title.appendChild(titleText);
+
+                // Ajouter le bouton audio
+                const audioUrl = getAudioUrl(exp.fr);
+                if (audioUrl) {
+                    const audioBtn = document.createElement('button');
+                    audioBtn.className = 'expression-audio-btn';
+                    audioBtn.innerHTML = '🔊';
+                    audioBtn.title = `Écouter "${exp.fr}"`;
+                    audioBtn.onclick = () => playAudio(audioUrl);
+                    title.appendChild(audioBtn);
+                }
+
+                const badge = document.createElement('span');
+                badge.className = `expression-level-badge ${exp.level}`;
+                badge.textContent = exp.level;
+
+                titleRow.appendChild(title);
+                titleRow.appendChild(badge);
+                header.appendChild(titleRow);
+
+                const body = document.createElement('div');
+                body.className = 'expression-body';
+
+                // Traductions EN et ES avec drapeaux
+                const translationsDiv = document.createElement('div');
+                translationsDiv.className = 'expression-translations';
+                
+                // Traduction EN
+                const enTranslation = document.createElement('div');
+                enTranslation.className = 'expression-translation-item';
+                enTranslation.innerHTML = `<span class="flag">🇬🇧</span> <strong>${exp.translations.en}</strong>`;
+                translationsDiv.appendChild(enTranslation);
+                
+                // Traduction ES
+                const esTranslation = document.createElement('div');
+                esTranslation.className = 'expression-translation-item';
+                esTranslation.innerHTML = `<span class="flag">🇪🇸</span> <strong>${exp.translations.es}</strong>`;
+                translationsDiv.appendChild(esTranslation);
+                
+                // Contexte d'utilisation (en anglais)
+                if (exp.context) {
+                    const contextDiv = document.createElement('div');
+                    contextDiv.className = 'expression-context';
+                    contextDiv.innerHTML = `<em style="color: #666; font-size: 0.9em;">${exp.context}</em>`;
+                    translationsDiv.appendChild(contextDiv);
+                }
+
+                const examplesSection = document.createElement('div');
+                examplesSection.className = 'expression-examples';
+
+                const examplesHeader = document.createElement('div');
+                examplesHeader.className = 'expression-examples-header';
+
+                const examplesIcon = document.createElement('span');
+                examplesIcon.className = 'expression-examples-icon';
+                examplesIcon.innerHTML = '💬';
+
+                const examplesTitle = document.createElement('span');
+                examplesTitle.className = 'expression-examples-title';
+                examplesTitle.textContent = 'Exemples contextuels :';
+
+                examplesHeader.appendChild(examplesIcon);
+                examplesHeader.appendChild(examplesTitle);
+
+                // Gérer les exemples avec ou sans contexte spécifique
+                exp.examples.forEach(example => {
+                    const exampleDiv = document.createElement('div');
+                    exampleDiv.className = 'expression-example';
+
+                    // Si l'exemple est un objet avec texte et contexte
+                    if (typeof example === 'object' && example.text && example.context) {
+                        const exampleText = document.createElement('p');
+                        exampleText.className = 'expression-example-text';
+                        exampleText.textContent = example.text;
+                        exampleDiv.appendChild(exampleText);
+                        
+                        const contextText = document.createElement('p');
+                        contextText.className = 'expression-example-context';
+                        contextText.innerHTML = `<em style="color: #888; font-size: 0.85em;">Context: ${example.context}</em>`;
+                        exampleDiv.appendChild(contextText);
+                    } else {
+                        // Si l'exemple est juste une chaîne de caractères
+                        const exampleText = document.createElement('p');
+                        exampleText.className = 'expression-example-text';
+                        exampleText.textContent = typeof example === 'string' ? example : example.text || example;
+                        exampleDiv.appendChild(exampleText);
+                    }
+
+                    examplesSection.appendChild(exampleDiv);
+                });
+
+                body.appendChild(translationsDiv);
+                body.appendChild(examplesSection);
+
+                card.appendChild(header);
+                card.appendChild(body);
+                grid.appendChild(card);
+            });
+        }
+
+        // Fonction d'initialisation
+        function initExpressions() {
+            // Réinitialiser les variables d'état
+            selectedLevel = 'all';
+            searchTerm = '';
+            
+            // Réinitialiser les event listeners (éviter les doublons)
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                // Cloner et remplacer pour supprimer les anciens listeners
+                const newSearchInput = searchInput.cloneNode(true);
+                searchInput.parentNode.replaceChild(newSearchInput, searchInput);
+                
+                newSearchInput.addEventListener('input', (e) => {
+                    searchTerm = e.target.value;
+                    filterExpressions();
+                });
+            }
+
+            // Réinitialiser les boutons de niveau
+            document.querySelectorAll('.level-btn').forEach(btn => {
+                const newBtn = btn.cloneNode(true);
+                btn.parentNode.replaceChild(newBtn, btn);
+                
+                newBtn.addEventListener('click', () => {
+                    document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+                    newBtn.classList.add('active');
+                    selectedLevel = newBtn.dataset.level;
+                    filterExpressions();
+                });
+            });
+
+
+            // Initial render
+            loadAudioUrls().then(() => {
+                filterExpressions();
+            });
+        }
+
+        // Fonction pour attendre que les éléments soient présents
+        let waitAttempts = 0;
+        const maxWaitAttempts = 100; // Maximum 5 secondes (100 * 50ms)
+        
+        function waitForElements() {
+            const searchInput = document.getElementById('search-input');
+            const levelBtns = document.querySelectorAll('.level-btn');
+            const grid = document.getElementById('expressions-grid');
+            
+            if (searchInput && levelBtns.length > 0 && grid) {
+                initExpressions();
+            } else if (waitAttempts < maxWaitAttempts) {
+                waitAttempts++;
+                // Réessayer après un court délai
+                setTimeout(waitForElements, 50);
+            } else {
+                console.error('Timeout: Les éléments ne sont pas disponibles');
+            }
+        }
+
+        // Attendre que le DOM soit prêt
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', waitForElements);
+        } else {
+            // Le DOM est déjà chargé, attendre que le HTML soit inséré
+            waitForElements();
+        }
+    </script>

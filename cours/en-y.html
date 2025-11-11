@@ -1,0 +1,87 @@
+
+    <button class="back-btn" onclick="backToSection('pronoms')">← Retour</button>
+    
+    <h2>EN et Y : Cas particuliers</h2>
+    
+    <div class="info-box">
+        <h3>📌 La règle simple</h3>
+        <ul>
+            <li><strong>EN</strong> = DE (provenance, quantité)</li>
+            <li><strong>Y</strong> = À / lieu (destination)</li>
+        </ul>
+    </div>
+
+    <h3>Le pronom EN</h3>
+    <p><strong>EN remplace :</strong></p>
+    
+    <div class="example-box">
+        <h4>1. Un complément introduit par "DE"</h4>
+        <ul>
+            <li>Tu parles <em>de ton voyage</em> ? → Oui, j'<strong>en</strong> parle.</li>
+            <li>Elle revient <em>de Paris</em> ? → Oui, elle <strong>en</strong> revient.</li>
+        </ul>
+    </div>
+
+    <div class="example-box">
+        <h4>2. Une quantité ou un partitif</h4>
+        <ul>
+            <li>Tu veux <em>du café</em> ? → Oui, j'<strong>en</strong> veux.</li>
+            <li>Tu as <em>des enfants</em> ? → Oui, j'<strong>en</strong> ai deux.</li>
+            <li>Il mange <em>des pommes</em> ? → Oui, il <strong>en</strong> mange.</li>
+        </ul>
+    </div>
+
+    <h3>Le pronom Y</h3>
+    <p><strong>Y remplace :</strong></p>
+    
+    <div class="example-box">
+        <h4>1. Un complément de lieu (destination)</h4>
+        <ul>
+            <li>Tu vas <em>à Paris</em> ? → Oui, j'<strong>y</strong> vais.</li>
+            <li>Elle habite <em>en France</em> ? → Oui, elle <strong>y</strong> habite.</li>
+            <li>Ils restent <em>au bureau</em> ? → Oui, ils <strong>y</strong> restent.</li>
+        </ul>
+    </div>
+
+    <div class="example-box">
+        <h4>2. Un complément introduit par "À" (choses/idées)</h4>
+        <ul>
+            <li>Tu penses <em>à ton examen</em> ? → Oui, j'<strong>y</strong> pense.</li>
+            <li>Elle s'intéresse <em>à la musique</em> ? → Oui, elle s'<strong>y</strong> intéresse.</li>
+        </ul>
+    </div>
+
+    <div class="warning-box">
+        <h4>⚠️ Attention : À + PERSONNE</h4>
+        <p>Avec une <strong>personne</strong>, on utilise <strong>lui/leur</strong>, pas Y !</p>
+        <ul>
+            <li>Je réponds <em>aux emails</em> → J'<strong>y</strong> réponds (chose)</li>
+            <li>Je réponds <em>à Patrick</em> → Je <strong>lui</strong> réponds (personne)</li>
+        </ul>
+    </div>
+
+    <h3>Exercices</h3>
+    <div class="exercise">
+        <h4>Exercice : Remplacez par EN, Y, LUI ou LEUR</h4>
+        <div class="question">
+            1. Tu vas à Paris ? → Oui, j'<input type="text" id="eny_1" class="answer"> vais.
+        </div>
+        <div class="question">
+            2. Tu veux du café ? → Oui, j'<input type="text" id="eny_2" class="answer"> veux.
+        </div>
+        <div class="question">
+            3. Tu parles à Marie ? → Oui, je <input type="text" id="eny_3" class="answer"> parle.
+        </div>
+        <div class="question">
+            4. Tu reviens de France ? → Oui, j'<input type="text" id="eny_4" class="answer"> reviens.
+        </div>
+        <div class="question">
+            5. Tu penses à ton examen ? → Oui, j'<input type="text" id="eny_5" class="answer"> pense.
+        </div>
+        <div class="question">
+            6. Tu as des enfants ? → Oui, j'<input type="text" id="eny_6" class="answer"> ai deux.
+        </div>
+        <button onclick="checkEnY()">Vérifier</button>
+        <button onclick="resetEnY()">Recommencer</button>
+        <div id="result-eny" class="result"></div>
+    </div>

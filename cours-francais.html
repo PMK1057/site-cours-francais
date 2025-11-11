@@ -1,0 +1,3477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours de Français - Tous Niveaux</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header et Navigation */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .section.active {
+            display: block !important;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Menu de sections */
+        .section-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .section-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .section-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .section-card p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* Contenu des cours */
+        .course-content {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .course-content.active {
+            display: block !important;
+            animation: fadeIn 0.5s;
+        }
+
+        .back-btn {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+
+        .back-btn:hover {
+            background: #5a3779;
+        }
+
+        h2 {
+            color: #667eea;
+            margin: 30px 0 20px 0;
+            font-size: 2em;
+        }
+
+        h3 {
+            color: #764ba2;
+            margin: 20px 0 15px 0;
+            font-size: 1.5em;
+        }
+
+        h4 {
+            color: #667eea;
+            margin: 15px 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* Tableaux */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        /* Boxes spéciaux */
+        .info-box {
+            background: #e8eaf6;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .example-box {
+            background: #f3e5f5;
+            border-left: 4px solid #764ba2;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        /* Exercices */
+        .exercise {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 2px solid #667eea;
+        }
+
+        .question {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        input[type="text"] {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            min-width: 150px;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        input.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        input.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-weight: bold;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .result.partial {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        strong {
+            color: #667eea;
+        }
+
+        em {
+            color: #764ba2;
+            font-style: italic;
+        }
+
+        /* Home section */
+        .home-welcome {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .home-welcome h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .level-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .level-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .level-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .emoji {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>🇫🇷 Cours de Français</h1>
+            <nav>
+                <button class="nav-btn active" onclick="showSection('home')">🏠 Accueil</button>
+                <button class="nav-btn" onclick="showSection('grammaire')">📚 Grammaire</button>
+                <button class="nav-btn" onclick="showSection('conjugaison')">🔄 Conjugaison</button>
+                <button class="nav-btn" onclick="showSection('pronoms')">💬 Pronoms</button>
+                <button class="nav-btn" onclick="showSection('expressions')">💡 Expressions & Vocabulaire</button>
+                <button class="nav-btn" onclick="showSection('exercices')">✍️ Exercices</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- HOME -->
+        <div id="home" class="section active">
+            <div class="home-welcome">
+                <h2>Bienvenue sur votre plateforme de français !</h2>
+                <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
+                    📚 Grammaire • 🔄 Conjugaison • 💬 Pronoms • 💡 Expressions • ✍️ Exercices
+                </p>
+                <p style="font-size: 1.1em; color: #888; margin-top: 30px;">
+                    <strong>Tous niveaux :</strong> Débutant, Intermédiaire, Avancé
+                </p>
+                <p style="font-size: 1em; color: #888; margin-top: 20px;">
+                    👆 Choisissez une section dans le menu ci-dessus pour commencer
+                </p>
+                
+                <div style="margin-top: 50px; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    <h3 style="color: #667eea; margin-bottom: 20px;">📊 Contenu disponible :</h3>
+                    <ul style="line-height: 2; color: #555;">
+                        <li><strong>2 cours de Grammaire</strong> (Déterminants Possessifs & Démonstratifs)</li>
+                        <li><strong>8 cours de Conjugaison</strong> (Passé Composé, Imparfait, Plus-que-parfait, Conditionnels, Subjonctifs)</li>
+                        <li><strong>5 cours de Pronoms</strong> (Possessifs, Démonstratifs, COD/COI, Toniques, EN/Y)</li>
+                        <li><strong>3 cours d'Expressions & Vocabulaire</strong> (Expressions courantes, Contractions, Vocabulaire thématique)</li>
+                        <li><strong>3 exercices interactifs</strong> avec corrections automatiques</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- GRAMMAIRE -->
+        <div id="grammaire" class="section">
+            <div class="section-menu">
+                <div class="section-card" onclick="showCourse('determinants-possessifs')">
+                    <h3>MON, MA, MES</h3>
+                    <p>Les Déterminants Possessifs</p>
+                </div>
+                <div class="section-card" onclick="showCourse('determinants-demonstratifs')">
+                    <h3>CE, CET, CETTE, CES</h3>
+                    <p>Les Déterminants Démonstratifs</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONJUGAISON -->
+        <div id="conjugaison" class="section">
+            <div class="section-menu">
+                <div class="section-card" onclick="showCourse('present-indicatif')">
+                    <h3>PRÉSENT DE L'INDICATIF</h3>
+                    <p>Je parle, tu finis, il va...</p>
+                </div>
+                <div class="section-card" onclick="showCourse('passe-compose')">
+                    <h3>PASSÉ COMPOSÉ</h3>
+                    <p>Formation et usage</p>
+                </div>
+                <div class="section-card" onclick="showCourse('imparfait')">
+                    <h3>IMPARFAIT</h3>
+                    <p>Formation et usage</p>
+                </div>
+                <div class="section-card" onclick="showCourse('passe-compose-vs-imparfait')">
+                    <h3>PASSÉ COMPOSÉ vs IMPARFAIT</h3>
+                    <p>Quand les utiliser ?</p>
+                </div>
+                <div class="section-card" onclick="showCourse('plus-que-parfait')">
+                    <h3>PLUS-QUE-PARFAIT</h3>
+                    <p>Le passé du passé</p>
+                </div>
+                <div class="section-card" onclick="showCourse('conditionnel-present')">
+                    <h3>CONDITIONNEL PRÉSENT</h3>
+                    <p>Si j'étais riche...</p>
+                </div>
+                <div class="section-card" onclick="showCourse('conditionnel-passe')">
+                    <h3>CONDITIONNEL PASSÉ</h3>
+                    <p>J'aurais dû...</p>
+                </div>
+                <div class="section-card" onclick="showCourse('subjonctif-present')">
+                    <h3>SUBJONCTIF PRÉSENT</h3>
+                    <p>Il faut que je...</p>
+                </div>
+                <div class="section-card" onclick="showCourse('subjonctif-passe')">
+                    <h3>SUBJONCTIF PASSÉ</h3>
+                    <p>Bien que j'aie...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRONOMS -->
+        <div id="pronoms" class="section">
+            <div class="section-menu">
+                <div class="section-card" onclick="showCourse('pronoms-possessifs')">
+                    <h3>MIEN, MIENNE</h3>
+                    <p>Les Pronoms Possessifs</p>
+                </div>
+                <div class="section-card" onclick="showCourse('pronoms-demonstratifs')">
+                    <h3>CELUI, CELLE</h3>
+                    <p>Les Pronoms Démonstratifs</p>
+                </div>
+                <div class="section-card" onclick="showCourse('cod-coi')">
+                    <h3>LE, LA, LES / LUI, LEUR</h3>
+                    <p>Pronoms COD et COI</p>
+                </div>
+                <div class="section-card" onclick="showCourse('pronoms-toniques')">
+                    <h3>MOI, TOI, LUI, ELLE</h3>
+                    <p>Pronoms Toniques</p>
+                </div>
+                <div class="section-card" onclick="showCourse('en-y')">
+                    <h3>EN et Y</h3>
+                    <p>Cas particuliers</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COURS: Pronoms Toniques -->
+        <div id="pronoms-toniques" class="course-content">
+            <button class="back-btn" onclick="backToSection('pronoms')">← Retour</button>
+            
+            <h2>💪 MOI, TOI, LUI, ELLE : Les Pronoms Toniques</h2>
+            
+            <div class="info-box">
+                <h3>📌 Qu'est-ce que c'est ?</h3>
+                <p>Les pronoms toniques (aussi appelés pronoms disjoints ou pronoms accentués) sont des pronoms qui peuvent être utilisés <strong>seuls</strong> ou <strong>après une préposition</strong>. Ils insistent sur la personne.</p>
+            </div>
+
+            <h3>Tableau des Pronoms Toniques</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pronom Sujet</th>
+                        <th>Pronom Tonique</th>
+                        <th>English</th>
+                        <th>Español</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>je</td><td><strong>moi</strong></td><td>me</td><td>yo / mí</td></tr>
+                    <tr><td>tu</td><td><strong>toi</strong></td><td>you</td><td>tú / ti</td></tr>
+                    <tr><td>il</td><td><strong>lui</strong></td><td>him</td><td>él</td></tr>
+                    <tr><td>elle</td><td><strong>elle</strong></td><td>her</td><td>ella</td></tr>
+                    <tr><td>nous</td><td><strong>nous</strong></td><td>us</td><td>nosotros</td></tr>
+                    <tr><td>vous</td><td><strong>vous</strong></td><td>you</td><td>vosotros / ustedes</td></tr>
+                    <tr><td>ils</td><td><strong>eux</strong></td><td>them (m)</td><td>ellos</td></tr>
+                    <tr><td>elles</td><td><strong>elles</strong></td><td>them (f)</td><td>ellas</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Quand les utiliser ?</h3>
+            
+            <div class="example-box">
+                <h4>1. 🎯 Pour insister sur le sujet</h4>
+                <ul>
+                    <li><strong>Moi</strong>, je veux partir. <em>(Me, I want to leave)</em></li>
+                    <li><strong>Lui</strong>, il ne sait pas. <em>(Him, he doesn't know)</em></li>
+                    <li><strong>Eux</strong>, ils sont contents. <em>(They are happy)</em></li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>2. 🔗 Après une préposition</h4>
+                <p><strong>Prépositions courantes :</strong> à, de, avec, pour, sans, chez, devant, derrière, sur, sous, etc.</p>
+                <ul>
+                    <li>Je vais chez <strong>moi</strong>. <em>(I'm going home)</em></li>
+                    <li>Il vient avec <strong>nous</strong>. <em>(He's coming with us)</em></li>
+                    <li>C'est pour <strong>toi</strong>. <em>(It's for you)</em></li>
+                    <li>Elle habite près de chez <strong>eux</strong>. <em>(She lives near them)</em></li>
+                    <li>Sans <strong>elle</strong>, je ne peux rien faire. <em>(Without her, I can't do anything)</em></li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>3. ✌️ Pour les comparaisons</h4>
+                <ul>
+                    <li>Il est plus grand que <strong>moi</strong>. <em>(He's taller than me)</em></li>
+                    <li>Elle court aussi vite que <strong>lui</strong>. <em>(She runs as fast as him)</em></li>
+                    <li>Tu es moins âgé que <strong>nous</strong>. <em>(You're younger than us)</em></li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>4. 💬 Réponse courte / Seul</h4>
+                <ul>
+                    <li>Qui veut venir ? — <strong>Moi</strong> ! <em>(Who wants to come? — Me!)</em></li>
+                    <li>Qui a fait ça ? — C'est <strong>lui</strong>. <em>(Who did this? — It's him)</em></li>
+                    <li>C'est <strong>toi</strong> ? — Oui, c'est <strong>moi</strong>. <em>(Is it you? — Yes, it's me)</em></li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>5. ➕ Avec "et" ou "ni"</h4>
+                <ul>
+                    <li><strong>Lui et moi</strong>, nous sommes amis. <em>(He and I are friends)</em></li>
+                    <li><strong>Toi et elle</strong>, vous partez ensemble ? <em>(You and her, are you leaving together?)</em></li>
+                    <li>Ni <strong>lui</strong> ni <strong>elle</strong> ne sont venus. <em>(Neither he nor she came)</em></li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>6. 🔄 Avec les verbes pronominaux (pour insister)</h4>
+                <ul>
+                    <li>Je m'occupe de <strong>moi</strong>. <em>(I take care of myself)</em></li>
+                    <li>Tu penses à <strong>toi</strong> ? <em>(Are you thinking about yourself?)</em></li>
+                    <li>Il parle de <strong>lui</strong>. <em>(He talks about himself)</em></li>
+                </ul>
+            </div>
+
+            <h3>Expressions courantes avec pronoms toniques</h3>
+            <div class="warning-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Expression</th>
+                            <th>English</th>
+                            <th>Español</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>chez <strong>moi</strong> / <strong>toi</strong> / <strong>lui</strong></td><td>at my/your/his place</td><td>en mi/tu/su casa</td></tr>
+                        <tr><td>à <strong>moi</strong></td><td>mine</td><td>mío</td></tr>
+                        <tr><td>selon <strong>moi</strong></td><td>in my opinion</td><td>según yo</td></tr>
+                        <tr><td>d'après <strong>lui</strong></td><td>according to him</td><td>según él</td></tr>
+                        <tr><td>grâce à <strong>toi</strong></td><td>thanks to you</td><td>gracias a ti</td></tr>
+                        <tr><td>à cause de <strong>lui</strong></td><td>because of him</td><td>por culpa de él</td></tr>
+                        <tr><td>quant à <strong>moi</strong></td><td>as for me</td><td>en cuanto a mí</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>⚠️ Différence importante : LUI (tonique) vs LUI (COI)</h3>
+            <div class="warning-box">
+                <p><strong>LUI (pronom tonique)</strong> = insistance, après préposition</p>
+                <ul>
+                    <li>C'est pour <strong>lui</strong>. <em>(It's for him)</em></li>
+                    <li>Je vais chez <strong>lui</strong>. <em>(I'm going to his place)</em></li>
+                </ul>
+                
+                <p><strong>LUI (pronom COI)</strong> = complément d'objet indirect, avant le verbe</p>
+                <ul>
+                    <li>Je <strong>lui</strong> parle. <em>(I talk to him/her)</em></li>
+                    <li>Je <strong>lui</strong> donne un cadeau. <em>(I give him/her a gift)</em></li>
+                </ul>
+            </div>
+
+            <h3>Exercices</h3>
+            <div class="exercise">
+                <h4>Exercice : Complétez avec le pronom tonique correct</h4>
+                <div class="question">
+                    1. C'est pour <input type="text" id="ton_1" class="answer"> ! (toi)
+                </div>
+                <div class="question">
+                    2. Je vais chez <input type="text" id="ton_2" class="answer">. (moi)
+                </div>
+                <div class="question">
+                    3. <input type="text" id="ton_3" class="answer">, il ne sait rien. (lui)
+                </div>
+                <div class="question">
+                    4. Tu viens avec <input type="text" id="ton_4" class="answer"> ? (nous)
+                </div>
+                <div class="question">
+                    5. Elle est plus grande que <input type="text" id="ton_5" class="answer">. (moi)
+                </div>
+                <div class="question">
+                    6. Qui veut partir ? — <input type="text" id="ton_6" class="answer"> ! (moi)
+                </div>
+                <div class="question">
+                    7. Sans <input type="text" id="ton_7" class="answer">, je ne peux rien faire. (toi)
+                </div>
+                <div class="question">
+                    8. C'est <input type="text" id="ton_8" class="answer"> qui l'ont fait. (eux)
+                </div>
+                <button onclick="checkToniques()">Vérifier</button>
+                <button onclick="resetToniques()">Recommencer</button>
+                <div id="result-toniques" class="result"></div>
+            </div>
+        </div>
+
+        <!-- EXPRESSIONS & VOCABULAIRE -->
+        <div id="expressions" class="section">
+            <div class="section-menu">
+                <div class="section-card" onclick="showCourse('expressions-courantes')">
+                    <h3>🗣️ EXPRESSIONS COURANTES</h3>
+                    <p>Avoir la pêche, avoir peur bleue...</p>
+                </div>
+                <div class="section-card" onclick="showCourse('contractions-oral')">
+                    <h3>🎤 CONTRACTIONS À L'ORAL</h3>
+                    <p>Je sais pas, t'as vu...</p>
+                </div>
+                <div class="section-card" onclick="showCourse('vocabulaire-thematique')">
+                    <h3>📖 VOCABULAIRE THÉMATIQUE</h3>
+                    <p>Couleurs, nationalités, émotions...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXERCICES MIXTES -->
+        <div id="exercices" class="section">
+            <div class="section-menu">
+                <div class="section-card" onclick="showCourse('exercice-cod-coi')">
+                    <h3>💬 Exercice COD/COI</h3>
+                    <p>12 phrases à compléter</p>
+                </div>
+                <div class="section-card" onclick="showCourse('exercice-pronoms-determinants')">
+                    <h3>📚 Exercice Pronoms & Déterminants</h3>
+                    <p>Tout mélangé avec traductions</p>
+                </div>
+                <div class="section-card" onclick="showCourse('exercice-conjugaison-mixte')">
+                    <h3>🔄 Exercice Conjugaison Mixte</h3>
+                    <p>Présent + Passé Composé + Imparfait</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COURS: Déterminants Possessifs -->
+        <div id="determinants-possessifs" class="course-content">
+            <button class="back-btn" onclick="backToSection('grammaire')">← Retour</button>
+            
+            <h2>MON, MA, MES : Les Déterminants Possessifs</h2>
+            
+            <div class="info-box">
+                <h3>📌 Introduction</h3>
+                <p>Les déterminants possessifs indiquent à qui appartient quelque chose. Ils se placent <strong>devant le nom</strong> et s'accordent en genre et en nombre avec ce nom (l'objet possédé).</p>
+            </div>
+
+            <h3>Tableau des Déterminants Possessifs</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Possesseur</th>
+                        <th>Masculin Singulier</th>
+                        <th>Féminin Singulier</th>
+                        <th>Pluriel (M+F)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>je</strong></td>
+                        <td>mon</td>
+                        <td>ma (mon*)</td>
+                        <td>mes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>tu</strong></td>
+                        <td>ton</td>
+                        <td>ta (ton*)</td>
+                        <td>tes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>il/elle</strong></td>
+                        <td>son</td>
+                        <td>sa (son*)</td>
+                        <td>ses</td>
+                    </tr>
+                    <tr>
+                        <td><strong>nous</strong></td>
+                        <td>notre</td>
+                        <td>notre</td>
+                        <td>nos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vous</strong></td>
+                        <td>votre</td>
+                        <td>votre</td>
+                        <td>vos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ils/elles</strong></td>
+                        <td>leur</td>
+                        <td>leur</td>
+                        <td>leurs</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>* Devant une voyelle ou un h muet</em></p>
+
+            <h3>Tableau Comparatif : Français - Anglais - Espagnol</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Français</th>
+                        <th>Anglais</th>
+                        <th>Espagnol</th>
+                        <th>Exemple (FR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>mon / ma / mes</td>
+                        <td>my</td>
+                        <td>mi / mis</td>
+                        <td>mon livre, ma voiture, mes amis</td>
+                    </tr>
+                    <tr>
+                        <td>ton / ta / tes</td>
+                        <td>your</td>
+                        <td>tu / tus</td>
+                        <td>ton chat, ta maison, tes parents</td>
+                    </tr>
+                    <tr>
+                        <td>son / sa / ses</td>
+                        <td>his / her / its</td>
+                        <td>su / sus</td>
+                        <td>son travail, sa famille, ses enfants</td>
+                    </tr>
+                    <tr>
+                        <td>notre / nos</td>
+                        <td>our</td>
+                        <td>nuestro/a / nuestros/as</td>
+                        <td>notre maison, nos vacances</td>
+                    </tr>
+                    <tr>
+                        <td>votre / vos</td>
+                        <td>your (plural/formal)</td>
+                        <td>vuestro/a / vuestros/as</td>
+                        <td>votre projet, vos idées</td>
+                    </tr>
+                    <tr>
+                        <td>leur / leurs</td>
+                        <td>their</td>
+                        <td>su / sus (de ellos)</td>
+                        <td>leur voiture, leurs problèmes</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Règles d'Utilisation</h3>
+            
+            <div class="example-box">
+                <h4>1. Accord avec l'objet possédé</h4>
+                <p>Le déterminant possessif s'accorde avec le nom qu'il accompagne (l'objet possédé), <strong>PAS</strong> avec le possesseur.</p>
+                <ul>
+                    <li><em>Marie</em> aime <strong>son</strong> chat. (le chat de Marie)</li>
+                    <li><em>Pierre</em> aime <strong>sa</strong> voiture. (la voiture de Pierre)</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>2. Cas particulier devant voyelle</h4>
+                <p>Devant une voyelle ou un h muet, on utilise <strong>mon/ton/son</strong> même pour un nom féminin.</p>
+                <ul>
+                    <li>✅ <strong>Mon</strong> amie (et non "ma amie")</li>
+                    <li>✅ <strong>Ton</strong> histoire (et non "ta histoire")</li>
+                    <li>✅ <strong>Son</strong> école (et non "sa école")</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Différence avec l'anglais</h4>
+                <p>En anglais, "his" et "her" dépendent du possesseur. En français, <strong>son/sa/ses</strong> dépendent de l'objet possédé !</p>
+                <ul>
+                    <li>Marie loves <em>her</em> dog → Marie aime <strong>son</strong> chien (masculin)</li>
+                    <li>Pierre loves <em>his</em> car → Pierre aime <strong>sa</strong> voiture (féminin)</li>
+                </ul>
+            </div>
+
+            <h3>Exercices</h3>
+            <div class="exercise">
+                <h4>Exercice 1 : Complétez avec le bon déterminant possessif</h4>
+                <div class="question">
+                    1. Je prends <input type="text" id="det_poss_1" class="answer"> stylo. (le stylo)
+                </div>
+                <div class="question">
+                    2. Tu aimes <input type="text" id="det_poss_2" class="answer"> maison ? (la maison)
+                </div>
+                <div class="question">
+                    3. Il oublie toujours <input type="text" id="det_poss_3" class="answer"> clés. (les clés)
+                </div>
+                <div class="question">
+                    4. Nous aimons <input type="text" id="det_poss_4" class="answer"> professeur. (le professeur)
+                </div>
+                <div class="question">
+                    5. Vous vendez <input type="text" id="det_poss_5" class="answer"> voiture ? (la voiture)
+                </div>
+                <div class="question">
+                    6. Elles adorent <input type="text" id="det_poss_6" class="answer"> enfants. (les enfants)
+                </div>
+                <div class="question">
+                    7. J'appelle <input type="text" id="det_poss_7" class="answer"> amie. (l'amie - féminin!)
+                </div>
+                <div class="question">
+                    8. Tu apportes <input type="text" id="det_poss_8" class="answer"> ordinateur ? (l'ordinateur)
+                </div>
+                <button onclick="checkDetPoss()">Vérifier</button>
+                <button onclick="resetDetPoss()">Recommencer</button>
+                <div id="result-det-poss" class="result"></div>
+            </div>
+        </div>
+
+        <!-- COURS: Déterminants Démonstratifs -->
+        <div id="determinants-demonstratifs" class="course-content">
+            <button class="back-btn" onclick="backToSection('grammaire')">← Retour</button>
+            
+            <h2>CE, CET, CETTE, CES : Les Déterminants Démonstratifs</h2>
+            
+            <div class="info-box">
+                <h3>📌 Introduction</h3>
+                <p>Les déterminants démonstratifs servent à désigner quelque chose ou quelqu'un de manière précise. Ils se placent <strong>devant le nom</strong> et s'accordent en genre et en nombre avec ce nom.</p>
+            </div>
+
+            <h3>Tableau des Déterminants Démonstratifs</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Masculin</th>
+                        <th>Féminin</th>
+                        <th>Pluriel (M+F)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ce</strong> (devant consonne)</td>
+                        <td rowspan="2"><strong>cette</strong></td>
+                        <td rowspan="2"><strong>ces</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>cet</strong> (devant voyelle/h muet)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Tableau Comparatif : Français - Anglais - Espagnol</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Français</th>
+                        <th>Anglais</th>
+                        <th>Espagnol</th>
+                        <th>Exemple (FR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ce / cet</td>
+                        <td>this (singular)</td>
+                        <td>este</td>
+                        <td>ce livre, cet homme</td>
+                    </tr>
+                    <tr>
+                        <td>cette</td>
+                        <td>this (singular)</td>
+                        <td>esta</td>
+                        <td>cette maison</td>
+                    </tr>
+                    <tr>
+                        <td>ces</td>
+                        <td>these (plural)</td>
+                        <td>estos / estas</td>
+                        <td>ces livres, ces maisons</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Règles d'Utilisation</h3>
+            
+            <div class="example-box">
+                <h4>1. CE vs CET (masculin)</h4>
+                <p>Pour le masculin singulier :</p>
+                <ul>
+                    <li><strong>CE</strong> devant une consonne : <em>ce livre, ce garçon, ce chat</em></li>
+                    <li><strong>CET</strong> devant une voyelle ou h muet : <em>cet ami, cet homme, cet ordinateur</em></li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>2. CETTE (féminin)</h4>
+                <p><strong>CETTE</strong> est toujours la même, peu importe si le nom commence par une consonne ou une voyelle.</p>
+                <ul>
+                    <li>cette maison</li>
+                    <li>cette amie</li>
+                    <li>cette école</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>3. CES (pluriel)</h4>
+                <p><strong>CES</strong> est unique pour le pluriel, masculin ET féminin.</p>
+                <ul>
+                    <li>ces livres (masculin pluriel)</li>
+                    <li>ces maisons (féminin pluriel)</li>
+                    <li>ces enfants (mixte)</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Différence démonstratif vs possessif</h4>
+                <p><strong>Démonstratif</strong> = montrer / désigner : <em>"regarde <strong>ce</strong> chien !"</em></p>
+                <p><strong>Possessif</strong> = appartenir : <em>"c'est <strong>mon</strong> chien"</em></p>
+            </div>
+
+            <h3>Exercices</h3>
+            <div class="exercise">
+                <h4>Exercice : Complétez avec le bon déterminant démonstratif</h4>
+                <div class="question">
+                    1. <input type="text" id="det_demo_1" class="answer"> livre est intéressant.
+                </div>
+                <div class="question">
+                    2. <input type="text" id="det_demo_2" class="answer"> maison est grande.
+                </div>
+                <div class="question">
+                    3. <input type="text" id="det_demo_3" class="answer"> enfants jouent dehors.
+                </div>
+                <div class="question">
+                    4. <input type="text" id="det_demo_4" class="answer"> homme est gentil.
+                </div>
+                <div class="question">
+                    5. <input type="text" id="det_demo_5" class="answer"> amie habite à Paris.
+                </div>
+                <div class="question">
+                    6. <input type="text" id="det_demo_6" class="answer"> ordinateur ne marche pas.
+                </div>
+                <div class="question">
+                    7. <input type="text" id="det_demo_7" class="answer"> voitures sont rapides.
+                </div>
+                <div class="question">
+                    8. <input type="text" id="det_demo_8" class="answer"> exercice est facile.
+                </div>
+                <button onclick="checkDetDemo()">Vérifier</button>
+                <button onclick="resetDetDemo()">Recommencer</button>
+                <div id="result-det-demo" class="result"></div>
+            </div>
+        </div>
+
+        <!-- COURS: Pronoms Possessifs -->
+        <div id="pronoms-possessifs" class="course-content">
+            <button class="back-btn" onclick="backToSection('pronoms')">← Retour</button>
+            
+            <h2>MIEN, MIENNE : Les Pronoms Possessifs</h2>
+            
+            <div class="info-box">
+                <h3>📌 Introduction</h3>
+                <p>Les pronoms possessifs <strong>remplacent</strong> un nom précédé d'un déterminant possessif. Ils s'accordent en genre et en nombre avec l'objet possédé.</p>
+                <p><strong>Exemple :</strong> C'est <em>mon</em> livre → C'est <strong>le mien</strong></p>
+            </div>
+
+            <h3>Tableau des Pronoms Possessifs</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Possesseur</th>
+                        <th>Masculin Singulier</th>
+                        <th>Féminin Singulier</th>
+                        <th>Masculin Pluriel</th>
+                        <th>Féminin Pluriel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>je</strong></td>
+                        <td>le mien</td>
+                        <td>la mienne</td>
+                        <td>les miens</td>
+                        <td>les miennes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>tu</strong></td>
+                        <td>le tien</td>
+                        <td>la tienne</td>
+                        <td>les tiens</td>
+                        <td>les tiennes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>il/elle</strong></td>
+                        <td>le sien</td>
+                        <td>la sienne</td>
+                        <td>les siens</td>
+                        <td>les siennes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>nous</strong></td>
+                        <td>le nôtre</td>
+                        <td>la nôtre</td>
+                        <td>les nôtres</td>
+                        <td>les nôtres</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vous</strong></td>
+                        <td>le vôtre</td>
+                        <td>la vôtre</td>
+                        <td>les vôtres</td>
+                        <td>les vôtres</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ils/elles</strong></td>
+                        <td>le leur</td>
+                        <td>la leur</td>
+                        <td>les leurs</td>
+                        <td>les leurs</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Tableau Comparatif : Français - Anglais - Espagnol</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Français</th>
+                        <th>Anglais</th>
+                        <th>Espagnol</th>
+                        <th>Exemple (FR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>le mien / la mienne</td>
+                        <td>mine</td>
+                        <td>el mío / la mía</td>
+                        <td>C'est le mien</td>
+                    </tr>
+                    <tr>
+                        <td>le tien / la tienne</td>
+                        <td>yours</td>
+                        <td>el tuyo / la tuya</td>
+                        <td>C'est le tien</td>
+                    </tr>
+                    <tr>
+                        <td>le sien / la sienne</td>
+                        <td>his / hers</td>
+                        <td>el suyo / la suya</td>
+                        <td>C'est le sien</td>
+                    </tr>
+                    <tr>
+                        <td>le nôtre / la nôtre</td>
+                        <td>ours</td>
+                        <td>el nuestro / la nuestra</td>
+                        <td>C'est le nôtre</td>
+                    </tr>
+                    <tr>
+                        <td>le vôtre / la vôtre</td>
+                        <td>yours</td>
+                        <td>el vuestro / la vuestra</td>
+                        <td>C'est le vôtre</td>
+                    </tr>
+                    <tr>
+                        <td>le leur / la leur</td>
+                        <td>theirs</td>
+                        <td>el suyo / la suya (de ellos)</td>
+                        <td>C'est le leur</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box">
+                <h4>⚠️ Points importants</h4>
+                <ul>
+                    <li>Les pronoms possessifs sont <strong>toujours précédés d'un article</strong> (le, la, les)</li>
+                    <li>Ils s'accordent avec l'<strong>objet possédé</strong>, pas avec le possesseur</li>
+                    <li><strong>Accent circonflexe</strong> sur nôtre/vôtre (pour les différencier de notre/votre)</li>
+                </ul>
+            </div>
+
+            <h3>Exercices</h3>
+            <div class="exercise">
+                <h4>Exercice : Remplacez par le pronom possessif correct</h4>
+                <div class="question">
+                    1. C'est mon livre → C'est <input type="text" id="pron_poss_1" class="answer">.
+                </div>
+                <div class="question">
+                    2. Ce sont tes clés → Ce sont <input type="text" id="pron_poss_2" class="answer">.
+                </div>
+                <div class="question">
+                    3. C'est sa voiture → C'est <input type="text" id="pron_poss_3" class="answer">.
+                </div>
+                <div class="question">
+                    4. C'est notre maison → C'est <input type="text" id="pron_poss_4" class="answer">.
+                </div>
+                <div class="question">
+                    5. Ce sont vos idées → Ce sont <input type="text" id="pron_poss_5" class="answer">.
+                </div>
+                <div class="question">
+                    6. C'est leur problème → C'est <input type="text" id="pron_poss_6" class="answer">.
+                </div>
+                <button onclick="checkPronPoss()">Vérifier</button>
+                <button onclick="resetPronPoss()">Recommencer</button>
+                <div id="result-pron-poss" class="result"></div>
+            </div>
+        </div>
+
+        <!-- COURS: Présent de l'Indicatif -->
+        <div id="present-indicatif" class="course-content">
+            <button class="back-btn" onclick="backToSection('conjugaison')">← Retour</button>
+            
+            <h2>✨ LE PRÉSENT DE L'INDICATIF</h2>
+            
+            <div class="info-box">
+                <h3>📌 Qu'est-ce que c'est ?</h3>
+                <p>Le présent de l'indicatif exprime une <strong>action qui se passe maintenant</strong>, une <strong>habitude</strong>, ou une <strong>vérité générale</strong>.</p>
+            </div>
+
+            <h3>Les 3 groupes de verbes</h3>
+            
+            <div class="example-box">
+                <h4>1er GROUPE : Verbes en -ER</h4>
+                <p><strong>PARLER :</strong></p>
+                <ul>
+                    <li>je parl<strong>e</strong></li>
+                    <li>tu parl<strong>es</strong></li>
+                    <li>il/elle parl<strong>e</strong></li>
+                    <li>nous parl<strong>ons</strong></li>
+                    <li>vous parl<strong>ez</strong></li>
+                    <li>ils/elles parl<strong>ent</strong></li>
+                </ul>
+                <p><em>✅ Terminaisons : -e, -es, -e, -ons, -ez, -ent</em></p>
+            </div>
+
+            <div class="example-box">
+                <h4>2ème GROUPE : Verbes en -IR (avec -issons)</h4>
+                <p><strong>FINIR :</strong></p>
+                <ul>
+                    <li>je fin<strong>is</strong></li>
+                    <li>tu fin<strong>is</strong></li>
+                    <li>il/elle fin<strong>it</strong></li>
+                    <li>nous fin<strong>issons</strong></li>
+                    <li>vous fin<strong>issez</strong></li>
+                    <li>ils/elles fin<strong>issent</strong></li>
+                </ul>
+                <p><em>✅ Terminaisons : -is, -is, -it, -issons, -issez, -issent</em></p>
+            </div>
+
+            <div class="warning-box">
+                <h4>3ème GROUPE : Verbes irréguliers</h4>
+                <p>Tous les autres verbes ! Les plus importants :</p>
+            </div>
+
+            <h3>Verbes irréguliers essentiels</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Infinitif</th>
+                        <th>je</th>
+                        <th>tu</th>
+                        <th>il/elle</th>
+                        <th>nous</th>
+                        <th>vous</th>
+                        <th>ils/elles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>être</strong></td><td>suis</td><td>es</td><td>est</td><td>sommes</td><td>êtes</td><td>sont</td></tr>
+                    <tr><td><strong>avoir</strong></td><td>ai</td><td>as</td><td>a</td><td>avons</td><td>avez</td><td>ont</td></tr>
+                    <tr><td><strong>aller</strong></td><td>vais</td><td>vas</td><td>va</td><td>allons</td><td>allez</td><td>vont</td></tr>
+                    <tr><td><strong>faire</strong></td><td>fais</td><td>fais</td><td>fait</td><td>faisons</td><td>faites</td><td>font</td></tr>
+                    <tr><td><strong>venir</strong></td><td>viens</td><td>viens</td><td>vient</td><td>venons</td><td>venez</td><td>viennent</td></tr>
+                    <tr><td><strong>prendre</strong></td><td>prends</td><td>prends</td><td>prend</td><td>prenons</td><td>prenez</td><td>prennent</td></tr>
+                    <tr><td><strong>pouvoir</strong></td><td>peux</td><td>peux</td><td>peut</td><td>pouvons</td><td>pouvez</td><td>peuvent</td></tr>
+                    <tr><td><strong>vouloir</strong></td><td>veux</td><td>veux</td><td>veut</td><td>voulons</td><td>voulez</td><td>veulent</td></tr>
+                    <tr><td><strong>devoir</strong></td><td>dois</td><td>dois</td><td>doit</td><td>devons</td><td>devez</td><td>doivent</td></tr>
+                    <tr><td><strong>savoir</strong></td><td>sais</td><td>sais</td><td>sait</td><td>savons</td><td>savez</td><td>savent</td></tr>
+                    <tr><td><strong>voir</strong></td><td>vois</td><td>vois</td><td>voit</td><td>voyons</td><td>voyez</td><td>voient</td></tr>
+                    <tr><td><strong>dire</strong></td><td>dis</td><td>dis</td><td>dit</td><td>disons</td><td>dites</td><td>disent</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Quand l'utiliser ?</h3>
+            <div class="example-box">
+                <ul>
+                    <li>✨ <strong>Action présente :</strong> <em>Je mange une pomme maintenant.</em></li>
+                    <li>🔁 <strong>Habitude :</strong> <em>Je vais au travail tous les jours.</em></li>
+                    <li>📚 <strong>Vérité générale :</strong> <em>Le soleil se lève à l'est.</em></li>
+                    <li>🔮 <strong>Futur proche :</strong> <em>Je pars demain.</em></li>
+                </ul>
+            </div>
+
+            <h3>Cas particuliers des verbes en -ER</h3>
+            <div class="warning-box">
+                <h4>Verbes en -CER (nous)</h4>
+                <p>commencer → nous commen<strong>ç</strong>ons (pour garder le son "s")</p>
+                
+                <h4>Verbes en -GER (nous)</h4>
+                <p>manger → nous mange<strong>ons</strong> (pour garder le son "j")</p>
+                
+                <h4>Verbes en -YER</h4>
+                <p>payer → je pai<strong>e</strong>, tu pai<strong>es</strong>, il pai<strong>e</strong>, ils pai<strong>ent</strong></p>
+                <p>MAIS : nous pay<strong>ons</strong>, vous pay<strong>ez</strong></p>
+            </div>
+
+            <h3>Exercices</h3>
+            <div class="exercise">
+                <h4>Exercice : Conjuguez les verbes au présent</h4>
+                <div class="question">
+                    1. Je <input type="text" id="pres_1" class="answer"> (parler) français.
+                </div>
+                <div class="question">
+                    2. Tu <input type="text" id="pres_2" class="answer"> (être) étudiant.
+                </div>
+                <div class="question">
+                    3. Il <input type="text" id="pres_3" class="answer"> (avoir) 20 ans.
+                </div>
+                <div class="question">
+                    4. Nous <input type="text" id="pres_4" class="answer"> (aller) au cinéma.
+                </div>
+                <div class="question">
+                    5. Vous <input type="text" id="pres_5" class="answer"> (faire) vos devoirs.
+                </div>
+                <div class="question">
+                    6. Elles <input type="text" id="pres_6" class="answer"> (finir) le travail.
+                </div>
+                <div class="question">
+                    7. Je <input type="text" id="pres_7" class="answer"> (prendre) le bus.
+                </div>
+                <div class="question">
+                    8. Tu <input type="text" id="pres_8" class="answer"> (pouvoir) venir ?
+                </div>
+                <button onclick="checkPresent()">Vérifier</button>
+                <button onclick="resetPresent()">Recommencer</button>
+                <div id="result-present" class="result"></div>
+            </div>
+        </div>
+
+        <!-- COURS: Passé Composé -->
+        <div id="passe-compose" class="course-content">
+            <button class="back-btn" onclick="backToSection('conjugaison')">← Retour</button>
+            
+            <h2>⚡ LE PASSÉ COMPOSÉ</h2>
+            
+            <div class="info-box">
+                <h3>📌 Qu'est-ce que c'est ?</h3>
+                <p>Le passé composé est un temps du passé qui exprime une <strong>action terminée</strong> ou un <strong>événement précis</strong> dans le passé.</p>
+            </div>
+
+            <h3>Formation</h3>
+            <p><strong>Passé composé = Auxiliaire (avoir/être) au présent + Participe passé</strong></p>
+            
+            <div class="example-box">
+                <h4>Avec AVOIR (majorité des verbes)</h4>
+                <ul>
+                    <li>J'<strong>ai mangé</strong> une pizza</li>
+                    <li>Tu <strong>as fini</strong> tes devoirs</li>
+                    <li>Il <strong>a travaillé</strong> hier</li>
+                    <li>Nous <strong>avons vu</strong> un film</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>Avec ÊTRE (verbes de mouvement + verbes pronominaux)</h4>
+                <ul>
+                    <li>Je <strong>suis allé(e)</strong> à Paris</li>
+                    <li>Elle <strong>est arrivée</strong> en retard</li>
+                    <li>Nous <strong>sommes partis</strong> tôt</li>
+                    <li>Je <strong>me suis levé(e)</strong> à 7h</li>
+                </ul>
+                <p><em>⚠️ Avec ÊTRE, le participe passé s'accorde avec le sujet !</em></p>
+            </div>
+
+            <h3>Verbes avec ÊTRE (à mémoriser)</h3>
+            <p><strong>Les 16 verbes de mouvement :</strong></p>
+            <ul>
+                <li>aller / venir</li>
+                <li>arriver / partir</li>
+                <li>entrer / sortir</li>
+                <li>monter / descendre</li>
+                <li>naître / mourir</li>
+                <li>rester / tomber</li>
+                <li>retourner / passer (par)</li>
+                <li>rentrer / revenir</li>
+            </ul>
+            <p><strong>+ TOUS les verbes pronominaux</strong> (se lever, se coucher, s'habiller, etc.)</p>
+
+            <h3>Participes passés irréguliers courants</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Infinitif</th>
+                        <th>Participe passé</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>être</td><td>été</td><td>j'ai été</td></tr>
+                    <tr><td>avoir</td><td>eu</td><td>j'ai eu</td></tr>
+                    <tr><td>faire</td><td>fait</td><td>j'ai fait</td></tr>
+                    <tr><td>dire</td><td>dit</td><td>j'ai dit</td></tr>
+                    <tr><td>voir</td><td>vu</td><td>j'ai vu</td></tr>
+                    <tr><td>prendre</td><td>pris</td><td>j'ai pris</td></tr>
+                    <tr><td>mettre</td><td>mis</td><td>j'ai mis</td></tr>
+                    <tr><td>pouvoir</td><td>pu</td><td>j'ai pu</td></tr>
+                    <tr><td>vouloir</td><td>voulu</td><td>j'ai voulu</td></tr>
+                    <tr><td>devoir</td><td>dû</td><td>j'ai dû</td></tr>
+                    <tr><td>savoir</td><td>su</td><td>j'ai su</td></tr>
+                    <tr><td>venir</td><td>venu</td><td>je suis venu(e)</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Quand l'utiliser ?</h3>
+            <div class="warning-box">
+                <ul>
+                    <li>⚡ Action terminée : <em>Hier, j'ai mangé une pizza</em></li>
+                    <li>🎯 Événement précis : <em>Elle est arrivée à 8h</em></li>
+                    <li>➡️➡️➡️ Succession d'actions : <em>Je me suis levé, j'ai pris mon petit-déjeuner et je suis parti</em></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- COURS: Imparfait -->
+        <div id="imparfait" class="course-content">
+            <button class="back-btn" onclick="backToSection('conjugaison')">← Retour</button>
+            
+            <h2>🎬 L'IMPARFAIT</h2>
+            
+            <div class="info-box">
+                <h3>📌 Qu'est-ce que c'est ?</h3>
+                <p>L'imparfait est un temps du passé qui exprime une <strong>description</strong>, une <strong>habitude</strong> ou une <strong>action en cours</strong> dans le passé.</p>
+            </div>
+
+            <h3>Formation</h3>
+            <p><strong>Radical de "nous" au présent + terminaisons : -ais, -ais, -ait, -ions, -iez, -aient</strong></p>
+            
+            <div class="example-box">
+                <h4>Exemple avec MANGER</h4>
+                <p>Nous mang<strong>eons</strong> (présent) → radical = <strong>mang</strong></p>
+                <ul>
+                    <li>je mang<strong>ais</strong></li>
+                    <li>tu mang<strong>ais</strong></li>
+                    <li>il/elle mang<strong>ait</strong></li>
+                    <li>nous mang<strong>ions</strong></li>
+                    <li>vous mang<strong>iez</strong></li>
+                    <li>ils/elles mang<strong>aient</strong></li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Verbe irrégulier : ÊTRE</h4>
+                <p>ÊTRE est le seul verbe irrégulier à l'imparfait !</p>
+                <ul>
+                    <li>j'<strong>étais</strong></li>
+                    <li>tu <strong>étais</strong></li>
+                    <li>il/elle <strong>était</strong></li>
+                    <li>nous <strong>étions</strong></li>
+                    <li>vous <strong>étiez</strong></li>
+                    <li>ils/elles <strong>étaient</strong></li>
+                </ul>
+            </div>
+
+            <h3>Quand l'utiliser ?</h3>
+            <div class="example-box">
+                <ul>
+                    <li>🎨 <strong>Description</strong> (décor, personnes, météo) : <em>Il faisait beau, le soleil brillait</em></li>
+                    <li>🔁 <strong>Habitude</strong> dans le passé : <em>Quand j'étais petit, j'allais à la plage tous les étés</em></li>
+                    <li>⏳ <strong>Action en cours</strong> : <em>Je dormais quand tu as appelé</em></li>
+                    <li>💭 <strong>État, sentiment</strong> : <em>J'étais fatigué. Il avait 20 ans.</em></li>
+                </ul>
+            </div>
+
+            <h3>Exemples de conjugaison</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Infinitif</th>
+                        <th>Nous (présent)</th>
+                        <th>Imparfait (je)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>avoir</td><td>nous avons</td><td>j'avais</td></tr>
+                    <tr><td>faire</td><td>nous faisons</td><td>je faisais</td></tr>
+                    <tr><td>aller</td><td>nous allons</td><td>j'allais</td></tr>
+                    <tr><td>venir</td><td>nous venons</td><td>je venais</td></tr>
+                    <tr><td>prendre</td><td>nous prenons</td><td>je prenais</td></tr>
+                    <tr><td>pouvoir</td><td>nous pouvons</td><td>je pouvais</td></tr>
+                    <tr><td>vouloir</td><td>nous voulons</td><td>je voulais</td></tr>
+                    <tr><td>devoir</td><td>nous devons</td><td>je devais</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- COURS: Plus-que-parfait -->
+        <div id="plus-que-parfait" class="course-content">
+            <button class="back-btn" onclick="backToSection('conjugaison')">← Retour</button>
+            
+            <h2>⏪ LE PLUS-QUE-PARFAIT</h2>
+            
+            <div class="info-box">
+                <h3>📌 Qu'est-ce que c'est ?</h3>
+                <p>Le plus-que-parfait exprime une <strong>action passée qui s'est déroulée AVANT une autre action passée</strong>. C'est le "passé du passé".</p>
+            </div>
+
+            <h3>Formation</h3>
+            <p><strong>Plus-que-parfait = Auxiliaire (avoir/être) à l'imparfait + Participe passé</strong></p>
+            
+            <div class="example-box">
+                <h4>Avec AVOIR</h4>
+                <ul>
+                    <li>J'<strong>avais mangé</strong> avant ton arrivée</li>
+                    <li>Tu <strong>avais fini</strong> tes devoirs</li>
+                    <li>Il <strong>avait travaillé</strong> toute la nuit</li>
+                    <li>Nous <strong>avions vu</strong> ce film</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>Avec ÊTRE</h4>
+                <ul>
+                    <li>J'<strong>étais allé(e)</strong> à Paris</li>
+                    <li>Elle <strong>était arrivée</strong> en retard</li>
+                    <li>Nous <strong>étions partis</strong> tôt</li>
+                    <li>Je m'<strong>étais levé(e)</strong> à 7h</li>
+                </ul>
+                <p><em>⚠️ Avec ÊTRE, le participe passé s'accorde avec le sujet !</em></p>
+            </div>
+
+            <h3>Quand l'utiliser ?</h3>
+            
+            <div class="warning-box">
+                <h4>Pour exprimer l'antériorité</h4>
+                <p>Action 1 (plus-que-parfait) → Action 2 (passé composé/imparfait)</p>
+                <ul>
+                    <li>Quand je suis arrivé, le film <strong>avait déjà commencé</strong>. (le film a commencé AVANT mon arrivée)</li>
+                    <li>Elle était fatiguée parce qu'elle <strong>avait beaucoup travaillé</strong>.</li>
+                    <li>Il ne connaissait pas Paris car il n'<strong>y était jamais allé</strong>.</li>
+                </ul>
+            </div>
+
+            <h3>Conjugaison complète</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Avec AVOIR (manger)</th>
+                        <th>Avec ÊTRE (aller)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>j'avais mangé</td><td>j'étais allé(e)</td></tr>
+                    <tr><td>tu avais mangé</td><td>tu étais allé(e)</td></tr>
+                    <tr><td>il/elle avait mangé</td><td>il/elle était allé(e)</td></tr>
+                    <tr><td>nous avions mangé</td><td>nous étions allé(e)s</td></tr>
+                    <tr><td>vous aviez mangé</td><td>vous étiez allé(e)(s)</td></tr>
+                    <tr><td>ils/elles avaient mangé</td><td>ils/elles étaient allé(e)s</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Exemples dans des phrases</h3>
+            <div class="example-box">
+                <ul>
+                    <li>J'<strong>avais déjà vu</strong> ce film quand tu me l'as recommandé.</li>
+                    <li>Ils <strong>étaient partis</strong> avant notre arrivée.</li>
+                    <li>Elle <strong>n'avait jamais mangé</strong> de sushi avant ce jour-là.</li>
+                    <li>Nous <strong>avions fini</strong> le travail quand le patron est arrivé.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- COURS: Conditionnel Présent -->
+        <div id="conditionnel-present" class="course-content">
+            <button class="back-btn" onclick="backToSection('conjugaison')">← Retour</button>
+            
+            <h2>🤔 LE CONDITIONNEL PRÉSENT</h2>
+            
+            <div class="info-box">
+                <h3>📌 Qu'est-ce que c'est ?</h3>
+                <p>Le conditionnel présent exprime une <strong>action hypothétique</strong>, un <strong>souhait</strong>, une <strong>demande polie</strong> ou une <strong>possibilité</strong>.</p>
+            </div>
+
+            <h3>Formation</h3>
+            <p><strong>Conditionnel présent = Infinitif + terminaisons de l'imparfait</strong></p>
+            <p><strong>Terminaisons : -ais, -ais, -ait, -ions, -iez, -aient</strong></p>
+            
+            <div class="example-box">
+                <h4>Verbes réguliers</h4>
+                <p><strong>PARLER :</strong></p>
+                <ul>
+                    <li>je parler<strong>ais</strong></li>
+                    <li>tu parler<strong>ais</strong></li>
+                    <li>il/elle parler<strong>ait</strong></li>
+                    <li>nous parler<strong>ions</strong></li>
+                    <li>vous parler<strong>iez</strong></li>
+                    <li>ils/elles parler<strong>aient</strong></li>
+                </ul>
+            </div>
+
+            <h3>Verbes irréguliers courants</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Infinitif</th>
+                        <th>Radical</th>
+                        <th>Conditionnel (je)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>être</td><td>ser-</td><td>je serais</td></tr>
+                    <tr><td>avoir</td><td>aur-</td><td>j'aurais</td></tr>
+                    <tr><td>faire</td><td>fer-</td><td>je ferais</td></tr>
+                    <tr><td>aller</td><td>ir-</td><td>j'irais</td></tr>
+                    <tr><td>venir</td><td>viendr-</td><td>je viendrais</td></tr>
+                    <tr><td>voir</td><td>verr-</td><td>je verrais</td></tr>
+                    <tr><td>pouvoir</td><td>pourr-</td><td>je pourrais</td></tr>
+                    <tr><td>vouloir</td><td>voudr-</td><td>je voudrais</td></tr>
+                    <tr><td>devoir</td><td>devr-</td><td>je devrais</td></tr>
+                    <tr><td>savoir</td><td>saur-</td><td>je saurais</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Quand l'utiliser ?</h3>
+            
+            <div class="example-box">
+                <h4>1. 💭 Hypothèse avec "SI" (présent)</h4>
+                <p><strong>Si + imparfait, conditionnel présent</strong></p>
+                <ul>
+                    <li><strong>Si</strong> j'<em>étais</em> riche, j'<strong>achèterais</strong> une maison.</li>
+                    <li><strong>Si</strong> tu <em>avais</em> le temps, tu <strong>viendrais</strong> ?</li>
+                    <li><strong>Si</strong> nous <em>pouvions</em>, nous <strong>voyagerions</strong> partout.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>2. 🙏 Demande polie</h4>
+                <ul>
+                    <li>Je <strong>voudrais</strong> un café, s'il vous plaît.</li>
+                    <li><strong>Pourriez</strong>-vous m'aider ?</li>
+                    <li><strong>Auriez</strong>-vous l'heure ?</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>3. ✨ Souhait / Conseil</h4>
+                <ul>
+                    <li>J'<strong>aimerais</strong> visiter le Japon.</li>
+                    <li>Tu <strong>devrais</strong> étudier plus.</li>
+                    <li>Nous <strong>pourrions</strong> aller au cinéma.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>4. 📰 Information non confirmée</h4>
+                <ul>
+                    <li>Selon les journaux, il <strong>serait</strong> malade.</li>
+                    <li>L'accident <strong>aurait</strong> fait 10 victimes.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- COURS: Conditionnel Passé -->
+        <div id="conditionnel-passe" class="course-content">
+            <button class="back-btn" onclick="backToSection('conjugaison')">← Retour</button>
+            
+            <h2>😔 LE CONDITIONNEL PASSÉ</h2>
+            
+            <div class="info-box">
+                <h3>📌 Qu'est-ce que c'est ?</h3>
+                <p>Le conditionnel passé exprime un <strong>regret</strong>, une <strong>hypothèse non réalisée dans le passé</strong>, ou un <strong>reproche</strong>.</p>
+            </div>
+
+            <h3>Formation</h3>
+            <p><strong>Conditionnel passé = Auxiliaire (avoir/être) au conditionnel présent + Participe passé</strong></p>
+            
+            <div class="example-box">
+                <h4>Avec AVOIR</h4>
+                <ul>
+                    <li>J'<strong>aurais mangé</strong> si j'avais eu faim</li>
+                    <li>Tu <strong>aurais fini</strong> plus tôt</li>
+                    <li>Il <strong>aurait travaillé</strong> davantage</li>
+                    <li>Nous <strong>aurions vu</strong> le film</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>Avec ÊTRE</h4>
+                <ul>
+                    <li>Je <strong>serais allé(e)</strong> à Paris</li>
+                    <li>Elle <strong>serait arrivée</strong> à l'heure</li>
+                    <li>Nous <strong>serions partis</strong> plus tôt</li>
+                    <li>Je me <strong>serais levé(e)</strong> plus tôt</li>
+                </ul>
+            </div>
+
+            <h3>Quand l'utiliser ?</h3>
+            
+            <div class="warning-box">
+                <h4>1. 😢 Regret / Ce qui ne s'est pas passé</h4>
+                <ul>
+                    <li>J'<strong>aurais dû</strong> étudier plus. (regret - je n'ai pas étudié)</li>
+                    <li>Tu <strong>aurais pu</strong> m'appeler ! (reproche)</li>
+                    <li>Nous <strong>serions venus</strong> si nous avions su. (mais nous ne sommes pas venus)</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>2. 💭 Hypothèse irréelle dans le passé</h4>
+                <p><strong>Si + plus-que-parfait, conditionnel passé</strong></p>
+                <ul>
+                    <li><strong>Si</strong> j'<em>avais été</em> riche, j'<strong>aurais acheté</strong> une maison.</li>
+                    <li><strong>Si</strong> tu <em>étais venu</em>, tu <strong>aurais vu</strong> Marie.</li>
+                    <li><strong>Si</strong> nous <em>avions su</em>, nous <strong>serions partis</strong> plus tôt.</li>
+                </ul>
+            </div>
+
+            <h3>Conjugaison complète</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Avec AVOIR (manger)</th>
+                        <th>Avec ÊTRE (aller)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>j'aurais mangé</td><td>je serais allé(e)</td></tr>
+                    <tr><td>tu aurais mangé</td><td>tu serais allé(e)</td></tr>
+                    <tr><td>il/elle aurait mangé</td><td>il/elle serait allé(e)</td></tr>
+                    <tr><td>nous aurions mangé</td><td>nous serions allé(e)s</td></tr>
+                    <tr><td>vous auriez mangé</td><td>vous seriez allé(e)(s)</td></tr>
+                    <tr><td>ils/elles auraient mangé</td><td>ils/elles seraient allé(e)s</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Expressions courantes</h3>
+            <div class="example-box">
+                <ul>
+                    <li>J'<strong>aurais dû</strong> le faire. (I should have done it)</li>
+                    <li>Tu <strong>aurais pu</strong> m'aider ! (You could have helped me!)</li>
+                    <li>Il <strong>aurait fallu</strong> partir plus tôt. (We should have left earlier)</li>
+                    <li>Ça <strong>aurait été</strong> mieux. (It would have been better)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- COURS: Subjonctif Présent -->
+        <div id="subjonctif-present" class="course-content">
+            <button class="back-btn" onclick="backToSection('conjugaison')">← Retour</button>
+            
+            <h2>🎭 LE SUBJONCTIF PRÉSENT</h2>
+            
+            <div class="info-box">
+                <h3>📌 Qu'est-ce que c'est ?</h3>
+                <p>Le subjonctif présent exprime le <strong>doute</strong>, le <strong>souhait</strong>, la <strong>nécessité</strong>, l'<strong>émotion</strong> ou la <strong>possibilité</strong>. Il est souvent utilisé après "que".</p>
+            </div>
+
+            <h3>Formation</h3>
+            <p><strong>Base : radical de "ils" au présent + terminaisons : -e, -es, -e, -ions, -iez, -ent</strong></p>
+            
+            <div class="example-box">
+                <h4>PARLER (régulier)</h4>
+                <p>Ils parl<strong>ent</strong> → radical = <strong>parl</strong></p>
+                <ul>
+                    <li>que je parl<strong>e</strong></li>
+                    <li>que tu parl<strong>es</strong></li>
+                    <li>qu'il/elle parl<strong>e</strong></li>
+                    <li>que nous parl<strong>ions</strong></li>
+                    <li>que vous parl<strong>iez</strong></li>
+                    <li>qu'ils/elles parl<strong>ent</strong></li>
+                </ul>
+            </div>
+
+            <h3>Verbes irréguliers importants</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Infinitif</th>
+                        <th>que je...</th>
+                        <th>que nous...</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>être</td><td>que je <strong>sois</strong></td><td>que nous <strong>soyons</strong></td></tr>
+                    <tr><td>avoir</td><td>que j'<strong>aie</strong></td><td>que nous <strong>ayons</strong></td></tr>
+                    <tr><td>faire</td><td>que je <strong>fasse</strong></td><td>que nous <strong>fassions</strong></td></tr>
+                    <tr><td>aller</td><td>que j'<strong>aille</strong></td><td>que nous <strong>allions</strong></td></tr>
+                    <tr><td>pouvoir</td><td>que je <strong>puisse</strong></td><td>que nous <strong>puissions</strong></td></tr>
+                    <tr><td>savoir</td><td>que je <strong>sache</strong></td><td>que nous <strong>sachions</strong></td></tr>
+                    <tr><td>vouloir</td><td>que je <strong>veuille</strong></td><td>que nous <strong>voulions</strong></td></tr>
+                    <tr><td>venir</td><td>que je <strong>vienne</strong></td><td>que nous <strong>venions</strong></td></tr>
+                    <tr><td>prendre</td><td>que je <strong>prenne</strong></td><td>que nous <strong>prenions</strong></td></tr>
+                </tbody>
+            </table>
+
+            <h3>Quand l'utiliser ?</h3>
+            
+            <div class="example-box">
+                <h4>1. 💪 Nécessité / Obligation</h4>
+                <ul>
+                    <li><strong>Il faut que</strong> je <strong>fasse</strong> mes devoirs.</li>
+                    <li><strong>Il est nécessaire que</strong> tu <strong>viennes</strong>.</li>
+                    <li><strong>Il est important que</strong> nous <strong>soyons</strong> à l'heure.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>2. ✨ Souhait / Volonté</h4>
+                <ul>
+                    <li><strong>Je veux que</strong> tu <strong>réussisses</strong>.</li>
+                    <li><strong>J'aimerais que</strong> vous <strong>veniez</strong>.</li>
+                    <li><strong>Je souhaite que</strong> tu <strong>ailles</strong> bien.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>3. 😊😢 Émotion</h4>
+                <ul>
+                    <li><strong>Je suis content que</strong> tu <strong>sois</strong> là.</li>
+                    <li><strong>J'ai peur que</strong> il <strong>pleuve</strong>.</li>
+                    <li><strong>Je regrette que</strong> tu ne <strong>puisses</strong> pas venir.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>4. 🤔 Doute / Possibilité</h4>
+                <ul>
+                    <li><strong>Je doute que</strong> il <strong>vienne</strong>.</li>
+                    <li><strong>Il est possible que</strong> nous <strong>partions</strong> demain.</li>
+                    <li><strong>Je ne pense pas que</strong> ce <strong>soit</strong> vrai.</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Expressions courantes avec subjonctif</h4>
+                <ul>
+                    <li>Il faut que...</li>
+                    <li>Il est important que...</li>
+                    <li>Il est nécessaire que...</li>
+                    <li>Bien que... (although)</li>
+                    <li>Avant que... (before)</li>
+                    <li>Pour que... (so that)</li>
+                    <li>Sans que... (without)</li>
+                    <li>Jusqu'à ce que... (until)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- COURS: Subjonctif Passé -->
+        <div id="subjonctif-passe" class="course-content">
+            <button class="back-btn" onclick="backToSection('conjugaison')">← Retour</button>
+            
+            <h2>🎭⏪ LE SUBJONCTIF PASSÉ</h2>
+            
+            <div class="info-box">
+                <h3>📌 Qu'est-ce que c'est ?</h3>
+                <p>Le subjonctif passé exprime les mêmes nuances que le subjonctif présent (doute, souhait, nécessité, émotion), mais pour des <strong>actions passées</strong> ou <strong>antérieures</strong>.</p>
+            </div>
+
+            <h3>Formation</h3>
+            <p><strong>Subjonctif passé = Auxiliaire (avoir/être) au subjonctif présent + Participe passé</strong></p>
+            
+            <div class="example-box">
+                <h4>Avec AVOIR</h4>
+                <ul>
+                    <li>que j'<strong>aie mangé</strong></li>
+                    <li>que tu <strong>aies fini</strong></li>
+                    <li>qu'il <strong>ait travaillé</strong></li>
+                    <li>que nous <strong>ayons vu</strong></li>
+                    <li>que vous <strong>ayez pris</strong></li>
+                    <li>qu'ils <strong>aient dit</strong></li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>Avec ÊTRE</h4>
+                <ul>
+                    <li>que je <strong>sois allé(e)</strong></li>
+                    <li>que tu <strong>sois venu(e)</strong></li>
+                    <li>qu'elle <strong>soit partie</strong></li>
+                    <li>que nous <strong>soyons arrivé(e)s</strong></li>
+                    <li>que vous <strong>soyez rentré(e)(s)</strong></li>
+                    <li>qu'ils <strong>soient sortis</strong></li>
+                </ul>
+            </div>
+
+            <h3>Quand l'utiliser ?</h3>
+            
+            <div class="example-box">
+                <h4>1. 😊 Émotion sur une action passée</h4>
+                <ul>
+                    <li><strong>Je suis content que</strong> tu <strong>sois venu</strong>. (tu es venu → je suis content)</li>
+                    <li><strong>Je regrette que</strong> tu n'<strong>aies pas pu</strong> venir hier.</li>
+                    <li><strong>J'ai peur que</strong> il <strong>soit parti</strong> sans nous.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>2. 🤔 Doute sur une action passée</h4>
+                <ul>
+                    <li><strong>Je doute qu'</strong>il <strong>ait réussi</strong> l'examen.</li>
+                    <li><strong>Il est possible qu'</strong>elle <strong>soit déjà partie</strong>.</li>
+                    <li><strong>Je ne crois pas qu'</strong>ils <strong>aient compris</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>3. ⏰ Antériorité avec "avant que"</h4>
+                <ul>
+                    <li>Appelle-moi <strong>avant que</strong> tu <strong>sois parti</strong>.</li>
+                    <li>Je veux finir <strong>avant qu'</strong>il <strong>ait commencé</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>4. 🎭 Concession avec "bien que"</h4>
+                <ul>
+                    <li><strong>Bien qu'</strong>il <strong>ait étudié</strong>, il a échoué.</li>
+                    <li><strong>Bien qu'</strong>elle <strong>soit venue</strong>, elle est repartie vite.</li>
+                </ul>
+            </div>
+
+            <h3>Conjugaison complète</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Avec AVOIR (finir)</th>
+                        <th>Avec ÊTRE (partir)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>que j'aie fini</td><td>que je sois parti(e)</td></tr>
+                    <tr><td>que tu aies fini</td><td>que tu sois parti(e)</td></tr>
+                    <tr><td>qu'il/elle ait fini</td><td>qu'il/elle soit parti(e)</td></tr>
+                    <tr><td>que nous ayons fini</td><td>que nous soyons parti(e)s</td></tr>
+                    <tr><td>que vous ayez fini</td><td>que vous soyez parti(e)(s)</td></tr>
+                    <tr><td>qu'ils/elles aient fini</td><td>qu'ils/elles soient parti(e)s</td></tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box">
+                <h4>⚠️ Astuce</h4>
+                <p>Le subjonctif passé suit les <strong>mêmes règles d'accord</strong> que le passé composé :</p>
+                <ul>
+                    <li>Avec ÊTRE → accord avec le sujet</li>
+                    <li>Avec AVOIR → généralement pas d'accord (sauf COD avant le verbe)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- COURS: Pronoms Démonstratifs -->
+        <div id="pronoms-demonstratifs" class="course-content">
+            <button class="back-btn" onclick="backToSection('pronoms')">← Retour</button>
+            
+            <h2>CELUI, CELLE : Les Pronoms Démonstratifs</h2>
+            
+            <div class="info-box">
+                <h3>📌 Introduction</h3>
+                <p>Les pronoms démonstratifs <strong>remplacent</strong> un nom précédé d'un déterminant démonstratif. Ils désignent quelque chose ou quelqu'un.</p>
+                <p><strong>Exemple :</strong> <em>Ce</em> livre → <strong>Celui-ci</strong> / <strong>Celui-là</strong></p>
+            </div>
+
+            <h3>Tableau des Pronoms Démonstratifs</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Masculin Singulier</th>
+                        <th>Féminin Singulier</th>
+                        <th>Masculin Pluriel</th>
+                        <th>Féminin Pluriel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>celui</strong></td>
+                        <td><strong>celle</strong></td>
+                        <td><strong>ceux</strong></td>
+                        <td><strong>celles</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Utilisation</h3>
+            
+            <div class="example-box">
+                <h4>1. Avec -ci / -là (proche / loin)</h4>
+                <ul>
+                    <li>Tu veux quel livre ? <strong>Celui-ci</strong> ou <strong>celui-là</strong> ?</li>
+                    <li>Quelle robe préfères-tu ? <strong>Celle-ci</strong> ou <strong>celle-là</strong> ?</li>
+                    <li>Prends ces stylos : <strong>ceux-ci</strong> sont meilleurs que <strong>ceux-là</strong></li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>2. Avec "de" (appartenance)</h4>
+                <ul>
+                    <li>Mon vélo est rouge. <strong>Celui de Marie</strong> est bleu.</li>
+                    <li>Ma voiture est neuve. <strong>Celle de Pierre</strong> est vieille.</li>
+                    <li>Mes parents sont sympas. <strong>Ceux de Jean</strong> sont sévères.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>3. Avec "qui" / "que" (proposition relative)</h4>
+                <ul>
+                    <li>Quel film ? <strong>Celui qui</strong> passe ce soir.</li>
+                    <li>Quelle chanson ? <strong>Celle que</strong> tu aimes.</li>
+                    <li>Quels livres ? <strong>Ceux que</strong> j'ai achetés hier.</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Formes neutres</h4>
+                <p>Il existe aussi des formes neutres (sans genre) :</p>
+                <ul>
+                    <li><strong>ce</strong> / <strong>c'</strong> : C'est bien ! Ce n'est pas grave.</li>
+                    <li><strong>ceci</strong> : Écoute ceci (= cette chose-ci)</li>
+                    <li><strong>cela</strong> / <strong>ça</strong> : Donne-moi ça ! (= cette chose-là)</li>
+                </ul>
+            </div>
+
+            <h3>Tableau Comparatif : Français - Anglais - Espagnol</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Français</th>
+                        <th>Anglais</th>
+                        <th>Espagnol</th>
+                        <th>Exemple (FR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>celui-ci / celui-là</td>
+                        <td>this one / that one</td>
+                        <td>este / ese / aquel</td>
+                        <td>Je préfère celui-ci</td>
+                    </tr>
+                    <tr>
+                        <td>celle-ci / celle-là</td>
+                        <td>this one / that one</td>
+                        <td>esta / esa / aquella</td>
+                        <td>Celle-là est plus belle</td>
+                    </tr>
+                    <tr>
+                        <td>ceux-ci / ceux-là</td>
+                        <td>these / those</td>
+                        <td>estos / esos / aquellos</td>
+                        <td>Ceux-ci sont moins chers</td>
+                    </tr>
+                    <tr>
+                        <td>celles-ci / celles-là</td>
+                        <td>these / those</td>
+                        <td>estas / esas / aquellas</td>
+                        <td>Celles-là sont meilleures</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- COURS: Passé Composé vs Imparfait -->
+        <div id="passe-compose-vs-imparfait" class="course-content">
+            <button class="back-btn" onclick="backToSection('conjugaison')">← Retour</button>
+            
+            <h2>⚡ PASSÉ COMPOSÉ vs 🎬 IMPARFAIT</h2>
+            
+            <div class="info-box">
+                <h3>💡 L'astuce du film</h3>
+                <p><strong>Imagine un film 🎬 :</strong></p>
+                <ul>
+                    <li><strong>IMPARFAIT</strong> = La scène, le décor, l'ambiance (ce qui se passe en arrière-plan)</li>
+                    <li><strong>PASSÉ COMPOSÉ</strong> = L'action principale (ce qui fait avancer l'histoire)</li>
+                </ul>
+            </div>
+
+            <h3>Quand les utiliser ?</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>PASSÉ COMPOSÉ ⚡</th>
+                        <th>IMPARFAIT 🎬</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>⚡ Une action terminée / un événement précis</td>
+                        <td>🎨 Une description (décor, personnes, météo)</td>
+                    </tr>
+                    <tr>
+                        <td>➡️➡️➡️ Une succession d'actions</td>
+                        <td>🔁 Une habitude dans le passé</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>⏳ Une action en cours d'accomplissement</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>💭 Un état d'esprit, sentiment ou statut</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Exemples</h3>
+            
+            <div class="example-box">
+                <h4>PASSÉ COMPOSÉ ⚡</h4>
+                <ul>
+                    <li>Hier, <strong>j'ai mangé</strong> une pizza.</li>
+                    <li>Elle <strong>est arrivée</strong> à 8h.</li>
+                    <li>Je <strong>me suis levé</strong>, <strong>j'ai pris</strong> mon petit-déjeuner et je <strong>suis parti</strong> au travail.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>IMPARFAIT 🎬</h4>
+                <ul>
+                    <li>Il <strong>faisait</strong> beau, le soleil <strong>brillait</strong>.</li>
+                    <li>Elle <strong>portait</strong> une robe rouge.</li>
+                    <li>Quand <strong>j'étais</strong> petit, <strong>j'allais</strong> à la plage tous les étés.</li>
+                    <li>Je <strong>dormais</strong> quand tu as appelé.</li>
+                    <li><strong>J'étais</strong> fatigué. Il <strong>avait</strong> 20 ans.</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>IMPARFAIT + PASSÉ COMPOSÉ ensemble</h4>
+                <p><strong>Exemple :</strong> Pendant que je <strong>marchais</strong> (🎬), je <strong>suis tombé</strong> (⚡)</p>
+                <p><strong>Exemple :</strong> Quand <strong>j'étais</strong> petit (🎬), <strong>j'ai rencontré</strong> mon meilleur ami (⚡)</p>
+            </div>
+
+            <h3>Exercices</h3>
+            <div class="exercise">
+                <h4>Exercice : Choisissez le bon temps (PC = Passé Composé, IMP = Imparfait)</h4>
+                <div class="question">
+                    1. Hier, il ________ (faire) beau. 
+                    <input type="text" id="pc_imp_1" class="answer" placeholder="faisait ou a fait ?">
+                </div>
+                <div class="question">
+                    2. Je ________ (partir) à 8 heures ce matin.
+                    <input type="text" id="pc_imp_2" class="answer" placeholder="partais ou suis parti ?">
+                </div>
+                <div class="question">
+                    3. Quand j'________ (être) enfant, j'adorais le chocolat.
+                    <input type="text" id="pc_imp_3" class="answer" placeholder="étais ou ai été ?">
+                </div>
+                <div class="question">
+                    4. Nous ________ (visiter) le musée lundi dernier.
+                    <input type="text" id="pc_imp_4" class="answer" placeholder="visitions ou avons visité ?">
+                </div>
+                <div class="question">
+                    5. Elle ________ (porter) une jolie robe rouge.
+                    <input type="text" id="pc_imp_5" class="answer" placeholder="portait ou a porté ?">
+                </div>
+                <div class="question">
+                    6. Pendant que je ________ (dormir), le téléphone a sonné.
+                    <input type="text" id="pc_imp_6" class="answer" placeholder="dormais ou ai dormi ?">
+                </div>
+                <button onclick="checkPCImp()">Vérifier</button>
+                <button onclick="resetPCImp()">Recommencer</button>
+                <div id="result-pc-imp" class="result"></div>
+            </div>
+        </div>
+
+        <!-- COURS: COD/COI -->
+        <div id="cod-coi" class="course-content">
+            <button class="back-btn" onclick="backToSection('pronoms')">← Retour</button>
+            
+            <h2>LE, LA, LES / LUI, LEUR : Pronoms COD et COI</h2>
+            
+            <div class="info-box">
+                <h3>📌 Introduction</h3>
+                <p>Les pronoms compléments remplacent des noms pour éviter les répétitions. Ils se placent <strong>AVANT le verbe conjugué</strong>.</p>
+            </div>
+
+            <h3>Tableau COD (Complément d'Objet Direct)</h3>
+            <p><strong>Répondent à "qui ?" ou "quoi ?"</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Français</th>
+                        <th>Anglais</th>
+                        <th>Espagnol</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>me / m'</td>
+                        <td>me</td>
+                        <td>me</td>
+                        <td>Il <strong>m'</strong>aime → He loves me</td>
+                    </tr>
+                    <tr>
+                        <td>te / t'</td>
+                        <td>you</td>
+                        <td>te</td>
+                        <td>Je <strong>t'</strong>entends → I hear you</td>
+                    </tr>
+                    <tr>
+                        <td>le / la / l'</td>
+                        <td>him / her / it</td>
+                        <td>lo / la</td>
+                        <td>Je <strong>le</strong> vois → I see him</td>
+                    </tr>
+                    <tr>
+                        <td>nous</td>
+                        <td>us</td>
+                        <td>nos</td>
+                        <td>Il <strong>nous</strong> aide → He helps us</td>
+                    </tr>
+                    <tr>
+                        <td>vous</td>
+                        <td>you (plural/formal)</td>
+                        <td>os / los / las</td>
+                        <td>Je <strong>vous</strong> connais → I know you</td>
+                    </tr>
+                    <tr>
+                        <td>les</td>
+                        <td>them</td>
+                        <td>los / las</td>
+                        <td>Je <strong>les</strong> regarde → I watch them</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Tableau COI (Complément d'Objet Indirect)</h3>
+            <p><strong>Répondent à "à qui ?" ou "à quoi ?"</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Français</th>
+                        <th>Anglais</th>
+                        <th>Espagnol</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>me / m'</td>
+                        <td>to me</td>
+                        <td>me</td>
+                        <td>Il <strong>me</strong> parle → He talks to me</td>
+                    </tr>
+                    <tr>
+                        <td>te / t'</td>
+                        <td>to you</td>
+                        <td>te</td>
+                        <td>Je <strong>te</strong> téléphone → I call you</td>
+                    </tr>
+                    <tr>
+                        <td>lui</td>
+                        <td>to him / to her</td>
+                        <td>le</td>
+                        <td>Je <strong>lui</strong> donne un cadeau → I give him/her a gift</td>
+                    </tr>
+                    <tr>
+                        <td>nous</td>
+                        <td>to us</td>
+                        <td>nos</td>
+                        <td>Il <strong>nous</strong> écrit → He writes to us</td>
+                    </tr>
+                    <tr>
+                        <td>vous</td>
+                        <td>to you (plural/formal)</td>
+                        <td>os / les</td>
+                        <td>Je <strong>vous</strong> réponds → I answer you</td>
+                    </tr>
+                    <tr>
+                        <td>leur</td>
+                        <td>to them</td>
+                        <td>les</td>
+                        <td>Je <strong>leur</strong> explique → I explain to them</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box">
+                <h4>⚠️ Comment choisir entre COD et COI ?</h4>
+                <p><strong>COD</strong> : verbe + QUI/QUOI directement</p>
+                <ul>
+                    <li>Je vois <em>Marie</em> → Je <strong>la</strong> vois</li>
+                    <li>Il mange <em>la pomme</em> → Il <strong>la</strong> mange</li>
+                </ul>
+                <p><strong>COI</strong> : verbe + À + QUI/QUOI</p>
+                <ul>
+                    <li>Je parle <em>à Marie</em> → Je <strong>lui</strong> parle</li>
+                    <li>Il téléphone <em>à ses parents</em> → Il <strong>leur</strong> téléphone</li>
+                </ul>
+            </div>
+
+            <h3>Verbes courants avec COI</h3>
+            <ul>
+                <li>parler <strong>à</strong> quelqu'un</li>
+                <li>téléphoner <strong>à</strong> quelqu'un</li>
+                <li>répondre <strong>à</strong> quelqu'un</li>
+                <li>écrire <strong>à</strong> quelqu'un</li>
+                <li>donner <strong>à</strong> quelqu'un</li>
+                <li>offrir <strong>à</strong> quelqu'un</li>
+                <li>demander <strong>à</strong> quelqu'un</li>
+            </ul>
+        </div>
+
+        <!-- COURS: EN et Y -->
+        <div id="en-y" class="course-content">
+            <button class="back-btn" onclick="backToSection('pronoms')">← Retour</button>
+            
+            <h2>EN et Y : Cas particuliers</h2>
+            
+            <div class="info-box">
+                <h3>📌 La règle simple</h3>
+                <ul>
+                    <li><strong>EN</strong> = DE (provenance, quantité)</li>
+                    <li><strong>Y</strong> = À / lieu (destination)</li>
+                </ul>
+            </div>
+
+            <h3>Le pronom EN</h3>
+            <p><strong>EN remplace :</strong></p>
+            
+            <div class="example-box">
+                <h4>1. Un complément introduit par "DE"</h4>
+                <ul>
+                    <li>Tu parles <em>de ton voyage</em> ? → Oui, j'<strong>en</strong> parle.</li>
+                    <li>Elle revient <em>de Paris</em> ? → Oui, elle <strong>en</strong> revient.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>2. Une quantité ou un partitif</h4>
+                <ul>
+                    <li>Tu veux <em>du café</em> ? → Oui, j'<strong>en</strong> veux.</li>
+                    <li>Tu as <em>des enfants</em> ? → Oui, j'<strong>en</strong> ai deux.</li>
+                    <li>Il mange <em>des pommes</em> ? → Oui, il <strong>en</strong> mange.</li>
+                </ul>
+            </div>
+
+            <h3>Le pronom Y</h3>
+            <p><strong>Y remplace :</strong></p>
+            
+            <div class="example-box">
+                <h4>1. Un complément de lieu (destination)</h4>
+                <ul>
+                    <li>Tu vas <em>à Paris</em> ? → Oui, j'<strong>y</strong> vais.</li>
+                    <li>Elle habite <em>en France</em> ? → Oui, elle <strong>y</strong> habite.</li>
+                    <li>Ils restent <em>au bureau</em> ? → Oui, ils <strong>y</strong> restent.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>2. Un complément introduit par "À" (choses/idées)</h4>
+                <ul>
+                    <li>Tu penses <em>à ton examen</em> ? → Oui, j'<strong>y</strong> pense.</li>
+                    <li>Elle s'intéresse <em>à la musique</em> ? → Oui, elle s'<strong>y</strong> intéresse.</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Attention : À + PERSONNE</h4>
+                <p>Avec une <strong>personne</strong>, on utilise <strong>lui/leur</strong>, pas Y !</p>
+                <ul>
+                    <li>Je réponds <em>aux emails</em> → J'<strong>y</strong> réponds (chose)</li>
+                    <li>Je réponds <em>à Patrick</em> → Je <strong>lui</strong> réponds (personne)</li>
+                </ul>
+            </div>
+
+            <h3>Exercices</h3>
+            <div class="exercise">
+                <h4>Exercice : Remplacez par EN, Y, LUI ou LEUR</h4>
+                <div class="question">
+                    1. Tu vas à Paris ? → Oui, j'<input type="text" id="eny_1" class="answer"> vais.
+                </div>
+                <div class="question">
+                    2. Tu veux du café ? → Oui, j'<input type="text" id="eny_2" class="answer"> veux.
+                </div>
+                <div class="question">
+                    3. Tu parles à Marie ? → Oui, je <input type="text" id="eny_3" class="answer"> parle.
+                </div>
+                <div class="question">
+                    4. Tu reviens de France ? → Oui, j'<input type="text" id="eny_4" class="answer"> reviens.
+                </div>
+                <div class="question">
+                    5. Tu penses à ton examen ? → Oui, j'<input type="text" id="eny_5" class="answer"> pense.
+                </div>
+                <div class="question">
+                    6. Tu as des enfants ? → Oui, j'<input type="text" id="eny_6" class="answer"> ai deux.
+                </div>
+                <button onclick="checkEnY()">Vérifier</button>
+                <button onclick="resetEnY()">Recommencer</button>
+                <div id="result-eny" class="result"></div>
+            </div>
+        </div>
+
+        <!-- COURS: Expressions Courantes -->
+        <div id="expressions-courantes" class="course-content">
+            <button class="back-btn" onclick="backToSection('expressions')">← Retour</button>
+            
+            <h2>🗣️ EXPRESSIONS COURANTES EN FRANÇAIS</h2>
+            
+            <div class="info-box">
+                <h3>📌 Introduction</h3>
+                <p>Les expressions idiomatiques rendent votre français plus naturel et vivant ! Voici les plus utilisées.</p>
+            </div>
+
+            <h3>Expressions avec "AVOIR"</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expression</th>
+                        <th>English</th>
+                        <th>Español</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>avoir la pêche</strong></td>
+                        <td>to have energy/be in great shape</td>
+                        <td>tener energía</td>
+                        <td>Aujourd'hui, j'ai la pêche !</td>
+                    </tr>
+                    <tr>
+                        <td><strong>avoir une peur bleue</strong></td>
+                        <td>to be scared to death</td>
+                        <td>tener mucho miedo</td>
+                        <td>J'ai une peur bleue des araignées.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>avoir le cafard</strong></td>
+                        <td>to feel down/depressed</td>
+                        <td>estar deprimido</td>
+                        <td>Il a le cafard depuis hier.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>avoir la flemme</strong></td>
+                        <td>to feel lazy</td>
+                        <td>tener flojera</td>
+                        <td>J'ai la flemme de sortir ce soir.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>avoir un coup de foudre</strong></td>
+                        <td>love at first sight</td>
+                        <td>flechazo</td>
+                        <td>Ils ont eu le coup de foudre !</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Expressions courantes du quotidien</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expression</th>
+                        <th>English</th>
+                        <th>Español</th>
+                        <th>Signification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ça marche !</strong></td>
+                        <td>That works! / Sounds good!</td>
+                        <td>¡Vale! / ¡De acuerdo!</td>
+                        <td>Accord, acceptation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>C'est pas grave</strong></td>
+                        <td>It's not a big deal / No worries</td>
+                        <td>No pasa nada</td>
+                        <td>Ce n'est pas important</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Laisse tomber</strong></td>
+                        <td>Forget it / Never mind</td>
+                        <td>Déjalo / Olvídalo</td>
+                        <td>Abandonne cette idée</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tu rigoles ?</strong></td>
+                        <td>Are you kidding?</td>
+                        <td>¿Estás bromeando?</td>
+                        <td>Expression de surprise</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ça te dit ?</strong></td>
+                        <td>Are you up for it?</td>
+                        <td>¿Te apetece?</td>
+                        <td>Proposition</td>
+                    </tr>
+                    <tr>
+                        <td><strong>J'en ai marre</strong></td>
+                        <td>I'm fed up / I'm sick of it</td>
+                        <td>Estoy harto</td>
+                        <td>Frustration, ras-le-bol</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ça va ?</strong></td>
+                        <td>How are you? / Are you okay?</td>
+                        <td>¿Qué tal?</td>
+                        <td>Salutation / Demander comment ça va</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Expressions de temps</h3>
+            <div class="example-box">
+                <ul>
+                    <li><strong>Tout à l'heure</strong> = later (today) / earlier (today)</li>
+                    <li><strong>À tout de suite</strong> = see you in a moment</li>
+                    <li><strong>Ça fait un bail</strong> = it's been a while</li>
+                    <li><strong>Du jour au lendemain</strong> = overnight</li>
+                </ul>
+            </div>
+
+            <h3>Expressions familières populaires</h3>
+            <div class="warning-box">
+                <p><em>⚠️ À utiliser seulement entre amis, pas en contexte formel !</em></p>
+                <ul>
+                    <li><strong>C'est chelou</strong> = C'est louche (It's weird/sketchy)</li>
+                    <li><strong>Ouais</strong> = Oui (Yeah)</li>
+                    <li><strong>Mec / Meuf</strong> = Guy / Girl</li>
+                    <li><strong>Ouf</strong> = Fou (Crazy) - verlan</li>
+                    <li><strong>Kiffer</strong> = Aimer beaucoup (To really like)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- COURS: Contractions à l'oral -->
+        <div id="contractions-oral" class="course-content">
+            <button class="back-btn" onclick="backToSection('expressions')">← Retour</button>
+            
+            <h2>🎤 CONTRACTIONS À L'ORAL</h2>
+            
+            <div class="info-box">
+                <h3>📌 Introduction</h3>
+                <p>À l'oral, les Français font beaucoup de <strong>contractions</strong> et d'<strong>élisions</strong>. Comprendre ces formes est essentiel pour bien comprendre le français parlé !</p>
+            </div>
+
+            <h3>Suppression du "NE" (très fréquent à l'oral)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Forme écrite / formelle</th>
+                        <th>Forme orale / informelle</th>
+                        <th>English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Je <strong>ne</strong> sais pas</td>
+                        <td>Je sais pas / J'sais pas</td>
+                        <td>I don't know</td>
+                    </tr>
+                    <tr>
+                        <td>Je <strong>ne</strong> comprends pas</td>
+                        <td>Je comprends pas / J'comprends pas</td>
+                        <td>I don't understand</td>
+                    </tr>
+                    <tr>
+                        <td>Il <strong>n'</strong>y a pas</td>
+                        <td>Y a pas / Y'a pas</td>
+                        <td>There isn't</td>
+                    </tr>
+                    <tr>
+                        <td>Ce <strong>n'</strong>est pas</td>
+                        <td>C'est pas</td>
+                        <td>It's not</td>
+                    </tr>
+                    <tr>
+                        <td>Je <strong>n'</strong>ai pas</td>
+                        <td>J'ai pas</td>
+                        <td>I don't have</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Contractions avec "TU"</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Forme complète</th>
+                        <th>Forme contractée</th>
+                        <th>English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tu as</td>
+                        <td><strong>T'as</strong></td>
+                        <td>You have</td>
+                    </tr>
+                    <tr>
+                        <td>Tu es</td>
+                        <td><strong>T'es</strong></td>
+                        <td>You are</td>
+                    </tr>
+                    <tr>
+                        <td>Tu as vu ?</td>
+                        <td><strong>T'as vu ?</strong></td>
+                        <td>Did you see?</td>
+                    </tr>
+                    <tr>
+                        <td>Tu sais</td>
+                        <td><strong>Tu sais</strong> (pas de contraction)</td>
+                        <td>You know</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Contractions avec "IL/ELLE"</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Forme complète</th>
+                        <th>Forme contractée</th>
+                        <th>English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Il y a</td>
+                        <td><strong>Y a</strong> / <strong>Y'a</strong></td>
+                        <td>There is/are</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Le "E" muet disparaît</h3>
+            <div class="example-box">
+                <ul>
+                    <li>Je <strong>t</strong>e dis → J<strong>te</strong> dis</li>
+                    <li>Tu <strong>m</strong>e dis → Tu <strong>m'</strong>dis</li>
+                    <li>Il <strong>f</strong>aut que → I' <strong>f</strong>aut qu'<br><em>Exemple : "Il faut que tu partes" → "I' faut qu' tu partes" (à l'oral)</em></li>
+                    <li>Qu'est-ce que → Qu'est-c'que / Kess-ke</li>
+                </ul>
+            </div>
+
+            <h3>Formes très familières</h3>
+            <div class="warning-box">
+                <p><em>⚠️ Très informel - à utiliser uniquement entre amis !</em></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Formel</th>
+                            <th>Informel</th>
+                            <th>Très informel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Qu'est-ce que tu fais ?</td>
+                            <td>Tu fais quoi ?</td>
+                            <td>Tu fais koi ? / T'fais koi ?</td>
+                        </tr>
+                        <tr>
+                            <td>Je ne sais pas</td>
+                            <td>Je sais pas</td>
+                            <td>J'sais pas / Chais pas</td>
+                        </tr>
+                        <tr>
+                            <td>Il y a</td>
+                            <td>Y a</td>
+                            <td>Y'a / Ya</td>
+                        </tr>
+                        <tr>
+                            <td>Maintenant</td>
+                            <td>Maintenant</td>
+                            <td>Maint'nant / M'tenant</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Prononciation vs Écriture</h3>
+            <div class="info-box">
+                <p><strong>Important :</strong> Ces contractions sont pour l'<strong>oral</strong> uniquement !</p>
+                <ul>
+                    <li>✅ <strong>À l'oral :</strong> "J'sais pas", "T'as vu ?", "Y'a pas"</li>
+                    <li>✅ <strong>À l'écrit (formel) :</strong> "Je ne sais pas", "Tu as vu ?", "Il n'y a pas"</li>
+                    <li>✅ <strong>À l'écrit (SMS/informel) :</strong> "Je sais pas", "T'as vu ?", "Y a pas"</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- COURS: Vocabulaire Thématique -->
+        <div id="vocabulaire-thematique" class="course-content">
+            <button class="back-btn" onclick="backToSection('expressions')">← Retour</button>
+            
+            <h2>📖 VOCABULAIRE THÉMATIQUE</h2>
+            
+            <div class="info-box">
+                <h3>📌 Introduction</h3>
+                <p>Vocabulaire essentiel organisé par thème pour faciliter l'apprentissage.</p>
+            </div>
+
+            <h3>🎨 LES COULEURS</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Français (M/F)</th>
+                        <th>English</th>
+                        <th>Español</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>blanc / blanche</td><td>white</td><td>blanco / blanca</td><td>Une chemise blanche</td></tr>
+                    <tr><td>noir / noire</td><td>black</td><td>negro / negra</td><td>Un chat noir</td></tr>
+                    <tr><td>rouge</td><td>red</td><td>rojo / roja</td><td>Une voiture rouge</td></tr>
+                    <tr><td>bleu / bleue</td><td>blue</td><td>azul</td><td>Le ciel bleu</td></tr>
+                    <tr><td>vert / verte</td><td>green</td><td>verde</td><td>L'herbe verte</td></tr>
+                    <tr><td>jaune</td><td>yellow</td><td>amarillo / amarilla</td><td>Le soleil jaune</td></tr>
+                    <tr><td>orange</td><td>orange</td><td>naranja</td><td>Une orange orange</td></tr>
+                    <tr><td>violet / violette</td><td>purple</td><td>violeta / morado</td><td>Une fleur violette</td></tr>
+                    <tr><td>rose</td><td>pink</td><td>rosa / rosado</td><td>Une robe rose</td></tr>
+                    <tr><td>gris / grise</td><td>grey</td><td>gris</td><td>Un nuage gris</td></tr>
+                    <tr><td>marron</td><td>brown</td><td>marrón</td><td>Un sac marron</td></tr>
+                </tbody>
+            </table>
+
+            <h3>🌍 LES NATIONALITÉS</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pays</th>
+                        <th>Masculin</th>
+                        <th>Féminin</th>
+                        <th>English</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>France</td><td>français</td><td>française</td><td>French</td></tr>
+                    <tr><td>Angleterre</td><td>anglais</td><td>anglaise</td><td>English</td></tr>
+                    <tr><td>Espagne</td><td>espagnol</td><td>espagnole</td><td>Spanish</td></tr>
+                    <tr><td>Italie</td><td>italien</td><td>italienne</td><td>Italian</td></tr>
+                    <tr><td>Allemagne</td><td>allemand</td><td>allemande</td><td>German</td></tr>
+                    <tr><td>Portugal</td><td>portugais</td><td>portugaise</td><td>Portuguese</td></tr>
+                    <tr><td>Chine</td><td>chinois</td><td>chinoise</td><td>Chinese</td></tr>
+                    <tr><td>Japon</td><td>japonais</td><td>japonaise</td><td>Japanese</td></tr>
+                    <tr><td>Mexique</td><td>mexicain</td><td>mexicaine</td><td>Mexican</td></tr>
+                    <tr><td>États-Unis</td><td>américain</td><td>américaine</td><td>American</td></tr>
+                    <tr><td>Russie</td><td>russe</td><td>russe</td><td>Russian</td></tr>
+                    <tr><td>Grèce</td><td>grec</td><td>grecque</td><td>Greek</td></tr>
+                </tbody>
+            </table>
+
+            <h3>😊😢 LES ÉMOTIONS</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Français</th>
+                        <th>English</th>
+                        <th>Español</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>la joie</strong></td><td>joy (temporary)</td><td>alegría</td></tr>
+                    <tr><td><strong>le bonheur</strong></td><td>happiness (lasting)</td><td>felicidad</td></tr>
+                    <tr><td><strong>joyeux / joyeuse</strong></td><td>joyful</td><td>alegre</td></tr>
+                    <tr><td><strong>heureux / heureuse</strong></td><td>happy</td><td>feliz</td></tr>
+                    <tr><td><strong>triste</strong></td><td>sad</td><td>triste</td></tr>
+                    <tr><td><strong>la tristesse</strong></td><td>sadness</td><td>tristeza</td></tr>
+                    <tr><td><strong>la colère</strong></td><td>anger</td><td>ira / rabia</td></tr>
+                    <tr><td><strong>en colère</strong></td><td>angry</td><td>enojado</td></tr>
+                    <tr><td><strong>la peur</strong></td><td>fear</td><td>miedo</td></tr>
+                    <tr><td><strong>avoir peur</strong></td><td>to be afraid</td><td>tener miedo</td></tr>
+                    <tr><td><strong>le dégoût</strong></td><td>disgust</td><td>asco</td></tr>
+                    <tr><td><strong>la surprise</strong></td><td>surprise</td><td>sorpresa</td></tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box">
+                <h4>⚠️ Différence importante</h4>
+                <ul>
+                    <li><strong>La joie</strong> = bonheur temporaire, émotion ponctuelle</li>
+                    <li><strong>Le bonheur</strong> = état durable, bien-être général</li>
+                </ul>
+                <p><em>Exemple : "J'ai ressenti une grande joie quand j'ai gagné" vs "Le bonheur, c'est d'être avec ma famille"</em></p>
+            </div>
+
+            <h3>🗣️ VERBES DE COMMUNICATION</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Français</th>
+                        <th>English</th>
+                        <th>Español</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>parler</strong></td><td>to speak</td><td>hablar</td></tr>
+                    <tr><td><strong>dire</strong></td><td>to say / tell</td><td>decir</td></tr>
+                    <tr><td><strong>raconter</strong></td><td>to tell (a story)</td><td>contar</td></tr>
+                    <tr><td><strong>expliquer</strong></td><td>to explain</td><td>explicar</td></tr>
+                    <tr><td><strong>demander</strong></td><td>to ask</td><td>preguntar / pedir</td></tr>
+                    <tr><td><strong>répondre</strong></td><td>to answer</td><td>responder</td></tr>
+                    <tr><td><strong>écouter</strong></td><td>to listen</td><td>escuchar</td></tr>
+                    <tr><td><strong>entendre</strong></td><td>to hear</td><td>oír</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- EXERCICE: COD/COI -->
+        <div id="exercice-cod-coi" class="course-content">
+            <button class="back-btn" onclick="backToSection('exercices')">← Retour</button>
+            
+            <h2>✍️ Exercice : Pronoms COD et COI</h2>
+            
+            <div class="info-box">
+                <p><strong>Rappel :</strong></p>
+                <ul>
+                    <li><strong>COD</strong> : me, te, le, la, nous, vous, les</li>
+                    <li><strong>COI</strong> : me, te, lui, nous, vous, leur</li>
+                </ul>
+            </div>
+
+            <div class="exercise">
+                <h4>Complétez avec le bon pronom</h4>
+                <div class="question">
+                    1. Marie aime ce livre. Je <input type="text" id="ex_cod_1" class="answer"> prends pour elle.
+                    <br><small>(le livre → COD)</small>
+                </div>
+                <div class="question">
+                    2. Mes parents attendent une réponse. Je <input type="text" id="ex_cod_2" class="answer"> donne la réponse demain.
+                    <br><small>(à mes parents → COI)</small>
+                </div>
+                <div class="question">
+                    3. Tu ressembles à ton frère. Tout le monde <input type="text" id="ex_cod_3" class="answer"> dit.
+                    <br><small>(cette chose → COD)</small>
+                </div>
+                <div class="question">
+                    4. Sophie veut un cadeau. Je <input type="text" id="ex_cod_4" class="answer"> offre un livre.
+                    <br><small>(à Sophie → COI)</small>
+                </div>
+                <div class="question">
+                    5. Vous aimez ces chaussures ? Je <input type="text" id="ex_cod_5" class="answer"> achète !
+                    <br><small>(les chaussures → COD)</small>
+                </div>
+                <div class="question">
+                    6. Mon frère attend le bus. Je <input type="text" id="ex_cod_6" class="answer"> attends avec lui.
+                    <br><small>(le bus → COD)</small>
+                </div>
+                <div class="question">
+                    7. Tu donnes un cadeau à ta sœur ? Oui, je <input type="text" id="ex_cod_7" class="answer"> donne un collier.
+                    <br><small>(à ta sœur → COI)</small>
+                </div>
+                <div class="question">
+                    8. Ces magazines sont intéressants. Tu <input type="text" id="ex_cod_8" class="answer"> lis souvent ?
+                    <br><small>(ces magazines → COD)</small>
+                </div>
+                <div class="question">
+                    9. Nous écrivons à nos amis. Nous <input type="text" id="ex_cod_9" class="answer"> écrivons chaque semaine.
+                    <br><small>(à nos amis → COI)</small>
+                </div>
+                <div class="question">
+                    10. Paul cherche ses clés. Tu <input type="text" id="ex_cod_10" class="answer"> vois quelque part ?
+                    <br><small>(ses clés → COD)</small>
+                </div>
+                <div class="question">
+                    11. Tes enfants ressemblent à qui ? Ils <input type="text" id="ex_cod_11" class="answer"> ressemblent beaucoup.
+                    <br><small>(à toi → COI)</small>
+                </div>
+                <div class="question">
+                    12. J'offre des fleurs à ma mère. Je <input type="text" id="ex_cod_12" class="answer"> offre pour son anniversaire.
+                    <br><small>(à ma mère → COI)</small>
+                </div>
+                <button onclick="checkExCOD()">Vérifier</button>
+                <button onclick="resetExCOD()">Recommencer</button>
+                <div id="result-ex-cod" class="result"></div>
+            </div>
+        </div>
+
+        <!-- EXERCICE: Pronoms & Déterminants avec traductions -->
+        <div id="exercice-pronoms-determinants" class="course-content">
+            <button class="back-btn" onclick="backToSection('exercices')">← Retour</button>
+            
+            <h2>✍️ Exercice : Pronoms & Déterminants (avec traductions)</h2>
+            
+            <div class="info-box">
+                <p><strong>Complétez les phrases. Les traductions en anglais et espagnol sont fournies pour vous aider.</strong></p>
+            </div>
+
+            <div class="exercise">
+                <div class="question">
+                    1. Marie aime ce livre. Je <input type="text" id="ex_trad_1" class="answer"> prends pour elle.
+                    <br><em style="color: #888;">EN: Marie loves this book. I take it for her.</em>
+                    <br><em style="color: #888;">ES: Marie ama este libro. Lo tomo para ella.</em>
+                </div>
+                <div class="question">
+                    2. Mes parents attendent une réponse. Je <input type="text" id="ex_trad_2" class="answer"> donne la réponse demain.
+                    <br><em style="color: #888;">EN: My parents are waiting for an answer. I give them the answer tomorrow.</em>
+                    <br><em style="color: #888;">ES: Mis padres esperan una respuesta. Les doy la respuesta mañana.</em>
+                </div>
+                <div class="question">
+                    3. <input type="text" id="ex_trad_3" class="answer"> homme est gentil. (masculin, commence par 'h')
+                    <br><em style="color: #888;">EN: This man is kind.</em>
+                    <br><em style="color: #888;">ES: Este hombre es amable.</em>
+                </div>
+                <div class="question">
+                    4. C'est <input type="text" id="ex_trad_4" class="answer"> livre. (mon livre → pronom possessif)
+                    <br><em style="color: #888;">EN: It's mine.</em>
+                    <br><em style="color: #888;">ES: Es el mío.</em>
+                </div>
+                <div class="question">
+                    5. <input type="text" id="ex_trad_5" class="answer"> voiture est rapide. (ma voiture → déterminant possessif)
+                    <br><em style="color: #888;">EN: My car is fast.</em>
+                    <br><em style="color: #888;">ES: Mi coche es rápido.</em>
+                </div>
+                <div class="question">
+                    6. Tu vas à Paris ? Oui, j'<input type="text" id="ex_trad_6" class="answer"> vais. (pronom Y)
+                    <br><em style="color: #888;">EN: Are you going to Paris? Yes, I'm going there.</em>
+                    <br><em style="color: #888;">ES: ¿Vas a París? Sí, voy allí.</em>
+                </div>
+                <div class="question">
+                    7. Tu veux du café ? Oui, j'<input type="text" id="ex_trad_7" class="answer"> veux. (pronom EN)
+                    <br><em style="color: #888;">EN: Do you want coffee? Yes, I want some.</em>
+                    <br><em style="color: #888;">ES: ¿Quieres café? Sí, quiero.</em>
+                </div>
+                <div class="question">
+                    8. <input type="text" id="ex_trad_8" class="answer"> enfants jouent dehors. (ces enfants)
+                    <br><em style="color: #888;">EN: These children are playing outside.</em>
+                    <br><em style="color: #888;">ES: Estos niños juegan afuera.</em>
+                </div>
+                <button onclick="checkExTrad()">Vérifier</button>
+                <button onclick="resetExTrad()">Recommencer</button>
+                <div id="result-ex-trad" class="result"></div>
+            </div>
+        </div>
+
+        <!-- EXERCICE: Conjugaison Mixte -->
+        <div id="exercice-conjugaison-mixte" class="course-content">
+            <button class="back-btn" onclick="backToSection('exercices')">← Retour</button>
+            
+            <h2>✍️ Exercice : Conjugaison Mixte (Présent, Passé Composé, Imparfait)</h2>
+            
+            <div class="info-box">
+                <p><strong>Conjuguez les verbes entre parenthèses au temps approprié.</strong></p>
+            </div>
+
+            <div class="exercise">
+                <h4>Texte 1 : Weekend à la plage 🏖️</h4>
+                <p>
+                    Le weekend dernier, Marc <input type="text" id="conj_1" class="answer" style="width:120px"> (voyager - PC) en Andalousie. 
+                    Il <input type="text" id="conj_2" class="answer" style="width:120px"> (faire - IMP) très beau. 
+                    Marc <input type="text" id="conj_3" class="answer" style="width:120px"> (nager - PC) dans la mer toute la journée. 
+                    Le soir, il <input type="text" id="conj_4" class="answer" style="width:120px"> (être - IMP) fatigué mais content. 
+                    Aujourd'hui, il <input type="text" id="conj_5" class="answer" style="width:120px"> (avoir - PRÉSENT) de beaux souvenirs.
+                </p>
+                <br>
+                <h4>Texte 2 : L'enfance de Sophie 👧</h4>
+                <p>
+                    Quand Sophie <input type="text" id="conj_6" class="answer" style="width:120px"> (être - IMP) petite, 
+                    elle <input type="text" id="conj_7" class="answer" style="width:120px"> (aller - IMP) à la plage tous les étés. 
+                    Elle <input type="text" id="conj_8" class="answer" style="width:120px"> (aimer - IMP) beaucoup nager. 
+                    Un jour, elle <input type="text" id="conj_9" class="answer" style="width:120px"> (rencontrer - PC) son meilleur ami Pierre. 
+                    Maintenant, elle <input type="text" id="conj_10" class="answer" style="width:120px"> (habiter - PRÉSENT) loin de la mer.
+                </p>
+                <br>
+                <h4>Texte 3 : Hier soir 🌙</h4>
+                <p>
+                    Hier soir, je <input type="text" id="conj_11" class="answer" style="width:120px"> (dormir - IMP) 
+                    quand le téléphone <input type="text" id="conj_12" class="answer" style="width:120px"> (sonner - PC). 
+                    C' <input type="text" id="conj_13" class="answer" style="width:120px"> (être - IMP) mon ami Paul. 
+                    Il <input type="text" id="conj_14" class="answer" style="width:120px"> (vouloir - IMP) sortir en boîte. 
+                    Je <input type="text" id="conj_15" class="answer" style="width:120px"> (dire - PC) oui et 
+                    nous <input type="text" id="conj_16" class="answer" style="width:120px"> (passer - PC) une super soirée !
+                </p>
+
+                <div class="info-box" style="margin-top: 30px;">
+                    <p><strong>Légende :</strong></p>
+                    <p>PC = Passé Composé ⚡ (action terminée)</p>
+                    <p>IMP = Imparfait 🎬 (description, habitude, contexte)</p>
+                    <p>PRÉSENT = Maintenant ✨</p>
+                </div>
+
+                <button onclick="checkConj()">Vérifier</button>
+                <button onclick="resetConj()">Recommencer</button>
+                <div id="result-conj" class="result"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Navigation
+        function showSection(sectionId) {
+            // Hide ALL sections and courses
+            document.querySelectorAll('.section').forEach(s => {
+                s.classList.remove('active');
+                s.style.display = 'none';
+            });
+            document.querySelectorAll('.course-content').forEach(c => {
+                c.classList.remove('active');
+                c.style.display = 'none';
+            });
+            
+            // Show the selected section
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+                section.style.display = 'block';
+            }
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function showCourse(courseId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => {
+                s.classList.remove('active');
+                s.style.display = 'none';
+            });
+            
+            // Hide all other courses
+            document.querySelectorAll('.course-content').forEach(c => {
+                c.classList.remove('active');
+                c.style.display = 'none';
+            });
+            
+            // Show the selected course
+            const courseElement = document.getElementById(courseId);
+            if (courseElement) {
+                courseElement.classList.add('active');
+                courseElement.style.display = 'block';
+            }
+        }
+
+        function backToSection(sectionId) {
+            // Hide all courses
+            document.querySelectorAll('.course-content').forEach(c => {
+                c.classList.remove('active');
+                c.style.display = 'none';
+            });
+            
+            // Hide all sections first
+            document.querySelectorAll('.section').forEach(s => {
+                s.classList.remove('active');
+                s.style.display = 'none';
+            });
+            
+            // Show the main section
+            const mainSection = document.getElementById(sectionId);
+            if (mainSection) {
+                mainSection.style.display = 'block';
+                mainSection.classList.add('active');
+            }
+        }
+
+        // Exercice: Déterminants Possessifs
+        const detPossAnswers = {
+            det_poss_1: 'mon',
+            det_poss_2: 'ta',
+            det_poss_3: 'ses',
+            det_poss_4: 'notre',
+            det_poss_5: 'votre',
+            det_poss_6: 'leurs',
+            det_poss_7: 'mon',
+            det_poss_8: 'ton'
+        };
+
+        function checkDetPoss() {
+            let correct = 0;
+            let total = Object.keys(detPossAnswers).length;
+            
+            Object.keys(detPossAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const answer = input.value.trim().toLowerCase();
+                
+                if (answer === detPossAnswers[id]) {
+                    input.className = 'answer correct';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                }
+            });
+
+            const result = document.getElementById('result-det-poss');
+            const percentage = (correct / total) * 100;
+            
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Excellent travail !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total} - Continue comme ça !`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Continue à pratiquer !`;
+            }
+        }
+
+        function resetDetPoss() {
+            Object.keys(detPossAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                input.value = '';
+                input.className = 'answer';
+            });
+            document.getElementById('result-det-poss').className = 'result';
+        }
+
+        // Exercice: Déterminants Démonstratifs
+        const detDemoAnswers = {
+            det_demo_1: 'ce',
+            det_demo_2: 'cette',
+            det_demo_3: 'ces',
+            det_demo_4: 'cet',
+            det_demo_5: 'cette',
+            det_demo_6: 'cet',
+            det_demo_7: 'ces',
+            det_demo_8: 'cet'
+        };
+
+        function checkDetDemo() {
+            let correct = 0;
+            let total = Object.keys(detDemoAnswers).length;
+            
+            Object.keys(detDemoAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const answer = input.value.trim().toLowerCase();
+                
+                if (answer === detDemoAnswers[id]) {
+                    input.className = 'answer correct';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                }
+            });
+
+            const result = document.getElementById('result-det-demo');
+            const percentage = (correct / total) * 100;
+            
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total}`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total}`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Révise la règle !`;
+            }
+        }
+
+        function resetDetDemo() {
+            Object.keys(detDemoAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                input.value = '';
+                input.className = 'answer';
+            });
+            document.getElementById('result-det-demo').className = 'result';
+        }
+
+        // Exercice: Pronoms Possessifs
+        const pronPossAnswers = {
+            pron_poss_1: 'le mien',
+            pron_poss_2: 'les tiennes',
+            pron_poss_3: 'la sienne',
+            pron_poss_4: 'la nôtre',
+            pron_poss_5: 'les vôtres',
+            pron_poss_6: 'le leur'
+        };
+
+        function checkPronPoss() {
+            let correct = 0;
+            let total = Object.keys(pronPossAnswers).length;
+            
+            Object.keys(pronPossAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const answer = input.value.trim().toLowerCase();
+                
+                if (answer === pronPossAnswers[id]) {
+                    input.className = 'answer correct';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                }
+            });
+
+            const result = document.getElementById('result-pron-poss');
+            const percentage = (correct / total) * 100;
+            
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total}`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Bien ! ${correct}/${total}`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - N'oublie pas les articles !`;
+            }
+        }
+
+        function resetPronPoss() {
+            Object.keys(pronPossAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                input.value = '';
+                input.className = 'answer';
+            });
+            document.getElementById('result-pron-poss').className = 'result';
+        }
+
+        // Exercice: Passé Composé vs Imparfait
+        const pcImpAnswers = {
+            pc_imp_1: 'faisait',
+            pc_imp_2: 'suis parti',
+            pc_imp_3: 'étais',
+            pc_imp_4: 'avons visité',
+            pc_imp_5: 'portait',
+            pc_imp_6: 'dormais'
+        };
+
+        function checkPCImp() {
+            let correct = 0;
+            let total = Object.keys(pcImpAnswers).length;
+            
+            Object.keys(pcImpAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const answer = input.value.trim().toLowerCase();
+                
+                if (answer === pcImpAnswers[id]) {
+                    input.className = 'answer correct';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                }
+            });
+
+            const result = document.getElementById('result-pc-imp');
+            const percentage = (correct / total) * 100;
+            
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Tu maîtrises bien !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Bien ! ${correct}/${total}`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Révise les règles !`;
+            }
+        }
+
+        function resetPCImp() {
+            Object.keys(pcImpAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                input.value = '';
+                input.className = 'answer';
+            });
+            document.getElementById('result-pc-imp').className = 'result';
+        }
+
+        // Exercice: EN et Y
+        const enYAnswers = {
+            eny_1: 'y',
+            eny_2: 'en',
+            eny_3: 'lui',
+            eny_4: 'en',
+            eny_5: 'y',
+            eny_6: 'en'
+        };
+
+        function checkEnY() {
+            let correct = 0;
+            let total = Object.keys(enYAnswers).length;
+            
+            Object.keys(enYAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const answer = input.value.trim().toLowerCase();
+                
+                if (answer === enYAnswers[id]) {
+                    input.className = 'answer correct';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                }
+            });
+
+            const result = document.getElementById('result-eny');
+            const percentage = (correct / total) * 100;
+            
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total}`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Bien ! ${correct}/${total}`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Révise EN = DE, Y = À`;
+            }
+        }
+
+        function resetEnY() {
+            Object.keys(enYAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                input.value = '';
+                input.className = 'answer';
+            });
+            document.getElementById('result-eny').className = 'result';
+        }
+
+        // Exercice: COD/COI
+        const exCODAnswers = {
+            ex_cod_1: 'le',
+            ex_cod_2: 'leur',
+            ex_cod_3: 'le',
+            ex_cod_4: 'lui',
+            ex_cod_5: 'les',
+            ex_cod_6: 'l\'',
+            ex_cod_7: 'lui',
+            ex_cod_8: 'les',
+            ex_cod_9: 'leur',
+            ex_cod_10: 'les',
+            ex_cod_11: 'te',
+            ex_cod_12: 'lui'
+        };
+
+        function checkExCOD() {
+            let correct = 0;
+            let total = Object.keys(exCODAnswers).length;
+            
+            Object.keys(exCODAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const answer = input.value.trim().toLowerCase().replace(/'/g, '\'');
+                
+                if (answer === exCODAnswers[id] || (id === 'ex_cod_6' && answer === 'le')) {
+                    input.className = 'answer correct';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                }
+            });
+
+            const result = document.getElementById('result-ex-cod');
+            const percentage = (correct / total) * 100;
+            
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Excellent !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total}`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Continue !`;
+            }
+        }
+
+        function resetExCOD() {
+            Object.keys(exCODAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                input.value = '';
+                input.className = 'answer';
+            });
+            document.getElementById('result-ex-cod').className = 'result';
+        }
+
+        // Exercice: Pronoms & Déterminants avec traductions
+        const exTradAnswers = {
+            ex_trad_1: 'le',
+            ex_trad_2: 'leur',
+            ex_trad_3: 'cet',
+            ex_trad_4: 'le mien',
+            ex_trad_5: 'ma',
+            ex_trad_6: 'y',
+            ex_trad_7: 'en',
+            ex_trad_8: 'ces'
+        };
+
+        function checkExTrad() {
+            let correct = 0;
+            let total = Object.keys(exTradAnswers).length;
+            
+            Object.keys(exTradAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const answer = input.value.trim().toLowerCase();
+                
+                if (answer === exTradAnswers[id]) {
+                    input.className = 'answer correct';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                }
+            });
+
+            const result = document.getElementById('result-ex-trad');
+            const percentage = (correct / total) * 100;
+            
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Excellent !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total}`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Continue !`;
+            }
+        }
+
+        function resetExTrad() {
+            Object.keys(exTradAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                input.value = '';
+                input.className = 'answer';
+            });
+            document.getElementById('result-ex-trad').className = 'result';
+        }
+
+        // Exercice: Conjugaison Mixte
+        const conjAnswers = {
+            conj_1: 'a voyagé',
+            conj_2: 'faisait',
+            conj_3: 'a nagé',
+            conj_4: 'était',
+            conj_5: 'a',
+            conj_6: 'était',
+            conj_7: 'allait',
+            conj_8: 'aimait',
+            conj_9: 'a rencontré',
+            conj_10: 'habite',
+            conj_11: 'dormais',
+            conj_12: 'a sonné',
+            conj_13: 'était',
+            conj_14: 'voulait',
+            conj_15: 'ai dit',
+            conj_16: 'avons passé'
+        };
+
+        function checkConj() {
+            let correct = 0;
+            let total = Object.keys(conjAnswers).length;
+            
+            Object.keys(conjAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const answer = input.value.trim().toLowerCase();
+                
+                if (answer === conjAnswers[id]) {
+                    input.className = 'answer correct';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                }
+            });
+
+            const result = document.getElementById('result-conj');
+            const percentage = (correct / total) * 100;
+            
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Tu maîtrises bien les temps !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total} - Continue comme ça !`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Révise les règles PC vs IMP !`;
+            }
+        }
+
+        function resetConj() {
+            Object.keys(conjAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                input.value = '';
+                input.className = 'answer';
+            });
+            document.getElementById('result-conj').className = 'result';
+        }
+
+        // Exercice: Pronoms Toniques
+        const toniquesAnswers = {
+            ton_1: 'toi',
+            ton_2: 'moi',
+            ton_3: 'lui',
+            ton_4: 'nous',
+            ton_5: 'moi',
+            ton_6: 'moi',
+            ton_7: 'toi',
+            ton_8: 'eux'
+        };
+
+        function checkToniques() {
+            let correct = 0;
+            let total = Object.keys(toniquesAnswers).length;
+            
+            Object.keys(toniquesAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const answer = input.value.trim().toLowerCase();
+                
+                if (answer === toniquesAnswers[id]) {
+                    input.className = 'answer correct';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                }
+            });
+
+            const result = document.getElementById('result-toniques');
+            const percentage = (correct / total) * 100;
+            
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Tu maîtrises les pronoms toniques !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total}`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Révise le tableau !`;
+            }
+        }
+
+        function resetToniques() {
+            Object.keys(toniquesAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                input.value = '';
+                input.className = 'answer';
+            });
+            document.getElementById('result-toniques').className = 'result';
+        }
+    </script>
+</body>
+</html>
