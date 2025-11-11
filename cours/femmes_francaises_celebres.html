@@ -27,40 +27,50 @@
             border-bottom: 3px solid #667eea;
             padding-bottom: 20px;
         }
-        h2 {
-            color: #667eea;
-            margin-top: 40px;
-            font-size: 1.8em;
-            border-left: 5px solid #764ba2;
-            padding-left: 15px;
-        }
         .biography-section {
             margin-bottom: 50px;
             padding: 30px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border: 2px solid #e9ecef;
+            background: linear-gradient(135deg, rgba(236, 241, 255, 0.95), rgba(248, 249, 252, 0.95));
+            border-radius: 16px;
+            border: 1px solid rgba(118, 75, 162, 0.1);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.12);
+        }
+        .biography-section h2 {
+            color: #667eea;
+            margin-top: 0;
+            font-size: 1.9em;
+            border-left: 6px solid #764ba2;
+            padding-left: 18px;
+            padding-bottom: 6px;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
         }
         .text-paragraph {
             font-size: 1.15em;
             color: #2c3e50;
             margin-bottom: 15px;
             line-height: 2;
+            text-align: justify;
         }
         .english {
             font-size: 0.95em;
-            color: #6c757d;
+            color: #4f5d75;
             font-style: italic;
-            margin-bottom: 20px;
-            padding-left: 20px;
-            border-left: 3px solid #667eea;
+            margin-bottom: 24px;
+            padding: 12px 20px;
+            border-left: 4px solid #667eea;
+            background: rgba(102, 126, 234, 0.08);
             display: block;
             margin-top: 5px;
+            border-radius: 0 8px 8px 0;
         }
         .blank {
             display: inline-flex;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             margin: 0 3px;
+            vertical-align: baseline;
         }
         .blank input {
             border: none;
@@ -73,6 +83,7 @@
             min-width: 140px;
             text-align: center;
             transition: all 0.3s;
+            border-radius: 0;
         }
         .blank input:focus {
             outline: none;
@@ -81,13 +92,14 @@
         }
         .verb-hint {
             background: #fff3cd;
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 4px;
             font-weight: bold;
             color: #856404;
             font-size: 0.85em;
-            margin-left: 5px;
+            margin-top: 6px;
             white-space: nowrap;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
         }
         .instructions {
             background: #d1ecf1;
@@ -106,7 +118,7 @@
             margin-top: 40px;
             padding-top: 20px;
             border-top: 2px solid #e9ecef;
-            color: #6c757d;
+            color: #546a7b;
             font-style: italic;
         }
         .check-button {
