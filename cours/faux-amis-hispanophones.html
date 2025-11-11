@@ -33,6 +33,32 @@
         gap: 20px;
         margin-top: 30px;
     }
+    body {
+        padding-bottom: 90px;
+    }
+    .global-warning {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #c0392b;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 20px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        z-index: 9999;
+        text-align: center;
+    }
+    .global-warning .warning-icon {
+        font-size: 1.3em;
+    }
+    .global-warning .warning-text {
+        font-size: 0.95em;
+    }
 </style>
 
 <div class="faux-ami-grid">
@@ -55,8 +81,8 @@
     <div class="faux-ami">
         <div class="faux-ami-title">Barrer ≠ barrer</div>
         <ul>
-            <li class="faux-ami-explanation"><strong>Barrer</strong> 🇫🇷 = balayer</li>
-            <li class="faux-ami-explanation"><strong>Barrer</strong> 🇪🇸 = barrer, bloquer</li>
+            <li class="faux-ami-explanation">🇫🇷 <strong>Barrer</strong> = balayer</li>
+            <li class="faux-ami-explanation">🇪🇸 <strong>Barrer</strong> = barrer, bloquer</li>
         </ul>
     </div>
 
@@ -85,6 +111,15 @@
     </div>
 
     <div class="faux-ami">
+        <div class="faux-ami-title">Débil ≠ débile</div>
+        <ul>
+            <li class="faux-ami-explanation">🇪🇸 <strong>Débil</strong> = faible, fragile physiquement</li>
+            <li class="faux-ami-explanation">🇫🇷 <strong>Débile</strong> = idiot, stupide (registre familier)</li>
+            <li class="faux-ami-explanation">💡 Attention : pour traduire « faible » en français, on utilise « faible » ou « fragile », pas « débile ».</li>
+        </ul>
+    </div>
+
+    <div class="faux-ami">
         <div class="faux-ami-title">Éxito ≠ exit</div>
         <ul>
             <li class="faux-ami-explanation"><strong>Éxito</strong> 🇪🇸 = succès</li>
@@ -93,18 +128,11 @@
     </div>
 
     <div class="faux-ami">
-        <div class="faux-ami-title">Librería ≠ bibliothèque</div>
-        <ul>
-            <li class="faux-ami-explanation"><strong>Librería</strong> 🇪🇸 = librairie</li>
-            <li class="faux-ami-explanation"><strong>Bibliothèque</strong> 🇫🇷 = bibliothèque</li>
-        </ul>
-    </div>
-
-    <div class="faux-ami">
         <div class="faux-ami-title">Mueble ≠ meuble</div>
         <ul>
-            <li class="faux-ami-explanation"><strong>Mueble</strong> 🇪🇸 = meuble</li>
-            <li class="faux-ami-explanation"><strong>Meuble</strong> 🇫🇷 = meuble (même sens !)</li>
+            <li class="faux-ami-explanation">🇪🇸 <strong>Mueble</strong> = meuble (terme générique pour tout le mobilier)</li>
+            <li class="faux-ami-explanation">🇫🇷 <strong>Meuble</strong> = meuble (objet de mobilier)</li>
+            <li class="faux-ami-explanation">💬 En Colombie ou en Espagne, on parle d'un « mueble » pour un canapé, une bibliothèque, etc. En français, on précise plutôt : « un canapé », « une armoire », « une étagère »…</li>
         </ul>
     </div>
 
@@ -187,12 +215,9 @@
             <li class="faux-ami-explanation"><strong>Tocar</strong> 🇫🇷 = toucher (même sens !)</li>
         </ul>
     </div>
+</div>
 
-    <div class="faux-ami">
-        <div class="faux-ami-title">Último ≠ ultime</div>
-        <ul>
-            <li class="faux-ami-explanation"><strong>Último</strong> 🇪🇸 = dernier, final</li>
-            <li class="faux-ami-explanation"><strong>Ultime</strong> 🇫🇷 = dernier, final (même sens !)</li>
-        </ul>
-    </div>
+<div class="global-warning">
+    <span class="warning-icon">&#9888;</span>
+    <span class="warning-text">¡Este sitio web está en desarrollo; aún contiene algunos errores e imprecisiones! | This website is under development; it still contains some errors and inaccuracies.</span>
 </div>
