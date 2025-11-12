@@ -417,8 +417,8 @@
                 level: "familier",
                 translations: {
                     fr: "Tout va bien, c'est bon, pas de problème (plus décontracté que 'ça marche')",
-                    en: "Everything's good, it's all rolling smoothly / How's it going? (when used as a question)",
-                    es: "Todo bien, sin problema / ¿Qué tal? / ¿Cómo va? (cuando se usa como pregunta)"
+                    en: "",
+                    es: ""
                 },
                 context: "Very casual expression used among friends. More relaxed than 'ça marche'. Used to say everything is fine or to agree casually. Can also be used as a question 'Ça roule?' meaning 'How's it going?' (equivalent to 'How are things?' in English, '¿Qué tal?' in Spanish).",
                 examples: [
@@ -553,8 +553,8 @@
                 level: "courant",
                 translations: {
                     fr: "C'est dommage mais on l'accepte, peu importe maintenant",
-                    en: "Too bad, oh well, it can't be helped",
-                    es: "Qué pena, mala suerte"
+                    en: "",
+                    es: ""
                 },
                 context: "Expression of resignation meaning 'too bad' or 'oh well'. Used when accepting a disappointing situation. Can also be used judgmentally ('tant pis pour lui' = too bad for him).",
                 examples: [
@@ -583,8 +583,8 @@
                 level: "courant",
                 translations: {
                     fr: "C'est selon les circonstances, pas de réponse fixe",
-                    en: "It depends, depends on the situation",
-                    es: "Depende, según las circunstancias"
+                    en: "",
+                    es: ""
                 },
                 context: "Common expression meaning 'it depends'. Used when the answer varies according to circumstances. Often followed by 'de' (on) to specify what it depends on.",
                 examples: [
@@ -612,11 +612,11 @@
                 fr: "C'est pas mal",
                 level: "courant",
                 translations: {
-                    fr: "C'est plutôt bien, c'est correct, pas mauvais (souvent un compliment modéré)",
-                    en: "That's not bad, pretty good, decent",
-                    es: "No está mal, está bien"
+                    fr: "C'est plutôt bien, c'est correct, pas mauvais (souvent un compliment modéré, l'équivalent d'un 7/10)",
+                    en: "",
+                    es: ""
                 },
-                context: "Moderate compliment meaning 'not bad' or 'pretty good'. In French culture, this is often a positive comment (understatement), unlike in English where 'not bad' can sound lukewarm. Can be used genuinely or diplomatically.",
+                context: "French understatement for genuine approval: saying « c'est pas mal » revient souvent à donner un 7/10. C'est une façon modérée mais positive de dire que quelque chose est réussi, sans exagérer.",
                 examples: [
                     "- Comment tu trouves mon dessin ? - C'est pas mal !",
                     "Le film était comment ? - C'est pas mal, je me suis pas ennuyé.",
@@ -628,7 +628,7 @@
                 level: "courant",
                 translations: {
                     fr: "C'est une possibilité, je suis ouvert à l'idée, peut-être",
-                    en: "Why not, that's a possibility, I'm open to it",
+                    en: "Why not",
                     es: "Por qué no, es posible"
                 },
                 context: "Open and non-committal response meaning 'why not'. Shows openness to an idea without strong enthusiasm. Can be neutral or slightly positive depending on tone.",
@@ -702,11 +702,11 @@
                 fr: "Tout à l'heure",
                 level: "courant",
                 translations: {
-                    fr: "Il y a peu de temps (passé) ou dans peu de temps (futur)",
-                    en: "Earlier / in a bit (depending on context)",
-                    es: "Hace un rato / dentro de un rato"
+                    fr: "Il y a peu de temps (passé) ou dans peu de temps (futur), toujours dans la même journée",
+                    en: "",
+                    es: ""
                 },
-                context: "This expression has different meanings depending on context: past ('a little while ago') or future ('in a little while'). The context of the sentence determines which meaning applies.",
+                context: "Temporal marker used for moments within the same day: selon le contexte, « tout à l'heure » peut vouloir dire il y a quelques heures ou dans quelques heures, mais toujours avant minuit du jour en cours.",
                 examples: [
                     {
                         text: "Je t'ai appelé tout à l'heure, tu n'as pas répondu.",
@@ -787,8 +787,8 @@
                 level: "soutenu",
                 translations: {
                     fr: "Certainement, c'est vrai (souvent suivi d'un 'mais')",
-                    en: "Certainly, admittedly, granted",
-                    es: "Ciertamente, es verdad"
+                    en: "",
+                    es: ""
                 },
                 context: "Formal concessive word meaning 'certainly' or 'admittedly'. Often followed by 'mais' (but) to acknowledge a point before making a counterargument. Used in sophisticated speech and writing to show nuanced thinking.",
                 examples: [
@@ -932,16 +932,20 @@
                 translationsDiv.className = 'expression-translations';
                 
                 // Traduction EN
-                const enTranslation = document.createElement('div');
-                enTranslation.className = 'expression-translation-item';
-                enTranslation.innerHTML = `<span class="flag">🇬🇧</span> <strong>${exp.translations.en}</strong>`;
-                translationsDiv.appendChild(enTranslation);
+                if (exp.translations.en && exp.translations.en.trim() !== "") {
+                    const enTranslation = document.createElement('div');
+                    enTranslation.className = 'expression-translation-item';
+                    enTranslation.innerHTML = `<span class="flag">🇬🇧</span> <strong>${exp.translations.en}</strong>`;
+                    translationsDiv.appendChild(enTranslation);
+                }
                 
                 // Traduction ES
-                const esTranslation = document.createElement('div');
-                esTranslation.className = 'expression-translation-item';
-                esTranslation.innerHTML = `<span class="flag">🇪🇸</span> <strong>${exp.translations.es}</strong>`;
-                translationsDiv.appendChild(esTranslation);
+                if (exp.translations.es && exp.translations.es.trim() !== "") {
+                    const esTranslation = document.createElement('div');
+                    esTranslation.className = 'expression-translation-item';
+                    esTranslation.innerHTML = `<span class="flag">🇪🇸</span> <strong>${exp.translations.es}</strong>`;
+                    translationsDiv.appendChild(esTranslation);
+                }
                 
                 // Contexte d'utilisation (en anglais)
                 if (exp.context) {

@@ -26,8 +26,8 @@ const FrenchExpressions = () => {
       level: "familier",
       translations: {
         fr: "Tout va bien, c'est bon, pas de problème (plus décontracté que 'ça marche')",
-        en: "Everything's good, it's all rolling smoothly",
-        es: "Todo bien, sin problema"
+        en: "",
+        es: ""
       },
       examples: [
         "- Comment ça va au boulot ? - Ça roule !",
@@ -152,8 +152,8 @@ const FrenchExpressions = () => {
       level: "courant",
       translations: {
         fr: "C'est dommage mais on l'accepte, peu importe maintenant",
-        en: "Too bad, oh well, it can't be helped",
-        es: "Qué pena, mala suerte"
+        en: "",
+        es: ""
       },
       examples: [
         "On n'a pas de places pour le concert ? Tant pis, on ira une autre fois.",
@@ -180,8 +180,8 @@ const FrenchExpressions = () => {
       level: "courant",
       translations: {
         fr: "C'est selon les circonstances, pas de réponse fixe",
-        en: "It depends, depends on the situation",
-        es: "Depende, según las circunstancias"
+        en: "",
+        es: ""
       },
       examples: [
         "- Il est sympa ton collègue ? - Ça dépend des jours.",
@@ -207,9 +207,9 @@ const FrenchExpressions = () => {
       fr: "C'est pas mal",
       level: "courant",
       translations: {
-        fr: "C'est plutôt bien, c'est correct, pas mauvais (souvent un compliment modéré)",
-        en: "That's not bad, pretty good, decent",
-        es: "No está mal, está bien"
+        fr: "C'est plutôt bien, c'est correct, pas mauvais (souvent un compliment modéré, l'équivalent d'un 7/10)",
+        en: "",
+        es: ""
       },
       examples: [
         "- Comment tu trouves mon dessin ? - C'est pas mal !",
@@ -222,7 +222,7 @@ const FrenchExpressions = () => {
       level: "courant",
       translations: {
         fr: "C'est une possibilité, je suis ouvert à l'idée, peut-être",
-        en: "Why not, that's a possibility, I'm open to it",
+        en: "Why not",
         es: "Por qué no, es posible"
       },
       examples: [
@@ -291,9 +291,9 @@ const FrenchExpressions = () => {
       fr: "Tout à l'heure",
       level: "courant",
       translations: {
-        fr: "Il y a peu de temps (passé) ou dans peu de temps (futur)",
-        en: "Earlier / in a bit (depending on context)",
-        es: "Hace un rato / dentro de un rato"
+        fr: "Il y a peu de temps (passé) ou dans peu de temps (futur), toujours dans la même journée",
+        en: "",
+        es: ""
       },
       examples: [
         "Je t'ai appelé tout à l'heure, tu n'as pas répondu.",
@@ -362,8 +362,8 @@ const FrenchExpressions = () => {
       level: "soutenu",
       translations: {
         fr: "Certainement, c'est vrai (souvent suivi d'un 'mais')",
-        en: "Certainly, admittedly, granted",
-        es: "Ciertamente, es verdad"
+        en: "",
+        es: ""
       },
       examples: [
         "C'est cher, certes, mais c'est de qualité.",
@@ -515,11 +515,13 @@ const FrenchExpressions = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {filteredExpressions.map((exp, index) => (
-            <div
-              key={index}
-              className="bg-white/95 backdrop-blur rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-            >
+          {filteredExpressions.map((exp, index) => {
+            const translationText = (exp.translations[selectedLang] ?? '').trim();
+            return (
+              <div
+                key={index}
+                className="bg-white/95 backdrop-blur rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+              >
               <div className={`bg-gradient-to-r ${getLevelGradient(exp.level)} p-4`}>
                 <div className="flex items-center justify-between">
                   <h3 className="text-2xl font-bold text-white">
@@ -535,7 +537,7 @@ const FrenchExpressions = () => {
                 <div className="flex items-start gap-2">
                   <BookOpen className="text-blue-500 mt-1 flex-shrink-0" size={18} />
                   <p className="text-gray-700 leading-relaxed text-sm">
-                    {exp.translations[selectedLang]}
+                    {translationText !== '' ? translationText : '—'}
                   </p>
                 </div>
 
@@ -554,7 +556,8 @@ const FrenchExpressions = () => {
                 </div>
               </div>
             </div>
-          ))}
+          );
+          })}
         </div>
 
         {filteredExpressions.length === 0 && (
