@@ -1,0 +1,261 @@
+<button class="back-btn" onclick="backToSection('expressions')">← Retour</button>
+
+<h2>🗣️ QUESTIONS PRATIQUES EN VOYAGE</h2>
+
+<div class="info-box">
+    <h3>📌 Comment s'en servir ?</h3>
+    <p>
+        Ces questions utiles couvrent <strong>le restaurant</strong>, <strong>les transports</strong>, <strong>les magasins</strong>
+        et les situations du quotidien. Elles sont regroupées selon le <strong>tutoiement</strong> (<span class="badge-t">T</span>) ou le
+        <strong>vouvoiement</strong> (<span class="badge-v">V</span>). Utilisez le vouvoiement avec les inconnus, les professionnels
+        ou toute personne à qui vous devez du respect.
+    </p>
+</div>
+
+<style>
+    .questions-wrapper {
+        margin-top: 25px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+        overflow: hidden;
+    }
+    .questions-legend {
+        background: #f3f4ff;
+        padding: 16px 22px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+        border-bottom: 1px solid rgba(102,126,234,0.18);
+    }
+    .questions-legend strong {
+        color: #4c3fa7;
+    }
+    .legend-chip {
+        padding: 6px 12px;
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #fff;
+        border: 1px solid rgba(102,126,234,0.2);
+        font-size: 0.9em;
+        color: #34495e;
+    }
+    .badge-t, .badge-v {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        font-weight: 700;
+        font-size: 0.85em;
+        color: white;
+    }
+    .badge-t {
+        background: #10b981;
+    }
+    .badge-v {
+        background: #6366f1;
+    }
+    table.questions-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table.questions-table th,
+    table.questions-table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(0,0,0,0.07);
+        text-align: left;
+        vertical-align: top;
+    }
+    table.questions-table th {
+        background: #f8f9ff;
+        color: #4338ca;
+        font-weight: 600;
+    }
+    table.questions-table tr:last-child td {
+        border-bottom: none;
+    }
+    table.questions-table td em {
+        color: #475569;
+        font-size: 0.95em;
+    }
+    @media (max-width: 720px) {
+        table.questions-table th,
+        table.questions-table td {
+            padding: 12px 10px;
+        }
+        .questions-legend {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
+
+<div class="questions-wrapper">
+    <div class="questions-legend">
+        <strong>Légende :</strong>
+        <span class="legend-chip"><span class="badge-t">T</span> Tutoiement (amis, proches, collègues familiers)</span>
+        <span class="legend-chip"><span class="badge-v">V</span> Vouvoiement (inconnus, professionnels, situations formelles)</span>
+    </div>
+    <table class="questions-table">
+        <thead>
+            <tr>
+                <th>Question en français</th>
+                <th>T / V</th>
+                <th>Traduction / Explication</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Est-ce que je peux avoir l’addition&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>“Can I have the bill?”&nbsp;– pour régler au restaurant.</td>
+            </tr>
+            <tr>
+                <td>Est-ce qu’on peut avoir une carafe d’eau&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>“Could we have a jug of water?”&nbsp;– demander de l’eau du robinet.</td>
+            </tr>
+            <tr>
+                <td>Est-ce qu’on peut avoir un peu plus de pain&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Demande polie pour du pain supplémentaire.</td>
+            </tr>
+            <tr>
+                <td>Est-ce qu’on peut avoir du pain&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Variante courte pour demander du pain.</td>
+            </tr>
+            <tr>
+                <td>Tu peux me passer le sel&nbsp;?</td>
+                <td><span class="badge-t">T</span></td>
+                <td>“Can you pass me the salt?”&nbsp;– ton familier (amis, famille).</td>
+            </tr>
+            <tr>
+                <td>Tu peux m’envoyer le lien&nbsp;?</td>
+                <td><span class="badge-t">T</span></td>
+                <td>“Can you send me the link?”&nbsp;– conversation informelle.</td>
+            </tr>
+            <tr>
+                <td>Vous pouvez m’envoyer le lien&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Version polie pour collègues ou personnes moins proches.</td>
+            </tr>
+            <tr>
+                <td>Est-ce que tu as un stylo&nbsp;?</td>
+                <td><span class="badge-t">T</span></td>
+                <td>“Do you have a pen?”&nbsp;– interlocuteur connu.</td>
+            </tr>
+            <tr>
+                <td>Vous ouvrez à quelle heure&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>“What time do you open?”&nbsp;– magasin, bureau, service.</td>
+            </tr>
+            <tr>
+                <td>Vous êtes ouvert(s)&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>“Are you open?”&nbsp;– s’assurer qu’un commerce est accessible.</td>
+            </tr>
+            <tr>
+                <td>Est-ce que je peux réserver une table pour ce soir&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>“Can I book a table for tonight?”</td>
+            </tr>
+            <tr>
+                <td>À quelle heure part le prochain train&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Question standard pour un guichet SNCF/transport.</td>
+            </tr>
+            <tr>
+                <td>C’est le bon quai pour aller en direction de Paris&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Vérifier le quai ou la direction du train.</td>
+            </tr>
+            <tr>
+                <td>Avez-vous une table pour deux personnes&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>“Do you have a table for two?”</td>
+            </tr>
+            <tr>
+                <td>Avez-vous quelque chose contre le mal de tête / la fièvre&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Demande à la pharmacie pour un médicament.</td>
+            </tr>
+            <tr>
+                <td>Où se trouve la boulangerie / la pharmacie / la poste la plus proche&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>“Where is the nearest bakery/pharmacy/post office?”</td>
+            </tr>
+            <tr>
+                <td>Ça coûte combien&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>“How much does it cost?” – question directe.</td>
+            </tr>
+            <tr>
+                <td>Quel est le prix de ce pantalon / cette robe / ce haut&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Formulation plus précise pour demander un prix.</td>
+            </tr>
+            <tr>
+                <td>Est-ce que je peux avoir une serviette&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Demande polie au restaurant ou à l’hôtel.</td>
+            </tr>
+            <tr>
+                <td>Où sont les toilettes&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Question directe mais polie.</td>
+            </tr>
+            <tr>
+                <td>On peut payer séparément&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>“Can we pay separately / split the bill?”&nbsp;– vouvoiement implicite.</td>
+            </tr>
+            <tr>
+                <td>Qu’est-ce que vous me conseillez&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>“What do you recommend?”&nbsp;– serveur, vendeur, conseiller.</td>
+            </tr>
+            <tr>
+                <td>Qu’est-ce que vous me recommandez&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Variante de la question précédente.</td>
+            </tr>
+            <tr>
+                <td>Est-ce que je peux avoir la carte des desserts&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Demande courante en fin de repas.</td>
+            </tr>
+            <tr>
+                <td>Est-ce que je peux avoir la carte des vins&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>“Could I see the wine list?”</td>
+            </tr>
+            <tr>
+                <td>Je peux essayer&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Demande dans une boutique (peut être “Je peux essayer ce modèle ?”).</td>
+            </tr>
+            <tr>
+                <td>Vous avez ça en bleu&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Demande à un vendeur pour une autre couleur.</td>
+            </tr>
+            <tr>
+                <td>Où sont les cabines d’essayage&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>“Where are the fitting rooms?”</td>
+            </tr>
+            <tr>
+                <td>Je peux avoir un sac&nbsp;?</td>
+                <td><span class="badge-v">V</span></td>
+                <td>Demander un sac / tote bag en boutique.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
