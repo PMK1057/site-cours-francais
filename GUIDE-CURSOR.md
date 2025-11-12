@@ -404,6 +404,12 @@ Guide-moi étape par étape pour faire tout ça.
 - Dis-lui de tester après chaque modification
 - N'hésite pas à lui demander d'expliquer ce qu'il fait
 
+### Génération d'audios
+- Quand tu demandes de générer des audios (via `generate_course_audio.py`), précise la liste exacte des phrases/expressions.
+- Après génération, ajoute systématiquement les boutons 🔊 correspondants dans les fichiers HTML concernés.
+- Chaque bouton doit appeler `playAudio()` avec l'URL Cloudinary générée et être inséré juste à côté du texte français.
+- Mets à jour `audio_urls.json` si de nouvelles entrées sont créées.
+
 ### Si quelque chose ne marche pas
 ```
 "Il y a un bug : [décris le problème]. 
