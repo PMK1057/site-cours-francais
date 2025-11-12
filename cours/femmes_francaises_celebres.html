@@ -166,6 +166,150 @@
     </style>
 </head>
 <body>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            line-height: 1.9;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #764ba2;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+        .biography-section {
+            margin-bottom: 42px;
+            padding: 34px 32px 30px;
+            background: #ffffff;
+            border-radius: 18px;
+            border: 1px solid #dee3f3;
+            box-shadow: 0 20px 45px rgba(102, 126, 234, 0.16);
+            position: relative;
+        }
+        .biography-section::before {
+            content: '';
+            position: absolute;
+            inset: 18px 22px auto 22px;
+            height: 12px;
+            background: linear-gradient(90deg, rgba(118,75,162,0.28), rgba(102,126,234,0.22));
+            border-radius: 999px;
+            opacity: 0.35;
+        }
+        .biography-section h2 {
+            color: #4633a7;
+            margin: 0 0 24px 0;
+            font-size: 1.85em;
+            padding-left: 18px;
+            border-left: 6px solid rgba(118,75,162,0.65);
+            letter-spacing: 0.6px;
+            text-transform: none;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+        .text-paragraph {
+            font-size: 1.15em;
+            color: #2c3e50;
+            margin-bottom: 18px;
+            line-height: 1.95;
+            text-align: justify;
+        }
+        .english {
+            font-size: 0.92em;
+            color: #516072;
+            font-style: italic;
+            margin: 14px 0 22px;
+            padding: 14px 22px;
+            border-left: 4px solid rgba(102,126,234,0.7);
+            background: linear-gradient(135deg, rgba(102,126,234,0.11), rgba(118,75,162,0.08));
+            display: block;
+            border-radius: 0 12px 12px 0;
+        }
+        .blank {
+            display: inline-grid;
+            grid-template-rows: auto auto;
+            align-items: center;
+            justify-items: center;
+            gap: 6px;
+            margin: 0 4px;
+            vertical-align: middle;
+        }
+        .blank input {
+            border: none;
+            border-bottom: 2px solid #667eea;
+            background: white;
+            padding: 4px 8px;
+            font-size: 1.05em;
+            font-family: 'Georgia', serif;
+            color: #2c3e50;
+            min-width: 132px;
+            text-align: center;
+            transition: all 0.3s;
+            border-radius: 0;
+            box-shadow: inset 0 -1px 0 rgba(102,126,234,0.25);
+        }
+        .blank input:focus {
+            outline: none;
+            border-bottom: 2px solid #764ba2;
+            background: #f4f7ff;
+        }
+        .verb-hint {
+            background: #fff4d6;
+            padding: 5px 11px 4px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #7a5b10;
+            font-size: 0.78em;
+            white-space: nowrap;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+        }
+        .instructions {
+            background: #d1ecf1;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #0c5460;
+            color: #0c5460;
+            font-size: 1.05em;
+        }
+        .instructions strong {
+            font-size: 1.1em;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            color: #546a7b;
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 24px 14px;
+            }
+            .container {
+                padding: 28px 20px;
+            }
+            .biography-section {
+                padding: 26px 20px;
+            }
+            .blank {
+                min-width: 110px;
+            }
+        }
+    </style>
     <div class="container">
         <h1>🇫🇷 Exercices de Conjugaison 🇫🇷</h1>
         <h2 style="text-align: center; color: #764ba2; border: none;">Texte à Trous - Femmes Célèbres</h2>
