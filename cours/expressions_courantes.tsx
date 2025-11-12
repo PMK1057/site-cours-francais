@@ -180,8 +180,8 @@ const FrenchExpressions = () => {
       level: "courant",
       translations: {
         fr: "C'est selon les circonstances, pas de réponse fixe",
-        en: "",
-        es: ""
+        en: "It depends, depends on the situation",
+        es: "Depende, según las circunstancias"
       },
       examples: [
         "- Il est sympa ton collègue ? - Ça dépend des jours.",
@@ -211,6 +211,7 @@ const FrenchExpressions = () => {
         en: "",
         es: ""
       },
+      context: "French understatement for genuine approval: saying “c'est pas mal” is often like giving a 7/10 — a restrained but positive way to say something is good without overhyping it.",
       examples: [
         "- Comment tu trouves mon dessin ? - C'est pas mal !",
         "Le film était comment ? - C'est pas mal, je me suis pas ennuyé.",
@@ -223,7 +224,7 @@ const FrenchExpressions = () => {
       translations: {
         fr: "C'est une possibilité, je suis ouvert à l'idée, peut-être",
         en: "Why not",
-        es: "Por qué no, es posible"
+        es: ""
       },
       examples: [
         "- On pourrait aller au ciné ? - Pourquoi pas.",
@@ -295,6 +296,7 @@ const FrenchExpressions = () => {
         en: "",
         es: ""
       },
+      context: "Temporal marker for the same day only: depending on context, “tout à l'heure” can mean a few hours ago or a few hours later, but always within the current day before midnight.",
       examples: [
         "Je t'ai appelé tout à l'heure, tu n'as pas répondu.",
         "On se voit tout à l'heure pour le café ?",
