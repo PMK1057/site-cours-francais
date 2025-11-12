@@ -98,46 +98,58 @@ nav {
 }
 
 .section-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 25px;
-    border-radius: 12px;
+    color: #ffffff;
+    padding: 28px 24px;
+    border-radius: 26px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: transform 0.25s ease, box-shadow 0.3s ease, filter 0.3s ease;
     text-align: center;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 16px 30px rgba(45, 55, 125, 0.25);
+}
+.section-card::after {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.18);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 /* Couleurs par niveau - Débutant */
 .level-beginner {
-    background: #4A90E2 !important; /* Bleu clair */
+    background: linear-gradient(145deg, #ff7a9e 0%, #ffb199 100%) !important;
 }
 
 /* Couleurs par niveau - Intermédiaire */
 .level-intermediate {
-    background: #9B59B6 !important; /* Violet */
+    background: linear-gradient(145deg, #7b5cff 0%, #a689ff 100%) !important;
 }
 
 /* Couleurs par niveau - Avancé */
 .level-advanced {
-    background: #E74C3C !important; /* Rouge/Corail */
+    background: linear-gradient(145deg, #ff8a5c 0%, #ffbf6b 100%) !important;
 }
 
 /* Couleurs par niveau - Verbes Pronominaux (vert) */
 .level-green {
-    background: #10B981 !important; /* Vert */
+    background: linear-gradient(145deg, #42d392 0%, #67e8a7 100%) !important;
 }
 
 /* Couleurs par niveau - Prépositions (orange) */
 .level-orange {
-    background: #F59E0B !important; /* Orange */
+    background: linear-gradient(145deg, #fba34c 0%, #fec87c 100%) !important;
 }
 
 .section-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    filter: brightness(1.1);
+    transform: translateY(-6px);
+    box-shadow: 0 24px 46px rgba(45, 55, 125, 0.25);
+    filter: brightness(1.03);
+}
+.section-card:hover::after {
+    opacity: 1;
 }
 
 .section-card h3 {
@@ -149,8 +161,8 @@ nav {
 
 .section-card p {
     font-size: 0.9em;
-    opacity: 0.95;
-    color: white;
+    opacity: 0.92;
+    color: rgba(255,255,255,0.92);
 }
 
 .level-badge {
