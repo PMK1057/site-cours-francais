@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau QUI QUE DONT</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .grammar-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(242,231,255,0.95));
+            border-radius: 18px;
+            padding: 28px 32px;
+            margin-bottom: 35px;
+            box-shadow: 0 18px 45px rgba(118,75,162,0.22);
+            position: relative;
+            overflow: hidden;
+        }
+        .grammar-card::before {
+            content: "";
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle at center, rgba(118,75,162,0.35), transparent 60%);
+            z-index: 0;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 18px;
+            z-index: 1;
+            position: relative;
+        }
+        .card-header-icon {
+            font-size: 2.2rem;
+        }
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.9rem;
+            color: #4b2e83;
+        }
+        .card-intro {
+            margin: 0 0 20px 0;
+            font-size: 1.1rem;
+            color: #49365d;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+        .language-lines {
+            display: grid;
+            gap: 14px;
+            position: relative;
+            z-index: 1;
+        }
+        .language-line {
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            box-shadow: 0 6px 18px rgba(75,46,131,0.12);
+        }
+        .lang-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            color: #ffffff;
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            padding: 6px 14px;
+            border-radius: 999px;
+            min-width: 58px;
+            text-transform: uppercase;
+        }
+        .language-line span:last-child {
+            color: #3a2c51;
+            font-size: 1.02rem;
+            line-height: 1.45;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .table-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .pronoun-title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+        }
+        .qui-title { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .que-title { background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%); }
+        .dont-title { background: linear-gradient(135deg, #4776e6 0%, #8e54e9 100%); }
+        
+        .example-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+            margin: 15px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .example-row:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .qui-row { border-color: #11998e; }
+        .que-row { border-color: #ee0979; }
+        .dont-row { border-color: #4776e6; }
+        
+        .phrase-avant {
+            text-align: right;
+            font-size: 1.1em;
+            color: #495057;
+            font-weight: 500;
+        }
+        .arrow {
+            font-size: 2em;
+            color: #6c757d;
+            font-weight: bold;
+        }
+        .phrase-apres {
+            font-size: 1.1em;
+            color: #212529;
+            font-weight: 600;
+        }
+        .pronom-highlight {
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .qui-highlight { background: #11998e; }
+        .que-highlight { background: #ee0979; }
+        .dont-highlight { background: #4776e6; }
+        
+        .explanation {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #ffc107;
+            font-style: italic;
+            color: #856404;
+        }
+        .exercise-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(227,238,255,0.96));
+            border-radius: 18px;
+            padding: 30px 34px;
+            margin: 45px 0;
+            box-shadow: 0 18px 45px rgba(71,118,230,0.22);
+        }
+        .exercise-card h2 {
+            margin-top: 0;
+            color: #27408b;
+            font-size: 1.8rem;
+        }
+        .exercise-card p {
+            color: #2f3a56;
+            font-size: 1.05rem;
+            margin-bottom: 22px;
+        }
+        .exercise-list {
+            list-style: decimal;
+            padding-left: 22px;
+            display: grid;
+            gap: 16px;
+            color: #25304d;
+            font-size: 1.05rem;
+        }
+        .exercise-list select {
+            font-size: 1rem;
+            padding: 6px 10px;
+            border-radius: 10px;
+            border: 2px solid #d0d7ff;
+            background: white;
+            font-weight: 600;
+            color: #223366;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .exercise-list select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.25);
+        }
+        .exercise-actions {
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .exercise-btn {
+            background: linear-gradient(135deg, #4776e6 0%, #8e54e9 100%);
+            color: #ffffff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 999px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(71,118,230,0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .exercise-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(71,118,230,0.4);
+        }
+        .exercise-feedback {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #27408b;
+        }
+        .exercise-list .correct-option {
+            border-color: #38c172 !important;
+            background: #e6ffed !important;
+            color: #1f7a3d !important;
+        }
+        .exercise-list .incorrect-option {
+            border-color: #e3342f !important;
+            background: #ffecec !important;
+            color: #b11f1a !important;
+        }
+
+        @media (max-width: 768px) {
+            .example-row {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .phrase-avant {
+                text-align: center;
+            }
+            .arrow {
+                transform: rotate(90deg);
+            }
+            .grammar-card {
+                padding: 24px 22px;
+            }
+            .card-header h2 {
+                font-size: 1.6rem;
+            }
+            .language-line {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .lang-label {
+                margin-bottom: 6px;
+            }
+            .exercise-card {
+                padding: 26px 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Tableau Visuel : QUI, QUE, DONT ✨</h1>
+        
+        <div class="grammar-card">
+            <div class="card-header">
+                <div class="card-header-icon">🧠</div>
+                <h2>Guide express des pronoms relatifs</h2>
+            </div>
+            <p class="card-intro">Choisis le bon pronom relatif pour relier deux phrases sans répéter le mot commun.</p>
+            <div class="language-lines">
+                <div class="language-line">
+                    <span class="lang-label">FR</span>
+                    <span><strong>qui</strong> = sujet ; <strong>que</strong> = COD ; <strong>dont</strong> = complément introduit par <em>de</em>.</span>
+                </div>
+                <div class="language-line">
+                    <span class="lang-label">ES</span>
+                    <span><strong>qui</strong> sustituye al sujeto ; <strong>que</strong> sustituye al complemento directo ; <strong>dont</strong> sustituye a un complemento con <em>de</em>.</span>
+                </div>
+                <div class="language-line">
+                    <span class="lang-label">EN</span>
+                    <span><strong>qui</strong> replaces the subject ; <strong>que</strong> replaces the direct object ; <strong>dont</strong> replaces an object introduced by <em>de</em> (“of/from/about”).</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- QUI Section -->
+        <div class="table-section">
+            <div class="pronoun-title qui-title">QUI (sujet)</div>
+            
+            <div class="example-row qui-row">
+                <div class="phrase-avant">L'oiseau chante</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">L'oiseau <span class="pronom-highlight qui-highlight">qui</span> chante</div>
+            </div>
+            
+            <div class="example-row qui-row">
+                <div class="phrase-avant">La fille danse</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">La fille <span class="pronom-highlight qui-highlight">qui</span> danse</div>
+            </div>
+            
+            <div class="example-row qui-row">
+                <div class="phrase-avant">Le chien aboie</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">Le chien <span class="pronom-highlight qui-highlight">qui</span> aboie</div>
+            </div>
+            
+            <div class="example-row qui-row">
+                <div class="phrase-avant">Le professeur explique la leçon</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">Le professeur <span class="pronom-highlight qui-highlight">qui</span> explique la leçon</div>
+            </div>
+            
+            <div class="example-row qui-row">
+                <div class="phrase-avant">Les enfants jouent dans le jardin</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">Les enfants <span class="pronom-highlight qui-highlight">qui</span> jouent dans le jardin</div>
+            </div>
+            
+            <div class="explanation">
+                💡 QUI remplace le SUJET (celui qui fait l'action). Après QUI, il y a toujours un VERBE.
+            </div>
+        </div>
+
+        <!-- QUE Section -->
+        <div class="table-section">
+            <div class="pronoun-title que-title">QUE (complément d'objet direct)</div>
+            
+            <div class="example-row que-row">
+                <div class="phrase-avant">La fille regarde l'oiseau</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">L'oiseau <span class="pronom-highlight que-highlight">que</span> la fille regarde</div>
+            </div>
+            
+            <div class="example-row que-row">
+                <div class="phrase-avant">Je mange une pomme</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">La pomme <span class="pronom-highlight que-highlight">que</span> je mange</div>
+            </div>
+            
+            <div class="example-row que-row">
+                <div class="phrase-avant">Tu lis un livre</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">Le livre <span class="pronom-highlight que-highlight">que</span> tu lis</div>
+            </div>
+            
+            <div class="example-row que-row">
+                <div class="phrase-avant">Nous aimons ce film</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">Le film <span class="pronom-highlight que-highlight">que</span> nous aimons</div>
+            </div>
+            
+            <div class="example-row que-row">
+                <div class="phrase-avant">Elle a acheté une voiture</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">La voiture <span class="pronom-highlight que-highlight">qu'</span>elle a achetée</div>
+            </div>
+            
+            <div class="explanation">
+                💡 QUE remplace le COMPLÉMENT (celui qui subit l'action). Après QUE, il y a toujours un SUJET puis un verbe.
+            </div>
+        </div>
+
+        <!-- DONT Section -->
+        <div class="table-section">
+            <div class="pronoun-title dont-title">DONT (complément avec DE)</div>
+            
+            <div class="example-row dont-row">
+                <div class="phrase-avant">Je parle de ce livre</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">Le livre <span class="pronom-highlight dont-highlight">dont</span> je parle</div>
+            </div>
+            
+            <div class="example-row dont-row">
+                <div class="phrase-avant">Tu as besoin de cette aide</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">L'aide <span class="pronom-highlight dont-highlight">dont</span> tu as besoin</div>
+            </div>
+            
+            <div class="example-row dont-row">
+                <div class="phrase-avant">Le père de la fille est médecin</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">La fille <span class="pronom-highlight dont-highlight">dont</span> le père est médecin</div>
+            </div>
+            
+            <div class="example-row dont-row">
+                <div class="phrase-avant">Elle rêve de ce voyage</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">Le voyage <span class="pronom-highlight dont-highlight">dont</span> elle rêve</div>
+            </div>
+            
+            <div class="example-row dont-row">
+                <div class="phrase-avant">Le toit de la maison est rouge</div>
+                <div class="arrow">→</div>
+                <div class="phrase-apres">La maison <span class="pronom-highlight dont-highlight">dont</span> le toit est rouge</div>
+            </div>
+            
+            <div class="explanation">
+                💡 DONT remplace un complément avec DE (parler de, avoir besoin de, rêver de, etc.). Le "de" disparaît après DONT.
+            </div>
+        </div>
+
+        <div class="exercise-card">
+            <h2>Exercice : choisis QUI, QUE ou DONT</h2>
+            <p>Complète chaque phrase en sélectionnant le pronom relatif approprié.</p>
+            <ol class="exercise-list">
+                <li>J'ai un voisin <select class="exercise-select" data-answer="qui"><option value="">—</option><option>qui</option><option>que</option><option>dont</option></select> parle quatre langues.</li>
+                <li>Voici le roman <select class="exercise-select" data-answer="que"><option value="">—</option><option>qui</option><option>que</option><option>dont</option></select> j'ai acheté hier.</li>
+                <li>C'est l'artiste <select class="exercise-select" data-answer="dont"><option value="">—</option><option>qui</option><option>que</option><option>dont</option></select> je t'ai parlé.</li>
+                <li>Les étudiantes <select class="exercise-select" data-answer="qui"><option value="">—</option><option>qui</option><option>que</option><option>dont</option></select> arrivent sont canadiennes.</li>
+                <li>La chanson <select class="exercise-select" data-answer="dont"><option value="">—</option><option>qui</option><option>que</option><option>dont</option></select> j'ai envie est toute nouvelle.</li>
+                <li>Le film <select class="exercise-select" data-answer="que"><option value="">—</option><option>qui</option><option>que</option><option>dont</option></select> nous avons vu hier était surprenant.</li>
+            </ol>
+            <div class="exercise-actions">
+                <button class="exercise-btn" onclick="checkPronounExercise()">Vérifier</button>
+                <div id="exercise-feedback" class="exercise-feedback"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function checkPronounExercise() {
+            const selects = document.querySelectorAll('.exercise-select');
+            let correctCount = 0;
+            selects.forEach(select => {
+                const expected = select.getAttribute('data-answer');
+                if (select.value === expected) {
+                    select.classList.add('correct-option');
+                    select.classList.remove('incorrect-option');
+                    correctCount++;
+                } else {
+                    select.classList.add('incorrect-option');
+                    select.classList.remove('correct-option');
+                }
+            });
+            const feedback = document.getElementById('exercise-feedback');
+            if (!feedback) return;
+            if (correctCount === selects.length) {
+                feedback.textContent = "🎉 Bravo ! Toutes les réponses sont correctes.";
+                feedback.style.color = "#1f7a3d";
+            } else {
+                feedback.textContent = `Tu as ${correctCount} bonne(s) réponse(s) sur ${selects.length}. Essaie encore !`;
+                feedback.style.color = "#b11f1a";
+            }
+        }
+    </script>
+</body>
+</html>
