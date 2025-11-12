@@ -9,94 +9,86 @@
             font-family: 'Georgia', serif;
             max-width: 1000px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 36px 18px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            line-height: 1.9;
+            line-height: 1.85;
         }
         .container {
             background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 38px 36px;
+            border-radius: 18px;
+            box-shadow: 0 14px 44px rgba(38, 52, 129, 0.22);
         }
         h1 {
-            color: #764ba2;
+            color: #6d4ac3;
             text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 20px;
+            font-size: 2.45em;
+            margin-bottom: 22px;
+            border-bottom: 2px solid rgba(118,75,162,0.2);
+            padding-bottom: 16px;
         }
         .biography-section {
-            margin-bottom: 42px;
-            padding: 34px 32px 30px;
-            background: #ffffff;
-            border-radius: 18px;
-            border: 1px solid #dee3f3;
-            box-shadow: 0 20px 45px rgba(102, 126, 234, 0.16);
-            position: relative;
-        }
-        .biography-section::before {
-            content: '';
-            position: absolute;
-            inset: 18px 22px auto 22px;
-            height: 12px;
-            background: linear-gradient(90deg, rgba(118,75,162,0.28), rgba(102,126,234,0.22));
-            border-radius: 999px;
-            opacity: 0.35;
+            margin-bottom: 34px;
+            padding: 32px 28px;
+            background: #fbfbff;
+            border-radius: 16px;
+            border: 1px solid rgba(109,122,220,0.18);
+            box-shadow: 0 10px 28px rgba(33, 48, 104, 0.18);
         }
         .biography-section h2 {
-            color: #4633a7;
-            margin: 0 0 24px 0;
-            font-size: 1.85em;
-            padding-left: 18px;
-            border-left: 6px solid rgba(118,75,162,0.65);
-            letter-spacing: 0.6px;
+            color: #3f2f92;
+            margin: 0 0 20px 0;
+            font-size: 1.78em;
             text-transform: none;
             font-weight: 600;
-            position: relative;
-            z-index: 1;
+            text-align: center;
+            letter-spacing: 0.55px;
+        }
+        .biography-section h2::after {
+            content: '';
+            display: block;
+            width: 76px;
+            height: 4px;
+            margin: 12px auto 0;
+            background: linear-gradient(90deg, rgba(118,75,162,0.7), rgba(102,126,234,0.55));
+            border-radius: 999px;
         }
         .text-paragraph {
-            font-size: 1.15em;
+            font-size: 1.12em;
             color: #2c3e50;
             margin-bottom: 18px;
-            line-height: 1.95;
+            line-height: 1.88;
             text-align: justify;
         }
         .english {
-            font-size: 0.92em;
-            color: #516072;
+            font-size: 0.9em;
+            color: #4f5d75;
             font-style: italic;
             margin: 14px 0 22px;
             padding: 14px 22px;
-            border-left: 4px solid rgba(102,126,234,0.7);
-            background: linear-gradient(135deg, rgba(102,126,234,0.11), rgba(118,75,162,0.08));
+            border-left: 4px solid rgba(102,126,234,0.55);
+            background: rgba(102,126,234,0.07);
             display: block;
             border-radius: 0 12px 12px 0;
         }
         .blank {
-            display: inline-grid;
-            grid-template-rows: auto auto;
-            align-items: center;
-            justify-items: center;
-            gap: 6px;
-            margin: 0 4px;
-            vertical-align: middle;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 8px;
+            margin: 0 5px;
+            vertical-align: baseline;
         }
         .blank input {
             border: none;
             border-bottom: 2px solid #667eea;
             background: white;
-            padding: 4px 8px;
+            padding: 2px 8px 3px;
             font-size: 1.05em;
             font-family: 'Georgia', serif;
             color: #2c3e50;
-            min-width: 132px;
+            min-width: 128px;
             text-align: center;
-            transition: all 0.3s;
-            border-radius: 0;
-            box-shadow: inset 0 -1px 0 rgba(102,126,234,0.25);
+            transition: border-color 0.25s, background 0.25s;
         }
         .blank input:focus {
             outline: none;
@@ -104,14 +96,14 @@
             background: #f4f7ff;
         }
         .verb-hint {
-            background: #fff4d6;
-            padding: 5px 11px 4px;
-            border-radius: 6px;
-            font-weight: bold;
+            background: #fff0c7;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-weight: 600;
             color: #7a5b10;
-            font-size: 0.78em;
+            font-size: 0.82em;
             white-space: nowrap;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 9px rgba(122,91,16,0.12);
         }
         .instructions {
             background: #d1ecf1;
