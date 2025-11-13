@@ -41,7 +41,7 @@ nav {
 }
 
 .nav-btn {
-    background: #667eea;
+    background: linear-gradient(145deg, #7b5cff 0%, #a689ff 100%);
     color: white;
     border: none;
     padding: 6px 20px;
@@ -53,12 +53,12 @@ nav {
 }
 
 .nav-btn:hover {
-    background: #5568d3;
+    background: linear-gradient(145deg, #6c4dfa 0%, #9678ff 100%);
     transform: translateY(-2px);
 }
 
 .nav-btn.active {
-    background: #764ba2;
+    background: linear-gradient(145deg, #ff5e7a 0%, #ff84a3 100%);
     transform: scale(1.05);
 }
 
