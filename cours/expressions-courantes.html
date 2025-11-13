@@ -853,7 +853,7 @@
         // Charger les URLs audio
         async function loadAudioUrls() {
             try {
-                const response = await fetch('audio_urls.json');
+                const response = await fetch('../audio_urls.json');
                 const data = await response.json();
                 audioUrls = data;
             } catch (error) {

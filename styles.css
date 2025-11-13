@@ -140,7 +140,7 @@ nav {
 
 /* Couleurs par niveau - Prépositions (orange) */
 .level-orange {
-    background: linear-gradient(145deg, #fba34c 0%, #fec87c 100%) !important;
+    background: linear-gradient(145deg, #FFB6A3 0%, #FFD4A3 100%) !important;
 }
 
 .section-card:hover {
