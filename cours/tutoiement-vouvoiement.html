@@ -101,6 +101,58 @@
         margin-right: 6px;
         display: inline-block;
     }
+    .tuto-select {
+        width: 100%;
+        max-width: 320px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(37,99,235,0.3);
+        background: #f8fafc;
+        font-size: 1em;
+        color: #1e293b;
+        transition: border-color 0.2s ease;
+        margin-top: 8px;
+    }
+    .tuto-select:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+    .exercise-item {
+        background: #f1f5f9;
+        border-radius: 12px;
+        padding: 18px 20px;
+        border: 1px solid rgba(148,163,184,0.25);
+        margin-bottom: 16px;
+    }
+    .exercise-item.correct {
+        border-color: rgba(34,197,94,0.5);
+        box-shadow: 0 0 0 1px rgba(34,197,94,0.25);
+    }
+    .exercise-item.incorrect {
+        border-color: rgba(239,68,68,0.5);
+        box-shadow: 0 0 0 1px rgba(239,68,68,0.25);
+    }
+    .check-btn {
+        margin-top: 12px;
+        background: linear-gradient(145deg, #2563eb, #4f46e5);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .check-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(79,70,229,0.25);
+    }
+    .tuto-result {
+        margin-top: 14px;
+        font-weight: 600;
+        color: #1e293b;
+    }
     @media (max-width: 680px) {
         .tuto-section {
             padding: 20px;
@@ -172,4 +224,115 @@
         </li>
     </ul>
 </div>
+
+<div class="tuto-section">
+    <h3>Conjugaisons utiles</h3>
+    <p>
+        <strong>Tutoyer</strong> ➜ je <em>tutoie</em>, tu <em>tutoies</em>, il/elle <em>tutoie</em>, nous <em>tutoyons</em>, vous <em>tutoyez</em>, ils/elles <em>tutoient</em>.<br>
+        <strong>Vouvoyer</strong> ➜ je <em>vouvoie</em>, tu <em>vouvoyes</em>, il/elle <em>vouvoie</em>, nous <em>vouvoyons</em>, vous <em>vouvoyez</em>, ils/elles <em>vouvoient</em>.
+    </p>
+    <p class="english-note">
+        Remember the spelling change: with “nous” and “vous”, the <strong>y</strong> reappears (nous <em>tutoyons</em>, vous <em>vouvoyez</em>).
+    </p>
+</div>
+
+<div class="tuto-section">
+    <h3>📝 Exercice : Tu ou Vous ?</h3>
+    <p>
+        Choisissez la forme appropriée (<strong>tutoiement</strong> ou <strong>vouvoiement</strong>) pour chaque situation.
+        <br><span class="english-note">Pick the correct form (tu / vous) for each context.</span>
+    </p>
+
+    <div class="exercise-item">
+        <p><strong>1.</strong> Vous écrivez à votre banquier pour demander un rendez-vous.<br>
+            <span class="english-note">You are emailing your bank advisor to book an appointment.</span>
+        </p>
+        <select class="tuto-select" data-answer="vous">
+            <option value="">— Choisissez —</option>
+            <option value="tu">Tutoiement (“tu”)</option>
+            <option value="vous">Vouvoiement (“vous”)</option>
+        </select>
+    </div>
+
+    <div class="exercise-item">
+        <p><strong>2.</strong> Tu parles à ton cousin du même âge lors d’un barbecue familial.<br>
+            <span class="english-note">You are chatting with your cousin, same age, at a family BBQ.</span>
+        </p>
+        <select class="tuto-select" data-answer="tu">
+            <option value="">— Choisissez —</option>
+            <option value="tu">Tutoiement (“tu”)</option>
+            <option value="vous">Vouvoiement (“vous”)</option>
+        </select>
+    </div>
+
+    <div class="exercise-item">
+        <p><strong>3.</strong> Vous répondez à un client qui vient d’envoyer une réclamation par e-mail.<br>
+            <span class="english-note">You are replying to a customer complaint by email.</span>
+        </p>
+        <select class="tuto-select" data-answer="vous">
+            <option value="">— Choisissez —</option>
+            <option value="tu">Tutoiement (“tu”)</option>
+            <option value="vous">Vouvoiement (“vous”)</option>
+        </select>
+    </div>
+
+    <div class="exercise-item">
+        <p><strong>4.</strong> Tu rencontres un nouveau camarade de classe dans un cours de danse.<br>
+            <span class="english-note">You meet a new classmate at a dance lesson.</span>
+        </p>
+        <select class="tuto-select" data-answer="tu">
+            <option value="">— Choisissez —</option>
+            <option value="tu">Tutoiement (“tu”)</option>
+            <option value="vous">Vouvoiement (“vous”)</option>
+        </select>
+    </div>
+
+    <div class="exercise-item">
+        <p><strong>5.</strong> Vous téléphonez au service client d’une compagnie aérienne.<br>
+            <span class="english-note">You are on the phone with an airline customer service agent.</span>
+        </p>
+        <select class="tuto-select" data-answer="vous">
+            <option value="">— Choisissez —</option>
+            <option value="tu">Tutoiement (“tu”)</option>
+            <option value="vous">Vouvoiement (“vous”)</option>
+        </select>
+    </div>
+
+    <div class="exercise-item">
+        <p><strong>6.</strong> Tu envoies un message à ta meilleure amie pour lui raconter une anecdote.<br>
+            <span class="english-note">You text your best friend to tell a funny story.</span>
+        </p>
+        <select class="tuto-select" data-answer="tu">
+            <option value="">— Choisissez —</option>
+            <option value="tu">Tutoiement (“tu”)</option>
+            <option value="vous">Vouvoiement (“vous”)</option>
+        </select>
+    </div>
+
+    <button class="check-btn" onclick="checkTutoExercise()">Vérifier mes choix</button>
+    <div id="tuto-result" class="tuto-result"></div>
+</div>
+
+<script>
+    function checkTutoExercise() {
+        const selects = document.querySelectorAll('.tuto-select');
+        let correct = 0;
+        selects.forEach(select => {
+            const parent = select.closest('.exercise-item');
+            parent.classList.remove('correct', 'incorrect');
+            if (!select.value) {
+                parent.classList.add('incorrect');
+                return;
+            }
+            if (select.value === select.dataset.answer) {
+                correct += 1;
+                parent.classList.add('correct');
+            } else {
+                parent.classList.add('incorrect');
+            }
+        });
+        const result = document.getElementById('tuto-result');
+        result.textContent = `Score : ${correct} / ${selects.length}`;
+    }
+</script>
 
