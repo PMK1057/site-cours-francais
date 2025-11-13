@@ -1,5 +1,82 @@
 // Navigation
-function showSection(sectionId) {
+const sectionNavMap = {};
+const courseSectionMap = {};
+let currentSection = 'home';
+let currentCourse = null;
+let hashUpdateEnabled = true;
+
+function updateURLHash({ section = null, course = null } = {}) {
+    let hash = '';
+    if (course) {
+        hash = `#course=${course}`;
+    } else if (section) {
+        hash = `#section=${section}`;
+    }
+
+    const newUrl = `${window.location.pathname}${window.location.search}${hash}`;
+    if (window.location.href.endsWith(hash) || window.location.hash === hash) {
+        return;
+    }
+    history.replaceState(null, '', newUrl);
+}
+
+function initNavigationData() {
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        const sectionId = btn.dataset.section;
+        if (sectionId) {
+            sectionNavMap[sectionId] = btn;
+        }
+    });
+
+    document.querySelectorAll('.section').forEach(section => {
+        const sectionId = section.id;
+        section.querySelectorAll('.section-card').forEach(card => {
+            const explicitCourseId = card.dataset.course;
+            let courseId = explicitCourseId;
+            if (!courseId) {
+                const onclickAttr = card.getAttribute('onclick');
+                if (onclickAttr) {
+                    const match = onclickAttr.match(/showCourse\(['\"]([^'\"]+)['\"]\)/);
+                    if (match) {
+                        courseId = match[1];
+                    }
+                }
+            }
+            if (courseId) {
+                courseSectionMap[courseId] = sectionId;
+            }
+        });
+    });
+}
+
+function handleHashNavigation() {
+    const hash = window.location.hash.replace('#', '').trim();
+    if (!hash) {
+        hashUpdateEnabled = false;
+        showSection('home', null, false);
+        hashUpdateEnabled = true;
+        return;
+    }
+
+    const [key, value] = hash.split('=');
+    if (key === 'course' && value) {
+        hashUpdateEnabled = false;
+        showCourse(value);
+        hashUpdateEnabled = true;
+    } else if (key === 'section' && value) {
+        hashUpdateEnabled = false;
+        showSection(value, null, false);
+        hashUpdateEnabled = true;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initNavigationData();
+    handleHashNavigation();
+    window.addEventListener('hashchange', handleHashNavigation);
+});
+
+function showSection(sectionId, evt = null, updateHistory = true) {
     // Hide ALL sections and courses
     document.querySelectorAll('.section').forEach(s => {
         s.classList.remove('active');
@@ -19,7 +96,17 @@ function showSection(sectionId) {
 
     // Update nav buttons
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
+    const targetBtn = evt && evt.target ? evt.target : (sectionNavMap[sectionId] || document.querySelector(`.nav-btn[data-section="${sectionId}"]`));
+    if (targetBtn) {
+        targetBtn.classList.add('active');
+    }
+
+    currentSection = sectionId;
+    currentCourse = null;
+
+    if (updateHistory && hashUpdateEnabled) {
+        updateURLHash({ section: sectionId });
+    }
 }
 
 // Cache pour stocker les cours chargés
@@ -105,6 +192,22 @@ function executeScriptsInHTML(html, container) {
 
 function showCourse(courseId, retryCount = 0) {
     const MAX_RETRIES = 2;
+
+    const parentSectionId = courseSectionMap[courseId];
+    if (parentSectionId) {
+        currentSection = parentSectionId;
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        const navBtn = sectionNavMap[parentSectionId] || document.querySelector(`.nav-btn[data-section="${parentSectionId}"]`);
+        if (navBtn) {
+            navBtn.classList.add('active');
+        }
+    }
+
+    currentCourse = courseId;
+
+    if (hashUpdateEnabled && retryCount === 0) {
+        updateURLHash({ course: courseId });
+    }
     
     // Hide all sections
     document.querySelectorAll('.section').forEach(s => {
@@ -223,24 +326,19 @@ function clearCourseCache(courseId = null) {
 }
 
 function backToSection(sectionId) {
-    // Hide all courses
-    document.querySelectorAll('.course-content').forEach(c => {
-        c.classList.remove('active');
-        c.style.display = 'none';
-    });
+    const targetSection = sectionId || currentSection || 'home';
 
-    // Hide all sections first
-    document.querySelectorAll('.section').forEach(s => {
-        s.classList.remove('active');
-        s.style.display = 'none';
-    });
-
-    // Show the main section
-    const mainSection = document.getElementById(sectionId);
-    if (mainSection) {
-        mainSection.style.display = 'block';
-        mainSection.classList.add('active');
+    const container = document.getElementById('course-container');
+    if (container) {
+        container.innerHTML = '';
+        container.classList.remove('active');
+        container.style.display = 'none';
     }
+
+    hashUpdateEnabled = false;
+    showSection(targetSection, null, false);
+    hashUpdateEnabled = true;
+    updateURLHash({ section: targetSection });
 }
 
 // Exercice: Déterminants Possessifs

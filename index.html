@@ -10,14 +10,14 @@
     <header>
         <div class="header-content">
             <nav>
-                <button class="nav-btn active" onclick="showSection('home')">🏠 Accueil</button>
-                <button class="nav-btn" onclick="showSection('bases')">🔰 Les Bases</button>
-                <button class="nav-btn" onclick="showSection('grammaire')">📚 Grammaire</button>
-                <button class="nav-btn" onclick="showSection('conjugaison')">🔄 Conjugaison</button>
-                <button class="nav-btn" onclick="showSection('pronoms')">💬 Pronoms</button>
-                <button class="nav-btn" onclick="showSection('expressions')">💡 Expressions & Vocabulaire</button>
-                <button class="nav-btn" onclick="showSection('textes')">📝 Textes</button>
-                <button class="nav-btn" onclick="showSection('textes-a-trous')">🧩 Textes à trous</button>
+                <button class="nav-btn active" data-section="home" onclick="showSection('home', event)">🏠 Accueil</button>
+                <button class="nav-btn" data-section="bases" onclick="showSection('bases', event)">🔰 Les Bases</button>
+                <button class="nav-btn" data-section="grammaire" onclick="showSection('grammaire', event)">📚 Grammaire</button>
+                <button class="nav-btn" data-section="conjugaison" onclick="showSection('conjugaison', event)">🔄 Conjugaison</button>
+                <button class="nav-btn" data-section="pronoms" onclick="showSection('pronoms', event)">💬 Pronoms</button>
+                <button class="nav-btn" data-section="expressions" onclick="showSection('expressions', event)">💡 Expressions & Vocabulaire</button>
+                <button class="nav-btn" data-section="textes" onclick="showSection('textes', event)">📝 Textes</button>
+                <button class="nav-btn" data-section="textes-a-trous" onclick="showSection('textes-a-trous', event)">🧩 Textes à trous</button>
             </nav>
         </div>
     </header>
