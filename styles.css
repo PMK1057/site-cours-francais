@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(145deg, #7b5cff 0%, #a689ff 100%);
     min-height: 100vh;
     padding-bottom: 90px;
 }
@@ -494,7 +494,7 @@ em {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #c0392b;
+    background: linear-gradient(145deg, #ff5e7a 0%, #ff84a3 100%);
     color: #fff;
     display: flex;
     align-items: center;
