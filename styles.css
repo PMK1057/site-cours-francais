@@ -447,11 +447,12 @@ em {
 }
 
 .game-card {
-    background: white;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Cartes entièrement colorées */
+    background: transparent;
 }
 
 .game-card:hover {
@@ -460,129 +461,206 @@ em {
 }
 
 .game-card-header {
-    padding: 20px 24px;
+    padding: 24px 28px;
     color: white;
     font-weight: 600;
+    font-family: 'Georgia', serif;
 }
 
 .game-card-header h2 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.78em;
     color: white;
+    font-weight: 600;
+    letter-spacing: 0.55px;
 }
 
-.expression-card .game-card-header {
+/* Expression card - entièrement violet */
+.expression-card {
     background: linear-gradient(145deg, #7b5cff 0%, #a689ff 100%);
 }
 
-.date-card .game-card-header {
+.expression-card .game-card-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+/* Date card - entièrement rose */
+.date-card {
     background: linear-gradient(145deg, #ff7a9e 0%, #ffb199 100%);
 }
 
-.conjugation-card .game-card-header {
+.date-card .game-card-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+/* Conjugation card - entièrement vert */
+.conjugation-card {
     background: linear-gradient(145deg, #42d392 0%, #67e8a7 100%);
 }
 
+.conjugation-card .game-card-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
 .game-card-body {
-    padding: 24px;
+    padding: 28px;
+    color: white;
+    font-family: 'Georgia', serif;
+}
+
+.expression-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
 }
 
 .expression-fr {
-    font-size: 1.4em;
-    font-weight: bold;
-    color: #667eea;
-    margin-bottom: 12px;
+    font-size: 1.78em;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    line-height: 1.88;
+    flex: 1;
+}
+
+.expression-audio-btn {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+.expression-audio-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(1.1);
 }
 
 .expression-en {
-    font-size: 1.1em;
-    color: #555;
-    margin-bottom: 12px;
-    font-weight: 600;
+    font-size: 1.12em;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 18px;
+    font-weight: 500;
+    line-height: 1.88;
 }
 
 .expression-explanation {
     font-size: 0.95em;
-    color: #777;
-    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.88;
     font-style: italic;
+    text-align: justify;
 }
 
 .date-text {
-    font-size: 1.5em;
-    color: #333;
+    font-size: 1.78em;
+    color: white;
     text-align: center;
     font-weight: 600;
+    line-height: 1.88;
+    font-family: 'Georgia', serif;
 }
 
 /* Conjugaison rapide */
 .conjugation-question {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     text-align: center;
 }
 
 .conjugation-question p {
-    font-size: 1.3em;
+    font-size: 1.78em;
     font-weight: 600;
-    color: #333;
+    color: white;
     margin: 0;
+    line-height: 1.88;
+    font-family: 'Georgia', serif;
 }
 
 .conjugation-input {
     display: flex;
     gap: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     flex-wrap: wrap;
 }
 
 .conjugation-input input {
     flex: 1;
     min-width: 200px;
-    padding: 12px 16px;
-    border: 2px solid #ddd;
+    padding: 14px 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
-    font-size: 1em;
-    transition: border-color 0.3s;
+    font-size: 1.12em;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-family: 'Georgia', serif;
+}
+
+.conjugation-input input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .conjugation-input input:focus {
     outline: none;
-    border-color: #42d392;
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .conjugation-input button {
-    padding: 12px 24px;
-    background: linear-gradient(145deg, #42d392 0%, #67e8a7 100%);
+    padding: 14px 28px;
+    background: rgba(255, 255, 255, 0.25);
     color: white;
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.12em;
     font-weight: 600;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s;
     margin: 0;
+    font-family: 'Georgia', serif;
 }
 
 .conjugation-input button:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(66, 211, 146, 0.4);
 }
 
 .timer {
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1.78em;
     font-weight: bold;
-    padding: 12px;
-    margin-bottom: 20px;
+    padding: 16px;
+    margin-bottom: 24px;
     border-radius: 8px;
-    background: #fff3cd;
-    color: #856404;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
     transition: all 0.3s;
+    font-family: 'Georgia', serif;
 }
 
 .timer.warning {
-    background: #f8d7da;
-    color: #721c24;
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
     animation: pulse 1s infinite;
 }
 
@@ -592,63 +670,76 @@ em {
 }
 
 .conjugation-result {
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 24px;
+    padding: 24px;
     border-radius: 12px;
     animation: fadeIn 0.5s;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .conjugation-result.correct {
-    background: #d4edda;
-    border: 2px solid #4caf50;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .conjugation-result.incorrect {
-    background: #f8d7da;
-    border: 2px solid #f44336;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .conjugation-result p {
-    margin: 8px 0;
+    margin: 12px 0;
+    color: white;
+    font-family: 'Georgia', serif;
 }
 
 #conjugation-result-icon {
-    font-size: 2em;
+    font-size: 2.5em;
     text-align: center;
     margin: 0;
 }
 
 #conjugation-result-text {
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: 600;
     text-align: center;
-    margin: 12px 0;
+    margin: 16px 0;
+    line-height: 1.88;
 }
 
 #conjugation-result-explanation {
-    font-size: 0.95em;
-    line-height: 1.6;
-    color: #555;
-    margin: 12px 0;
+    font-size: 1.12em;
+    line-height: 1.88;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 16px 0;
+    text-align: justify;
+}
+
+#conjugation-result-explanation strong {
+    color: white;
+    font-weight: 600;
 }
 
 #conjugation-next {
     display: block;
-    margin: 16px auto 0;
-    padding: 10px 24px;
-    background: linear-gradient(145deg, #7b5cff 0%, #a689ff 100%);
+    margin: 20px auto 0;
+    padding: 12px 28px;
+    background: rgba(255, 255, 255, 0.25);
     color: white;
-    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.12em;
     font-weight: 600;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s;
+    font-family: 'Georgia', serif;
 }
 
 #conjugation-next:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(123, 92, 255, 0.4);
 }
 
 /* Responsive */

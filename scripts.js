@@ -1167,8 +1167,113 @@ const expressionsData = [
     }
 ];
 
+// Mapping des expressions françaises vers leurs noms de fichiers audio
+const expressionToFilename = {
+    "Ça marche": "ca_marche",
+    "Ça roule": "ca_roule",
+    "C'est parti": "cest_parti",
+    "Vas-y": "vas_y",
+    "Carrément": "carrement",
+    "Nickel": "nickel",
+    "Impeccable": "impeccable",
+    "Pas de souci": "pas_de_souci",
+    "T'inquiète (pas)": "t_inquiete",
+    "T'inquiète": "t_inquiete",
+    "Laisse tomber": "laisse_tomber",
+    "Tant pis": "tant_pis",
+    "Tant mieux": "tant_mieux",
+    "Ça dépend": "ca_depend",
+    "Ça y est": "ca_y_est",
+    "C'est pas mal": "cest_pas_mal",
+    "Pourquoi pas": "pourquoi_pas",
+    "Tranquille": "tranquille",
+    "On verra bien": "on_verra_bien",
+    "Ça suffit": "ca_suffit",
+    "Comme tu veux": "comme_tu_veux",
+    "Tout à l'heure": "tout_a_lheure",
+    "À tout à l'heure": "a_tout_a_lheure",
+    "À plus": "a_plus",
+    "Volontiers": "volontiers",
+    "En effet": "en_effet",
+    "Certes": "certes",
+    "Néanmoins": "neanmoins"
+};
+
+// Fallbacks audio pour les expressions
+const audioFallbacks = {
+    "ca_marche": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207604/cours-francais/vocabulaire/ca_marche.mp3",
+    "ca_roule": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207605/cours-francais/vocabulaire/ca_roule.mp3",
+    "cest_parti": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207606/cours-francais/vocabulaire/cest_parti.mp3",
+    "vas_y": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207608/cours-francais/vocabulaire/vas_y.mp3",
+    "carrement": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207609/cours-francais/vocabulaire/carrement.mp3",
+    "nickel": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207610/cours-francais/vocabulaire/nickel.mp3",
+    "impeccable": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207611/cours-francais/vocabulaire/impeccable.mp3",
+    "pas_de_souci": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207611/cours-francais/vocabulaire/pas_de_souci.mp3",
+    "t_inquiete": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207612/cours-francais/vocabulaire/t_inquiete.mp3",
+    "laisse_tomber": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207613/cours-francais/vocabulaire/laisse_tomber.mp3",
+    "tant_pis": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207614/cours-francais/vocabulaire/tant_pis.mp3",
+    "tant_mieux": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207615/cours-francais/vocabulaire/tant_mieux.mp3",
+    "ca_depend": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207616/cours-francais/vocabulaire/ca_depend.mp3",
+    "ca_y_est": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207617/cours-francais/vocabulaire/ca_y_est.mp3",
+    "cest_pas_mal": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207618/cours-francais/vocabulaire/cest_pas_mal.mp3",
+    "pourquoi_pas": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207619/cours-francais/vocabulaire/pourquoi_pas.mp3",
+    "tranquille": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207621/cours-francais/vocabulaire/tranquille.mp3",
+    "on_verra_bien": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207622/cours-francais/vocabulaire/on_verra_bien.mp3",
+    "ca_suffit": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207623/cours-francais/vocabulaire/ca_suffit.mp3",
+    "comme_tu_veux": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207623/cours-francais/vocabulaire/comme_tu_veux.mp3",
+    "tout_a_lheure": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207625/cours-francais/vocabulaire/tout_a_lheure.mp3",
+    "a_tout_a_lheure": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207626/cours-francais/vocabulaire/a_tout_a_lheure.mp3",
+    "a_plus": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207627/cours-francais/vocabulaire/a_plus.mp3",
+    "volontiers": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207628/cours-francais/vocabulaire/volontiers.mp3",
+    "en_effet": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207629/cours-francais/vocabulaire/en_effet.mp3",
+    "certes": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207630/cours-francais/vocabulaire/certes.mp3",
+    "neanmoins": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207631/cours-francais/vocabulaire/neanmoins.mp3"
+};
+
+// Variable globale pour stocker les URLs audio
+let audioUrls = {};
+let currentExpressionAudioUrl = null;
+
+// Charger les URLs audio
+async function loadAudioUrls() {
+    try {
+        const response = await fetch('audio_urls.json');
+        const data = await response.json();
+        audioUrls = data;
+    } catch (error) {
+        console.error('Erreur lors du chargement des URLs audio:', error);
+        audioUrls = {};
+    }
+    
+    // Compléter avec les fallbacks
+    audioUrls = { ...audioFallbacks, ...audioUrls };
+}
+
+// Obtenir l'URL audio pour une expression
+function getAudioUrl(expression) {
+    const filename = expressionToFilename[expression];
+    if (!filename) return null;
+    
+    const audioData = audioUrls[filename];
+    if (!audioData) return null;
+    
+    return typeof audioData === 'string' ? audioData : audioData.url;
+}
+
+// Fonction pour jouer l'audio de l'expression du jour
+function playExpressionAudio() {
+    if (currentExpressionAudioUrl) {
+        playAudio(currentExpressionAudioUrl);
+    }
+}
+
 // Expression du jour - avec localStorage
-function initExpressionOfTheDay() {
+async function initExpressionOfTheDay() {
+    // Charger les URLs audio si ce n'est pas déjà fait
+    if (Object.keys(audioUrls).length === 0) {
+        await loadAudioUrls();
+    }
+    
     const today = new Date().toDateString();
     const storageKey = `expressionOfTheDay_${today}`;
     
@@ -1195,10 +1300,23 @@ function initExpressionOfTheDay() {
     const frElement = document.getElementById('expression-fr');
     const enElement = document.getElementById('expression-en');
     const explanationElement = document.getElementById('expression-explanation');
+    const audioBtn = document.getElementById('expression-audio-btn');
     
     if (frElement) frElement.textContent = expression.fr;
     if (enElement) enElement.textContent = `🇬🇧 ${expression.en}`;
     if (explanationElement) explanationElement.textContent = expression.explanation;
+    
+    // Gérer le bouton audio
+    const audioUrl = getAudioUrl(expression.fr);
+    currentExpressionAudioUrl = audioUrl;
+    
+    if (audioBtn) {
+        if (audioUrl) {
+            audioBtn.style.display = 'flex';
+        } else {
+            audioBtn.style.display = 'none';
+        }
+    }
 }
 
 // Date du jour en français
@@ -1946,15 +2064,15 @@ function validateConjugation(timeout = false) {
 }
 
 // Initialiser tous les mini-jeux quand la section home est affichée
-function initHomeGames() {
+async function initHomeGames() {
     // Vérifier que nous sommes sur la page d'accueil
     const homeSection = document.getElementById('home');
     if (!homeSection || !homeSection.classList.contains('active')) {
         return;
     }
     
-    // Initialiser les mini-jeux
-    initExpressionOfTheDay();
+    // Initialiser les mini-jeux (expression du jour est async)
+    await initExpressionOfTheDay();
     initDateOfTheDay();
     initConjugationGame();
 }
