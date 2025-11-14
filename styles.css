@@ -499,9 +499,9 @@ em {
     margin-bottom: 20px;
 }
 
-/* Conjugation card - entièrement vert */
+/* Conjugation card - entièrement vert doux */
 .conjugation-card {
-    background: linear-gradient(145deg, #42d392 0%, #67e8a7 100%);
+    background: linear-gradient(145deg, #A3DEC8 0%, #C3F0DE 100%);
 }
 
 .conjugation-card .game-card-header {
