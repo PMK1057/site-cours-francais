@@ -24,28 +24,52 @@
     <div class="container">
         <!-- HOME -->
         <div id="home" class="section active">
-            <div class="home-welcome">
-                <h2>Bienvenue sur votre plateforme de français !</h2>
-                <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
-                    🔰 Les Bases • 📚 Grammaire • 🔄 Conjugaison • 💬 Pronoms • 💡 Expressions • 📝 Textes • 🧩 Textes à trous
-                </p>
-                <p style="font-size: 1.1em; color: #888; margin-top: 30px;">
-                    <strong>Tous niveaux :</strong> Débutant, Intermédiaire, Avancé
-                </p>
-                <p style="font-size: 1em; color: #888; margin-top: 20px;">
-                    👆 Choisissez une section dans le menu ci-dessus pour commencer
-                </p>
-                <div style="margin-top: 50px; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    <h3 style="color: #667eea; margin-bottom: 20px;">📊 Contenu disponible :</h3>
-                    <ul style="line-height: 2; color: #555;">
-                        <li><strong>7 cours des Bases</strong> (Chiffres, Temps, Présentations, Famille, Expressions, Nationalités, Couleurs)</li>
-                        <li><strong>9 cours de Grammaire</strong> (Déterminants Possessifs, Déterminants Démonstratifs, Prépositions, De/Des/Du, Locutions Impersonnelles, Eux vs Leur, Comparaisons, Causes en français, Lequel/Auquel/Duquel)</li>
-                        <li><strong>9 cours de Conjugaison</strong> (Futur Proche, Passé Composé, Imparfait, Plus-que-parfait, Conditionnels, Subjonctifs)</li>
-                        <li><strong>6 cours de Pronoms</strong> (Possessifs, Démonstratifs, COD/COI, Toniques, EN/Y, Pronoms interrogatifs)</li>
-                        <li><strong>2 cours d'Expressions & Vocabulaire</strong> (Expressions courantes, Contractions)</li>
-                        <li><strong>1 section Textes</strong> (Mix Passé Composé/Présent A2)</li>
-                        <li><strong>3 textes à trous + 3 exercices interactifs</strong> avec corrections automatiques</li>
-                    </ul>
+            <div class="home-games">
+                <!-- Expression du jour -->
+                <div class="game-card expression-card">
+                    <div class="game-card-header">
+                        <h2>💬 Expression du jour</h2>
+                    </div>
+                    <div class="game-card-body">
+                        <div id="expression-content">
+                            <p class="expression-fr" id="expression-fr"></p>
+                            <p class="expression-en" id="expression-en"></p>
+                            <p class="expression-explanation" id="expression-explanation"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Date du jour -->
+                <div class="game-card date-card">
+                    <div class="game-card-header">
+                        <h2>🗓️ Date du jour</h2>
+                    </div>
+                    <div class="game-card-body">
+                        <p class="date-text" id="date-text"></p>
+                    </div>
+                </div>
+
+                <!-- Conjugaison rapide -->
+                <div class="game-card conjugation-card">
+                    <div class="game-card-header">
+                        <h2>⚡ Conjugaison rapide</h2>
+                    </div>
+                    <div class="game-card-body">
+                        <div id="conjugation-timer" class="timer" style="display: none;"></div>
+                        <div class="conjugation-question">
+                            <p id="conjugation-question"></p>
+                        </div>
+                        <div class="conjugation-input">
+                            <input type="text" id="conjugation-answer" placeholder="Votre réponse..." />
+                            <button id="conjugation-validate" onclick="validateConjugation()">Valider</button>
+                        </div>
+                        <div id="conjugation-result" class="conjugation-result" style="display: none;">
+                            <p id="conjugation-result-icon"></p>
+                            <p id="conjugation-result-text"></p>
+                            <p id="conjugation-result-explanation"></p>
+                            <button id="conjugation-next" onclick="nextConjugation()">Suivant</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
