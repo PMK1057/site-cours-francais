@@ -1952,9 +1952,24 @@ function nextConjugation() {
         data: conjugaisons[verbe][tempsChoisi][personne]
     };
     
+    // Afficher la question - gérer l'élision pour "je"
+    let displayPersonne = personne;
+    if (personne.toLowerCase() === 'je') {
+        // Vérifier si la réponse commence par une voyelle (a, e, i, o, u, y) ou h muet
+        const reponse = currentConjugation.data.reponse.toLowerCase().trim();
+        const premierChar = reponse.charAt(0);
+        const voyelles = ['a', 'e', 'i', 'o', 'u', 'y', 'h'];
+        if (voyelles.includes(premierChar)) {
+            displayPersonne = "J'";
+        }
+    }
+    
+    // Capitaliser la première lettre de la personne
+    displayPersonne = displayPersonne.charAt(0).toUpperCase() + displayPersonne.slice(1);
+    
     // Afficher la question
     if (questionDiv) {
-        questionDiv.textContent = `${verbe.toUpperCase()} - ${tempsChoisi.charAt(0).toUpperCase() + tempsChoisi.slice(1)} - ${personne.charAt(0).toUpperCase() + personne.slice(1)}`;
+        questionDiv.textContent = `${verbe.toUpperCase()} - ${tempsChoisi.charAt(0).toUpperCase() + tempsChoisi.slice(1)} - ${displayPersonne}`;
     }
     
     // Incrémenter le compteur de questions

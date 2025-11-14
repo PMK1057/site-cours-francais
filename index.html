@@ -25,6 +25,17 @@
         <!-- HOME -->
         <div id="home" class="section active">
             <div class="home-games">
+                <!-- Date du jour -->
+                <div class="game-card date-card">
+                    <div class="game-card-header">
+                        <h2>🗓️ Date du jour</h2>
+                    </div>
+                    <div class="game-card-body">
+                        <p class="date-text" id="date-text"></p>
+                        <button class="game-card-link-btn" onclick="showCourse('reperes-temporels')">En savoir plus sur les dates</button>
+                    </div>
+                </div>
+
                 <!-- Expression du jour -->
                 <div class="game-card expression-card">
                     <div class="game-card-header">
@@ -39,16 +50,7 @@
                             <p class="expression-en" id="expression-en"></p>
                             <p class="expression-explanation" id="expression-explanation"></p>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Date du jour -->
-                <div class="game-card date-card">
-                    <div class="game-card-header">
-                        <h2>🗓️ Date du jour</h2>
-                    </div>
-                    <div class="game-card-body">
-                        <p class="date-text" id="date-text"></p>
+                        <button class="game-card-link-btn" onclick="showCourse('expressions-courantes')">Découvrir d'autres expressions</button>
                     </div>
                 </div>
 

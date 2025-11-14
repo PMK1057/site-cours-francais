@@ -742,31 +742,55 @@ em {
     transform: translateY(-2px);
 }
 
+/* Bouton lien dans les cartes */
+.game-card-link-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    transition: all 0.3s;
+    font-family: 'Georgia', serif;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.game-card-link-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
 /* Responsive */
-/* Mobile : 1 colonne (par défaut) */
+/* Mobile : 1 colonne (par défaut) - Date en haut, puis expression, puis conjugaison */
 @media (min-width: 768px) {
     .home-games {
         grid-template-columns: 1fr 1fr;
         gap: 24px;
     }
     
-    .expression-card {
+    .date-card {
         grid-column: 1 / -1;
     }
 }
 
-/* Desktop : Expression en pleine largeur, puis date et conjugaison côte à côte */
+/* Desktop : Date en pleine largeur en haut, puis expression et conjugaison côte à côte */
 @media (min-width: 1024px) {
     .home-games {
         grid-template-columns: 1fr 1fr;
         gap: 30px;
     }
     
-    .expression-card {
+    .date-card {
         grid-column: 1 / -1;
     }
     
-    .date-card,
+    .expression-card,
     .conjugation-card {
         grid-column: auto;
     }
