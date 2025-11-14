@@ -238,26 +238,16 @@
             gap: 10px;
         }
 
-        .expression-audio-btn {
-            background: rgba(255, 255, 255, 0.25);
-            border: none;
-            cursor: pointer;
-            font-size: 1.1em;
-            padding: 6px;
-            border-radius: 999px;
-            transition: all 0.2s;
-            color: white;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        .expression-header .audio-btn {
+            background: rgba(255, 255, 255, 0.25) !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
             width: 34px;
             height: 34px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
 
-        .expression-audio-btn:hover {
-            background: rgba(255, 255, 255, 0.35);
-            transform: translateY(-1px) scale(1.07);
+        .expression-header .audio-btn:hover {
+            background: rgba(255, 255, 255, 0.35) !important;
         }
 
         .expression-level-badge {
@@ -946,8 +936,8 @@
                 const audioUrl = getAudioUrl(exp.fr);
                 if (audioUrl) {
                     const audioBtn = document.createElement('button');
-                    audioBtn.className = 'expression-audio-btn';
-                    audioBtn.innerHTML = '🎙️';
+                    audioBtn.className = 'audio-btn';
+                    audioBtn.innerHTML = '🔊';
                     audioBtn.title = `Écouter "${exp.fr}"`;
                     audioBtn.onclick = () => playAudio(audioUrl);
                     title.appendChild(audioBtn);
