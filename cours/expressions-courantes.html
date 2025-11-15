@@ -900,6 +900,12 @@
         }
 
         function filterExpressions() {
+            // Vérifier que expressions est défini
+            if (!expressions || !Array.isArray(expressions) || expressions.length === 0) {
+                console.error('expressions n\'est pas défini ou est vide');
+                return;
+            }
+            
             const filtered = expressions.filter(exp => {
                 const matchesSearch = exp.fr.toLowerCase().includes(searchTerm.toLowerCase());
                 const matchesLevel = selectedLevel === 'all' || exp.level === selectedLevel;
@@ -907,13 +913,35 @@
             });
 
             renderExpressions(filtered);
-            document.getElementById('count').textContent = filtered.length;
-            document.getElementById('no-results').style.display = filtered.length === 0 ? 'block' : 'none';
+            
+            // Mettre à jour le compteur
+            const countElement = document.getElementById('count');
+            if (countElement) {
+                countElement.textContent = filtered.length;
+            } else {
+                console.warn('Élément #count non trouvé');
+            }
+            
+            // Gérer l'affichage "no results"
+            const noResultsElement = document.getElementById('no-results');
+            if (noResultsElement) {
+                noResultsElement.style.display = filtered.length === 0 ? 'block' : 'none';
+            }
         }
 
         function renderExpressions(expressionsToShow) {
             const grid = document.getElementById('expressions-grid');
+            if (!grid) {
+                console.error('Élément #expressions-grid non trouvé');
+                return;
+            }
+            
             grid.innerHTML = '';
+
+            if (!expressionsToShow || expressionsToShow.length === 0) {
+                console.warn('Aucune expression à afficher');
+                return;
+            }
 
             expressionsToShow.forEach(exp => {
                 const card = document.createElement('div');
@@ -1037,6 +1065,8 @@
 
         // Fonction d'initialisation
         function initExpressions() {
+            console.log('initExpressions appelé, expressions.length =', expressions ? expressions.length : 'undefined');
+            
             // Réinitialiser les variables d'état
             selectedLevel = 'all';
             searchTerm = '';
@@ -1067,11 +1097,21 @@
                 });
             });
 
-
-            // Initial render
-            loadAudioUrls().then(() => {
+            // Forcer le premier affichage immédiatement
+            if (expressions && expressions.length > 0) {
                 filterExpressions();
-            });
+            }
+
+            // Initial render - appeler filterExpressions même si loadAudioUrls échoue
+            loadAudioUrls()
+                .then(() => {
+                    filterExpressions();
+                })
+                .catch((error) => {
+                    console.warn('Erreur lors du chargement des URLs audio:', error);
+                    // Initialiser quand même les expressions
+                    filterExpressions();
+                });
         }
 
         // Fonction pour attendre que les éléments soient présents et initialiser
@@ -1113,4 +1153,18 @@
             // Le DOM est déjà chargé, attendre que le HTML soit inséré
             setTimeout(waitForElements, 200);
         }
+        
+        // Appel direct immédiat pour forcer l'affichage si les éléments sont déjà présents
+        setTimeout(() => {
+            const grid = document.getElementById('expressions-grid');
+            const countElement = document.getElementById('count');
+            
+            if (grid && countElement && expressions && expressions.length > 0) {
+                // Vérifier si filterExpressions n'a pas déjà été appelé
+                if (grid.innerHTML === '' && countElement.textContent === '0') {
+                    console.log('Appel direct de filterExpressions pour corriger l\'affichage');
+                    filterExpressions();
+                }
+            }
+        }, 500);
     </script>
