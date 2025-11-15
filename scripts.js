@@ -180,23 +180,33 @@ function executeScriptsInHTML(html, container) {
         setTimeout(() => {
             scriptsContent.forEach(scriptData => {
                 try {
-                    const newScript = document.createElement('script');
-                    scriptData.attributes.forEach(attr => {
-                        newScript.setAttribute(attr.name, attr.value);
-                    });
-                    newScript.appendChild(document.createTextNode(scriptData.innerHTML));
-                    document.body.appendChild(newScript);
-                    // Retirer le script après exécution pour éviter les conflits
-                    setTimeout(() => {
-                        if (newScript.parentNode) {
-                            newScript.parentNode.removeChild(newScript);
-                        }
-                    }, 100);
+                    // Évaluer directement le script dans le contexte global pour expressions-courantes
+                    // Cela évite les problèmes de redéclaration
+                    if (scriptData.innerHTML.includes('expressions-courantes') || 
+                        scriptData.innerHTML.includes('window.expressionsData')) {
+                        // Exécuter directement avec eval dans le contexte global
+                        const scriptFunction = new Function(scriptData.innerHTML);
+                        scriptFunction.call(window);
+                    } else {
+                        // Pour les autres scripts, utiliser la méthode normale
+                        const newScript = document.createElement('script');
+                        scriptData.attributes.forEach(attr => {
+                            newScript.setAttribute(attr.name, attr.value);
+                        });
+                        newScript.appendChild(document.createTextNode(scriptData.innerHTML));
+                        document.body.appendChild(newScript);
+                        // Retirer le script après exécution pour éviter les conflits
+                        setTimeout(() => {
+                            if (newScript.parentNode) {
+                                newScript.parentNode.removeChild(newScript);
+                            }
+                        }, 100);
+                    }
                 } catch (scriptError) {
                     console.error('Erreur lors de l\'exécution d\'un script:', scriptError);
                 }
             });
-        }, 100);
+        }, 150);
     } catch (error) {
         console.error('Erreur dans executeScriptsInHTML:', error);
         throw error;
@@ -1275,26 +1285,46 @@ function playExpressionAudio() {
 
 // Expression du jour - avec localStorage
 async function initExpressionOfTheDay() {
-    // Vérifier que les éléments existent
-    const frElement = document.getElementById('expression-fr');
-    const enElement = document.getElementById('expression-en');
-    const explanationElement = document.getElementById('expression-explanation');
+    console.log('initExpressionOfTheDay appelé');
+    
+    // Vérifier que les éléments existent avec plusieurs tentatives
+    let frElement = document.getElementById('expression-fr');
+    let enElement = document.getElementById('expression-en');
+    let explanationElement = document.getElementById('expression-explanation');
     
     if (!frElement || !enElement || !explanationElement) {
-        console.warn('Éléments de l\'expression du jour non trouvés, réessai dans 200ms...');
+        console.warn('Éléments de l\'expression du jour non trouvés, réessai dans 200ms...', {
+            frElement: !!frElement,
+            enElement: !!enElement,
+            explanationElement: !!explanationElement
+        });
         setTimeout(initExpressionOfTheDay, 200);
         return;
     }
     
-    // Charger les URLs audio si ce n'est pas déjà fait
-    if (Object.keys(audioUrls).length === 0) {
-        await loadAudioUrls();
+    // Vérifier que expressionsData est défini et non vide AVANT de charger les audio
+    // Utiliser window.expressionsData si expressionsData global n'est pas défini
+    const dataSource = window.expressionsData || expressionsData;
+    
+    if (!dataSource || !Array.isArray(dataSource) || dataSource.length === 0) {
+        console.error('expressionsData n\'est pas défini ou est vide', {
+            expressionsData: expressionsData,
+            windowExpressionsData: window.expressionsData,
+            dataSource: dataSource,
+            length: dataSource ? dataSource.length : 'undefined'
+        });
+        // Réessayer après un court délai
+        setTimeout(initExpressionOfTheDay, 300);
+        return;
     }
     
-    // Vérifier que expressionsData est défini et non vide
-    if (!expressionsData || expressionsData.length === 0) {
-        console.error('expressionsData n\'est pas défini ou est vide');
-        return;
+    // Charger les URLs audio si ce n'est pas déjà fait (non bloquant)
+    if (Object.keys(audioUrls).length === 0) {
+        try {
+            await loadAudioUrls();
+        } catch (error) {
+            console.warn('Erreur lors du chargement des URLs audio, continuons quand même:', error);
+        }
     }
     
     const today = new Date().toDateString();
@@ -1303,9 +1333,17 @@ async function initExpressionOfTheDay() {
     let expressionData = localStorage.getItem(storageKey);
     
     if (!expressionData) {
+        // Utiliser la source de données disponible (window.expressionsData ou expressionsData)
+        const dataSource = window.expressionsData || expressionsData;
+        
         // Sélectionner une expression aléatoire
-        const randomIndex = Math.floor(Math.random() * expressionsData.length);
-        const selectedExpression = expressionsData[randomIndex];
+        const randomIndex = Math.floor(Math.random() * dataSource.length);
+        const selectedExpression = dataSource[randomIndex];
+        
+        if (!selectedExpression || !selectedExpression.fr) {
+            console.error('Expression sélectionnée invalide:', selectedExpression);
+            return;
+        }
         
         // Sauvegarder dans localStorage
         localStorage.setItem(storageKey, JSON.stringify({
@@ -1320,10 +1358,38 @@ async function initExpressionOfTheDay() {
         const data = JSON.parse(expressionData);
         const expression = data.expression;
         
-        // Afficher l'expression
-        frElement.textContent = expression.fr || '';
-        enElement.textContent = expression.en ? `🇬🇧 ${expression.en}` : '';
-        explanationElement.textContent = expression.explanation || '';
+        if (!expression || !expression.fr) {
+            console.error('Données d\'expression invalides:', expression);
+            return;
+        }
+        
+        console.log('Affichage de l\'expression:', expression.fr);
+        
+        // Afficher l'expression (vérifier à nouveau que les éléments existent)
+        frElement = document.getElementById('expression-fr');
+        enElement = document.getElementById('expression-en');
+        explanationElement = document.getElementById('expression-explanation');
+        
+        if (frElement) {
+            frElement.textContent = expression.fr || '';
+            console.log('Texte FR défini:', frElement.textContent);
+        } else {
+            console.error('Élément expression-fr non trouvé au moment de l\'affichage');
+        }
+        
+        if (enElement) {
+            enElement.textContent = expression.en ? `🇬🇧 ${expression.en}` : '';
+            console.log('Texte EN défini:', enElement.textContent);
+        } else {
+            console.error('Élément expression-en non trouvé au moment de l\'affichage');
+        }
+        
+        if (explanationElement) {
+            explanationElement.textContent = expression.explanation || '';
+            console.log('Explication définie:', explanationElement.textContent.substring(0, 50) + '...');
+        } else {
+            console.error('Élément expression-explanation non trouvé au moment de l\'affichage');
+        }
         
         // Gérer le bouton audio
         const audioBtn = document.getElementById('expression-audio-btn');
@@ -1339,6 +1405,10 @@ async function initExpressionOfTheDay() {
         }
     } catch (error) {
         console.error('Erreur lors du parsing de l\'expression:', error);
+        // Réessayer une fois en cas d'erreur
+        setTimeout(() => {
+            initExpressionOfTheDay();
+        }, 300);
     }
 }
 
@@ -2095,16 +2165,36 @@ function validateConjugation(timeout = false) {
 
 // Initialiser tous les mini-jeux quand la section home est affichée
 async function initHomeGames() {
+    console.log('initHomeGames appelé');
+    
     // Vérifier que nous sommes sur la page d'accueil
     const homeSection = document.getElementById('home');
     if (!homeSection || !homeSection.classList.contains('active')) {
+        console.log('Section home non active, abandon');
         return;
     }
     
+    // Attendre un peu que le DOM soit rendu
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
     // Initialiser les mini-jeux (expression du jour est async)
-    await initExpressionOfTheDay();
+    try {
+        await initExpressionOfTheDay();
+    } catch (error) {
+        console.error('Erreur lors de l\'initialisation de l\'expression du jour:', error);
+    }
+    
     initDateOfTheDay();
     initConjugationGame();
+    
+    // Vérification finale après 500ms pour forcer l'affichage si nécessaire
+    setTimeout(() => {
+        const frElement = document.getElementById('expression-fr');
+        if (frElement && (!frElement.textContent || frElement.textContent.trim() === '')) {
+            console.warn('L\'expression n\'est toujours pas affichée, nouvelle tentative...');
+            initExpressionOfTheDay();
+        }
+    }, 500);
 }
 
 // Écouter les changements de section pour réinitialiser les jeux

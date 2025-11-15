@@ -1098,6 +1098,11 @@
             const expressionsToUse = expressions || window.expressionsData;
             console.log('initExpressions appelé, expressions.length =', expressionsToUse ? expressionsToUse.length : 'undefined');
             
+            if (!expressionsToUse || !Array.isArray(expressionsToUse) || expressionsToUse.length === 0) {
+                console.error('Impossible d\'initialiser: expressions non définies');
+                return;
+            }
+            
             // Réinitialiser les variables d'état
             selectedLevel = 'all';
             searchTerm = '';
@@ -1128,10 +1133,9 @@
                 });
             });
 
-            // Forcer le premier affichage immédiatement
-            if (expressionsToUse && expressionsToUse.length > 0) {
-                filterExpressions();
-            }
+            // Forcer le premier affichage immédiatement (PRIORITÉ)
+            console.log('Appel immédiat de filterExpressions depuis initExpressions');
+            filterExpressions();
 
             // Initial render - appeler filterExpressions même si loadAudioUrls échoue
             loadAudioUrls()
@@ -1175,28 +1179,67 @@
             }
         }
 
-        // Attendre que le DOM soit prêt
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                setTimeout(waitForElements, 200);
-            });
-        } else {
-            // Le DOM est déjà chargé, attendre que le HTML soit inséré
-            setTimeout(waitForElements, 200);
-        }
-        
-        // Appel direct immédiat pour forcer l'affichage si les éléments sont déjà présents
-        setTimeout(() => {
+        // Fonction pour forcer l'initialisation immédiatement
+        function forceInit() {
+            const expressionsToUse = window.expressionsData || expressions;
             const grid = document.getElementById('expressions-grid');
             const countElement = document.getElementById('count');
-            const expressionsToUse = expressions || window.expressionsData;
+            const searchInput = document.getElementById('search-input');
             
-            if (grid && countElement && expressionsToUse && expressionsToUse.length > 0) {
-                // Vérifier si filterExpressions n'a pas déjà été appelé
-                if (grid.innerHTML === '' && countElement.textContent === '0') {
-                    console.log('Appel direct de filterExpressions pour corriger l\'affichage');
+            console.log('forceInit appelé', {
+                expressionsToUse: expressionsToUse ? expressionsToUse.length : 'undefined',
+                grid: !!grid,
+                countElement: !!countElement,
+                searchInput: !!searchInput
+            });
+            
+            if (expressionsToUse && expressionsToUse.length > 0 && grid && countElement) {
+                // Si le grid est vide ou le compteur est à 0, forcer l'affichage
+                if (grid.innerHTML === '' || countElement.textContent === '0') {
+                    console.log('Forçage de l\'affichage des expressions');
                     filterExpressions();
                 }
             }
-        }, 500);
+        }
+        
+        // Attendre que le DOM soit prêt
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(() => {
+                    waitForElements();
+                    forceInit();
+                }, 200);
+            });
+        } else {
+            // Le DOM est déjà chargé, attendre que le HTML soit inséré
+            setTimeout(() => {
+                waitForElements();
+                forceInit();
+            }, 200);
+        }
+        
+        // Appels multiples pour forcer l'affichage
+        [300, 500, 800, 1000, 1500].forEach(delay => {
+            setTimeout(() => {
+                forceInit();
+            }, delay);
+        });
+        
+        // Observer les mutations du DOM pour détecter quand le HTML est inséré
+        const observer = new MutationObserver((mutations) => {
+            const grid = document.getElementById('expressions-grid');
+            const countElement = document.getElementById('count');
+            if (grid && countElement && (grid.innerHTML === '' || countElement.textContent === '0')) {
+                forceInit();
+            }
+        });
+        
+        // Observer le document pour les ajouts d'éléments
+        setTimeout(() => {
+            const container = document.getElementById('course-container') || document.body;
+            observer.observe(container, {
+                childList: true,
+                subtree: true
+            });
+        }, 100);
     </script>
