@@ -1886,7 +1886,7 @@ let currentConjugation = null;
 let conjugationTimer = null;
 let conjugationTimerInterval = null;
 let conjugationQuestionCount = 0;
-let conjugationTimeLeft = 10;
+let conjugationTimeLeft = 20;
 
 // Jeu de conjugaison rapide
 function initConjugationGame() {
@@ -1952,17 +1952,9 @@ function nextConjugation() {
         data: conjugaisons[verbe][tempsChoisi][personne]
     };
     
-    // Afficher la question - gérer l'élision pour "je"
+    // Afficher la question - toujours afficher "Je" dans la question (pas d'élision)
+    // L'élision s'applique seulement dans la réponse écrite
     let displayPersonne = personne;
-    if (personne.toLowerCase() === 'je') {
-        // Vérifier si la réponse commence par une voyelle (a, e, i, o, u, y) ou h muet
-        const reponse = currentConjugation.data.reponse.toLowerCase().trim();
-        const premierChar = reponse.charAt(0);
-        const voyelles = ['a', 'e', 'i', 'o', 'u', 'y', 'h'];
-        if (voyelles.includes(premierChar)) {
-            displayPersonne = "J'";
-        }
-    }
     
     // Capitaliser la première lettre de la personne
     displayPersonne = displayPersonne.charAt(0).toUpperCase() + displayPersonne.slice(1);
@@ -1979,7 +1971,7 @@ function nextConjugation() {
     if (conjugationQuestionCount > 1) {
         if (timerDiv) {
             timerDiv.style.display = 'block';
-            conjugationTimeLeft = 10;
+            conjugationTimeLeft = 20;
             updateTimerDisplay();
             startConjugationTimer();
         }
