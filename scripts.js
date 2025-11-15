@@ -1285,22 +1285,41 @@ function playExpressionAudio() {
 
 // Expression du jour - avec localStorage
 async function initExpressionOfTheDay() {
-    console.log('initExpressionOfTheDay appelé');
-    
-    // Vérifier que les éléments existent avec plusieurs tentatives
-    let frElement = document.getElementById('expression-fr');
-    let enElement = document.getElementById('expression-en');
-    let explanationElement = document.getElementById('expression-explanation');
-    
-    if (!frElement || !enElement || !explanationElement) {
-        console.warn('Éléments de l\'expression du jour non trouvés, réessai dans 200ms...', {
-            frElement: !!frElement,
-            enElement: !!enElement,
-            explanationElement: !!explanationElement
+    // Utiliser requestAnimationFrame pour s'assurer que le DOM est rendu
+    return new Promise((resolve) => {
+        requestAnimationFrame(async () => {
+            console.log('initExpressionOfTheDay appelé');
+            
+            // Vérifier que les éléments existent avec plusieurs tentatives
+            let frElement = document.getElementById('expression-fr');
+            let enElement = document.getElementById('expression-en');
+            let explanationElement = document.getElementById('expression-explanation');
+            
+            if (!frElement || !enElement || !explanationElement) {
+                console.warn('Éléments de l\'expression du jour non trouvés, réessai dans 200ms...', {
+                    frElement: !!frElement,
+                    enElement: !!enElement,
+                    explanationElement: !!explanationElement
+                });
+                setTimeout(() => {
+                    initExpressionOfTheDay().then(resolve);
+                }, 200);
+                return;
+            }
+            
+            try {
+                await initExpressionOfTheDayInternal(frElement, enElement, explanationElement);
+                resolve();
+            } catch (error) {
+                console.error('Erreur dans initExpressionOfTheDay:', error);
+                resolve();
+            }
         });
-        setTimeout(initExpressionOfTheDay, 200);
-        return;
-    }
+    });
+}
+
+// Fonction interne pour l'initialisation de l'expression
+async function initExpressionOfTheDayInternal(frElement, enElement, explanationElement) {
     
     // Vérifier que expressionsData est défini et non vide AVANT de charger les audio
     // Utiliser window.expressionsData si expressionsData global n'est pas défini
@@ -1313,8 +1332,7 @@ async function initExpressionOfTheDay() {
             dataSource: dataSource,
             length: dataSource ? dataSource.length : 'undefined'
         });
-        // Réessayer après un court délai
-        setTimeout(initExpressionOfTheDay, 300);
+        // Ne pas réessayer ici, laisser initHomeGames gérer les réessais
         return;
     }
     
@@ -1365,13 +1383,15 @@ async function initExpressionOfTheDay() {
         
         console.log('Affichage de l\'expression:', expression.fr);
         
-        // Afficher l'expression (vérifier à nouveau que les éléments existent)
+        // Vérifier à nouveau que les éléments existent avant de les modifier
         frElement = document.getElementById('expression-fr');
         enElement = document.getElementById('expression-en');
         explanationElement = document.getElementById('expression-explanation');
         
         if (frElement) {
             frElement.textContent = expression.fr || '';
+            // Forcer le reflow pour s'assurer que le texte est rendu
+            frElement.offsetHeight;
             console.log('Texte FR défini:', frElement.textContent);
         } else {
             console.error('Élément expression-fr non trouvé au moment de l\'affichage');
@@ -1379,6 +1399,8 @@ async function initExpressionOfTheDay() {
         
         if (enElement) {
             enElement.textContent = expression.en ? `🇬🇧 ${expression.en}` : '';
+            // Forcer le reflow
+            enElement.offsetHeight;
             console.log('Texte EN défini:', enElement.textContent);
         } else {
             console.error('Élément expression-en non trouvé au moment de l\'affichage');
@@ -1386,10 +1408,15 @@ async function initExpressionOfTheDay() {
         
         if (explanationElement) {
             explanationElement.textContent = expression.explanation || '';
+            // Forcer le reflow
+            explanationElement.offsetHeight;
             console.log('Explication définie:', explanationElement.textContent.substring(0, 50) + '...');
         } else {
             console.error('Élément expression-explanation non trouvé au moment de l\'affichage');
         }
+        
+        // Marquer comme initialisé
+        expressionInitialized = true;
         
         // Gérer le bouton audio
         const audioBtn = document.getElementById('expression-audio-btn');
@@ -2163,6 +2190,11 @@ function validateConjugation(timeout = false) {
     resultDiv.style.display = 'block';
 }
 
+// Variable pour suivre si l'expression a été initialisée avec succès
+let expressionInitialized = false;
+let expressionInitAttempts = 0;
+const MAX_EXPRESSION_INIT_ATTEMPTS = 10;
+
 // Initialiser tous les mini-jeux quand la section home est affichée
 async function initHomeGames() {
     console.log('initHomeGames appelé');
@@ -2173,6 +2205,10 @@ async function initHomeGames() {
         console.log('Section home non active, abandon');
         return;
     }
+    
+    // Réinitialiser le flag d'initialisation
+    expressionInitialized = false;
+    expressionInitAttempts = 0;
     
     // Attendre un peu que le DOM soit rendu
     await new Promise(resolve => setTimeout(resolve, 100));
@@ -2187,14 +2223,56 @@ async function initHomeGames() {
     initDateOfTheDay();
     initConjugationGame();
     
-    // Vérification finale après 500ms pour forcer l'affichage si nécessaire
-    setTimeout(() => {
+    // Vérifications multiples pour forcer l'affichage si nécessaire
+    const checkAndRetry = () => {
         const frElement = document.getElementById('expression-fr');
-        if (frElement && (!frElement.textContent || frElement.textContent.trim() === '')) {
-            console.warn('L\'expression n\'est toujours pas affichée, nouvelle tentative...');
+        const enElement = document.getElementById('expression-en');
+        const explanationElement = document.getElementById('expression-explanation');
+        
+        // Vérifier si tous les éléments existent et ont du contenu
+        const hasContent = frElement && frElement.textContent && frElement.textContent.trim() !== '' &&
+                          enElement && enElement.textContent && enElement.textContent.trim() !== '';
+        
+        if (!hasContent && expressionInitAttempts < MAX_EXPRESSION_INIT_ATTEMPTS) {
+            expressionInitAttempts++;
+            console.warn(`L'expression n'est toujours pas affichée (tentative ${expressionInitAttempts}/${MAX_EXPRESSION_INIT_ATTEMPTS}), nouvelle tentative...`);
             initExpressionOfTheDay();
+        } else if (hasContent) {
+            expressionInitialized = true;
+            console.log('Expression du jour initialisée avec succès');
         }
-    }, 500);
+    };
+    
+    // Vérifications à intervalles multiples
+    [200, 400, 600, 800, 1000, 1500, 2000].forEach(delay => {
+        setTimeout(checkAndRetry, delay);
+    });
+    
+    // Observer les mutations du DOM pour détecter quand les éléments sont ajoutés
+    const observer = new MutationObserver((mutations) => {
+        const frElement = document.getElementById('expression-fr');
+        if (frElement && (!frElement.textContent || frElement.textContent.trim() === '') && 
+            expressionInitAttempts < MAX_EXPRESSION_INIT_ATTEMPTS) {
+            checkAndRetry();
+        }
+    });
+    
+    // Observer le container de l'expression
+    setTimeout(() => {
+        const expressionContent = document.getElementById('expression-content');
+        if (expressionContent) {
+            observer.observe(expressionContent, {
+                childList: true,
+                subtree: true,
+                characterData: true
+            });
+        }
+    }, 100);
+    
+    // Nettoyer l'observer après 5 secondes
+    setTimeout(() => {
+        observer.disconnect();
+    }, 5000);
 }
 
 // Écouter les changements de section pour réinitialiser les jeux
