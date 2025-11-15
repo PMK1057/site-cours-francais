@@ -389,7 +389,9 @@
     </style>
 
     <script>
-        const expressions = [
+        // Utiliser window pour éviter les redéclarations si le script s'exécute plusieurs fois
+        if (typeof window.expressionsData === 'undefined') {
+            window.expressionsData = [
             {
                 fr: "Ça marche",
                 level: "courant",
@@ -805,11 +807,18 @@
                     "Le résultat n'est pas parfait, néanmoins c'est satisfaisant."
                 ]
             }
-        ];
+            ];
+        }
+        // Créer une référence locale
+        const expressions = window.expressionsData;
 
         let selectedLevel = 'all';
         let searchTerm = '';
-        let audioUrls = {};
+        // Utiliser window pour éviter les redéclarations si le script s'exécute plusieurs fois
+        if (typeof window.expressionsAudioUrls === 'undefined') {
+            window.expressionsAudioUrls = {};
+        }
+        let audioUrls = window.expressionsAudioUrls;
 
         const audioFallbacks = {
             "ca_marche": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207604/cours-francais/vocabulaire/ca_marche.mp3",
@@ -876,16 +885,31 @@
         // Charger les URLs audio
         async function loadAudioUrls() {
             try {
-                const response = await fetch('../audio_urls.json');
-                const data = await response.json();
-                audioUrls = data;
+                // Essayer différents chemins possibles
+                let response = await fetch('audio_urls.json');
+                if (!response.ok) {
+                    response = await fetch('../audio_urls.json');
+                }
+                if (!response.ok) {
+                    response = await fetch('/audio_urls.json');
+                }
+                if (response.ok) {
+                    const data = await response.json();
+                    audioUrls = data;
+                    window.expressionsAudioUrls = audioUrls;
+                } else {
+                    throw new Error('Fichier audio_urls.json introuvable');
+                }
             } catch (error) {
-                console.error('Erreur lors du chargement des URLs audio:', error);
-                audioUrls = {};
+                console.warn('Erreur lors du chargement des URLs audio, utilisation des fallbacks:', error);
+                // Utiliser uniquement les fallbacks si le chargement échoue
+                audioUrls = { ...audioFallbacks };
+                window.expressionsAudioUrls = audioUrls;
             }
             
-            // Compléter avec les fallbacks
+            // Compléter avec les fallbacks (au cas où certaines URLs manqueraient)
             audioUrls = { ...audioFallbacks, ...audioUrls };
+            window.expressionsAudioUrls = audioUrls;
         }
 
         // Obtenir l'URL audio pour une expression
@@ -900,13 +924,19 @@
         }
 
         function filterExpressions() {
-            // Vérifier que expressions est défini
-            if (!expressions || !Array.isArray(expressions) || expressions.length === 0) {
-                console.error('expressions n\'est pas défini ou est vide');
+            // Vérifier que expressions est défini (utiliser window.expressionsData si expressions n'est pas défini)
+            const expressionsToUse = expressions || window.expressionsData;
+            if (!expressionsToUse || !Array.isArray(expressionsToUse) || expressionsToUse.length === 0) {
+                console.error('expressions n\'est pas défini ou est vide', {
+                    expressions: expressions,
+                    windowExpressionsData: window.expressionsData,
+                    expressionsToUse: expressionsToUse
+                });
                 return;
             }
             
-            const filtered = expressions.filter(exp => {
+            console.log('filterExpressions appelé avec', expressionsToUse.length, 'expressions');
+            const filtered = expressionsToUse.filter(exp => {
                 const matchesSearch = exp.fr.toLowerCase().includes(searchTerm.toLowerCase());
                 const matchesLevel = selectedLevel === 'all' || exp.level === selectedLevel;
                 return matchesSearch && matchesLevel;
@@ -1065,7 +1095,8 @@
 
         // Fonction d'initialisation
         function initExpressions() {
-            console.log('initExpressions appelé, expressions.length =', expressions ? expressions.length : 'undefined');
+            const expressionsToUse = expressions || window.expressionsData;
+            console.log('initExpressions appelé, expressions.length =', expressionsToUse ? expressionsToUse.length : 'undefined');
             
             // Réinitialiser les variables d'état
             selectedLevel = 'all';
@@ -1098,7 +1129,7 @@
             });
 
             // Forcer le premier affichage immédiatement
-            if (expressions && expressions.length > 0) {
+            if (expressionsToUse && expressionsToUse.length > 0) {
                 filterExpressions();
             }
 
@@ -1158,8 +1189,9 @@
         setTimeout(() => {
             const grid = document.getElementById('expressions-grid');
             const countElement = document.getElementById('count');
+            const expressionsToUse = expressions || window.expressionsData;
             
-            if (grid && countElement && expressions && expressions.length > 0) {
+            if (grid && countElement && expressionsToUse && expressionsToUse.length > 0) {
                 // Vérifier si filterExpressions n'a pas déjà été appelé
                 if (grid.innerHTML === '' && countElement.textContent === '0') {
                     console.log('Appel direct de filterExpressions pour corriger l\'affichage');
