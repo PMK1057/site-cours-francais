@@ -185,12 +185,18 @@ function executeScriptsInHTML(html, container) {
                         newScript.setAttribute(attr.name, attr.value);
                     });
                     newScript.appendChild(document.createTextNode(scriptData.innerHTML));
-                    container.appendChild(newScript);
+                    document.body.appendChild(newScript);
+                    // Retirer le script après exécution pour éviter les conflits
+                    setTimeout(() => {
+                        if (newScript.parentNode) {
+                            newScript.parentNode.removeChild(newScript);
+                        }
+                    }, 100);
                 } catch (scriptError) {
                     console.error('Erreur lors de l\'exécution d\'un script:', scriptError);
                 }
             });
-        }, 10);
+        }, 100);
     } catch (error) {
         console.error('Erreur dans executeScriptsInHTML:', error);
         throw error;
@@ -1269,9 +1275,26 @@ function playExpressionAudio() {
 
 // Expression du jour - avec localStorage
 async function initExpressionOfTheDay() {
+    // Vérifier que les éléments existent
+    const frElement = document.getElementById('expression-fr');
+    const enElement = document.getElementById('expression-en');
+    const explanationElement = document.getElementById('expression-explanation');
+    
+    if (!frElement || !enElement || !explanationElement) {
+        console.warn('Éléments de l\'expression du jour non trouvés, réessai dans 200ms...');
+        setTimeout(initExpressionOfTheDay, 200);
+        return;
+    }
+    
     // Charger les URLs audio si ce n'est pas déjà fait
     if (Object.keys(audioUrls).length === 0) {
         await loadAudioUrls();
+    }
+    
+    // Vérifier que expressionsData est défini et non vide
+    if (!expressionsData || expressionsData.length === 0) {
+        console.error('expressionsData n\'est pas défini ou est vide');
+        return;
     }
     
     const today = new Date().toDateString();
@@ -1293,29 +1316,29 @@ async function initExpressionOfTheDay() {
         expressionData = localStorage.getItem(storageKey);
     }
     
-    const data = JSON.parse(expressionData);
-    const expression = data.expression;
-    
-    // Afficher l'expression
-    const frElement = document.getElementById('expression-fr');
-    const enElement = document.getElementById('expression-en');
-    const explanationElement = document.getElementById('expression-explanation');
-    const audioBtn = document.getElementById('expression-audio-btn');
-    
-    if (frElement) frElement.textContent = expression.fr;
-    if (enElement) enElement.textContent = `🇬🇧 ${expression.en}`;
-    if (explanationElement) explanationElement.textContent = expression.explanation;
-    
-    // Gérer le bouton audio
-    const audioUrl = getAudioUrl(expression.fr);
-    currentExpressionAudioUrl = audioUrl;
-    
-    if (audioBtn) {
-        if (audioUrl) {
-            audioBtn.style.display = 'flex';
-        } else {
-            audioBtn.style.display = 'none';
+    try {
+        const data = JSON.parse(expressionData);
+        const expression = data.expression;
+        
+        // Afficher l'expression
+        frElement.textContent = expression.fr || '';
+        enElement.textContent = expression.en ? `🇬🇧 ${expression.en}` : '';
+        explanationElement.textContent = expression.explanation || '';
+        
+        // Gérer le bouton audio
+        const audioBtn = document.getElementById('expression-audio-btn');
+        const audioUrl = getAudioUrl(expression.fr);
+        currentExpressionAudioUrl = audioUrl;
+        
+        if (audioBtn) {
+            if (audioUrl) {
+                audioBtn.style.display = 'flex';
+            } else {
+                audioBtn.style.display = 'none';
+            }
         }
+    } catch (error) {
+        console.error('Erreur lors du parsing de l\'expression:', error);
     }
 }
 

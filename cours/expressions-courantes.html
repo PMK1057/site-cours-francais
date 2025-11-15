@@ -1074,31 +1074,43 @@
             });
         }
 
-        // Fonction pour attendre que les éléments soient présents
-        let waitAttempts = 0;
-        const maxWaitAttempts = 100; // Maximum 5 secondes (100 * 50ms)
-        
-        function waitForElements() {
+        // Fonction pour attendre que les éléments soient présents et initialiser
+        function initializeExpressionsPage() {
             const searchInput = document.getElementById('search-input');
             const levelBtns = document.querySelectorAll('.level-btn');
             const grid = document.getElementById('expressions-grid');
             
-            if (searchInput && levelBtns.length > 0 && grid) {
+            if (searchInput && grid && document.querySelector('.level-btn')) {
                 initExpressions();
-            } else if (waitAttempts < maxWaitAttempts) {
-                waitAttempts++;
-                // Réessayer après un court délai
-                setTimeout(waitForElements, 50);
+                return true;
+            }
+            return false;
+        }
+
+        // Essayer plusieurs fois d'initialiser avec des délais croissants
+        function waitForElements(maxAttempts = 20, attempt = 0) {
+            if (initializeExpressionsPage()) {
+                return;
+            }
+            
+            if (attempt < maxAttempts) {
+                setTimeout(() => waitForElements(maxAttempts, attempt + 1), 100 * (attempt + 1));
             } else {
-                console.error('Timeout: Les éléments ne sont pas disponibles');
+                console.error('Timeout: Les éléments ne sont pas disponibles après', maxAttempts, 'tentatives');
+                // Essayer quand même d'initialiser
+                setTimeout(() => {
+                    initExpressions();
+                }, 500);
             }
         }
 
         // Attendre que le DOM soit prêt
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', waitForElements);
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(waitForElements, 200);
+            });
         } else {
             // Le DOM est déjà chargé, attendre que le HTML soit inséré
-            waitForElements();
+            setTimeout(waitForElements, 200);
         }
     </script>
