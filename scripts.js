@@ -2158,11 +2158,26 @@ function validateConjugation(timeout = false) {
     const normalizedUserAnswer = userAnswer.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     const normalizedCorrectAnswer = correctAnswer.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     
+    // Supprimer les pronoms sujets courants au début de la réponse de l'utilisateur
+    // pour accepter "vous avez voulu" comme "avez voulu"
+    const pronouns = ['je', 'tu', 'il', 'elle', 'nous', 'vous', 'ils', 'elles', 'on'];
+    let cleanedUserAnswer = normalizedUserAnswer;
+    for (const pronoun of pronouns) {
+        const regex = new RegExp(`^${pronoun}\\s+`, 'i');
+        if (regex.test(cleanedUserAnswer)) {
+            cleanedUserAnswer = cleanedUserAnswer.replace(regex, '').trim();
+            break;
+        }
+    }
+    
     // Si timeout, la réponse est toujours incorrecte
     let isCorrect = false;
     if (!timeout) {
+        // Accepter la réponse exacte OU la réponse sans pronom
         isCorrect = normalizedUserAnswer === normalizedCorrectAnswer || 
-                   userAnswer === correctAnswer;
+                   userAnswer === correctAnswer ||
+                   cleanedUserAnswer === normalizedCorrectAnswer ||
+                   cleanedUserAnswer === correctAnswer;
     }
     
     // Afficher le résultat

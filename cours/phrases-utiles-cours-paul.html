@@ -1,0 +1,360 @@
+
+<button class="back-btn" onclick="backToSection('expressions')">← Retour</button>
+<h2>💬 PHRASES UTILES PENDANT LES COURS AVEC PAUL</h2>
+<div class="info-box warning-box" style="background: #fff3cd; border-left: 4px solid #ffc107; margin-bottom: 25px;">
+<h3>⚠️ Attention : Tutoiement vs Vouvoiement</h3>
+<p>
+    <strong>Pendant les cours avec Paul</strong> : le contexte est <strong>informel</strong>, donc on <strong>tutoie</strong> Paul (tu, te, ton, etc.).
+</p>
+<p>
+    <strong>Dans un cours avec plusieurs élèves</strong> (par exemple à la faculté) : le contexte est plus <strong>formel</strong>, donc on <strong>vouvoie</strong> le professeur (vous, votre, etc.).
+</p>
+<p style="margin-top: 12px;">
+    <a href="#" onclick="showCourse('tutoiement-vouvoiement'); return false;" style="color: #6366f1; text-decoration: underline; font-weight: 600;">📚 En savoir plus sur le tutoiement et le vouvoiement →</a>
+</p>
+</div>
+<style>
+    .phrases-wrapper {
+        margin-top: 25px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+        overflow: hidden;
+    }
+    .category-section {
+        border-bottom: 2px solid #e5e7eb;
+    }
+    .category-section:last-child {
+        border-bottom: none;
+    }
+    .category-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 18px 22px;
+        font-size: 1.2em;
+        font-weight: 600;
+        margin: 0;
+    }
+    table.phrases-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table.phrases-table th,
+    table.phrases-table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(0,0,0,0.07);
+        text-align: left;
+        vertical-align: top;
+    }
+    table.phrases-table th {
+        background: #f8f9ff;
+        color: #4338ca;
+        font-weight: 600;
+    }
+    table.phrases-table tr:last-child td {
+        border-bottom: none;
+    }
+    table.phrases-table td em {
+        color: #475569;
+        font-size: 0.95em;
+    }
+    .audio-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2em;
+        margin-left: 8px;
+        padding: 0;
+        vertical-align: middle;
+    }
+    .audio-btn:hover {
+        transform: scale(1.1);
+    }
+    @media (max-width: 720px) {
+        table.phrases-table th,
+        table.phrases-table td {
+            padding: 12px 10px;
+            font-size: 0.9em;
+        }
+    }
+</style>
+<div class="phrases-wrapper">
+<!-- Au début du cours -->
+<div class="category-section">
+<h3 class="category-header">👋 Au début du cours</h3>
+<table class="phrases-table">
+<thead>
+<tr>
+<th>Phrase en français</th>
+<th>Traduction / Explication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comment ça va ?<button class="audio-btn" onclick='playAudio("")' title='Écouter "Comment ça va ?"' type="button">🔊</button></td>
+<td>How are you? (casual greeting)</td>
+</tr>
+<tr>
+<td>Tu vas bien ?<button class="audio-btn" onclick='playAudio("")' title='Écouter "Tu vas bien ?"' type="button">🔊</button></td>
+<td>Are you doing well? (casual check-in)</td>
+</tr>
+<tr>
+<td>La forme ?<button class="audio-btn" onclick='playAudio("")' title='Écouter "La forme ?"' type="button">🔊</button></td>
+<td>How are you? / How's it going? (very casual, short form)</td>
+</tr>
+<tr>
+<td>Salut<button class="audio-btn" onclick='playAudio("")' title='Écouter "Salut"' type="button">🔊</button></td>
+<td>Hi / Bye (casual greeting or farewell)</td>
+</tr>
+<tr>
+<td>Comment s'est passé ta semaine ?<button class="audio-btn" onclick='playAudio("")' title='Écouter "Comment s'est passé ta semaine ?"' type="button">🔊</button></td>
+<td>How was your week? (asking about the past week)</td>
+</tr>
+<tr>
+<td>Comment s'est passé ton week-end ?<button class="audio-btn" onclick='playAudio("")' title='Écouter "Comment s'est passé ton week-end ?"' type="button">🔊</button></td>
+<td>How was your weekend? (asking about the weekend)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- Pendant le cours -->
+<div class="category-section">
+<h3 class="category-header">📚 Pendant le cours</h3>
+<table class="phrases-table">
+<thead>
+<tr>
+<th>Phrase en français</th>
+<th>Traduction / Explication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ça a été les devoirs ?<button class="audio-btn" onclick='playAudio("")' title='Écouter "Ça a été les devoirs ?"' type="button">🔊</button></td>
+<td>How did the homework go? / Did you manage the homework? (casual way to ask about homework)</td>
+</tr>
+<tr>
+<td>Tu as pu faire les devoirs ?<button class="audio-btn" onclick='playAudio("")' title='Écouter "Tu as pu faire les devoirs ?"' type="button">🔊</button></td>
+<td>Were you able to do the homework? (asking if homework was completed)</td>
+</tr>
+<tr>
+<td>Tu vois mon écran ?<button class="audio-btn" onclick='playAudio("")' title='Écouter "Tu vois mon écran ?"' type="button">🔊</button></td>
+<td>Can you see my screen? (checking if screen sharing is working)</td>
+</tr>
+<tr>
+<td>Tu arrives à lire ?<button class="audio-btn" onclick='playAudio("")' title='Écouter "Tu arrives à lire ?"' type="button">🔊</button></td>
+<td>Can you read it? / Are you able to read it? (checking if text is visible/readable)</td>
+</tr>
+<tr>
+<td>Est-ce que tu m'entends bien ?<button class="audio-btn" onclick='playAudio("")' title='Écouter "Est-ce que tu m'entends bien ?"' type="button">🔊</button></td>
+<td>Can you hear me well? (checking audio quality)</td>
+</tr>
+<tr>
+<td>Je n'ai pas compris<button class="audio-btn" onclick='playAudio("")' title='Écouter "Je n'ai pas compris"' type="button">🔊</button></td>
+<td>I didn't understand (asking for clarification)</td>
+</tr>
+<tr>
+<td>Je ne comprends pas<button class="audio-btn" onclick='playAudio("")' title='Écouter "Je ne comprends pas"' type="button">🔊</button></td>
+<td>I don't understand (asking for explanation)</td>
+</tr>
+<tr>
+<td>Excuse-moi (pour interrompre)<button class="audio-btn" onclick='playAudio("")' title='Écouter "Excuse-moi"' type="button">🔊</button></td>
+<td>Excuse me (to interrupt politely)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- Encouragements -->
+<div class="category-section">
+<h3 class="category-header">✨ Encouragements</h3>
+<table class="phrases-table">
+<thead>
+<tr>
+<th>Phrase en français</th>
+<th>Traduction / Explication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Super<button class="audio-btn" onclick='playAudio("")' title='Écouter "Super"' type="button">🔊</button></td>
+<td>Great! / Super! (positive feedback)</td>
+</tr>
+<tr>
+<td>Bien joué<button class="audio-btn" onclick='playAudio("")' title='Écouter "Bien joué"' type="button">🔊</button></td>
+<td>Well done! / Good job! (praise for good work)</td>
+</tr>
+<tr>
+<td>Parfait<button class="audio-btn" onclick='playAudio("")' title='Écouter "Parfait"' type="button">🔊</button></td>
+<td>Perfect! (complete approval)</td>
+</tr>
+<tr>
+<td>Très bien<button class="audio-btn" onclick='playAudio("")' title='Écouter "Très bien"' type="button">🔊</button></td>
+<td>Very good! (positive feedback)</td>
+</tr>
+<tr>
+<td>Bravo<button class="audio-btn" onclick='playAudio("")' title='Écouter "Bravo"' type="button">🔊</button></td>
+<td>Bravo! / Well done! (congratulation)</td>
+</tr>
+<tr>
+<td>C'est ça<button class="audio-btn" onclick='playAudio("")' title='Écouter "C'est ça"' type="button">🔊</button></td>
+<td>That's it! / Exactly! (confirming correctness)</td>
+</tr>
+<tr>
+<td>Tout à fait<button class="audio-btn" onclick='playAudio("")' title='Écouter "Tout à fait"' type="button">🔊</button></td>
+<td>Absolutely! / Exactly! (complete agreement)</td>
+</tr>
+<tr>
+<td>Exactement<button class="audio-btn" onclick='playAudio("")' title='Écouter "Exactement"' type="button">🔊</button></td>
+<td>Exactly! (precise confirmation)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- Pour commencer une activité -->
+<div class="category-section">
+<h3 class="category-header">🚀 Pour commencer une activité</h3>
+<table class="phrases-table">
+<thead>
+<tr>
+<th>Phrase en français</th>
+<th>Traduction / Explication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>On y va<button class="audio-btn" onclick='playAudio("")' title='Écouter "On y va"' type="button">🔊</button></td>
+<td>Let's go! / Here we go! (starting an activity)</td>
+</tr>
+<tr>
+<td>C'est parti<button class="audio-btn" onclick='playAudio("")' title='Écouter "C'est parti"' type="button">🔊</button></td>
+<td>Let's go! / Here we go! (enthusiastic start)</td>
+</tr>
+<tr>
+<td>On va faire un exercice<button class="audio-btn" onclick='playAudio("")' title='Écouter "On va faire un exercice"' type="button">🔊</button></td>
+<td>We're going to do an exercise (announcing an exercise)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- Mots de grammaire/conjugaison -->
+<div class="category-section">
+<h3 class="category-header">📖 Mots de grammaire et conjugaison</h3>
+<table class="phrases-table">
+<thead>
+<tr>
+<th>Mot en français</th>
+<th>Traduction / Explication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conjugaison<button class="audio-btn" onclick='playAudio("")' title='Écouter "Conjugaison"' type="button">🔊</button></td>
+<td>Conjugation (changing verb forms according to person, tense, mood)</td>
+</tr>
+<tr>
+<td>Terminaison<button class="audio-btn" onclick='playAudio("")' title='Écouter "Terminaison"' type="button">🔊</button></td>
+<td>Ending (the final part of a verb that changes)</td>
+</tr>
+<tr>
+<td>Radical<button class="audio-btn" onclick='playAudio("")' title='Écouter "Radical"' type="button">🔊</button></td>
+<td>Stem / Root (the base part of a verb that stays the same)</td>
+</tr>
+<tr>
+<td>Pronom<button class="audio-btn" onclick='playAudio("")' title='Écouter "Pronom"' type="button">🔊</button></td>
+<td>Pronoun (word that replaces a noun: je, tu, il, elle, nous, vous, ils, elles)</td>
+</tr>
+<tr>
+<td>Accord<button class="audio-btn" onclick='playAudio("")' title='Écouter "Accord"' type="button">🔊</button></td>
+<td>Agreement (matching gender and number: le livre / la table, les livres / les tables)</td>
+</tr>
+<tr>
+<td>Liaison<button class="audio-btn" onclick='playAudio("")' title='Écouter "Liaison"' type="button">🔊</button></td>
+<td>Linking (pronouncing a normally silent consonant before a vowel: "les amis" → "lezami")</td>
+</tr>
+<tr>
+<td>Élision<button class="audio-btn" onclick='playAudio("")' title='Écouter "Élision"' type="button">🔊</button></td>
+<td>Elision (dropping a vowel before another vowel: "je" → "j'" in "j'aime")</td>
+</tr>
+<tr>
+<td>Féminin<button class="audio-btn" onclick='playAudio("")' title='Écouter "Féminin"' type="button">🔊</button></td>
+<td>Feminine (gender: la table, une maison)</td>
+</tr>
+<tr>
+<td>Masculin<button class="audio-btn" onclick='playAudio("")' title='Écouter "Masculin"' type="button">🔊</button></td>
+<td>Masculine (gender: le livre, un garçon)</td>
+</tr>
+<tr>
+<td>Phrase<button class="audio-btn" onclick='playAudio("")' title='Écouter "Phrase"' type="button">🔊</button></td>
+<td>Sentence (a complete thought with subject and verb)</td>
+</tr>
+<tr>
+<td>Mot<button class="audio-btn" onclick='playAudio("")' title='Écouter "Mot"' type="button">🔊</button></td>
+<td>Word (a single unit of language)</td>
+</tr>
+<tr>
+<td>Verbe<button class="audio-btn" onclick='playAudio("")' title='Écouter "Verbe"' type="button">🔊</button></td>
+<td>Verb (action word: manger, être, aller)</td>
+</tr>
+<tr>
+<td>Conjuguer<button class="audio-btn" onclick='playAudio("")' title='Écouter "Conjuguer"' type="button">🔊</button></td>
+<td>To conjugate (to change a verb according to person, tense, mood)</td>
+</tr>
+<tr>
+<td>Ce verbe est à l'infinitif<button class="audio-btn" onclick='playAudio("")' title='Écouter "Ce verbe est à l'infinitif"' type="button">🔊</button></td>
+<td>This verb is in the infinitive (base form: manger, être, aller)</td>
+</tr>
+<tr>
+<td>Le verbe est entre parenthèses<button class="audio-btn" onclick='playAudio("")' title='Écouter "Le verbe est entre parenthèses"' type="button">🔊</button></td>
+<td>The verb is in parentheses (the verb is given in brackets)</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- À la fin du cours -->
+<div class="category-section">
+<h3 class="category-header">👋 À la fin du cours</h3>
+<table class="phrases-table">
+<thead>
+<tr>
+<th>Phrase en français</th>
+<th>Traduction / Explication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>À bientôt<button class="audio-btn" onclick='playAudio("")' title='Écouter "À bientôt"' type="button">🔊</button></td>
+<td>See you soon! (general farewell)</td>
+</tr>
+<tr>
+<td>À la semaine prochaine<button class="audio-btn" onclick='playAudio("")' title='Écouter "À la semaine prochaine"' type="button">🔊</button></td>
+<td>See you next week! (farewell when next meeting is next week)</td>
+</tr>
+<tr>
+<td>À mercredi<button class="audio-btn" onclick='playAudio("")' title='Écouter "À mercredi"' type="button">🔊</button></td>
+<td>See you Wednesday! (farewell when next meeting is Wednesday)</td>
+</tr>
+<tr>
+<td>À plus<button class="audio-btn" onclick='playAudio("")' title='Écouter "À plus"' type="button">🔊</button></td>
+<td>See you later! / Bye! (very casual farewell, short for "à plus tard")</td>
+</tr>
+<tr>
+<td>Passe une bonne journée<button class="audio-btn" onclick='playAudio("")' title='Écouter "Passe une bonne journée"' type="button">🔊</button></td>
+<td>Have a good day! (wishing a good day)</td>
+</tr>
+<tr>
+<td>Passe un bon week-end<button class="audio-btn" onclick='playAudio("")' title='Écouter "Passe un bon week-end"' type="button">🔊</button></td>
+<td>Have a good weekend! (wishing a good weekend)</td>
+</tr>
+<tr>
+<td>Passe une bonne soirée<button class="audio-btn" onclick='playAudio("")' title='Écouter "Passe une bonne soirée"' type="button">🔊</button></td>
+<td>Have a good evening! (wishing a good evening)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+

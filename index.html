@@ -65,9 +65,12 @@
                             <p id="conjugation-question"></p>
                         </div>
                         <div class="conjugation-input">
-                            <input type="text" id="conjugation-answer" placeholder="Votre réponse..." />
+                            <input type="text" id="conjugation-answer" placeholder="Ex: avez voulu (ou vous avez voulu)" />
                             <button id="conjugation-validate" onclick="validateConjugation()">Valider</button>
                         </div>
+                        <p style="font-size: 0.85em; color: #666; margin-top: 8px; text-align: center;">
+                            💡 Vous pouvez inclure ou non le pronom sujet (vous avez voulu ou avez voulu)
+                        </p>
                         <div id="conjugation-result" class="conjugation-result" style="display: none;">
                             <p id="conjugation-result-icon"></p>
                             <p id="conjugation-result-text"></p>
@@ -240,7 +243,7 @@
             <div class="section-menu">
                 <div class="section-card level-intermediate" onclick="showCourse('expressions-courantes')">
                     <h3>🗣️ EXPRESSIONS COURANTES</h3>
-                    <p>Expressions françaises courantes avec traductions et exemples</p>
+                    <p>Ça marche, pas de souci, à tout à l'heure...</p>
                 </div>
                 <div class="section-card level-intermediate" onclick="showCourse('contractions-oral')">
                     <h3>🎤 CONTRACTIONS À L'ORAL</h3>
@@ -258,6 +261,11 @@
                     <span class="level-badge">A2/B1</span>
                     <h3>🗣️ QUESTIONS PRATIQUES EN FRANCE</h3>
                     <p>Phrases utiles en voyage (restaurant, boutique, train) avec traduction</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('phrases-utiles-cours-paul')">
+                    <span class="level-badge">A1/A2</span>
+                    <h3>💬 PHRASES UTILES PENDANT LES COURS</h3>
+                    <p>Expressions pour communiquer pendant les cours avec Paul (salutations, encouragements, vocabulaire)</p>
                 </div>
             </div>
         </div>
