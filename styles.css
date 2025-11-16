@@ -495,8 +495,12 @@ em {
 .date-card .game-card-header {
     background: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+
+.date-card .game-card-body {
+    padding: 14px 28px;
 }
 
 /* Conjugation card - entièrement beige/brun */
@@ -572,12 +576,13 @@ em {
 }
 
 .date-text {
-    font-size: 1.78em;
+    font-size: 1.2em;
     color: white;
     text-align: center;
     font-weight: 600;
-    line-height: 1.88;
+    line-height: 1.4;
     font-family: 'Georgia', serif;
+    margin: 0;
 }
 
 /* Conjugaison rapide */
@@ -758,6 +763,12 @@ em {
     display: block;
     width: 100%;
     text-align: center;
+}
+
+.date-card .game-card-link-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    font-size: 0.85em;
 }
 
 .game-card-link-btn:hover {

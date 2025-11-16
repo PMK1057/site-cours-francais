@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grands Hommes Français - Histoire de France</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            line-height: 1.85;
+            color: #212744;
+        }
+        .men-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 36px 24px 48px;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #6d4ac3;
+            text-align: center;
+            font-size: 2.45em;
+            margin-bottom: 22px;
+            border-bottom: 2px solid rgba(118,75,162,0.2);
+            padding-bottom: 16px;
+        }
+        .biography-section {
+            margin-bottom: 30px;
+            padding: 30px 26px;
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(118,75,162,0.12);
+            box-shadow: 0 6px 16px rgba(44, 52, 92, 0.12);
+        }
+        .biography-section h2 {
+            color: #3f2f92;
+            margin: 0 0 20px 0;
+            font-size: 1.78em;
+            text-transform: none;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.55px;
+        }
+        .text-paragraph {
+            font-size: 1.12em;
+            color: #2c3e50;
+            margin-bottom: 18px;
+            line-height: 1.88;
+            text-align: justify;
+        }
+        .english {
+            font-size: 0.9em;
+            color: #4f5d75;
+            font-style: italic;
+            margin: 14px 0 22px;
+            padding: 14px 22px;
+            border-left: 4px solid rgba(102,126,234,0.55);
+            background: rgba(102,126,234,0.07);
+            display: block;
+            border-radius: 0 12px 12px 0;
+        }
+        .vocab-box {
+            background: #fff9e6;
+            border-left: 4px solid #ffa500;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 3px 8px rgba(255,165,0,0.15);
+        }
+        .vocab-box strong {
+            color: #cc7a00;
+            font-size: 1.05em;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .vocab-box ul {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+        }
+        .vocab-box li {
+            margin-bottom: 6px;
+            color: #5c4a00;
+            line-height: 1.6;
+        }
+        .vocab-box li strong {
+            color: #cc7a00;
+            display: inline;
+            margin-right: 6px;
+        }
+        .instructions {
+            background: #d1ecf1;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #0c5460;
+            color: #0c5460;
+            font-size: 1.05em;
+        }
+        .instructions strong {
+            font-size: 1.1em;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            color: #546a7b;
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 24px 14px;
+            }
+            .men-container {
+                padding: 28px 20px;
+            }
+            .biography-section {
+                padding: 26px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            line-height: 1.85;
+            color: #212744;
+        }
+        .men-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 36px 24px 48px;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #6d4ac3;
+            text-align: center;
+            font-size: 2.45em;
+            margin-bottom: 22px;
+            border-bottom: 2px solid rgba(118,75,162,0.2);
+            padding-bottom: 16px;
+        }
+        .biography-section {
+            margin-bottom: 30px;
+            padding: 30px 26px;
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(118,75,162,0.12);
+            box-shadow: 0 6px 16px rgba(44, 52, 92, 0.12);
+        }
+        .biography-section h2 {
+            color: #3f2f92;
+            margin: 0 0 20px 0;
+            font-size: 1.78em;
+            text-transform: none;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.55px;
+        }
+        .text-paragraph {
+            font-size: 1.12em;
+            color: #2c3e50;
+            margin-bottom: 18px;
+            line-height: 1.88;
+            text-align: justify;
+        }
+        .english {
+            font-size: 0.9em;
+            color: #4f5d75;
+            font-style: italic;
+            margin: 14px 0 22px;
+            padding: 14px 22px;
+            border-left: 4px solid rgba(102,126,234,0.55);
+            background: rgba(102,126,234,0.07);
+            display: block;
+            border-radius: 0 12px 12px 0;
+        }
+        .vocab-box {
+            background: #fff9e6;
+            border-left: 4px solid #ffa500;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 3px 8px rgba(255,165,0,0.15);
+        }
+        .vocab-box strong {
+            color: #cc7a00;
+            font-size: 1.05em;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .vocab-box ul {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+        }
+        .vocab-box li {
+            margin-bottom: 6px;
+            color: #5c4a00;
+            line-height: 1.6;
+        }
+        .vocab-box li strong {
+            color: #cc7a00;
+            display: inline;
+            margin-right: 6px;
+        }
+        .instructions {
+            background: #d1ecf1;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #0c5460;
+            color: #0c5460;
+            font-size: 1.05em;
+        }
+        .instructions strong {
+            font-size: 1.1em;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            color: #546a7b;
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 24px 14px;
+            }
+            .men-container {
+                padding: 28px 20px;
+            }
+            .biography-section {
+                padding: 26px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="men-container">
+        <h1>🏛️ Grands Hommes Français</h1>
+        <h2 style="text-align: center; color: #764ba2; border: none; margin-bottom: 25px;">Figures historiques de France</h2>
+        
+        <div class="instructions">
+            <strong>Instructions:</strong> Ces textes présentent les grandes figures de l'histoire de France. Chaque section comprend le texte en français avec une traduction anglaise, et des encadrés avec les mots-clés importants à comprendre.
+        </div>
+
+        <!-- NAPOLÉON -->
+        <div class="biography-section">
+            <h2>Napoléon Bonaparte - L'Empereur qui a dominé l'Europe</h2>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Empereur</strong> : Emperor - chef suprême d'un empire</li>
+                    <li><strong>Révolution</strong> : Revolution - changement politique violent</li>
+                    <li><strong>Coup d'État</strong> : Coup d'état - prise de pouvoir par la force</li>
+                    <li><strong>Empire</strong> : Empire - territoire contrôlé par un empereur</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                Napoléon Bonaparte <strong>est né</strong> en 1769 à Ajaccio, en Corse. Il <strong>est devenu</strong> l'une des figures les plus importantes de l'histoire européenne. Il <strong>a grandi</strong> dans une famille noble corse. À neuf ans, il <strong>a quitté</strong> l'île pour étudier en France.
+                <span class="english">Napoleon Bonaparte was born in 1769 in Ajaccio, Corsica. He became one of the most important figures in European history. He grew up in a noble Corsican family. At nine years old, he left the island to study in France.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                En 1789, la Révolution française <strong>a éclaté</strong>. Napoléon <strong>s'est engagé</strong> dans l'armée révolutionnaire. Il <strong>s'est fait</strong> remarquer rapidement par ses talents militaires. En 1793, il <strong>a aidé</strong> à reprendre Toulon aux royalistes. Cette victoire <strong>l'a rendu</strong> célèbre. Il <strong>n'avait</strong> que 24 ans.
+                <span class="english">In 1789, the French Revolution broke out. Napoleon joined the revolutionary army. He quickly stood out for his military talents. In 1793, he helped retake Toulon from the royalists. This victory made him famous. He was only 24 years old.</span>
+            </div>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Campagne</strong> : Campaign - série de batailles militaires</li>
+                    <li><strong>Conquête</strong> : Conquest - prise de territoire par la force</li>
+                    <li><strong>Victoire</strong> : Victory - succès dans une bataille</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                En 1796, Napoléon <strong>a reçu</strong> le commandement de l'armée d'Italie. Il <strong>a mené</strong> une campagne brillante et <strong>a vaincu</strong> les Autrichiens. Il <strong>a conquis</strong> une grande partie de l'Italie. Les Français <strong>l'ont adoré</strong>. Il <strong>est devenu</strong> un héros national.
+                <span class="english">In 1796, Napoleon received command of the Italian army. He led a brilliant campaign and defeated the Austrians. He conquered a large part of Italy. The French adored him. He became a national hero.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                En 1798, Napoléon <strong>a envahi</strong> l'Égypte. Il <strong>a voulu</strong> couper la route vers l'Inde aux Britanniques. Sur terre, il <strong>a gagné</strong> toutes les batailles. Mais la flotte française <strong>a été</strong> détruite par l'amiral Nelson. Napoléon <strong>est resté</strong> bloqué en Égypte. En 1799, il <strong>a appris</strong> que la France <strong>était</strong> en danger. Il <strong>a abandonné</strong> son armée et <strong>est rentré</strong> en France.
+                <span class="english">In 1798, Napoleon invaded Egypt. He wanted to cut the British route to India. On land, he won every battle. But the French fleet was destroyed by Admiral Nelson. Napoleon remained stuck in Egypt. In 1799, he learned that France was in danger. He abandoned his army and returned to France.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Le 9 novembre 1799 (18 brumaire), Napoléon <strong>a organisé</strong> un coup d'État. Il <strong>a renversé</strong> le Directoire et <strong>s'est nommé</strong> Premier Consul. La France <strong>avait</strong> trois consuls, mais Napoléon <strong>était</strong> le seul véritable dirigeant. Il <strong>a réorganisé</strong> l'administration, <strong>a créé</strong> la Banque de France, et <strong>a établi</strong> le Code civil. Ce code de lois <strong>a modernisé</strong> la France et <strong>influence</strong> encore le droit français aujourd'hui.
+                <span class="english">On November 9, 1799 (18 Brumaire), Napoleon organized a coup d'état. He overthrew the Directory and appointed himself First Consul. France had three consuls, but Napoleon was the only real leader. He reorganized the administration, created the Bank of France, and established the Civil Code. This legal code modernized France and still influences French law today.</span>
+            </div>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Couronnement</strong> : Coronation - cérémonie où on devient empereur/roi</li>
+                    <li><strong>Sacré</strong> : Anointed - consacré par une cérémonie religieuse</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                En 1804, Napoléon <strong>s'est fait</strong> proclamer Empereur des Français. Le 2 décembre 1804, il <strong>s'est fait</strong> sacrer à Notre-Dame de Paris. Mais il <strong>a pris</strong> la couronne des mains du pape et <strong>se l'est mise</strong> lui-même sur la tête. Ce geste <strong>montrait</strong> qu'il ne <strong>devait</strong> son pouvoir à personne, pas même à Dieu. Il <strong>était</strong> son propre maître.
+                <span class="english">In 1804, Napoleon had himself proclaimed Emperor of the French. On December 2, 1804, he was crowned at Notre-Dame de Paris. But he took the crown from the pope's hands and placed it on his own head. This gesture showed that he owed his power to no one, not even God. He was his own master.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Napoléon <strong>a mené</strong> de nombreuses guerres en Europe. Entre 1805 et 1809, il <strong>a remporté</strong> des victoires éclatantes : Austerlitz, Iéna, Wagram. Il <strong>a créé</strong> un empire immense qui <strong>s'étendait</strong> de l'Espagne à la Pologne. Il <strong>a mis</strong> ses frères sur les trônes d'Espagne, de Hollande et de Westphalie. Il <strong>a épousé</strong> Marie-Louise d'Autriche pour créer une alliance. Il <strong>avait</strong> un fils, le roi de Rome.
+                <span class="english">Napoleon waged many wars in Europe. Between 1805 and 1809, he won brilliant victories: Austerlitz, Jena, Wagram. He created a vast empire stretching from Spain to Poland. He placed his brothers on the thrones of Spain, Holland, and Westphalia. He married Marie-Louise of Austria to create an alliance. He had a son, the King of Rome.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Mais Napoléon <strong>a commis</strong> une erreur fatale. En 1812, il <strong>a envahi</strong> la Russie avec une armée de 600 000 hommes. Les Russes <strong>ont refusé</strong> de se battre. Ils <strong>se sont retirés</strong> en brûlant tout sur leur passage. L'armée française <strong>a marché</strong> jusqu'à Moscou, mais la ville <strong>était</strong> vide et en flammes. L'hiver russe <strong>est arrivé</strong>. Il <strong>était</strong> terrible. Des centaines de milliers de soldats <strong>sont morts</strong> de froid et de faim. Moins de 100 000 hommes <strong>sont rentrés</strong> en France.
+                <span class="english">But Napoleon made a fatal mistake. In 1812, he invaded Russia with an army of 600,000 men. The Russians refused to fight. They withdrew, burning everything in their path. The French army marched to Moscow, but the city was empty and in flames. The Russian winter arrived. It was terrible. Hundreds of thousands of soldiers died from cold and hunger. Less than 100,000 men returned to France.</span>
+            </div>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Abdication</strong> : Abdication - renoncer au pouvoir</li>
+                    <li><strong>Exil</strong> : Exile - vivre forcé loin de son pays</li>
+                    <li><strong>Restauration</strong> : Restoration - retour d'un ancien régime</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                En 1813, toute l'Europe <strong>s'est unie</strong> contre Napoléon. Il <strong>a été</strong> vaincu à Leipzig. En 1814, les Alliés <strong>ont envahi</strong> la France. Napoléon <strong>a abdiqué</strong> et <strong>a été</strong> exilé sur l'île d'Elbe. Les Bourbons <strong>sont revenus</strong> au pouvoir. Louis XVIII <strong>est devenu</strong> roi. C'<strong>était</strong> la Restauration.
+                <span class="english">In 1813, all of Europe united against Napoleon. He was defeated at Leipzig. In 1814, the Allies invaded France. Napoleon abdicated and was exiled to the island of Elba. The Bourbons returned to power. Louis XVIII became king. This was the Restoration.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Mais en mars 1815, Napoléon <strong>s'est échappé</strong> de l'île d'Elbe et <strong>est revenu</strong> en France. En trois semaines, sans tirer un seul coup de feu, il <strong>a reconquis</strong> le pays. Les soldats envoyés pour l'arrêter <strong>se sont ralliés</strong> à lui. C'<strong>était</strong> le "vol de l'Aigle". Les Cent-Jours <strong>ont commencé</strong>.
+                <span class="english">But in March 1815, Napoleon escaped from the island of Elba and returned to France. In three weeks, without firing a single shot, he reconquered the country. The soldiers sent to arrest him rallied to him. This was the "Flight of the Eagle." The Hundred Days began.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Le 18 juin 1815, à Waterloo, en Belgique, Napoléon <strong>a affronté</strong> les armées britannique et prussienne. La bataille <strong>a duré</strong> toute la journée. Les Français <strong>ont failli</strong> gagner plusieurs fois. Mais les Prussiens <strong>sont arrivés</strong> en renfort. Napoléon <strong>a été</strong> écrasé. Il <strong>a abdiqué</strong> une seconde fois et <strong>s'est rendu</strong> aux Britanniques.
+                <span class="english">On June 18, 1815, at Waterloo, Belgium, Napoleon faced the British and Prussian armies. The battle lasted all day. The French nearly won several times. But the Prussians arrived as reinforcements. Napoleon was crushed. He abdicated a second time and surrendered to the British.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Cette fois, les Britanniques <strong>l'ont envoyé</strong> très loin : sur l'île de Sainte-Hélène, dans l'Atlantique Sud. Il <strong>y est resté</strong> six ans, jusqu'à sa mort en 1821. Il <strong>avait</strong> 51 ans. On <strong>sait</strong> maintenant qu'il <strong>est mort</strong> d'un cancer de l'estomac, probablement causé par un empoisonnement à l'arsenic. Ses dernières paroles <strong>ont été</strong> : "France, armée, tête d'armée, Joséphine".
+                <span class="english">This time, the British sent him very far away: to the island of Saint Helena, in the South Atlantic. He stayed there for six years, until his death in 1821. He was 51 years old. We now know that he died of stomach cancer, probably caused by arsenic poisoning. His last words were: "France, army, head of the army, Josephine."</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Napoléon <strong>a transformé</strong> la France et l'Europe. Il <strong>a modernisé</strong> l'administration, <strong>a créé</strong> le système métrique, <strong>a réformé</strong> l'éducation. Ses réformes juridiques <strong>ont influencé</strong> toute l'Europe. Il <strong>reste</strong> une figure controversée : un génie militaire et un réformateur pour les uns, un tyran pour les autres. Son corps <strong>a été</strong> rapatrié en France en 1840 et <strong>repose</strong> aux Invalides, à Paris.
+                <span class="english">Napoleon transformed France and Europe. He modernized the administration, created the metric system, reformed education. His legal reforms influenced all of Europe. He remains a controversial figure: a military genius and reformer for some, a tyrant for others. His body was repatriated to France in 1840 and rests at Les Invalides, in Paris.</span>
+            </div>
+        </div>
+
+        <!-- DE GAULLE -->
+        <div class="biography-section">
+            <h2>Charles de Gaulle - Le résistant devenu président</h2>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Résistance</strong> : Resistance - lutte contre l'occupation</li>
+                    <li><strong>Réfugié</strong> : Refugee - personne qui fuit son pays</li>
+                    <li><strong>Armistice</strong> : Armistice - accord pour arrêter une guerre</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                Charles de Gaulle <strong>est né</strong> en 1890 à Lille dans une famille catholique et patriote. Il <strong>a choisi</strong> très jeune la carrière militaire.
+                <span class="english">Charles de Gaulle was born in 1890 in Lille into a Catholic and patriotic family. He chose a military career at a very young age.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                En 1940, la France <strong>a été</strong> envahie par l'Allemagne nazie. Le gouvernement français <strong>a capitulé</strong> et <strong>a signé</strong> l'armistice. Le maréchal Pétain <strong>a accepté</strong> la défaite et la collaboration avec Hitler. De Gaulle <strong>a refusé</strong>. Le 18 juin 1940, réfugié à Londres, il <strong>a lancé</strong> un appel radiophonique aux Français : "La France a perdu une bataille, mais la France n'a pas perdu la guerre !" Très peu de gens <strong>ont entendu</strong> cet appel à l'époque, mais il <strong>est devenu</strong> mythique.
+                <span class="english">In 1940, France was invaded by Nazi Germany. The French government capitulated and signed the armistice. Marshal Pétain accepted defeat and collaboration with Hitler. De Gaulle refused. On June 18, 1940, a refugee in London, he broadcast a radio appeal to the French: "France has lost a battle, but France has not lost the war!" Very few people heard this appeal at the time, but it became mythical.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                De Gaulle <strong>a organisé</strong> la France Libre depuis Londres. Progressivement, des résistants français <strong>l'ont rejoint</strong>. Le gouvernement de Vichy <strong>l'a condamné</strong> à mort par contumace. En 1944, après le débarquement allié en Normandie, de Gaulle <strong>est rentré</strong> en France. Le 26 août 1944, il <strong>a descendu</strong> les Champs-Élysées sous les acclamations. Il <strong>était</strong> le chef incontesté de la France libérée.
+                <span class="english">De Gaulle organized Free France from London. Gradually, French resistants joined him. The Vichy government sentenced him to death in absentia. In 1944, after the Allied landing in Normandy, de Gaulle returned to France. On August 26, 1944, he walked down the Champs-Élysées to cheers. He was the undisputed leader of liberated France.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                En 1958, la crise de la guerre d'Algérie <strong>a ramené</strong> de Gaulle au pouvoir. Il <strong>a fondé</strong> la Cinquième République avec une constitution qui <strong>donnait</strong> plus de pouvoir au président. De Gaulle <strong>a accordé</strong> l'indépendance à l'Algérie en 1962. Il <strong>a développé</strong> l'arme nucléaire française et <strong>a mené</strong> une politique étrangère indépendante des États-Unis. Il <strong>est mort</strong> en 1970. Il <strong>reste</strong> une figure centrale de l'histoire française du 20ème siècle.
+                <span class="english">In 1958, the crisis of the Algerian War brought de Gaulle back to power. He founded the Fifth Republic with a constitution that gave more power to the president. De Gaulle granted independence to Algeria in 1962. He developed the French nuclear weapon and pursued a foreign policy independent of the United States. He died in 1970. He remains a central figure in 20th-century French history.</span>
+            </div>
+        </div>
+
+        <!-- VOLTAIRE -->
+        <div class="biography-section">
+            <h2>Voltaire - Le philosophe provocateur</h2>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Philosophe</strong> : Philosopher - penseur qui réfléchit sur la vie</li>
+                    <li><strong>Satirique</strong> : Satirical - qui critique avec humour</li>
+                    <li><strong>Exilé</strong> : Exiled - banni de son pays</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                François-Marie Arouet, dit Voltaire, <strong>est né</strong> à Paris en 1694 dans une famille bourgeoise. Il <strong>a adopté</strong> le pseudonyme "Voltaire" vers 1718.
+                <span class="english">François-Marie Arouet, known as Voltaire, was born in Paris in 1694 into a bourgeois family. He adopted the pseudonym "Voltaire" around 1718.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Jeune, Voltaire <strong>a commencé</strong> à écrire des textes satiriques contre le pouvoir. En 1717, le roi <strong>l'a fait</strong> emprisonner à la Bastille pendant 11 mois pour avoir critiqué le régent. En prison, il <strong>a écrit</strong> sa première tragédie. En 1726, après une dispute avec un noble, Voltaire <strong>a été</strong> à nouveau embastillé puis exilé en Angleterre. Il <strong>y est resté</strong> trois ans. Il <strong>a découvert</strong> les idées de John Locke et Isaac Newton. Cette expérience <strong>a transformé</strong> sa pensée.
+                <span class="english">Young, Voltaire began writing satirical texts against power. In 1717, the king had him imprisoned in the Bastille for 11 months for criticizing the regent. In prison, he wrote his first tragedy. In 1726, after a dispute with a nobleman, Voltaire was imprisoned again and then exiled to England. He stayed there for three years. He discovered the ideas of John Locke and Isaac Newton. This experience transformed his thinking.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                De retour en France, Voltaire <strong>a écrit</strong> des dizaines d'œuvres : des pièces de théâtre, des essais philosophiques, des romans comme <em>Candide</em> (1759). Il <strong>a dénoncé</strong> l'intolérance religieuse, le fanatisme et l'arbitraire royal. L'affaire Calas <strong>a marqué</strong> sa vie. En 1762, un protestant, Jean Calas, <strong>a été</strong> torturé et exécuté à Toulouse pour un crime qu'il n'avait pas commis. Voltaire <strong>s'est battu</strong> pendant trois ans pour réhabiliter sa mémoire. Il <strong>a réussi</strong>.
+                <span class="english">Returning to France, Voltaire wrote dozens of works: plays, philosophical essays, novels like Candide (1759). He denounced religious intolerance, fanaticism, and royal arbitrariness. The Calas affair marked his life. In 1762, a Protestant, Jean Calas, was tortured and executed in Toulouse for a crime he did not commit. Voltaire fought for three years to rehabilitate his memory. He succeeded.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Voltaire <strong>a passé</strong> les dernières années de sa vie en Suisse, à Ferney, près de la frontière française. De là, il <strong>a continué</strong> à bombarder la France de pamphlets contre l'Église et le pouvoir absolu. "Écrasez l'infâme !" <strong>était</strong> son cri de guerre contre le fanatisme. Il <strong>est mort</strong> à Paris en 1778, à 83 ans. L'Église <strong>a refusé</strong> de l'enterrer religieusement. En 1791, la Révolution <strong>a transféré</strong> ses cendres au Panthéon.
+                <span class="english">Voltaire spent the last years of his life in Switzerland, at Ferney, near the French border. From there, he continued to bombard France with pamphlets against the Church and absolute power. "Crush the infamous thing!" was his war cry against fanaticism. He died in Paris in 1778, at 83 years old. The Church refused to bury him religiously. In 1791, the Revolution transferred his ashes to the Panthéon.</span>
+            </div>
+        </div>
+
+        <!-- LOUIS XIV -->
+        <div class="biography-section">
+            <h2>Louis XIV - Le Roi-Soleil</h2>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Monarchie absolue</strong> : Absolute monarchy - roi avec tout le pouvoir</li>
+                    <li><strong>Règne</strong> : Reign - période où un roi gouverne</li>
+                    <li><strong>Cour</strong> : Court - entourage du roi</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                Louis XIV <strong>est né</strong> en 1638. Il <strong>est devenu</strong> roi de France à l'âge de 5 ans, en 1643, après la mort de son père Louis XIII. Pendant son enfance, la France <strong>a connu</strong> une période de troubles : la Fronde. Des nobles <strong>se sont révoltés</strong> contre le pouvoir royal. Le jeune Louis <strong>a dû</strong> fuir Paris avec sa mère. Cette expérience <strong>l'a marqué</strong> profondément.
+                <span class="english">Louis XIV was born in 1638. He became king of France at the age of 5, in 1643, after the death of his father Louis XIII. During his childhood, France experienced a period of turmoil: the Fronde. Nobles revolted against royal power. The young Louis had to flee Paris with his mother. This experience marked him deeply.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                En 1661, à 23 ans, Louis XIV <strong>a pris</strong> le pouvoir personnel. Il <strong>a déclaré</strong> : "L'État, c'est moi". Il <strong>a gouverné</strong> la France pendant 72 ans, le plus long règne de l'histoire européenne. Louis XIV <strong>a construit</strong> le château de Versailles. Il <strong>a transformé</strong> un pavillon de chasse en un palais immense. En 1682, il <strong>y a installé</strong> toute la cour. Les nobles <strong>devaient</strong> vivre à Versailles sous son contrôle. C'<strong>était</strong> une prison dorée.
+                <span class="english">In 1661, at 23 years old, Louis XIV took personal power. He declared: "The State is me." He governed France for 72 years, the longest reign in European history. Louis XIV built the Palace of Versailles. He transformed a hunting lodge into a huge palace. In 1682, he installed the entire court there. Nobles had to live at Versailles under his control. It was a gilded prison.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Le Roi-Soleil <strong>a mené</strong> de nombreuses guerres pour agrandir le territoire français. Il <strong>a conquis</strong> l'Alsace, la Franche-Comté et des villes du Nord. Mais ces guerres <strong>ont coûté</strong> très cher au royaume. En 1685, Louis XIV <strong>a révoqué</strong> l'Édit de Nantes. Les protestants français <strong>n'avaient</strong> plus le droit de pratiquer leur religion. Des centaines de milliers <strong>ont fui</strong> le pays. Cette décision <strong>a affaibli</strong> l'économie française. Louis XIV <strong>est mort</strong> en 1715. Il <strong>a laissé</strong> un pays endetté et une monarchie absolue qui <strong>s'effondrerait</strong> 74 ans plus tard avec la Révolution.
+                <span class="english">The Sun King waged many wars to expand French territory. He conquered Alsace, Franche-Comté, and cities in the North. But these wars cost the kingdom dearly. In 1685, Louis XIV revoked the Edict of Nantes. French Protestants no longer had the right to practice their religion. Hundreds of thousands fled the country. This decision weakened the French economy. Louis XIV died in 1715. He left a country in debt and an absolute monarchy that would collapse 74 years later with the Revolution.</span>
+            </div>
+        </div>
+
+        <!-- PASTEUR -->
+        <div class="biography-section">
+            <h2>Louis Pasteur - Le scientifique qui a sauvé des millions de vies</h2>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Microbe</strong> : Microbe - organisme invisible qui cause des maladies</li>
+                    <li><strong>Pasteurisation</strong> : Pasteurization - procédé pour tuer les microbes</li>
+                    <li><strong>Vaccin</strong> : Vaccine - médicament qui protège d'une maladie</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                Louis Pasteur <strong>est né</strong> en 1822 dans une famille modeste du Jura. Il <strong>a étudié</strong> la chimie et <strong>est devenu</strong> professeur à l'université de Lille. Dans les années 1860, Pasteur <strong>a fait</strong> une découverte majeure : il <strong>a prouvé</strong> que les microbes <strong>causent</strong> les maladies et la fermentation.
+                <span class="english">Louis Pasteur was born in 1822 into a modest family in the Jura. He studied chemistry and became a professor at the University of Lille. In the 1860s, Pasteur made a major discovery: he proved that microbes cause diseases and fermentation.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Il <strong>a inventé</strong> la pasteurisation : un procédé qui <strong>tue</strong> les microbes dans le lait et le vin en chauffant le liquide. Cette technique <strong>a révolutionné</strong> l'industrie alimentaire et <strong>a sauvé</strong> des millions de vies. En 1885, Pasteur <strong>a développé</strong> le vaccin contre la rage. Un jeune garçon de 9 ans, Joseph Meister, <strong>s'est fait</strong> mordre par un chien enragé. Pasteur <strong>lui a injecté</strong> son vaccin expérimental. L'enfant <strong>a survécu</strong>. C'<strong>était</strong> un succès historique. Pasteur <strong>est mort</strong> en 1895. Aujourd'hui, l'Institut Pasteur à Paris <strong>continue</strong> ses recherches sur les maladies infectieuses.
+                <span class="english">He invented pasteurization: a process that kills microbes in milk and wine by heating the liquid. This technique revolutionized the food industry and saved millions of lives. In 1885, Pasteur developed the rabies vaccine. A 9-year-old boy, Joseph Meister, was bitten by a rabid dog. Pasteur injected him with his experimental vaccine. The child survived. It was a historic success. Pasteur died in 1895. Today, the Pasteur Institute in Paris continues its research on infectious diseases.</span>
+            </div>
+        </div>
+
+        <!-- HUGO -->
+        <div class="biography-section">
+            <h2>Victor Hugo - L'écrivain engagé</h2>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Engagé</strong> : Committed - qui défend des causes politiques</li>
+                    <li><strong>Dénoncer</strong> : Denounce - critiquer publiquement</li>
+                    <li><strong>Exil</strong> : Exile - bannissement forcé</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                Victor Hugo <strong>est né</strong> à Besançon en 1802. Il <strong>est devenu</strong> l'un des plus grands écrivains français du 19ème siècle. Il <strong>a écrit</strong> des romans célèbres comme <em>Notre-Dame de Paris</em> (1831) et <em>Les Misérables</em> (1862). Ces œuvres <strong>dénoncent</strong> la misère sociale et <strong>défendent</strong> les opprimés.
+                <span class="english">Victor Hugo was born in Besançon in 1802. He became one of the greatest French writers of the 19th century. He wrote famous novels like Notre-Dame de Paris (1831) and Les Misérables (1862). These works denounce social misery and defend the oppressed.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Hugo <strong>n'était</strong> pas seulement écrivain. Il <strong>s'est engagé</strong> en politique. En 1848, il <strong>est devenu</strong> député. Il <strong>a combattu</strong> la peine de mort et <strong>a défendu</strong> l'éducation gratuite pour tous les enfants. En 1851, Napoléon III <strong>a pris</strong> le pouvoir par un coup d'État. Hugo <strong>s'est opposé</strong> violemment à cette dictature. Le gouvernement <strong>l'a exilé</strong>. Il <strong>a vécu</strong> 19 ans en exil, d'abord en Belgique, puis sur les îles anglo-normandes. En 1870, après la chute de Napoléon III, Hugo <strong>est rentré</strong> en France. Il <strong>est mort</strong> en 1885. La République <strong>lui a organisé</strong> des funérailles nationales monumentales.
+                <span class="english">Hugo was not only a writer. He engaged in politics. In 1848, he became a deputy. He fought against the death penalty and defended free education for all children. In 1851, Napoleon III took power through a coup d'état. Hugo violently opposed this dictatorship. The government exiled him. He lived in exile for 19 years, first in Belgium, then on the Channel Islands. In 1870, after the fall of Napoleon III, Hugo returned to France. He died in 1885. The Republic organized monumental national funerals for him.</span>
+            </div>
+        </div>
+
+        <!-- CURIE -->
+        <div class="biography-section">
+            <h2>Pierre et Marie Curie - Le couple de la radioactivité</h2>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Radioactivité</strong> : Radioactivity - propriété de certains éléments</li>
+                    <li><strong>Prix Nobel</strong> : Nobel Prize - prix scientifique prestigieux</li>
+                    <li><strong>Radiation</strong> : Radiation - énergie émise par des substances radioactives</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                Marie Curie <strong>est née</strong> en Pologne en 1867 sous le nom de Maria Sklodowska. Elle <strong>a déménagé</strong> à Paris pour étudier la physique à la Sorbonne. En 1895, elle <strong>a épousé</strong> Pierre Curie, un physicien français. Ensemble, ils <strong>ont formé</strong> un couple scientifique exceptionnel.
+                <span class="english">Marie Curie was born in Poland in 1867 under the name Maria Sklodowska. She moved to Paris to study physics at the Sorbonne. In 1895, she married Pierre Curie, a French physicist. Together, they formed an exceptional scientific couple.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                En 1898, Marie et Pierre <strong>ont découvert</strong> deux nouveaux éléments chimiques : le polonium et le radium. En 1903, ils <strong>ont reçu</strong> le prix Nobel de physique. Marie <strong>est devenue</strong> la première femme à recevoir un prix Nobel. En 1906, Pierre <strong>est mort</strong> dans un accident de rue à Paris. Marie <strong>a continué</strong> seule les recherches. En 1911, elle <strong>a obtenu</strong> un deuxième prix Nobel, cette fois en chimie. Elle <strong>reste</strong> la seule personne à avoir reçu deux prix Nobel dans deux disciplines différentes. Marie Curie <strong>est morte</strong> en 1934 d'une leucémie, probablement causée par son exposition aux radiations. En 1995, elle <strong>est devenue</strong> la première femme enterrée au Panthéon pour ses propres mérites.
+                <span class="english">In 1898, Marie and Pierre discovered two new chemical elements: polonium and radium. In 1903, they received the Nobel Prize in Physics. Marie became the first woman to receive a Nobel Prize. In 1906, Pierre died in a street accident in Paris. Marie continued the research alone. In 1911, she won a second Nobel Prize, this time in Chemistry. She remains the only person to have received two Nobel Prizes in two different disciplines. Marie Curie died in 1934 from leukemia, probably caused by her exposure to radiation. In 1995, she became the first woman buried in the Panthéon for her own merits.</span>
+            </div>
+        </div>
+
+        <!-- RICHELIEU -->
+        <div class="biography-section">
+            <h2>Richelieu - Le cardinal qui a fait la France moderne</h2>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Cardinal</strong> : Cardinal - haut dignitaire de l'Église</li>
+                    <li><strong>Siège</strong> : Siege - encerclement d'une ville</li>
+                    <li><strong>Académie</strong> : Academy - institution savante</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                Armand Jean du Plessis de Richelieu <strong>est né</strong> en 1585. En 1624, le roi Louis XIII <strong>l'a nommé</strong> principal ministre. Richelieu <strong>est resté</strong> au pouvoir jusqu'à sa mort en 1642. Pendant 18 ans, il <strong>a gouverné</strong> la France avec une autorité de fer.
+                <span class="english">Armand Jean du Plessis de Richelieu was born in 1585. In 1624, King Louis XIII appointed him principal minister. Richelieu remained in power until his death in 1642. For 18 years, he governed France with an iron authority.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Son objectif <strong>était</strong> simple : renforcer le pouvoir royal. Les nobles turbulents <strong>étaient</strong> sa première cible. Il <strong>a fait</strong> détruire leurs châteaux fortifiés. En 1628, il <strong>a assiégé</strong> La Rochelle, la principale ville protestante. Après 14 mois de siège, la ville <strong>s'est rendue</strong>. Il <strong>a créé</strong> l'Académie française en 1635 pour contrôler et unifier la langue française. Il <strong>a transformé</strong> la France en une monarchie absolue centralisée. Il <strong>est mort</strong> en 1642, quelques mois avant Louis XIII.
+                <span class="english">His goal was simple: strengthen royal power. Turbulent nobles were his first target. He had their fortified castles destroyed. In 1628, he besieged La Rochelle, the main Protestant city. After 14 months of siege, the city surrendered. He created the French Academy in 1635 to control and unify the French language. He transformed France into a centralized absolute monarchy. He died in 1642, a few months before Louis XIII.</span>
+            </div>
+        </div>
+
+        <!-- ROBESPIERRE -->
+        <div class="biography-section">
+            <h2>Robespierre - L'Incorruptible de la Terreur</h2>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Terreur</strong> : Terror - période de violence politique</li>
+                    <li><strong>Guillotine</strong> : Guillotine - machine pour exécuter</li>
+                    <li><strong>Révolution</strong> : Revolution - changement politique violent</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                Maximilien de Robespierre <strong>est né</strong> à Arras en 1758. En 1789, quand la Révolution <strong>a éclaté</strong>, Robespierre <strong>a été</strong> élu aux États généraux. On <strong>l'a surnommé</strong> "l'Incorruptible" parce qu'il <strong>refusait</strong> l'argent et le pouvoir personnel.
+                <span class="english">Maximilien de Robespierre was born in Arras in 1758. In 1789, when the Revolution broke out, Robespierre was elected to the Estates General. He was nicknamed "the Incorruptible" because he refused money and personal power.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                En 1793, la France <strong>était</strong> en guerre contre toute l'Europe. À l'intérieur, des royalistes <strong>se révoltaient</strong>. Robespierre et les Jacobins <strong>ont pris</strong> le contrôle du Comité de salut public. Ils <strong>ont instauré</strong> la Terreur pour "sauver la République". Entre 1793 et 1794, environ 40 000 personnes <strong>ont été</strong> guillotinées. Le 9 thermidor (27 juillet 1794), la Convention <strong>s'est retournée</strong> contre Robespierre. Il <strong>a été</strong> guillotiné sans procès. Il <strong>avait</strong> 36 ans. Avec sa mort, la Terreur <strong>s'est terminée</strong>.
+                <span class="english">In 1793, France was at war with all of Europe. Internally, royalists were revolting. Robespierre and the Jacobins took control of the Committee of Public Safety. They established the Terror to "save the Republic." Between 1793 and 1794, approximately 40,000 people were guillotined. On 9 Thermidor (July 27, 1794), the Convention turned against Robespierre. He was guillotined without trial. He was 36 years old. With his death, the Terror ended.</span>
+            </div>
+        </div>
+
+        <!-- CLEMENCEAU -->
+        <div class="biography-section">
+            <h2>Georges Clemenceau - Le Tigre de la Grande Guerre</h2>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Capituler</strong> : Capitulate - se rendre à l'ennemi</li>
+                    <li><strong>Traité</strong> : Treaty - accord de paix</li>
+                    <li><strong>Président du Conseil</strong> : Prime Minister - chef du gouvernement</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                Georges Clemenceau <strong>est né</strong> en 1841 en Vendée. En 1917, la France <strong>était</strong> épuisée par trois ans de guerre. À 76 ans, Clemenceau <strong>est revenu</strong> au pouvoir comme président du Conseil. Son message <strong>était</strong> simple : "Je fais la guerre !" On <strong>l'a surnommé</strong> "le Tigre" et "le Père la Victoire".
+                <span class="english">Georges Clemenceau was born in 1841 in Vendée. In 1917, France was exhausted by three years of war. At 76 years old, Clemenceau returned to power as Prime Minister. His message was simple: "I wage war!" He was nicknamed "the Tiger" and "Father Victory."</span>
+            </div>
+            
+            <div class="text-paragraph">
+                En 1918, l'Allemagne <strong>a capitulé</strong>. En 1919, Clemenceau <strong>a négocié</strong> le traité de Versailles. Il <strong>voulait</strong> une paix dure pour l'Allemagne. Il <strong>a obtenu</strong> le retour de l'Alsace-Lorraine à la France. Il <strong>est mort</strong> en 1929 à 88 ans.
+                <span class="english">In 1918, Germany capitulated. In 1919, Clemenceau negotiated the Treaty of Versailles. He wanted a harsh peace for Germany. He obtained the return of Alsace-Lorraine to France. He died in 1929 at 88 years old.</span>
+            </div>
+        </div>
+
+        <!-- MOULIN -->
+        <div class="biography-section">
+            <h2>Jean Moulin - Le héros de la Résistance</h2>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Préfet</strong> : Prefect - représentant de l'État dans une région</li>
+                    <li><strong>Gestapo</strong> : Gestapo - police secrète nazie</li>
+                    <li><strong>Torturer</strong> : Torture - faire souffrir pour obtenir des informations</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                Jean Moulin <strong>est né</strong> en 1899 à Béziers. Il <strong>est entré</strong> dans l'administration comme préfet, le plus jeune de France. En juin 1940, les Allemands <strong>lui ont ordonné</strong> de signer un document accusant faussement des tirailleurs sénégalais de crimes. Moulin <strong>a refusé</strong>. Pour ne pas céder sous la torture, il <strong>s'est tranché</strong> la gorge avec un morceau de verre. Il <strong>a survécu</strong> mais <strong>a gardé</strong> une cicatrice.
+                <span class="english">Jean Moulin was born in 1899 in Béziers. He entered the administration as a prefect, the youngest in France. In June 1940, the Germans ordered him to sign a document falsely accusing Senegalese riflemen of crimes. Moulin refused. To avoid giving in under torture, he cut his throat with a piece of glass. He survived but kept a scar.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                En 1941, il <strong>s'est échappé</strong> en zone libre puis <strong>a gagné</strong> Londres pour rencontrer de Gaulle. Sa mission <strong>était</strong> claire : unifier les mouvements de résistance français. En mai 1943, il <strong>a créé</strong> le Conseil national de la Résistance (CNR). Le 21 juin 1943, Moulin <strong>a convoqué</strong> une réunion secrète du CNR à Caluire. Quelqu'un <strong>a trahi</strong>. La Gestapo <strong>a fait</strong> irruption et <strong>a arrêté</strong> tout le monde. Barbie <strong>a torturé</strong> Moulin pendant des semaines. Moulin <strong>n'a rien dit</strong>. Il <strong>est mort</strong> le 8 juillet 1943. Il <strong>avait</strong> 44 ans. En 1964, de Gaulle <strong>a fait</strong> transférer ses cendres au Panthéon.
+                <span class="english">In 1941, he escaped to the free zone and then went to London to meet de Gaulle. His mission was clear: unify the French resistance movements. In May 1943, he created the National Council of the Resistance (CNR). On June 21, 1943, Moulin convened a secret CNR meeting in Caluire. Someone betrayed them. The Gestapo burst in and arrested everyone. Barbie tortured Moulin for weeks. Moulin said nothing. He died on July 8, 1943. He was 44 years old. In 1964, de Gaulle had his ashes transferred to the Panthéon.</span>
+            </div>
+        </div>
+
+        <!-- LUMIÈRE -->
+        <div class="biography-section">
+            <h2>Les frères Lumière - Les inventeurs du cinéma</h2>
+            
+            <div class="vocab-box">
+                <strong>📚 Mots-clés importants :</strong>
+                <ul>
+                    <li><strong>Cinématographe</strong> : Cinematograph - première machine de cinéma</li>
+                    <li><strong>Projection</strong> : Projection - affichage d'un film sur un écran</li>
+                    <li><strong>Opérateur</strong> : Operator - personne qui filme</li>
+                </ul>
+            </div>
+            
+            <div class="text-paragraph">
+                Auguste et Louis Lumière <strong>sont nés</strong> à Besançon dans les années 1860. Leur père <strong>possédait</strong> une usine de matériel photographique à Lyon. En 1895, ils <strong>ont inventé</strong> le cinématographe : une machine qui <strong>peut</strong> filmer et projeter des images en mouvement.
+                <span class="english">Auguste and Louis Lumière were born in Besançon in the 1860s. Their father owned a photographic equipment factory in Lyon. In 1895, they invented the cinematograph: a machine that can film and project moving images.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Le 28 décembre 1895, ils <strong>ont organisé</strong> la première projection publique de films au Grand Café à Paris. Les spectateurs <strong>ont été</strong> fascinés et effrayés en même temps. Ils <strong>ont tourné</strong> plus de 1400 films entre 1895 et 1905. Contrairement à ce qu'on pense souvent, ils <strong>ne croyaient</strong> pas au futur du cinéma. Louis Lumière <strong>a déclaré</strong> que le cinéma était "une invention sans avenir". Ils <strong>avaient</strong> tort : le cinéma <strong>est devenu</strong> le septième art.
+                <span class="english">On December 28, 1895, they organized the first public film screening at the Grand Café in Paris. The spectators were both fascinated and frightened. They filmed over 1,400 films between 1895 and 1905. Contrary to common belief, they did not believe in the future of cinema. Louis Lumière declared that cinema was "an invention without a future." They were wrong: cinema became the seventh art.</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Vocabulaire avancé :</strong> conquête, abdication, exil, résistance, pasteurisation, vaccin, radioactivité, terreur, guillotine, cinématographe</p>
+            <p>✨ Textes créés pour l'apprentissage du français avancé ✨</p>
+        </div>
+    </div>
+</body>
+</html>
+
