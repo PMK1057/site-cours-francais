@@ -934,3 +934,19 @@ em {
 .global-warning .warning-text {
     font-size: 0.95em;
 }
+
+/* Impression globale */
+@media print {
+    .print-hide { display: none !important; }
+    body { background: #ffffff !important; }
+    .section, .container { box-shadow: none !important; }
+}
+
+/* Bouton PDF global pour les cours */
+.course-toolbar { text-align: right; margin-bottom: 12px; }
+.print-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 14px; border-radius: 8px; border: 1px solid #764ba2;
+    color: #764ba2; background: #f4f1ff; cursor: pointer; font-weight: 600;
+}
+.print-btn:hover { background: #ece7ff; }

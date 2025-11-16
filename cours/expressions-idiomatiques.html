@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expressions idiomatiques françaises</title>
+    <style>
+        .idioms-container { max-width: 980px; margin: 0 auto; padding: 28px 22px; box-sizing: border-box; }
+        h2 { color: #6d4ac3; font-family: 'Georgia', serif; text-align: center; margin: 0 0 18px; }
+        p.lead { color: #212744; opacity: .9; margin-bottom: 18px; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0 24px; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+        th, td { padding: 12px 14px; border-bottom: 1px solid #e9ecef; }
+        th { background: #f5f6ff; color: #3f2f92; text-align: left; }
+        tr:hover td { background: #fafbff; }
+        .en { color: #425466; font-size: .95em; }
+        .note { background: #fff7e6; border-left: 4px solid #ffb84d; padding: 12px 14px; border-radius: 8px; color: #7a5b10; margin: 10px 0 18px; }
+    </style>
+</head>
+<body>
+    <div class="idioms-container">
+        <button class="back-btn" onclick="backToSection('expressions')">← Retour</button>
+        <h2>🧠 Expressions idiomatiques</h2>
+        <p class="lead">Registre familier / courant, tournures figées et idiomes très utilisés au quotidien.</p>
+
+        <div class="note">
+            Conseil: apprends-les en blocs complets. Leur sens est souvent figuré; une traduction mot à mot ne fonctionne pas.
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Expression (FR)</th>
+                    <th>English</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Faire la grasse matinée</td><td class="en">to sleep in</td></tr>
+                <tr><td>Avoir un chat dans la gorge</td><td class="en">to have a frog in one’s throat (hoarse)</td></tr>
+                <tr><td>Avoir un coup de foudre</td><td class="en">love at first sight</td></tr>
+                <tr><td>Tomber dans les pommes</td><td class="en">to faint, pass out</td></tr>
+                <tr><td>Avoir un petit creux</td><td class="en">to feel a bit hungry</td></tr>
+                <tr><td>Avoir du pain sur la planche</td><td class="en">to have a lot on one’s plate</td></tr>
+                <tr><td>Avoir la gueule de bois</td><td class="en">to have a hangover</td></tr>
+                <tr><td>Péter un câble</td><td class="en">to freak out / lose it (very informal)</td></tr>
+                <tr><td>Filer un coup de main</td><td class="en">to give a hand, help out</td></tr>
+                <tr><td>Avoir la dalle</td><td class="en">to be starving (slang)</td></tr>
+                <tr><td>Passer un coup de fil</td><td class="en">to make a phone call</td></tr>
+                <tr><td>Prendre une cuite</td><td class="en">to get drunk (slang)</td></tr>
+                <tr><td>Tourner en rond</td><td class="en">to go around in circles, make no progress</td></tr>
+                <tr><td>Avoir la flemme</td><td class="en">to feel too lazy / can’t be bothered</td></tr>
+                <tr><td>Mettre toutes les chances de son côté</td><td class="en">to stack the odds in one’s favor</td></tr>
+                <tr><td>Se prendre la tête</td><td class="en">to overthink / stress oneself out</td></tr>
+                <tr><td>Prendre la tête (à quelqu’un)</td><td class="en">to annoy/bother (to get on someone’s nerves)</td></tr>
+                <tr><td>Faire d’une pierre deux coups</td><td class="en">to kill two birds with one stone</td></tr>
+                <tr><td>Avoir le seum</td><td class="en">to be salty / annoyed (slang)</td></tr>
+                <tr><td>Être à la bourre</td><td class="en">to be running late (informal)</td></tr>
+                <tr><td>Faire marche arrière</td><td class="en">to backtrack, reverse a decision</td></tr>
+                <tr><td>Être crevé</td><td class="en">to be exhausted</td></tr>
+                <tr><td>C’est la galère</td><td class="en">it’s a pain / it’s tough</td></tr>
+                <tr><td>Boire un coup</td><td class="en">to have a (quick) drink</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Protection: s'assure que backToSection existe même si appelé directement
+        if (typeof backToSection !== 'function') {
+            window.backToSection = function(sectionId){ window.location.hash = '#section=' + (sectionId || 'expressions'); };
+        }
+    </script>
+</body>
+</html>
+
+

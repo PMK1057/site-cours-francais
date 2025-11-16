@@ -395,6 +395,7 @@
             {
                 fr: "Ça marche",
                 level: "courant",
+                important: true,
                 translations: {
                     fr: "D'accord, c'est entendu, on est sur la même longueur d'onde",
                     en: "Okay, it works, we agree / That's fine with me",
@@ -501,6 +502,7 @@
             {
                 fr: "Pas de souci",
                 level: "courant",
+                important: true,
                 translations: {
                     fr: "Aucun problème, ne t'inquiète pas",
                     en: "No worries, no problem at all",
@@ -606,6 +608,7 @@
             {
                 fr: "C'est pas mal",
                 level: "courant",
+                important: true,
                 translations: {
                     fr: "C'est plutôt bien, c'est correct, pas mauvais (souvent un compliment modéré, l'équivalent d'un 7/10)",
                     en: "",
@@ -696,6 +699,7 @@
             {
                 fr: "Tout à l'heure",
                 level: "courant",
+                important: true,
                 translations: {
                     fr: "Il y a peu de temps (passé) ou dans peu de temps (futur), toujours dans la même journée",
                     en: "",
@@ -720,6 +724,7 @@
             {
                 fr: "À tout à l'heure",
                 level: "courant",
+                important: true,
                 translations: {
                     fr: "À bientôt, on se voit dans peu de temps (même journée)",
                     en: "See you soon, see you in a bit",
@@ -942,6 +947,13 @@
                 return matchesSearch && matchesLevel;
             });
 
+            // Trier : expressions importantes en premier
+            filtered.sort((a, b) => {
+                if (a.important && !b.important) return -1;
+                if (!a.important && b.important) return 1;
+                return 0;
+            });
+
             renderExpressions(filtered);
             
             // Mettre à jour le compteur
@@ -985,6 +997,14 @@
 
                 const title = document.createElement('h3');
                 title.className = 'expression-title';
+                
+                // Ajouter une étoile pour les expressions importantes
+                if (exp.important) {
+                    const star = document.createElement('span');
+                    star.textContent = '⭐ ';
+                    star.style.marginRight = '4px';
+                    title.appendChild(star);
+                }
                 
                 const titleText = document.createElement('span');
                 titleText.textContent = exp.fr;

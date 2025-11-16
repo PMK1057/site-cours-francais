@@ -176,6 +176,27 @@ function executeScriptsInHTML(html, container) {
         scripts.forEach(script => script.remove());
         container.innerHTML = doc.body.innerHTML;
         
+        // Injecter une barre d'outils PDF si absente
+        try {
+            const alreadyHasPrint = container.querySelector('.print-btn');
+            if (!alreadyHasPrint) {
+                const toolbar = document.createElement('div');
+                toolbar.className = 'course-toolbar print-hide';
+                toolbar.style.textAlign = 'right';
+                toolbar.style.marginBottom = '12px';
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'print-btn';
+                btn.setAttribute('aria-label', 'Télécharger ce cours en PDF');
+                btn.textContent = '🖨️ Télécharger en PDF';
+                btn.addEventListener('click', () => window.print());
+                toolbar.appendChild(btn);
+                container.insertBefore(toolbar, container.firstChild);
+            }
+        } catch (e) {
+            console.warn('Injection bouton PDF ignorée:', e);
+        }
+        
         // Exécuter les scripts après un court délai pour s'assurer que le DOM est prêt
         setTimeout(() => {
             scriptsContent.forEach(scriptData => {
@@ -1250,19 +1271,48 @@ const audioFallbacks = {
 let audioUrls = {};
 let currentExpressionAudioUrl = null;
 
-// Charger les URLs audio
+// Charger les URLs audio (robuste avec fallback de chemins et vérif de type)
 async function loadAudioUrls() {
-    try {
-        const response = await fetch('audio_urls.json');
-        const data = await response.json();
-        audioUrls = data;
-    } catch (error) {
-        console.error('Erreur lors du chargement des URLs audio:', error);
+    // Si déjà chargé, ne rien faire
+    if (Object.keys(audioUrls || {}).length > 0) {
+        return;
+    }
+    const candidates = [
+        'audio_urls.json',
+        '/audio_urls.json',
+        `${window.location.origin}/audio_urls.json`,
+        './audio_urls.json',
+        '../audio_urls.json'
+    ];
+    let loaded = false;
+    for (const url of candidates) {
+        try {
+            const response = await fetch(url, { cache: 'no-store' });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const contentType = response.headers.get('content-type') || '';
+            if (!contentType.includes('application/json')) {
+                // Évite de parser du HTML de fallback (<!DOCTYPE ...)
+                throw new Error(`Type de contenu inattendu: ${contentType || 'inconnu'}`);
+            }
+            const data = await response.json();
+            if (data && typeof data === 'object') {
+                audioUrls = data;
+                loaded = true;
+                break;
+            }
+        } catch (err) {
+            console.warn(`Chargement audio_urls.json échoué via ${url}:`, err.message || err);
+            continue;
+        }
+    }
+    if (!loaded) {
+        // Utiliser uniquement les fallbacks Cloudinary
         audioUrls = {};
     }
-    
-    // Compléter avec les fallbacks
+    // Compléter avec les fallbacks (priorité aux URLs locales si présentes)
     audioUrls = { ...audioFallbacks, ...audioUrls };
+    // Exposer globalement pour réutilisation entre pages/courses
+    window.expressionsAudioUrls = audioUrls;
 }
 
 // Obtenir l'URL audio pour une expression
@@ -1337,12 +1387,15 @@ async function initExpressionOfTheDayInternal(frElement, enElement, explanationE
     }
     
     // Charger les URLs audio si ce n'est pas déjà fait (non bloquant)
-    if (Object.keys(audioUrls).length === 0) {
-        try {
+    try {
+        // Préférer le cache global si disponible
+        if (window.expressionsAudioUrls && Object.keys(window.expressionsAudioUrls).length > 0) {
+            audioUrls = window.expressionsAudioUrls;
+        } else {
             await loadAudioUrls();
-        } catch (error) {
-            console.warn('Erreur lors du chargement des URLs audio, continuons quand même:', error);
         }
+    } catch (error) {
+        console.warn('Erreur lors du chargement des URLs audio, continuons quand même:', error);
     }
     
     const today = new Date().toDateString();
