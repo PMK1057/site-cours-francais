@@ -68,6 +68,81 @@
             window.backToSection = function(sectionId){ window.location.hash = '#section=' + (sectionId || 'expressions'); };
         }
     </script>
+    <script>
+        (async function () {
+            function cleanFilename(text) {
+                if (!text) return '';
+                // Minuscule
+                text = text.toLowerCase();
+                // Enlever les accents
+                text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                // Remplacer tout ce qui n'est pas [a-z0-9] par des underscores
+                text = text.replace(/[^a-z0-9]+/g, '_');
+                // Enlever les underscores en début/fin
+                text = text.replace(/^_+|_+$/g, '');
+                return text;
+            }
+
+            async function loadAudioUrls() {
+                let audioUrls = {};
+                try {
+                    let response = await fetch('audio_urls.json');
+                    if (!response.ok) {
+                        response = await fetch('../audio_urls.json');
+                    }
+                    if (!response.ok) {
+                        response = await fetch('/audio_urls.json');
+                    }
+                    if (response.ok) {
+                        audioUrls = await response.json();
+                    } else {
+                        console.warn('Fichier audio_urls.json introuvable pour les expressions idiomatiques');
+                    }
+                } catch (error) {
+                    console.warn('Erreur lors du chargement des URLs audio pour les expressions idiomatiques:', error);
+                }
+                return audioUrls;
+            }
+
+            const audioUrls = await loadAudioUrls();
+            if (!audioUrls || Object.keys(audioUrls).length === 0) {
+                return;
+            }
+
+            if (typeof playAudio !== 'function') {
+                console.warn('Fonction playAudio indisponible, pas d’audio pour les expressions idiomatiques.');
+                return;
+            }
+
+            const table = document.querySelector('.idioms-container table');
+            if (!table) return;
+
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const firstCell = row.querySelector('td');
+                if (!firstCell) return;
+
+                const expressionText = firstCell.textContent.trim();
+                if (!expressionText) return;
+
+                const filename = cleanFilename(expressionText);
+                const audioData = audioUrls[filename];
+                if (!audioData) return;
+
+                const audioUrl = typeof audioData === 'string' ? audioData : audioData.url;
+                if (!audioUrl) return;
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'audio-btn';
+                btn.textContent = '🔊';
+                btn.title = `Écouter "${expressionText}"`;
+                btn.addEventListener('click', () => playAudio(audioUrl));
+
+                firstCell.appendChild(btn);
+            });
+        })();
+    </script>
 </body>
 </html>
 

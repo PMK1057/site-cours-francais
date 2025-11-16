@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulaire familier en français</title>
+    <style>
+        .fam-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 32px 20px 48px;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+        h2 {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 8px;
+            color: #212744;
+        }
+        .fam-subtitle {
+            text-align: center;
+            color: #4b5563;
+            margin-bottom: 24px;
+        }
+        .fam-note {
+            background: #fff7e6;
+            border-left: 4px solid #ffb84d;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            color: #7a5b10;
+            font-size: 0.95em;
+        }
+        h3 {
+            margin-top: 26px;
+            margin-bottom: 10px;
+            color: #374151;
+            font-size: 1.25em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(15,23,42,0.08);
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: middle;
+        }
+        th {
+            background: #f3f4ff;
+            color: #1f2937;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tbody tr:hover td {
+            background: #f9fafb;
+        }
+        .fam-fr {
+            font-weight: 600;
+            color: #111827;
+            white-space: nowrap;
+        }
+        .fam-reg {
+            color: #374151;
+        }
+        .fam-en {
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+        .audio-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-left: 6px;
+        }
+        .audio-btn:focus-visible {
+            outline: 2px solid #7b5cff;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="fam-container">
+        <button class="back-btn" onclick="backToSection('expressions')">← Retour</button>
+        <h2>🧩 Vocabulaire familier</h2>
+        <p class="fam-subtitle">Argot et mots familiers très fréquents à l'oral en France.</p>
+
+        <div class="fam-note">
+            Ce vocabulaire est <strong>familier</strong> : parfait pour comprendre les conversations, à utiliser surtout avec amis et proches (pas dans un entretien d’embauche !).
+        </div>
+
+        <h3>👥 Personnes</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mot familier</th>
+                    <th>Français standard</th>
+                    <th>English</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="fam-fr">Mec
+                        <button class="audio-btn" type="button" title="Écouter 'mec'" onclick="playAudio('audio/vocabulaire-familier/mec.mp3')">🔊</button>
+                    </td>
+                    <td class="fam-reg">gars, homme</td>
+                    <td class="fam-en">guy, dude</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Meuf
+                        <button class="audio-btn" type="button" title="Écouter 'meuf'" onclick="playAudio('audio/vocabulaire-familier/meuf.mp3')">🔊</button>
+                    </td>
+                    <td class="fam-reg">fille, femme</td>
+                    <td class="fam-en">girl, woman</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Pote
+                        <button class="audio-btn" type="button" title="Écouter 'pote'" onclick="playAudio('audio/vocabulaire-familier/pote.mp3')">🔊</button>
+                    </td>
+                    <td class="fam-reg">ami, copain</td>
+                    <td class="fam-en">friend, mate</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Gamin</td>
+                    <td class="fam-reg">enfant, jeune garçon</td>
+                    <td class="fam-en">kid (boy)</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Gamine</td>
+                    <td class="fam-reg">enfant, jeune fille</td>
+                    <td class="fam-en">kid (girl)</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Nana</td>
+                    <td class="fam-reg">fille, femme</td>
+                    <td class="fam-en">girl, woman (informal)</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Type</td>
+                    <td class="fam-reg">gars, homme</td>
+                    <td class="fam-en">guy, bloke</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Gosse</td>
+                    <td class="fam-reg">enfant</td>
+                    <td class="fam-en">kid, child</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>😒 Expressions négatives</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Expression</th>
+                    <th>Français standard</th>
+                    <th>English</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="fam-fr">Ça fait chier</td>
+                    <td class="fam-reg">c'est très ennuyeux / frustrant</td>
+                    <td class="fam-en">this really sucks / it's annoying</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">C'est relou</td>
+                    <td class="fam-reg">c'est pénible, agaçant</td>
+                    <td class="fam-en">it's annoying / such a drag</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Chiant(e)</td>
+                    <td class="fam-reg">ennuyeux, agaçant</td>
+                    <td class="fam-en">annoying, a pain</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Putain</td>
+                    <td class="fam-reg">juron d'exaspération</td>
+                    <td class="fam-en">damn, fuck (strong swear)</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Merde</td>
+                    <td class="fam-reg">juron général</td>
+                    <td class="fam-en">shit, damn</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Bordel</td>
+                    <td class="fam-reg">désordre / juron</td>
+                    <td class="fam-en">mess, bloody hell</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Fait chier</td>
+                    <td class="fam-reg">énerver, embêter</td>
+                    <td class="fam-en">to piss (someone) off</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Se faire chier</td>
+                    <td class="fam-reg">s'ennuyer beaucoup</td>
+                    <td class="fam-en">to be bored to death</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>🧍 Corps / apparence</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mot familier</th>
+                    <th>Français standard</th>
+                    <th>English</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="fam-fr">La gueule</td>
+                    <td class="fam-reg">la tête, le visage (registre familier / parfois vulgaire)</td>
+                    <td class="fam-en">face (can be rude)</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Les fringues</td>
+                    <td class="fam-reg">les vêtements</td>
+                    <td class="fam-en">clothes</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Le bide</td>
+                    <td class="fam-reg">le ventre</td>
+                    <td class="fam-en">belly, gut</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>⚙️ Actions / états</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Verbe familier</th>
+                    <th>Français standard</th>
+                    <th>English</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="fam-fr">Bosser</td>
+                    <td class="fam-reg">travailler</td>
+                    <td class="fam-en">to work</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Bouffer</td>
+                    <td class="fam-reg">manger</td>
+                    <td class="fam-en">to eat (slang)</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Picoler</td>
+                    <td class="fam-reg">boire de l'alcool</td>
+                    <td class="fam-en">to booze, drink alcohol</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Se marrer</td>
+                    <td class="fam-reg">rire, s'amuser</td>
+                    <td class="fam-en">to have a laugh</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Se casser</td>
+                    <td class="fam-reg">partir</td>
+                    <td class="fam-en">to leave, take off</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Se barrer</td>
+                    <td class="fam-reg">partir</td>
+                    <td class="fam-en">to clear off, get out</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Gerber</td>
+                    <td class="fam-reg">vomir</td>
+                    <td class="fam-en">to puke</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Péter un câble</td>
+                    <td class="fam-reg">péter les plombs, perdre son calme</td>
+                    <td class="fam-en">to freak out, lose it</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>✅ Qualificatifs positifs</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mot familier</th>
+                    <th>Français standard</th>
+                    <th>English</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="fam-fr">Ouf</td>
+                    <td class="fam-reg">fou, incroyable (verlan de « fou »)</td>
+                    <td class="fam-en">crazy good, amazing</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">De ouf</td>
+                    <td class="fam-reg">super bien, énormément</td>
+                    <td class="fam-en">really, hugely, so much</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Grave</td>
+                    <td class="fam-reg">vraiment, beaucoup</td>
+                    <td class="fam-en">totally, so (intensifier)</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Stylé</td>
+                    <td class="fam-reg">très beau, cool</td>
+                    <td class="fam-en">cool, stylish</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>❌ Qualificatifs négatifs</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mot familier</th>
+                    <th>Français standard</th>
+                    <th>English</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="fam-fr">Nul(le)</td>
+                    <td class="fam-reg">mauvais, sans intérêt</td>
+                    <td class="fam-en">rubbish, lame</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Pourri</td>
+                    <td class="fam-reg">très mauvais</td>
+                    <td class="fam-en">rotten, awful</td>
+                </tr>
+                <tr>
+                    <td class="fam-fr">Chelou</td>
+                    <td class="fam-reg">louche (verlan de « louche »)</td>
+                    <td class="fam-en">weird, shady</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        if (typeof playAudio !== 'function') {
+            function playAudio(url) {
+                const audio = new Audio(url);
+                audio.play().catch(err => console.error('Erreur audio:', err));
+            }
+        }
+    </script>
+</body>
+</html>
+
+
