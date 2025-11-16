@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="header-content">
-            <nav>
+            <nav role="navigation" aria-label="Sections du site">
                 <button class="nav-btn active" data-section="home" onclick="showSection('home', event)">🏠 Accueil</button>
                 <button class="nav-btn" data-section="bases" onclick="showSection('bases', event)">🔰 Les Bases</button>
                 <button class="nav-btn" data-section="grammaire" onclick="showSection('grammaire', event)">📚 Grammaire</button>
@@ -23,7 +23,8 @@
     </header>
     <div class="container">
         <!-- HOME -->
-        <div id="home" class="section active">
+        <div id="home" class="section active" role="region" aria-labelledby="id-home">
+            <h2 id="id-home" class="sr-only">Accueil</h2>
             <div class="home-games">
                 <!-- Date du jour -->
                 <div class="game-card date-card">
@@ -79,7 +80,8 @@
             </div>
         </div>
         <!-- LES BASES -->
-        <div id="bases" class="section">
+        <div id="bases" class="section" role="region" aria-labelledby="id-bases">
+            <h2 id="id-bases" class="sr-only">Les bases</h2>
             <div class="section-menu">
                 <div class="section-card level-intermediate" onclick="showCourse('chiffres-nombres')">
                     <h3>🔢 CHIFFRES & NOMBRES</h3>
@@ -121,7 +123,8 @@
             </div>
         </div>
         <!-- GRAMMAIRE -->
-        <div id="grammaire" class="section">
+        <div id="grammaire" class="section" role="region" aria-labelledby="id-grammaire">
+            <h2 id="id-grammaire" class="sr-only">Grammaire</h2>
             <div class="section-menu">
                 <div class="section-card level-intermediate" onclick="showCourse('determinants-possessifs')">
                     <h3>MON, MA, MES</h3>
@@ -162,7 +165,8 @@
             </div>
         </div>
         <!-- CONJUGAISON -->
-        <div id="conjugaison" class="section">
+        <div id="conjugaison" class="section" role="region" aria-labelledby="id-conjugaison">
+            <h2 id="id-conjugaison" class="sr-only">Conjugaison</h2>
             <div class="section-menu">
                 <div class="section-card level-intermediate" onclick="showCourse('present-indicatif')">
                     <h3>PRÉSENT DE L'INDICATIF</h3>
@@ -211,7 +215,8 @@
             </div>
         </div>
         <!-- PRONOMS -->
-        <div id="pronoms" class="section">
+        <div id="pronoms" class="section" role="region" aria-labelledby="id-pronoms">
+            <h2 id="id-pronoms" class="sr-only">Pronoms</h2>
             <div class="section-menu">
                 <div class="section-card level-intermediate" onclick="showCourse('pronoms-possessifs')">
                     <h3>MIEN, MIENNE</h3>
@@ -240,7 +245,8 @@
             </div>
         </div>
         <!-- EXPRESSIONS & VOCABULAIRE -->
-        <div id="expressions" class="section">
+        <div id="expressions" class="section" role="region" aria-labelledby="id-expressions">
+            <h2 id="id-expressions" class="sr-only">Expressions et vocabulaire</h2>
             <div class="section-menu">
                 <div class="section-card level-intermediate" onclick="showCourse('expressions-courantes')">
                     <h3>🗣️ EXPRESSIONS COURANTES</h3>
@@ -271,7 +277,8 @@
             </div>
         </div>
         <!-- TEXTES -->
-        <div id="textes" class="section">
+        <div id="textes" class="section" role="region" aria-labelledby="id-textes">
+            <h2 id="id-textes" class="sr-only">Textes</h2>
             <div class="section-menu">
                 <div class="section-card level-intermediate" onclick="showCourse('textes-francais-prepositions')">
                     <span class="level-badge">A1</span>
@@ -296,7 +303,8 @@
             </div>
         </div>
         <!-- TEXTES À TROUS -->
-        <div id="textes-a-trous" class="section">
+        <div id="textes-a-trous" class="section" role="region" aria-labelledby="id-textes-a-trous">
+            <h2 id="id-textes-a-trous" class="sr-only">Textes à trous</h2>
             <div class="section-menu">
                 <div class="section-card level-intermediate" onclick="showCourse('geographie_france')">
                     <span class="level-badge">A2</span>
@@ -326,6 +334,26 @@
             </div>
         </div>
         </div>
+    <script>
+        // Accessibilité: transformer les cartes en boutons accessibles
+        (function () {
+            const cards = document.querySelectorAll('.section-card');
+            cards.forEach(card => {
+                card.setAttribute('role', 'button');
+                card.setAttribute('tabindex', '0');
+                const titleEl = card.querySelector('h3');
+                const title = titleEl ? titleEl.textContent.trim() : 'ce cours';
+                card.setAttribute('aria-label', `Ouvrir le cours ${title}`);
+                // Gestion clavier: Enter/Space déclenchent le clic
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        card.click();
+                    }
+                });
+            });
+        })();
+    </script>
     <div class="global-warning">
         <span class="warning-icon">&#9888;</span>
         <span class="warning-text">¡Este sitio web está en desarrollo; aún contiene algunos errores e imprecisiones! | This website is under development; it still contains some errors and inaccuracies.</span>

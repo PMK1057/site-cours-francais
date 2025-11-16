@@ -4,9 +4,17 @@
     box-sizing: border-box;
 }
 
+/* Palette unifiée (variables) */
+:root {
+    --grad-intermediate: linear-gradient(145deg, #7b5cff 0%, #a689ff 100%);
+    --grad-advanced: linear-gradient(145deg, #ff5e7a 0%, #ff84a3 100%);
+    --grad-beginner: linear-gradient(145deg, #ff7a9e 0%, #ffb199 100%);
+    --color-text: #212744;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(145deg, #7b5cff 0%, #a689ff 100%);
+    background: var(--grad-intermediate);
     min-height: 100vh;
     padding-bottom: 90px;
 }
@@ -41,7 +49,7 @@ nav {
 }
 
 .nav-btn {
-    background: linear-gradient(145deg, #7b5cff 0%, #a689ff 100%);
+    background: var(--grad-intermediate);
     color: white;
     border: none;
     padding: 6px 20px;
@@ -53,12 +61,12 @@ nav {
 }
 
 .nav-btn:hover {
-    background: linear-gradient(145deg, #6c4dfa 0%, #9678ff 100%);
+    background: var(--grad-intermediate);
     transform: translateY(-2px);
 }
 
 .nav-btn.active {
-    background: linear-gradient(145deg, #ff5e7a 0%, #ff84a3 100%);
+    background: var(--grad-advanced);
     transform: scale(1.05);
 }
 
@@ -120,17 +128,17 @@ nav {
 
 /* Couleurs par niveau - Débutant */
 .level-beginner {
-    background: linear-gradient(145deg, #ff7a9e 0%, #ffb199 100%) !important;
+    background: var(--grad-beginner) !important;
 }
 
 /* Couleurs par niveau - Intermédiaire */
 .level-intermediate {
-    background: linear-gradient(145deg, #7b5cff 0%, #a689ff 100%) !important;
+    background: var(--grad-intermediate) !important;
 }
 
 /* Couleurs par niveau - Avancé */
 .level-advanced {
-    background: linear-gradient(145deg, #ff5e7a 0%, #ff84a3 100%) !important;
+    background: var(--grad-advanced) !important;
 }
 
 /* Couleurs par niveau - Verbes Pronominaux (vert) */
@@ -147,6 +155,41 @@ nav {
     transform: translateY(-6px);
     box-shadow: 0 24px 46px rgba(45, 55, 125, 0.25);
     filter: brightness(1.03);
+}
+
+/* Accessibilité: focus visibles */
+.nav-btn:focus-visible,
+.section-card:focus-visible,
+.expression-audio-btn:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, .9);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(123, 92, 255, .35);
+}
+
+/* Titres en blanc sur fonds à dégradé */
+.section-card h3 {
+    color: #fff;
+}
+
+/* Classe utilitaire pour texte caché (ARIA) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Typographies mobiles XS */
+@media (max-width: 375px) {
+    h1 { font-size: 2.1em; }
+    h2 { font-size: 1.6em; }
+    .section-card h3 { font-size: 1.05em; }
+    .expression-title { font-size: 1.25em; }
 }
 .section-card:hover::after {
     opacity: 1;
