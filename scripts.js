@@ -2133,12 +2133,16 @@ function nextConjugation() {
         data: conjugaisons[verbe][tempsChoisi][personne]
     };
     
-    // Afficher la question - toujours afficher "Je" dans la question (pas d'élision)
-    // L'élision s'applique seulement dans la réponse écrite
+    // Afficher la question - utiliser "je/j'" pour éviter les incohérences avec "avoir"
     let displayPersonne = personne;
     
-    // Capitaliser la première lettre de la personne
-    displayPersonne = displayPersonne.charAt(0).toUpperCase() + displayPersonne.slice(1);
+    // Pour le verbe "avoir" avec "je", afficher "je/j'" pour éviter "JE AI"
+    if (verbe === "avoir" && personne === "je") {
+        displayPersonne = "je/j'";
+    } else {
+        // Capitaliser la première lettre de la personne
+        displayPersonne = displayPersonne.charAt(0).toUpperCase() + displayPersonne.slice(1);
+    }
     
     // Afficher la question
     if (questionDiv) {

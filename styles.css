@@ -561,9 +561,9 @@ em {
     padding: 14px 28px;
 }
 
-/* Conjugation card - entièrement beige/brun */
+/* Conjugation card - même dégradé que le bouton de menu actif */
 .conjugation-card {
-    background: linear-gradient(145deg, #C89666 0%, #DEAC7C 100%);
+    background: var(--grad-advanced);
 }
 
 .conjugation-card .game-card-header {

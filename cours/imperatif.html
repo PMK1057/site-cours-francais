@@ -140,6 +140,13 @@
             <td><strong>Fermez</strong> !</td>
             <td>close</td>
         </tr>
+        <tr>
+            <td><strong>éteindre</strong></td>
+            <td><strong>Éteins</strong> !</td>
+            <td><strong>Éteignons</strong> !</td>
+            <td><strong>Éteignez</strong> !</td>
+            <td>turn off / extinguish</td>
+        </tr>
     </tbody>
 </table>
 
@@ -269,7 +276,7 @@
         Au travail, ton collègue te dit : « <strong><input type="text" id="imp_7" class="answer" style="width:100px"></strong> (écouter) bien ce que je vais te dire. » Puis : « <strong><input type="text" id="imp_8" class="answer" style="width:100px"></strong> (regarder) ce document. » Et enfin : « <strong><input type="text" id="imp_9" class="answer" style="width:100px"></strong> (parler) avec le client. »
     </p>
     <p>
-        Le soir, quand tu rentres, tu dis à tes enfants : « <strong><input type="text" id="imp_10" class="answer" style="width:100px"></strong> (venir) ici ! » Puis : « <strong><input type="text" id="imp_11" class="answer" style="width:100px"></strong> (s'asseoir) à table. » Et : « <strong><input type="text" id="imp_12" class="answer" style="width:100px"></strong> (fermer) la télévision. »
+        Le soir, quand tu rentres, tu dis à tes enfants : « <strong><input type="text" id="imp_10" class="answer" style="width:100px"></strong> (venir) ici ! » Puis : « <strong><input type="text" id="imp_11" class="answer" style="width:100px"></strong> (s'asseoir) à table. » Et : « <strong><input type="text" id="imp_12" class="answer" style="width:100px"></strong> (éteindre) la télévision. »
     </p>
     <p>
         Avant de dormir, tu te rappelles : « <strong><input type="text" id="imp_13" class="answer" style="width:100px"></strong> (ouvrir) la fenêtre pour aérer. » Et : « <strong><input type="text" id="imp_14" class="answer" style="width:100px"></strong> (donner) à manger au chat. » Enfin, <strong><input type="text" id="imp_15" class="answer" style="width:100px"></strong> (attendre) demain pour recommencer !
@@ -291,30 +298,30 @@
         imp_7: 'Écoute',
         imp_8: 'Regarde',
         imp_9: 'Parle',
-        imp_10: 'Viens',
-        imp_11: 'Assieds-toi',
-        imp_12: 'Ferme',
+        imp_10: 'Venez',
+        imp_11: 'Asseyez-vous',
+        imp_12: 'Éteignez',
         imp_13: 'Ouvre',
         imp_14: 'Donne',
         imp_15: 'Attends'
     };
 
     const imperatifExplanations = {
-        imp_1: 'Lève-toi (verbe pronominal, tutoiement)',
-        imp_2: 'Va (verbe aller, tutoiement)',
+        imp_1: 'Lève-toi (verbe pronominal, tutoiement - une seule personne)',
+        imp_2: 'Va (verbe aller, tutoiement - une seule personne)',
         imp_3: 'Mange (verbe manger, tutoiement, pas de "s")',
-        imp_4: 'Bois (verbe boire, tutoiement)',
-        imp_5: 'Prends (verbe prendre, tutoiement)',
-        imp_6: 'Fais (verbe faire, tutoiement)',
-        imp_7: 'Écoute (verbe écouter, tutoiement, pas de "s")',
-        imp_8: 'Regarde (verbe regarder, tutoiement, pas de "s")',
-        imp_9: 'Parle (verbe parler, tutoiement, pas de "s")',
-        imp_10: 'Viens (verbe venir, tutoiement)',
-        imp_11: 'Assieds-toi (verbe pronominal, tutoiement)',
-        imp_12: 'Ferme (verbe fermer, tutoiement, pas de "s")',
-        imp_13: 'Ouvre (verbe ouvrir, tutoiement)',
-        imp_14: 'Donne (verbe donner, tutoiement, pas de "s")',
-        imp_15: 'Attends (verbe attendre, tutoiement)'
+        imp_4: 'Bois (verbe boire, tutoiement - une seule personne)',
+        imp_5: 'Prends (verbe prendre, tutoiement - une seule personne)',
+        imp_6: 'Fais (verbe faire, tutoiement - une seule personne)',
+        imp_7: 'Écoute (verbe écouter, tutoiement, pas de "s" - un seul collègue)',
+        imp_8: 'Regarde (verbe regarder, tutoiement, pas de "s" - un seul collègue)',
+        imp_9: 'Parle (verbe parler, tutoiement, pas de "s" - un seul collègue)',
+        imp_10: 'Venez (verbe venir, vouvoiement - plusieurs enfants)',
+        imp_11: 'Asseyez-vous (verbe pronominal, vouvoiement - plusieurs enfants)',
+        imp_12: 'Éteignez (verbe éteindre, vouvoiement - on éteint la télévision, pas on la ferme, plusieurs enfants)',
+        imp_13: 'Ouvre (verbe ouvrir, tutoiement - une seule personne se parle à elle-même)',
+        imp_14: 'Donne (verbe donner, tutoiement - une seule personne se parle à elle-même)',
+        imp_15: 'Attends (verbe attendre, tutoiement - une seule personne se parle à elle-même)'
     };
 
     function checkImperatif() {
@@ -359,6 +366,193 @@
             input.style.borderColor = '';
         }
         document.getElementById('result-imperatif').innerHTML = '';
+    }
+</script>
+
+<h3>✍️ Exercice 2 : Vouvoiement à l'impératif</h3>
+
+<div class="info-box">
+    <p><strong>Complétez les situations avec les formes impératives au vouvoiement (vous).</strong></p>
+    <p><em>Le vouvoiement s'utilise pour être poli, avec des inconnus, des supérieurs hiérarchiques, ou plusieurs personnes.</em></p>
+</div>
+
+<div class="exercise">
+    <h4>Situations formelles</h4>
+    
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>1. Dans un restaurant</strong></p>
+        <p>Le serveur s'adresse aux clients : « <strong><input type="text" id="vous_1" class="answer" style="width:120px"></strong> (s'asseoir), s'il vous plaît. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: In a restaurant, the waiter asks customers to sit down politely.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>2. À l'aéroport</strong></p>
+        <p>L'agent de sécurité dit aux passagers : « <strong><input type="text" id="vous_2" class="answer" style="width:120px"></strong> (venir) ici, messieurs-dames. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: At the airport, security personnel directs passengers to come forward.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>3. Au magasin</strong></p>
+        <p>Le vendeur dit aux clients : « <strong><input type="text" id="vous_3" class="answer" style="width:120px"></strong> (regarder) ce modèle, il est en promotion. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: In a store, the salesperson invites customers to look at a product on sale.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>4. À l'hôpital</strong></p>
+        <p>Le médecin dit au patient : « <strong><input type="text" id="vous_4" class="answer" style="width:120px"></strong> (prendre) ce médicament matin et soir. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: At the hospital, the doctor gives medical instructions to a patient.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>5. Dans la rue</strong></p>
+        <p>Un policier dit aux piétons : « <strong><input type="text" id="vous_5" class="answer" style="width:120px"></strong> (faire) attention en traversant ! »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: In the street, a police officer warns pedestrians to be careful when crossing.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>6. Au bureau</strong></p>
+        <p>Le patron dit à ses employés : « <strong><input type="text" id="vous_6" class="answer" style="width:120px"></strong> (écouter) bien, c'est important. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: At the office, the boss addresses employees to pay attention to important information.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>7. Dans un musée</strong></p>
+        <p>Le guide dit au groupe : « <strong><input type="text" id="vous_7" class="answer" style="width:120px"></strong> (suivre) le groupe, s'il vous plaît. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: In a museum, the tour guide asks the group to follow along during the visit.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>8. À la banque</strong></p>
+        <p>Le conseiller dit aux clients : « <strong><input type="text" id="vous_8" class="answer" style="width:120px"></strong> (attendre) ici, je reviens dans un instant. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: At the bank, the advisor asks clients to wait while they handle something.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>9. Dans un hôtel</strong></p>
+        <p>La réceptionniste dit aux clients : « <strong><input type="text" id="vous_9" class="answer" style="width:120px"></strong> (remplir) ce formulaire, s'il vous plaît. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: At a hotel, the receptionist asks guests to fill out a registration form.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>10. À la gare</strong></p>
+        <p>L'employé dit aux voyageurs : « <strong><input type="text" id="vous_10" class="answer" style="width:120px"></strong> (montrer) vos billets avant d'entrer. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: At the train station, staff members ask travelers to show their tickets before boarding.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>11. À l'école</strong></p>
+        <p>Le professeur dit aux élèves : « <strong><input type="text" id="vous_11" class="answer" style="width:120px"></strong> (ouvrir) vos cahiers à la page 25. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: At school, the teacher instructs students to open their notebooks to a specific page.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>12. Dans un parc</strong></p>
+        <p>L'agent de sécurité dit aux visiteurs : « <strong><input type="text" id="vous_12" class="answer" style="width:120px"></strong> (ne pas manger) sur l'herbe, s'il vous plaît. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: In a park, security personnel politely asks visitors not to eat on the grass.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>13. Dans un taxi</strong></p>
+        <p>Le chauffeur dit aux passagers : « <strong><input type="text" id="vous_13" class="answer" style="width:120px"></strong> (mettre) vos ceintures de sécurité, merci. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: In a taxi, the driver reminds passengers to fasten their seatbelts for safety.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>14. Dans un ascenseur</strong></p>
+        <p>Un résident dit aux voisins : « <strong><input type="text" id="vous_14" class="answer" style="width:120px"></strong> (fermer) la porte en sortant, s'il vous plaît. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: In an elevator, a resident politely asks neighbors to close the door when leaving.</em></p>
+    </div>
+
+    <div style="margin-bottom: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #667eea;">
+        <p><strong>15. À la réception</strong></p>
+        <p>L'accueil dit aux visiteurs : « <strong><input type="text" id="vous_15" class="answer" style="width:120px"></strong> (patienter) quelques instants, je vous prie. »</p>
+        <p><em style="color: #666; font-size: 0.9em;">EN: At reception, staff asks visitors to wait a moment while they attend to something.</em></p>
+    </div>
+    
+    <button class="check-btn" onclick="checkVouvoiement()" style="margin-top: 20px;">Vérifier</button>
+    <button class="check-btn" onclick="resetVouvoiement()" style="margin-top: 20px; margin-left: 10px;">Recommencer</button>
+    <div id="result-vouvoiement" class="result" style="margin-top: 20px;"></div>
+</div>
+
+<script>
+    const vouvoiementAnswers = {
+        vous_1: 'Asseyez-vous',
+        vous_2: 'Venez',
+        vous_3: 'Regardez',
+        vous_4: 'Prenez',
+        vous_5: 'Faites',
+        vous_6: 'Écoutez',
+        vous_7: 'Suivez',
+        vous_8: 'Attendez',
+        vous_9: 'Remplissez',
+        vous_10: 'Montrez',
+        vous_11: 'Ouvrez',
+        vous_12: 'Ne mangez pas',
+        vous_13: 'Mettez',
+        vous_14: 'Fermez',
+        vous_15: 'Patientez'
+    };
+
+    const vouvoiementExplanations = {
+        vous_1: 'Asseyez-vous (verbe pronominal, vouvoiement - situation formelle restaurant)',
+        vous_2: 'Venez (verbe venir, vouvoiement - s\'adresse à plusieurs personnes)',
+        vous_3: 'Regardez (verbe regarder, vouvoiement - situation commerciale)',
+        vous_4: 'Prenez (verbe prendre, vouvoiement - instruction médicale formelle)',
+        vous_5: 'Faites (verbe faire, vouvoiement - avertissement officiel)',
+        vous_6: 'Écoutez (verbe écouter, vouvoiement - contexte professionnel)',
+        vous_7: 'Suivez (verbe suivre, vouvoiement - s\'adresse à un groupe)',
+        vous_8: 'Attendez (verbe attendre, vouvoiement - situation de service)',
+        vous_9: 'Remplissez (verbe remplir, vouvoiement - demande administrative)',
+        vous_10: 'Montrez (verbe montrer, vouvoiement - contrôle formel)',
+        vous_11: 'Ouvrez (verbe ouvrir, vouvoiement - instruction en classe)',
+        vous_12: 'Ne mangez pas (verbe manger, vouvoiement négatif - interdiction polie)',
+        vous_13: 'Mettez (verbe mettre, vouvoiement - consigne de sécurité)',
+        vous_14: 'Fermez (verbe fermer, vouvoiement - demande de voisinage)',
+        vous_15: 'Patientez (verbe patienter, vouvoiement - demande de service)'
+    };
+
+    function checkVouvoiement() {
+        let correct = 0;
+        let total = Object.keys(vouvoiementAnswers).length;
+        let feedback = '<h4>Résultats :</h4><ul>';
+
+        for (const [id, expected] of Object.entries(vouvoiementAnswers)) {
+            const input = document.getElementById(id);
+            const userAnswer = input.value.trim();
+            const normalizedUser = userAnswer.toLowerCase().replace(/[^a-zàâäéèêëïîôùûüÿç]/g, '');
+            const normalizedExpected = expected.toLowerCase().replace(/[^a-zàâäéèêëïîôùûüÿç]/g, '');
+
+            if (normalizedUser === normalizedExpected) {
+                correct++;
+                feedback += `<li style="color: green;">✅ ${id}: "${userAnswer}" - Correct ! ${vouvoiementExplanations[id]}</li>`;
+                input.style.borderColor = 'green';
+            } else {
+                feedback += `<li style="color: red;">❌ ${id}: "${userAnswer}" → Réponse attendue : "${expected}" - ${vouvoiementExplanations[id]}</li>`;
+                input.style.borderColor = 'red';
+            }
+        }
+
+        feedback += '</ul>';
+        feedback += `<p><strong>Score : ${correct}/${total}</strong></p>`;
+
+        if (correct === total) {
+            feedback += '<p style="color: green; font-weight: bold;">🎉 Parfait ! Tu maîtrises le vouvoiement à l\'impératif !</p>';
+        } else if (correct >= total * 0.7) {
+            feedback += '<p style="color: orange; font-weight: bold;">👍 Bien joué ! Continue comme ça !</p>';
+        } else {
+            feedback += '<p style="color: red; font-weight: bold;">💪 Continue, tu vas y arriver !</p>';
+        }
+
+        document.getElementById('result-vouvoiement').innerHTML = feedback;
+    }
+
+    function resetVouvoiement() {
+        for (const id of Object.keys(vouvoiementAnswers)) {
+            const input = document.getElementById(id);
+            input.value = '';
+            input.style.borderColor = '';
+        }
+        document.getElementById('result-vouvoiement').innerHTML = '';
     }
 </script>
 
