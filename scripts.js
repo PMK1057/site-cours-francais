@@ -1346,12 +1346,24 @@ async function initExpressionOfTheDay() {
             let explanationElement = document.getElementById('expression-explanation');
             
             if (!frElement || !enElement || !explanationElement) {
-                console.warn('Éléments de l\'expression du jour non trouvés, réessai dans 200ms...', {
+                // Limiter les tentatives pour éviter les boucles infinies
+                if (expressionInitAttempts >= MAX_EXPRESSION_INIT_ATTEMPTS) {
+                    console.error('Nombre maximum de tentatives atteint pour initExpressionOfTheDay');
+                    resolve();
+                    return;
+                }
+                expressionInitAttempts++;
+                console.warn(`Éléments de l'expression du jour non trouvés, tentative ${expressionInitAttempts}/${MAX_EXPRESSION_INIT_ATTEMPTS}...`, {
                     frElement: !!frElement,
                     enElement: !!enElement,
                     explanationElement: !!explanationElement
                 });
-                setTimeout(() => {
+                // Nettoyer le timeout précédent s'il existe
+                if (expressionInitTimeout) {
+                    clearTimeout(expressionInitTimeout);
+                }
+                expressionInitTimeout = setTimeout(() => {
+                    expressionInitTimeout = null;
                     initExpressionOfTheDay().then(resolve);
                 }, 200);
                 return;
@@ -1485,30 +1497,23 @@ async function initExpressionOfTheDayInternal(frElement, enElement, explanationE
         }
     } catch (error) {
         console.error('Erreur lors du parsing de l\'expression:', error);
-        // Réessayer une fois en cas d'erreur
-        setTimeout(() => {
-            initExpressionOfTheDay();
-        }, 300);
+        // Réessayer une fois en cas d'erreur, mais seulement si on n'a pas dépassé la limite
+        if (expressionInitAttempts < MAX_EXPRESSION_INIT_ATTEMPTS) {
+            expressionInitAttempts++;
+            // Nettoyer le timeout précédent s'il existe
+            if (expressionInitTimeout) {
+                clearTimeout(expressionInitTimeout);
+            }
+            expressionInitTimeout = setTimeout(() => {
+                expressionInitTimeout = null;
+                initExpressionOfTheDay();
+            }, 300);
+        } else {
+            console.error('Nombre maximum de tentatives atteint, arrêt des réessais');
+        }
     }
 }
 
-// Date du jour en français
-function initDateOfTheDay() {
-    const dateElement = document.getElementById('date-text');
-    if (!dateElement) return;
-    
-    const today = new Date();
-    const jours = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
-    const mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 
-                  'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
-    
-    const jourSemaine = jours[today.getDay()];
-    const jour = today.getDate();
-    const moisNom = mois[today.getMonth()];
-    const annee = today.getFullYear();
-    
-    dateElement.textContent = `On est le ${jourSemaine} ${jour} ${moisNom} ${annee}`;
-}
 
 // Conjugaisons complètes pour le jeu
 const conjugaisons = {
@@ -2065,11 +2070,14 @@ let conjugationTimeLeft = 20;
 function initConjugationGame() {
     conjugationQuestionCount = 0;
     
-    // Arrêter le timer s'il est en cours
+    // Arrêter le timer s'il est en cours (IMPORTANT: éviter les fuites)
     if (conjugationTimerInterval) {
         clearInterval(conjugationTimerInterval);
         conjugationTimerInterval = null;
     }
+    
+    // Réinitialiser le temps restant
+    conjugationTimeLeft = 20;
     
     nextConjugation();
     
@@ -2262,10 +2270,30 @@ function validateConjugation(timeout = false) {
 let expressionInitialized = false;
 let expressionInitAttempts = 0;
 const MAX_EXPRESSION_INIT_ATTEMPTS = 10;
+let expressionInitTimeout = null; // Pour nettoyer les timeouts
+let homeGamesTimeoutIds = []; // Pour nettoyer tous les timeouts de initHomeGames
+let homeGamesObserver = null; // Pour nettoyer l'observer
 
 // Initialiser tous les mini-jeux quand la section home est affichée
 async function initHomeGames() {
     console.log('initHomeGames appelé');
+    
+    // NETTOYER LES RESSOURCES PRÉCÉDENTES
+    // Nettoyer tous les timeouts précédents
+    homeGamesTimeoutIds.forEach(id => clearTimeout(id));
+    homeGamesTimeoutIds = [];
+    
+    // Nettoyer l'observer précédent s'il existe
+    if (homeGamesObserver) {
+        homeGamesObserver.disconnect();
+        homeGamesObserver = null;
+    }
+    
+    // Nettoyer le timeout d'expression s'il existe
+    if (expressionInitTimeout) {
+        clearTimeout(expressionInitTimeout);
+        expressionInitTimeout = null;
+    }
     
     // Vérifier que nous sommes sur la page d'accueil
     const homeSection = document.getElementById('home');
@@ -2279,7 +2307,10 @@ async function initHomeGames() {
     expressionInitAttempts = 0;
     
     // Attendre un peu que le DOM soit rendu
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => {
+        const timeoutId = setTimeout(resolve, 100);
+        homeGamesTimeoutIds.push(timeoutId);
+    });
     
     // Initialiser les mini-jeux (expression du jour est async)
     try {
@@ -2288,7 +2319,6 @@ async function initHomeGames() {
         console.error('Erreur lors de l\'initialisation de l\'expression du jour:', error);
     }
     
-    initDateOfTheDay();
     initConjugationGame();
     
     // Vérifications multiples pour forcer l'affichage si nécessaire
@@ -2311,13 +2341,14 @@ async function initHomeGames() {
         }
     };
     
-    // Vérifications à intervalles multiples
+    // Vérifications à intervalles multiples (tous stockés pour nettoyage)
     [200, 400, 600, 800, 1000, 1500, 2000].forEach(delay => {
-        setTimeout(checkAndRetry, delay);
+        const timeoutId = setTimeout(checkAndRetry, delay);
+        homeGamesTimeoutIds.push(timeoutId);
     });
     
     // Observer les mutations du DOM pour détecter quand les éléments sont ajoutés
-    const observer = new MutationObserver((mutations) => {
+    homeGamesObserver = new MutationObserver((mutations) => {
         const frElement = document.getElementById('expression-fr');
         if (frElement && (!frElement.textContent || frElement.textContent.trim() === '') && 
             expressionInitAttempts < MAX_EXPRESSION_INIT_ATTEMPTS) {
@@ -2326,21 +2357,26 @@ async function initHomeGames() {
     });
     
     // Observer le container de l'expression
-    setTimeout(() => {
+    const observerTimeoutId = setTimeout(() => {
         const expressionContent = document.getElementById('expression-content');
-        if (expressionContent) {
-            observer.observe(expressionContent, {
+        if (expressionContent && homeGamesObserver) {
+            homeGamesObserver.observe(expressionContent, {
                 childList: true,
                 subtree: true,
                 characterData: true
             });
         }
     }, 100);
+    homeGamesTimeoutIds.push(observerTimeoutId);
     
     // Nettoyer l'observer après 5 secondes
-    setTimeout(() => {
-        observer.disconnect();
+    const cleanupTimeoutId = setTimeout(() => {
+        if (homeGamesObserver) {
+            homeGamesObserver.disconnect();
+            homeGamesObserver = null;
+        }
     }, 5000);
+    homeGamesTimeoutIds.push(cleanupTimeoutId);
 }
 
 // Écouter les changements de section pour réinitialiser les jeux

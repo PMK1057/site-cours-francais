@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://res.cloudinary.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://res.cloudinary.com; media-src 'self' https://res.cloudinary.com; connect-src 'self' https://api.anthropic.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://res.cloudinary.com https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://res.cloudinary.com https://assets.calendly.com; media-src 'self' https://res.cloudinary.com; connect-src 'self' https://api.anthropic.com https://calendly.com; frame-src 'self' https://calendly.com;">
     <title>Cours de Français - Tous Niveaux</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -19,6 +19,7 @@
                 <button class="nav-btn" data-section="expressions" onclick="showSection('expressions', event)">💡 Expressions & Vocabulaire</button>
                 <button class="nav-btn" data-section="textes" onclick="showSection('textes', event)">📝 Textes</button>
                 <button class="nav-btn" data-section="textes-a-trous" onclick="showSection('textes-a-trous', event)">🧩 Textes à trous</button>
+                <button class="nav-btn nav-btn-booking" data-section="reservation" onclick="showSection('reservation', event)">📅 Réserver un cours</button>
             </nav>
         </div>
     </header>
@@ -27,17 +28,6 @@
         <div id="home" class="section active" role="region" aria-labelledby="id-home">
             <h2 id="id-home" class="sr-only">Accueil</h2>
             <div class="home-games">
-                <!-- Date du jour -->
-                <div class="game-card date-card">
-                    <div class="game-card-header">
-                        <h2>🗓️ Date du jour</h2>
-                    </div>
-                    <div class="game-card-body">
-                        <p class="date-text" id="date-text"></p>
-                        <button class="game-card-link-btn" onclick="showCourse('reperes-temporels')">En savoir plus sur les dates</button>
-                    </div>
-                </div>
-
                 <!-- Expression du jour -->
                 <div class="game-card expression-card">
                     <div class="game-card-header">
@@ -172,6 +162,10 @@
                 <div class="section-card level-intermediate" onclick="showCourse('present-indicatif')">
                     <h3>PRÉSENT DE L'INDICATIF</h3>
                     <p>Je parle, tu finis, il va...</p>
+                </div>
+                <div class="section-card level-intermediate" onclick="showCourse('imperatif')">
+                    <h3>⚡ IMPÉRATIF</h3>
+                    <p>Va ! Fais ! Parlez ! Ordres et conseils</p>
                 </div>
                 <div class="section-card level-intermediate" onclick="showCourse('futur-proche')">
                     <h3>🔮 FUTUR PROCHE</h3>
@@ -409,6 +403,18 @@
                 </div>
             </div>
         </div>
+        <!-- RÉSERVATION -->
+        <div id="reservation" class="section" role="region" aria-labelledby="id-reservation">
+            <h2 id="id-reservation" class="sr-only">Réserver un cours avec Paul</h2>
+            <div class="reservation-content">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #667eea;">📅 Réserver un cours avec Paul</h2>
+                <p style="text-align: center; font-size: 1.1em; margin-bottom: 40px; color: #555;">
+                    Choisissez un créneau qui vous convient pour réserver votre cours de français personnalisé.
+                </p>
+                <div class="calendly-inline-widget" data-url="https://calendly.com/paulmkmaurice/nouvelle-reunion?month=2025-11" style="min-width:320px;height:700px;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+            </div>
+        </div>
         </div>
     <script>
         // Accessibilité: transformer les cartes en boutons accessibles
@@ -430,6 +436,11 @@
             });
         })();
     </script>
+    <!-- Bouton CTA flottant pour réserver un cours -->
+    <a href="#reservation" class="floating-cta" onclick="showSection('reservation', null); return false;" aria-label="Réserver un cours avec Paul">
+        <span class="cta-icon">📅</span>
+        <span class="cta-text">Réserver un cours</span>
+    </a>
     <div class="global-warning">
         <span class="warning-icon">&#9888;</span>
         <span class="warning-text">¡Este sitio web está en desarrollo; aún contiene algunos errores e imprecisiones! | This website is under development; it still contains some errors and inaccuracies.</span>

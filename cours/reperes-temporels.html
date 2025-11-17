@@ -5,6 +5,37 @@
 <h3>📌 Introduction</h3>
 <p>Apprenez à parler du temps : aujourd'hui, demain, les jours de la semaine, les mois, les heures...</p>
 </div>
+
+<div class="info-box" style="background: #f0f7ff; border-left: 4px solid #667eea; margin: 20px 0;">
+    <h3>🗓️ Date du jour</h3>
+    <p class="date-text" id="date-text" style="font-size: 1.2em; font-weight: 600; color: #3f2f92;"></p>
+</div>
+<script>
+    // Date du jour en français
+    function initDateOfTheDay() {
+        const dateElement = document.getElementById('date-text');
+        if (!dateElement) return;
+        
+        const today = new Date();
+        const jours = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+        const mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 
+                      'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+        
+        const jourSemaine = jours[today.getDay()];
+        const jour = today.getDate();
+        const moisNom = mois[today.getMonth()];
+        const annee = today.getFullYear();
+        
+        dateElement.textContent = `On est le ${jourSemaine} ${jour} ${moisNom} ${annee}`;
+    }
+    
+    // Initialiser quand le DOM est prêt
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDateOfTheDay);
+    } else {
+        initDateOfTheDay();
+    }
+</script>
 <h3>Les jours de la semaine</h3>
 <table>
 <thead>
