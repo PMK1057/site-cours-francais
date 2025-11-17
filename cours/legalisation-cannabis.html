@@ -5,8 +5,79 @@
   .bilingual p { margin: 10px 0; line-height: 1.8; }
   .fr { font-weight: 600; color: #1f2937; }
   .en { font-style: italic; color: #475569; }
-  .vocab-box { background: #f0fdf4; border-left: 4px solid #22c55e; padding: 14px 16px; border-radius: 0 10px 10px 0; margin-top: 18px; }
-  .vocab-box h4 { margin: 0 0 8px 0; color: #166534; }
+  .vocab-box { 
+        background: #fff9e6; 
+        border-left: 4px solid #ffa500; 
+        padding: 16px 20px; 
+        border-radius: 0 12px 12px 0; 
+        margin: 20px 0;
+        box-shadow: 0 3px 8px rgba(255,165,0,0.15);
+    }
+    .vocab-box h4 { 
+        margin: 0 0 12px 0; 
+        color: #cc7a00; 
+        font-size: 1.05em;
+    }
+    .vocab-box ul {
+        margin: 8px 0 0 0;
+        padding-left: 20px;
+    }
+    .vocab-box li {
+        margin-bottom: 10px;
+        color: #5c4a00;
+        line-height: 1.6;
+    }
+    .vocab-box li strong {
+        color: #cc7a00;
+        display: inline;
+        margin-right: 6px;
+    }
+    body {
+        font-family: 'Georgia', serif;
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        line-height: 1.85;
+        color: #212744;
+    }
+    .text-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 36px 24px 48px;
+        box-sizing: border-box;
+    }
+    h2 {
+        color: #6d4ac3;
+        text-align: center;
+        font-size: 2.45em;
+        margin-bottom: 22px;
+        border-bottom: 2px solid rgba(118,75,162,0.2);
+        padding-bottom: 16px;
+    }
+    .bilingual p { 
+        margin: 10px 0; 
+        line-height: 1.88; 
+        font-size: 1.12em;
+        text-align: justify;
+    }
+    .fr { 
+        font-weight: 600; 
+        color: #2c3e50; 
+    }
+    .en { 
+        font-style: italic; 
+        color: #4f5d75;
+        margin: 14px 0 22px;
+        padding: 14px 22px;
+        border-left: 4px solid rgba(102,126,234,0.55);
+        background: rgba(102,126,234,0.07);
+        display: block;
+        border-radius: 0 12px 12px 0;
+    }
+    @media (max-width: 768px) {
+        body { padding: 24px 14px; }
+        .text-container { padding: 28px 20px; }
+    }
   @media print { .print-hide { display: none !important; } }
 +  .course-toolbar { text-align: right; margin-bottom: 12px; }
 +  .print-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; border: 1px solid #764ba2; color: #764ba2; background: #f4f1ff; cursor: pointer; font-weight: 600; }
@@ -21,6 +92,7 @@
   <span class="level-badge" style="margin-left:8px; background:#10b981; color:#fff; padding:4px 8px; border-radius:8px; font-weight:700;">B2</span>
 </div>
 
+<div class="text-container">
 <div class="bilingual">
   <p class="fr">En France, le cannabis est la drogue illégale la plus consommée. Environ 5 millions de Français en consomment régulièrement. Pourtant, sa possession et sa consommation sont interdites depuis 1970.</p>
   <p class="en">In France, cannabis is the most consumed illegal drug. Approximately 5 million French people consume it regularly. Yet its possession and consumption have been prohibited since 1970.</p>
@@ -83,15 +155,16 @@
 </div>
 
 <div class="vocab-box">
-  <h4>📚 Verbes avancés et leurs différentes significations :</h4>
+  <h4>📚 Advanced Verbs and Their Different Meanings:</h4>
   <ul>
-    <li><strong>Distinguer</strong> : "to distinguish" - faire la différence entre deux choses. Ex: La loi ne distingue pas entre drogues dures et douces = The law does not distinguish between hard and soft drugs. Distinction (nom) = distinction. Distingué = distinguished.</li>
-    <li><strong>Dépénaliser</strong> : "to decriminalize" - enlever le caractère criminel sans légaliser. Ex: Le Portugal a dépénalisé toutes les drogues = Portugal decriminalized all drugs. Dépénalisation (nom) = decriminalization. Différent de "légaliser" = to legalize.</li>
-    <li><strong>Tolérer</strong> : "to tolerate" - permettre sans officialiser. Ex: Les Pays-Bas tolèrent la vente = The Netherlands tolerate sales. Tolérance (nom) = tolerance. Tolérant = tolerant.</li>
-    <li><strong>Enrichir</strong> : "to enrich" - rendre riche. Ex: Le trafic enrichit les réseaux = Trafficking enriches networks. Enrichissement (nom) = enrichment. Peut aussi être littéraire : enrichir sa langue = to enrich one's language.</li>
-    <li><strong>Alimenter</strong> : "to fuel" ou "to feed" - fournir, entretenir. Ex: Le trafic alimente la violence = Trafficking fuels violence. Alimentation (nom) = nutrition/fueling. Ne pas confondre avec "nourrir" = to feed (personnes/animaux).</li>
-    <li><strong>Encadrer</strong> : "to regulate" ou "to frame" - encadrer par des règles strictes. Ex: Les Français seraient favorables à une légalisation encadrée = French people would be in favor of regulated legalization. Encadrement (nom) = regulation/framing.</li>
-    <li><strong>Franchir</strong> : "to cross" ou "to take the step" - passer au-delà d'une limite, oser faire. Ex: Si d'autres pays franchissent le pas = If other countries take the step. Franchissement (nom) = crossing. Ex: franchir une frontière = to cross a border.</li>
+    <li><strong>Distinguer</strong>: "to distinguish" - to make the difference between two things. Ex: La loi ne distingue pas entre drogues dures et douces = The law does not distinguish between hard and soft drugs. Distinction (noun) = distinction. Distingué = distinguished.</li>
+    <li><strong>Dépénaliser</strong>: "to decriminalize" - to remove the criminal character without legalizing. Ex: Le Portugal a dépénalisé toutes les drogues = Portugal decriminalized all drugs. Dépénalisation (noun) = decriminalization. Different from "légaliser" = to legalize.</li>
+    <li><strong>Tolérer</strong>: "to tolerate" - to allow without officially recognizing. Ex: Les Pays-Bas tolèrent la vente = The Netherlands tolerate sales. Tolérance (noun) = tolerance. Tolérant = tolerant.</li>
+    <li><strong>Enrichir</strong>: "to enrich" - to make rich. Ex: Le trafic enrichit les réseaux = Trafficking enriches networks. Enrichissement (noun) = enrichment. Can also be literary: enrichir sa langue = to enrich one's language.</li>
+    <li><strong>Alimenter</strong>: "to fuel" or "to feed" - to provide, to maintain. Ex: Le trafic alimente la violence = Trafficking fuels violence. Alimentation (noun) = nutrition/fueling. Note: do not confuse with "nourrir" = to feed (people/animals).</li>
+    <li><strong>Encadrer</strong>: "to regulate" or "to frame" - to frame with strict rules. Ex: Les Français seraient favorables à une légalisation encadrée = French people would be in favor of regulated legalization. Encadrement (noun) = regulation/framing.</li>
+    <li><strong>Franchir</strong>: "to cross" or "to take the step" - to go beyond a limit, to dare to do. Ex: Si d'autres pays franchissent le pas = If other countries take the step. Franchissement (noun) = crossing. Ex: franchir une frontière = to cross a border.</li>
   </ul>
+</div>
 </div>
 

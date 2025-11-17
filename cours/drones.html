@@ -1,0 +1,235 @@
+<button class="back-btn" onclick="backToSection('textes')">← Retour</button>
+<h2>🚁 Les drones — De nouveaux outils qui changent tout</h2>
+
+<style>
+    body {
+        font-family: 'Georgia', serif;
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        line-height: 1.85;
+        color: #212744;
+    }
+    .text-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 36px 24px 48px;
+        box-sizing: border-box;
+    }
+    h2 {
+        color: #6d4ac3;
+        text-align: center;
+        font-size: 2.45em;
+        margin-bottom: 22px;
+        border-bottom: 2px solid rgba(118,75,162,0.2);
+        padding-bottom: 16px;
+    }
+    h4 {
+        color: #3f2f92;
+        font-size: 1.3em;
+        margin-top: 24px;
+        margin-bottom: 12px;
+        border-bottom: 2px solid rgba(118,75,162,0.15);
+        padding-bottom: 8px;
+    }
+    .bilingual p { 
+        margin: 10px 0; 
+        line-height: 1.88; 
+        font-size: 1.12em;
+        text-align: justify;
+    }
+    .fr { 
+        font-weight: 600; 
+        color: #2c3e50; 
+    }
+    .en { 
+        font-style: italic; 
+        color: #4f5d75;
+        margin: 14px 0 22px;
+        padding: 14px 22px;
+        border-left: 4px solid rgba(102,126,234,0.55);
+        background: rgba(102,126,234,0.07);
+        display: block;
+        border-radius: 0 12px 12px 0;
+    }
+    .vocab-box { 
+        background: #fff9e6; 
+        border-left: 4px solid #ffa500; 
+        padding: 16px 20px; 
+        border-radius: 0 12px 12px 0; 
+        margin: 20px 0;
+        box-shadow: 0 3px 8px rgba(255,165,0,0.15);
+    }
+    .vocab-box h4 { 
+        margin: 0 0 12px 0; 
+        color: #cc7a00; 
+        font-size: 1.05em;
+        border: none;
+        padding: 0;
+    }
+    .vocab-box ul {
+        margin: 8px 0 0 0;
+        padding-left: 20px;
+    }
+    .vocab-box li {
+        margin-bottom: 10px;
+        color: #5c4a00;
+        line-height: 1.6;
+    }
+    .vocab-box li strong {
+        color: #cc7a00;
+        display: inline;
+        margin-right: 6px;
+    }
+    @media print { .print-hide { display: none !important; } }
+    .course-toolbar { text-align: right; margin-bottom: 12px; }
+    .print-btn { 
+        display: inline-flex; 
+        align-items: center; 
+        gap: 8px; 
+        padding: 10px 14px; 
+        border-radius: 8px; 
+        border: 1px solid #764ba2; 
+        color: #764ba2; 
+        background: #f4f1ff; 
+        cursor: pointer; 
+        font-weight: 600; 
+    }
+    .print-btn:hover { background: #ece7ff; }
+    @media (max-width: 768px) {
+        body { padding: 24px 14px; }
+        .text-container { padding: 28px 20px; }
+    }
+</style>
+
+<div class="course-toolbar print-hide">
+  <button class="print-btn" type="button" onclick="window.print()">🖨️ Télécharger en PDF</button>
+  <span class="level-badge" style="margin-left:8px; background:#10b981; color:#fff; padding:4px 8px; border-radius:8px; font-weight:700;">B2</span>
+</div>
+
+<div class="text-container">
+<div class="bilingual">
+  <p class="fr">Il y a vingt ans, les drones étaient des armes militaires coûteuses utilisées uniquement par les grandes armées. Aujourd'hui, n'importe qui peut acheter un drone pour quelques centaines d'euros. Cette démocratisation transforme la société, parfois de manière inquiétante.</p>
+  <p class="en">Twenty years ago, drones were expensive military weapons used only by large armies. Today, anyone can buy a drone for a few hundred euros. This democratization is transforming society, sometimes in disturbing ways.</p>
+
+  <h4>Les drones dans le crime organisé</h4>
+
+  <p class="fr">En Colombie, les cartels de drogue utilisent des drones depuis plusieurs années. Ils s'en servent pour surveiller les routes et détecter les barrages de police. Quand un convoi de drogue circule, des drones volent en éclaireurs à quelques kilomètres devant pour repérer les dangers.</p>
+  <p class="en">In Colombia, drug cartels have been using drones for several years. They use them to monitor roads and detect police checkpoints. When a drug convoy moves, drones fly as scouts a few kilometers ahead to spot dangers.</p>
+
+  <p class="fr">Les groupes armés illégaux utilisent aussi des drones pour surveiller leurs territoires. Dans les zones contrôlées par les FARC ou d'autres milices, des drones patrouillent régulièrement pour détecter les intrus ou les opérations militaires.</p>
+  <p class="en">Illegal armed groups also use drones to monitor their territories. In areas controlled by FARC or other militias, drones regularly patrol to detect intruders or military operations.</p>
+
+  <p class="fr">Plus inquiétant encore, certains cartels mexicains ont transformé des drones en armes. En 2017, des drones équipés d'explosifs improvisés ont été utilisés lors d'affrontements entre cartels. Ces "drones kamikazes" transportent quelques kilos d'explosifs et peuvent être dirigés sur une cible avec précision.</p>
+  <p class="en">Even more concerning, some Mexican cartels have turned drones into weapons. In 2017, drones equipped with improvised explosives were used during clashes between cartels. These "kamikaze drones" carry a few kilos of explosives and can be directed at a target with precision.</p>
+
+  <p class="fr">Les prisons font aussi face à un nouveau problème : des drones livrent de la drogue, des téléphones portables et même des armes aux prisonniers. Les drones survolent les murs de la prison la nuit et larguent leurs colis dans les cours. En France, en Espagne et aux États-Unis, les autorités ont détecté des centaines de ces livraisons.</p>
+  <p class="en">Prisons also face a new problem: drones deliver drugs, cell phones and even weapons to prisoners. Drones fly over prison walls at night and drop their packages in courtyards. In France, Spain and the United States, authorities have detected hundreds of these deliveries.</p>
+
+  <h4>Les drones au service de la police</h4>
+
+  <p class="fr">Mais les drones servent aussi à combattre le crime.</p>
+  <p class="en">But drones also serve to fight crime.</p>
+
+  <p class="fr">À San Francisco et dans plusieurs villes américaines, la police utilise des drones équipés de caméras thermiques pour traquer les voleurs de voitures. Quand une voiture volée est repérée, au lieu de lancer une course-poursuite dangereuse, la police envoie un drone qui suit discrètement le véhicule depuis les airs. Le voleur ne sait pas qu'il est suivi. Quand la voiture s'arrête, la police intervient sans risque.</p>
+  <p class="en">In San Francisco and several American cities, police use drones equipped with thermal cameras to track car thieves. When a stolen car is spotted, instead of launching a dangerous chase, police send a drone that discreetly follows the vehicle from the air. The thief doesn't know they're being followed. When the car stops, police intervene without risk.</p>
+
+  <p class="fr">Cette technique a considérablement réduit les accidents lors des poursuites. Avant, les courses-poursuites causaient des accidents mortels impliquant des innocents. Maintenant, la police peut suivre un suspect sans danger.</p>
+  <p class="en">This technique has significantly reduced accidents during pursuits. Before, chases caused fatal accidents involving innocent people. Now, police can follow a suspect without danger.</p>
+
+  <p class="fr">À Los Angeles, la police utilise des drones pour surveiller les manifestations et les zones de criminalité élevée. Les drones sont équipés de caméras haute définition qui peuvent lire une plaque d'immatriculation depuis 100 mètres de hauteur.</p>
+  <p class="en">In Los Angeles, police use drones to monitor protests and high-crime areas. Drones are equipped with high-definition cameras that can read a license plate from 100 meters high.</p>
+
+  <p class="fr">En Australie, des drones patrouillent les plages pour détecter les requins et prévenir les baigneurs. Les drones peuvent aussi larguer des bouées de sauvetage à des nageurs en difficulté plus rapidement qu'un maître-nageur.</p>
+  <p class="en">In Australia, drones patrol beaches to detect sharks and warn swimmers. Drones can also drop life buoys to swimmers in distress faster than a lifeguard.</p>
+
+  <h4>Les drones dans la guerre moderne</h4>
+
+  <p class="fr">La guerre en Ukraine depuis 2022 a révélé l'importance stratégique des drones. Les deux camps utilisent massivement des drones commerciaux bon marché pour repérer les positions ennemies, guider l'artillerie et même attaquer directement.</p>
+  <p class="en">The war in Ukraine since 2022 has revealed the strategic importance of drones. Both sides massively use cheap commercial drones to locate enemy positions, guide artillery and even attack directly.</p>
+
+  <p class="fr">Des drones qui coûtent 500 euros détruisent des chars qui valent 5 millions d'euros. Un soldat ukrainien ou russe peut piloter un petit drone depuis une tranchée, voler jusqu'aux lignes ennemies et lâcher une grenade sur un véhicule blindé avec une précision chirurgicale.</p>
+  <p class="en">Drones costing 500 euros destroy tanks worth 5 million euros. A Ukrainian or Russian soldier can pilot a small drone from a trench, fly to enemy lines and drop a grenade on an armored vehicle with surgical precision.</p>
+
+  <p class="fr">L'armée ukrainienne utilise aussi des drones maritimes : des bateaux sans équipage bourrés d'explosifs qui attaquent les navires de guerre russes dans la mer Noire. En 2023, ces drones ont endommagé plusieurs navires russes, dont le croiseur Moskva.</p>
+  <p class="en">The Ukrainian army also uses maritime drones: unmanned boats packed with explosives that attack Russian warships in the Black Sea. In 2023, these drones damaged several Russian ships, including the cruiser Moskva.</p>
+
+  <p class="fr">Les drones kamikazes iraniens Shahed-136 frappent régulièrement les villes ukrainiennes. Ces drones ressemblent à de petits avions et peuvent parcourir des centaines de kilomètres avant d'exploser sur leur cible.</p>
+  <p class="en">Iranian Shahed-136 kamikaze drones regularly strike Ukrainian cities. These drones look like small planes and can travel hundreds of kilometers before exploding on their target.</p>
+
+  <p class="fr">Cette guerre a prouvé qu'à l'avenir, aucune armée ne pourra fonctionner sans des milliers de drones. Le soldat du futur sera peut-être quelqu'un qui contrôle dix drones depuis un bunker plutôt que quelqu'un qui combat directement sur le terrain.</p>
+  <p class="en">This war has proven that in the future, no army will be able to function without thousands of drones. The soldier of the future may be someone who controls ten drones from a bunker rather than someone who fights directly on the battlefield.</p>
+
+  <h4>Les drones dans la vie quotidienne</h4>
+
+  <p class="fr">Mais les drones ne servent pas qu'à la guerre et au crime. Ils transforment aussi la vie quotidienne.</p>
+  <p class="en">But drones aren't just for war and crime. They also transform daily life.</p>
+
+  <p class="fr"><strong>La livraison</strong> : Amazon teste depuis des années des drones de livraison. L'idée est simple : commander un produit et le recevoir par drone en 30 minutes. Google Wing opère déjà ce service en Australie. Au Rwanda, des drones Zipline livrent du sang et des médicaments dans des zones rurales difficiles d'accès. Cette technologie a sauvé des milliers de vies.</p>
+  <p class="en"><strong>Delivery</strong>: Amazon has been testing delivery drones for years. The idea is simple: order a product and receive it by drone in 30 minutes. Google Wing already operates this service in Australia. In Rwanda, Zipline drones deliver blood and medicines to remote rural areas. This technology has saved thousands of lives.</p>
+
+  <p class="fr"><strong>L'agriculture</strong> : Les agriculteurs utilisent des drones pour surveiller leurs champs, détecter les maladies des plantes, optimiser l'irrigation. Les drones pulvérisent même des pesticides de manière précise, réduisant la quantité de produits chimiques nécessaires.</p>
+  <p class="en"><strong>Agriculture</strong>: Farmers use drones to monitor their fields, detect plant diseases, optimize irrigation. Drones even spray pesticides precisely, reducing the amount of chemicals needed.</p>
+
+  <p class="fr"><strong>Le cinéma</strong> : Les drones ont révolutionné le cinéma. Avant, filmer des scènes aériennes nécessitait un hélicoptère coûtant des milliers d'euros par heure. Maintenant, un drone à 1 000 euros produit des images spectaculaires.</p>
+  <p class="en"><strong>Cinema</strong>: Drones have revolutionized cinema. Before, filming aerial scenes required a helicopter costing thousands of euros per hour. Now, a 1,000-euro drone produces spectacular images.</p>
+
+  <p class="fr"><strong>Le sauvetage</strong> : Lors d'inondations, de tremblements de terre ou d'avalanches, les drones localisent rapidement les victimes. Équipés de caméras thermiques, ils détectent la chaleur corporelle sous les décombres.</p>
+  <p class="en"><strong>Rescue</strong>: During floods, earthquakes or avalanches, drones quickly locate victims. Equipped with thermal cameras, they detect body heat under rubble.</p>
+
+  <h4>Les dangers et les régulations</h4>
+
+  <p class="fr">La prolifération des drones pose de nombreux problèmes.</p>
+  <p class="en">The proliferation of drones raises many problems.</p>
+
+  <p class="fr"><strong>La vie privée</strong> : Un drone peut voler au-dessus de votre jardin et vous filmer chez vous. En France, la loi interdit de filmer les gens sans leur consentement, mais c'est difficile à faire respecter.</p>
+  <p class="en"><strong>Privacy</strong>: A drone can fly over your garden and film you at home. In France, the law prohibits filming people without their consent, but it's difficult to enforce.</p>
+
+  <p class="fr"><strong>La sécurité aérienne</strong> : Des drones ont provoqué des incidents dangereux près des aéroports. En 2018, l'aéroport de Gatwick à Londres a été fermé pendant 36 heures à cause d'observations de drones près des pistes. Des centaines de vols ont été annulés.</p>
+  <p class="en"><strong>Aviation safety</strong>: Drones have caused dangerous incidents near airports. In 2018, Gatwick Airport in London was closed for 36 hours due to drone sightings near runways. Hundreds of flights were cancelled.</p>
+
+  <p class="fr"><strong>Le terrorisme</strong> : En 2018, des drones ont été utilisés lors d'une tentative d'assassinat du président vénézuélien Maduro. Des drones chargés d'explosifs ont explosé pendant un discours. Heureusement, personne n'a été gravement blessé, mais l'incident a montré la vulnérabilité des dirigeants face à cette menace.</p>
+  <p class="en"><strong>Terrorism</strong>: In 2018, drones were used during an assassination attempt on Venezuelan President Maduro. Drones loaded with explosives detonated during a speech. Fortunately, no one was seriously injured, but the incident showed the vulnerability of leaders to this threat.</p>
+
+  <p class="fr">La plupart des pays ont mis en place des réglementations strictes. En France, il est interdit de faire voler un drone au-dessus de 120 mètres, près des aéroports, au-dessus des foules ou des zones urbaines denses sans autorisation. Les drones de plus de 800 grammes doivent être enregistrés.</p>
+  <p class="en">Most countries have implemented strict regulations. In France, it is prohibited to fly a drone above 120 meters, near airports, over crowds or dense urban areas without authorization. Drones over 800 grams must be registered.</p>
+
+  <h4>Le futur des drones</h4>
+
+  <p class="fr">Dans 10 ou 20 ans, les drones seront partout.</p>
+  <p class="en">In 10 or 20 years, drones will be everywhere.</p>
+
+  <p class="fr">Des taxis volants autonomes transporteront des passagers dans les villes. Des essais ont déjà lieu à Dubaï et à Singapour.</p>
+  <p class="en">Autonomous flying taxis will transport passengers in cities. Trials are already taking place in Dubai and Singapore.</p>
+
+  <p class="fr">Des essaims de drones travailleront ensemble : des centaines de petits drones coordonneront leurs mouvements pour créer des spectacles lumineux (comme on le voit déjà lors de certains événements), mais aussi pour des tâches plus complexes comme la construction de bâtiments ou l'exploration de zones dangereuses.</p>
+  <p class="en">Swarms of drones will work together: hundreds of small drones will coordinate their movements to create light shows (as we already see at some events), but also for more complex tasks like building construction or exploring dangerous areas.</p>
+
+  <p class="fr">La technologie continuera à se démocratiser. D'ici quelques années, un drone performant coûtera peut-être 50 euros. Cela apportera de formidables opportunités, mais aussi de nouveaux défis pour la sécurité et la vie privée.</p>
+  <p class="en">Technology will continue to democratize. In a few years, a high-performance drone may cost 50 euros. This will bring tremendous opportunities, but also new challenges for security and privacy.</p>
+
+  <p class="fr">Une chose est certaine : les drones ont changé le monde en moins de dix ans. Et la révolution ne fait que commencer.</p>
+  <p class="en">One thing is certain: drones have changed the world in less than ten years. And the revolution is just beginning.</p>
+</div>
+
+<div class="vocab-box">
+  <h4>📚 Advanced Verbs and Their Different Meanings:</h4>
+  <ul>
+    <li><strong>Se servir de</strong>: "to use" (reflexive) - to make use of something. Ex: Ils s'en servent pour surveiller = They use them to monitor. Service (noun) = service. Différent de "utiliser" which is more direct.</li>
+    <li><strong>Repérer</strong>: "to spot" or "to locate" - to identify the position of something. Ex: Repérer les dangers = To spot dangers. Repérage (noun) = location/spotting. Ne pas confondre avec "réparer" = to repair.</li>
+    <li><strong>Transformer</strong>: "to transform" - to completely change the form or nature. Ex: Transformer des drones en armes = To transform drones into weapons. Transformation (noun) = transformation.</li>
+    <li><strong>Larguer</strong>: "to drop" or "to release" - to let fall from a height. Ex: Larguer des colis = To drop packages. Largage (noun) = dropping/release. Peut aussi signifier "to dump" (romantically): larguer quelqu'un = to dump someone.</li>
+    <li><strong>Traquer</strong>: "to track down" or "to hunt" - to pursue and find. Ex: Traquer les voleurs = To track down thieves. Traque (noun) = tracking/hunt. Traqueur = tracker/hunter.</li>
+    <li><strong>Révéler</strong>: "to reveal" - to show something previously hidden. Ex: La guerre a révélé l'importance = The war revealed the importance. Révélation (noun) = revelation.</li>
+    <li><strong>Parcourir</strong>: "to travel" or "to cover" - to travel a distance. Ex: Parcourir des centaines de kilomètres = To travel hundreds of kilometers. Parcours (noun) = route/journey. Ne pas confondre avec "parcouer" (doesn't exist).</li>
+    <li><strong>Opérer</strong>: "to operate" - to run, to perform an operation. Ex: Opérer un service = To operate a service. Opération (noun) = operation. Peut aussi signifier "to operate" (surgery): opérer un patient.</li>
+    <li><strong>Pulvériser</strong>: "to spray" - to reduce to fine particles. Ex: Pulvériser des pesticides = To spray pesticides. Pulvérisation (noun) = spraying. Peut aussi signifier "to crush" figuratively: pulvériser un record = to crush a record.</li>
+    <li><strong>Localiser</strong>: "to locate" - to find the position of. Ex: Localiser les victimes = To locate victims. Localisation (noun) = location. Local = local (adjective).</li>
+    <li><strong>Proliférer</strong>: "to proliferate" - to increase rapidly in number. Ex: La prolifération des drones = The proliferation of drones. Prolifération (noun) = proliferation. Souvent utilisé négativement.</li>
+    <li><strong>Vulnérabilité</strong>: "vulnerability" (noun) - state of being vulnerable. Vulnérable = vulnerable (adjective). Vulnérabiliser = to make vulnerable (verb).</li>
+    <li><strong>Coordonner</strong>: "to coordinate" - to organize harmoniously. Ex: Coordonner leurs mouvements = To coordinate their movements. Coordination (noun) = coordination. Coordonné = coordinated (adjective).</li>
+    <li><strong>Se démocratiser</strong>: "to become democratized" - to become accessible to everyone. Ex: La technologie se démocratise = Technology is becoming democratized. Démocratisation (noun) = democratization. Démocratie = democracy.</li>
+  </ul>
+</div>
+</div>
+

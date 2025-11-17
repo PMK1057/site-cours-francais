@@ -1,0 +1,222 @@
+<button class="back-btn" onclick="backToSection('textes')">← Retour</button>
+<h2>⚖️ L'intelligence artificielle et le droit — Vers des juges robots ?</h2>
+
+<style>
+    body {
+        font-family: 'Georgia', serif;
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        line-height: 1.85;
+        color: #212744;
+    }
+    .text-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 36px 24px 48px;
+        box-sizing: border-box;
+    }
+    h2 {
+        color: #6d4ac3;
+        text-align: center;
+        font-size: 2.45em;
+        margin-bottom: 22px;
+        border-bottom: 2px solid rgba(118,75,162,0.2);
+        padding-bottom: 16px;
+    }
+    h3 {
+        color: #3f2f92;
+        font-size: 1.6em;
+        margin-top: 32px;
+        margin-bottom: 18px;
+        border-bottom: 2px solid rgba(118,75,162,0.15);
+        padding-bottom: 10px;
+    }
+    h4 {
+        color: #3f2f92;
+        font-size: 1.3em;
+        margin-top: 24px;
+        margin-bottom: 12px;
+        border-bottom: 2px solid rgba(118,75,162,0.15);
+        padding-bottom: 8px;
+    }
+    .bilingual p { 
+        margin: 10px 0; 
+        line-height: 1.88; 
+        font-size: 1.12em;
+        text-align: justify;
+    }
+    .fr { 
+        font-weight: 600; 
+        color: #2c3e50; 
+    }
+    .en { 
+        font-style: italic; 
+        color: #4f5d75;
+        margin: 14px 0 22px;
+        padding: 14px 22px;
+        border-left: 4px solid rgba(102,126,234,0.55);
+        background: rgba(102,126,234,0.07);
+        display: block;
+        border-radius: 0 12px 12px 0;
+    }
+    .vocab-box { 
+        background: #fff9e6; 
+        border-left: 4px solid #ffa500; 
+        padding: 16px 20px; 
+        border-radius: 0 12px 12px 0; 
+        margin: 20px 0;
+        box-shadow: 0 3px 8px rgba(255,165,0,0.15);
+    }
+    .vocab-box h4 { 
+        margin: 0 0 12px 0; 
+        color: #cc7a00; 
+        font-size: 1.05em;
+        border: none;
+        padding: 0;
+    }
+    .vocab-box ul {
+        margin: 8px 0 0 0;
+        padding-left: 20px;
+    }
+    .vocab-box li {
+        margin-bottom: 10px;
+        color: #5c4a00;
+        line-height: 1.6;
+    }
+    .vocab-box li strong {
+        color: #cc7a00;
+        display: inline;
+        margin-right: 6px;
+    }
+    @media print { .print-hide { display: none !important; } }
+    .course-toolbar { text-align: right; margin-bottom: 12px; }
+    .print-btn { 
+        display: inline-flex; 
+        align-items: center; 
+        gap: 8px; 
+        padding: 10px 14px; 
+        border-radius: 8px; 
+        border: 1px solid #764ba2; 
+        color: #764ba2; 
+        background: #f4f1ff; 
+        cursor: pointer; 
+        font-weight: 600; 
+    }
+    .print-btn:hover { background: #ece7ff; }
+    @media (max-width: 768px) {
+        body { padding: 24px 14px; }
+        .text-container { padding: 28px 20px; }
+    }
+</style>
+
+<div class="course-toolbar print-hide">
+  <button class="print-btn" type="button" onclick="window.print()">🖨️ Télécharger en PDF</button>
+  <span class="level-badge" style="margin-left:8px; background:#10b981; color:#fff; padding:4px 8px; border-radius:8px; font-weight:700;">B2</span>
+</div>
+
+<div class="text-container">
+<div class="bilingual">
+  <p class="fr">L'intelligence artificielle transforme déjà le monde juridique. Des algorithmes analysent des contrats, prédisent les décisions de justice, aident les avocats dans leurs recherches. Mais jusqu'où peut aller l'IA dans le droit ?</p>
+  <p class="en">Artificial intelligence is already transforming the legal world. Algorithms analyze contracts, predict court decisions, help lawyers in their research. But how far can AI go in law?</p>
+
+  <h4>Ce que l'IA fait déjà dans le droit</h4>
+
+  <p class="fr"><strong>L'analyse de documents</strong> : Les cabinets d'avocats reçoivent souvent des milliers de pages de documents à analyser pour un seul dossier. Avant, des avocats juniors passaient des semaines à lire tous ces papiers. Aujourd'hui, des logiciels d'IA scannent ces documents en quelques heures et identifient les passages importants.</p>
+  <p class="en"><strong>Document analysis</strong>: Law firms often receive thousands of pages of documents to analyze for a single case. Before, junior lawyers spent weeks reading all these papers. Today, AI software scans these documents in a few hours and identifies important passages.</p>
+
+  <p class="fr">Par exemple, lors de procès complexes entre grandes entreprises, l'IA peut analyser 10 millions de documents et trouver les preuves pertinentes. Un travail qui aurait pris des mois à une équipe d'avocats.</p>
+  <p class="en">For example, during complex trials between large companies, AI can analyze 10 million documents and find relevant evidence. Work that would have taken months for a team of lawyers.</p>
+
+  <p class="fr"><strong>La rédaction de contrats standards</strong> : Des outils comme LawGeex ou DoNotPay génèrent automatiquement des contrats simples : baux d'appartement, accords de confidentialité, contrats de travail basiques. L'utilisateur répond à quelques questions et l'IA produit un document juridiquement valide.</p>
+  <p class="en"><strong>Drafting standard contracts</strong>: Tools like LawGeex or DoNotPay automatically generate simple contracts: apartment leases, confidentiality agreements, basic employment contracts. The user answers a few questions and AI produces a legally valid document.</p>
+
+  <p class="fr">Aux États-Unis, DoNotPay a même créé un "robot avocat" gratuit qui aide les gens à contester des amendes de stationnement. L'IA analyse la situation et rédige automatiquement les recours. Le système a gagné des milliers de cas.</p>
+  <p class="en">In the United States, DoNotPay even created a free "lawyer robot" that helps people contest parking tickets. AI analyzes the situation and automatically drafts appeals. The system has won thousands of cases.</p>
+
+  <p class="fr"><strong>La prédiction des décisions de justice</strong> : C'est probablement l'usage le plus controversé. Des logiciels comme Case Law Analytics ou Lex Machina analysent des milliers de décisions de justice passées. Ils identifient des patterns : comment tel juge a jugé dans des affaires similaires, quel pourcentage de chances a un demandeur de gagner son procès.</p>
+  <p class="en"><strong>Predicting court decisions</strong>: This is probably the most controversial use. Software like Case Law Analytics or Lex Machina analyzes thousands of past court decisions. They identify patterns: how a particular judge ruled in similar cases, what percentage chance a plaintiff has of winning their case.</p>
+
+  <p class="fr">En France, la startup Predictice propose ce service. Un avocat peut entrer les détails d'une affaire et l'IA lui dit : "Dans 73% des cas similaires, le demandeur a obtenu gain de cause avec un dédommagement moyen de 15 000 euros."</p>
+  <p class="en">In France, the startup Predictice offers this service. A lawyer can enter the details of a case and AI tells them: "In 73% of similar cases, the plaintiff won with an average compensation of 15,000 euros."</p>
+
+  <p class="fr">Cela change la stratégie des avocats. Si l'IA prédit qu'ils vont perdre, ils peuvent conseiller à leur client de négocier un accord à l'amiable plutôt que d'aller au procès.</p>
+  <p class="en">This changes lawyers' strategy. If AI predicts they will lose, they can advise their client to negotiate a settlement rather than go to trial.</p>
+
+  <h4>Les algorithmes qui décident déjà</h4>
+
+  <p class="fr">Dans certains pays, l'IA prend déjà des décisions qui affectent la vie des gens.</p>
+  <p class="en">In some countries, AI already makes decisions that affect people's lives.</p>
+
+  <p class="fr"><strong>Aux États-Unis</strong>, dans plusieurs États, des algorithmes calculent le risque de récidive d'un criminel. Un système appelé COMPAS analyse des dizaines de facteurs : âge, casier judiciaire, situation familiale, emploi. Il donne une note de risque : faible, moyen ou élevé.</p>
+  <p class="en"><strong>In the United States</strong>, in several states, algorithms calculate a criminal's risk of recidivism. A system called COMPAS analyzes dozens of factors: age, criminal record, family situation, employment. It gives a risk score: low, medium, or high.</p>
+
+  <p class="fr">Les juges utilisent cette note pour décider si un accusé peut être libéré sous caution ou s'il doit rester en prison avant son procès. Dans certains cas, l'algorithme influence même la durée de la peine.</p>
+  <p class="en">Judges use this score to decide whether an accused can be released on bail or must remain in prison before trial. In some cases, the algorithm even influences the length of the sentence.</p>
+
+  <p class="fr">Le problème ? En 2016, une enquête a révélé que COMPAS était biaisé contre les personnes noires. À crime égal, l'algorithme les classait plus souvent comme "à haut risque" que les personnes blanches. Les créateurs de l'algorithme ont nié ces accusations, mais le débat continue.</p>
+  <p class="en">The problem? In 2016, an investigation revealed that COMPAS was biased against Black people. For the same crime, the algorithm classified them more often as "high risk" than white people. The algorithm's creators denied these accusations, but the debate continues.</p>
+
+  <p class="fr"><strong>En Estonie</strong>, un projet pilote teste un "juge robot" pour les petits litiges (moins de 7 000 euros). Les deux parties soumettent leurs arguments et leurs preuves. L'IA analyse le dossier et rend une décision. Si les deux parties sont d'accord, le jugement est exécutoire. Sinon, un juge humain prend le relais.</p>
+  <p class="en"><strong>In Estonia</strong>, a pilot project tests a "robot judge" for small disputes (less than 7,000 euros). Both parties submit their arguments and evidence. AI analyzes the case and makes a decision. If both parties agree, the judgment is enforceable. Otherwise, a human judge takes over.</p>
+
+  <p class="fr"><strong>En Chine</strong>, le gouvernement utilise massivement l'IA dans le système judiciaire. Des "tribunaux intelligents" analysent les dossiers et proposent des décisions aux juges. Le système traite des millions de petits litiges : divorces, dettes, accidents de la route.</p>
+  <p class="en"><strong>In China</strong>, the government uses AI massively in the judicial system. "Smart courts" analyze cases and propose decisions to judges. The system processes millions of small disputes: divorces, debts, road accidents.</p>
+
+  <h4>Les dangers de l'IA dans la justice</h4>
+
+  <p class="fr">L'idée de remplacer des juges par des algorithmes inquiète beaucoup de juristes et de citoyens.</p>
+  <p class="en">The idea of replacing judges with algorithms worries many lawyers and citizens.</p>
+
+  <p class="fr"><strong>Le manque de transparence</strong> : Les algorithmes d'IA sont souvent des "boîtes noires". Personne ne sait exactement comment ils arrivent à leurs conclusions. Un juge humain doit justifier sa décision. Un algorithme ne peut pas vraiment expliquer pourquoi il a décidé ceci plutôt que cela.</p>
+  <p class="en"><strong>Lack of transparency</strong>: AI algorithms are often "black boxes." No one knows exactly how they arrive at their conclusions. A human judge must justify their decision. An algorithm cannot really explain why it decided one thing rather than another.</p>
+
+  <p class="fr">En France, la loi interdit même d'analyser statistiquement les décisions des juges individuels. En 2019, la "loi pour la confiance dans la justice" a rendu illégal de créer des logiciels qui prédisent comment un juge spécifique va juger. L'objectif était de protéger l'indépendance de la justice.</p>
+  <p class="en">In France, the law even prohibits statistically analyzing individual judges' decisions. In 2019, the "law on trust in justice" made it illegal to create software that predicts how a specific judge will rule. The goal was to protect judicial independence.</p>
+
+  <p class="fr"><strong>Les biais algorithmiques</strong> : L'IA apprend en analysant des données passées. Si ces données contiennent des discriminations, l'IA va reproduire ces discriminations. Par exemple, si pendant des décennies les juges ont condamné plus sévèrement les minorités, l'IA va apprendre ce pattern et le perpétuer.</p>
+  <p class="en"><strong>Algorithmic biases</strong>: AI learns by analyzing past data. If this data contains discrimination, AI will reproduce this discrimination. For example, if for decades judges have sentenced minorities more severely, AI will learn this pattern and perpetuate it.</p>
+
+  <p class="fr"><strong>L'absence de contexte humain</strong> : Un juge humain peut prendre en compte des circonstances atténuantes que l'algorithme ne voit pas. Un père qui a volé pour nourrir ses enfants mérite-t-il la même peine qu'un voleur récidiviste ? L'IA a du mal avec ces nuances.</p>
+  <p class="en"><strong>Lack of human context</strong>: A human judge can take into account mitigating circumstances that the algorithm doesn't see. Does a father who stole to feed his children deserve the same sentence as a repeat thief? AI struggles with these nuances.</p>
+
+  <p class="fr"><strong>Le risque d'erreur</strong> : Les algorithmes ne sont pas infaillibles. Ils peuvent se tromper. Mais quand un juge humain se trompe, il peut être tenu responsable. Qui est responsable quand c'est un algorithme qui commet une erreur ? Le programmeur ? L'entreprise qui a créé le logiciel ? Le juge qui a suivi ses recommandations ?</p>
+  <p class="en"><strong>Risk of error</strong>: Algorithms are not infallible. They can make mistakes. But when a human judge makes a mistake, they can be held accountable. Who is responsible when an algorithm makes an error? The programmer? The company that created the software? The judge who followed its recommendations?</p>
+
+  <h4>L'avenir : une justice augmentée, pas remplacée</h4>
+
+  <p class="fr">La plupart des experts pensent que l'IA ne remplacera pas les juges, mais les assistera.</p>
+  <p class="en">Most experts think AI will not replace judges, but will assist them.</p>
+
+  <p class="fr">L'IA pourrait gérer les tâches répétitives : analyser les documents, rechercher la jurisprudence, rédiger les parties administratives des jugements. Cela libérerait du temps pour que les juges se concentrent sur l'essentiel : comprendre les situations humaines complexes et rendre une justice équitable.</p>
+  <p class="en">AI could handle repetitive tasks: analyzing documents, researching case law, drafting administrative parts of judgments. This would free up time for judges to focus on what's essential: understanding complex human situations and delivering fair justice.</p>
+
+  <p class="fr">Pour les petits litiges simples (factures impayées, contraventions), l'IA pourrait proposer des solutions rapides et peu coûteuses. Cela désengorgerait les tribunaux et permettrait aux gens de résoudre leurs problèmes sans attendre des mois.</p>
+  <p class="en">For simple small disputes (unpaid invoices, traffic violations), AI could offer quick and inexpensive solutions. This would unclog courts and allow people to resolve their problems without waiting months.</p>
+
+  <p class="fr">Mais pour les affaires graves - crimes, divorces conflictuels, questions constitutionnelles - l'humain devra rester au centre. La justice n'est pas seulement une question de logique et de règles. C'est aussi une question de sagesse, d'éthique, de compréhension humaine.</p>
+  <p class="en">But for serious cases - crimes, contentious divorces, constitutional questions - humans must remain at the center. Justice is not just a matter of logic and rules. It is also a matter of wisdom, ethics, human understanding.</p>
+
+  <p class="fr">Une chose est sûre : l'IA va continuer à transformer le droit. Les avocats et les juges devront apprendre à travailler avec ces outils, tout en gardant leur esprit critique.</p>
+  <p class="en">One thing is certain: AI will continue to transform law. Lawyers and judges will need to learn to work with these tools, while maintaining their critical thinking.</p>
+</div>
+
+<div class="vocab-box">
+  <h4>📚 Advanced Verbs and Their Different Meanings:</h4>
+  <ul>
+    <li><strong>Transformer</strong>: "to transform" - to completely change the form or nature of something. Ex: L'IA transforme le monde juridique = AI is transforming the legal world. Transformation (noun) = transformation. Différent de "changer" which is more general.</li>
+    <li><strong>Identifier</strong>: "to identify" - to recognize or establish what something is. Ex: L'IA identifie les passages importants = AI identifies important passages. Identification (noun) = identification. Peut aussi signifier "to identify with" : s'identifier à quelqu'un.</li>
+    <li><strong>Générer</strong>: "to generate" - to produce, to create. Ex: L'IA génère des contrats = AI generates contracts. Génération (noun) = generation/generating. Générer du profit = to generate profit.</li>
+    <li><strong>Révéler</strong>: "to reveal" or "to disclose" - to make known something previously secret. Ex: L'enquête a révélé un biais = The investigation revealed a bias. Révélation (noun) = revelation. Peut aussi signifier "to show" : révéler ses sentiments = to reveal one's feelings.</li>
+    <li><strong>Classifier</strong>: "to classify" - to categorize, to arrange in groups. Ex: L'algorithme les classait comme "à haut risque" = The algorithm classified them as "high risk." Classification (noun) = classification. Classer = to sort (similar but less formal).</li>
+    <li><strong>Soumettre</strong>: "to submit" - to present for consideration or judgment. Ex: Les parties soumettent leurs arguments = The parties submit their arguments. Soumission (noun) = submission. Peut aussi signifier "to subject to" : soumettre à une règle = to subject to a rule.</li>
+    <li><strong>Rendre</strong>: polysemous verb! 1) "to make" + adjective (rendre illégal = to make illegal), 2) "to give back" (rendre un livre), 3) "to deliver" (rendre une décision = to deliver a decision), 4) se rendre = to surrender or to go somewhere.</li>
+    <li><strong>Justifier</strong>: "to justify" - to show or prove to be right or reasonable. Ex: Un juge doit justifier sa décision = A judge must justify their decision. Justification (noun) = justification. Juste = just/fair (adjective).</li>
+    <li><strong>Perpétuer</strong>: "to perpetuate" - to make something continue indefinitely. Ex: L'IA va perpétuer les discriminations = AI will perpetuate discrimination. Perpétuation (noun) = perpetuation. Différent de "continuer" which is more general.</li>
+    <li><strong>Libérer</strong>: "to free" or "to release" - to set free, to make available. Ex: Cela libérerait du temps = This would free up time. Libération (noun) = liberation/freeing. Peut aussi signifier "to release" from prison: libérer un prisonnier.</li>
+    <li><strong>Désengorger</strong>: "to unclog" or "to relieve congestion" - to clear blockages, to reduce overcrowding. Ex: Désengorger les tribunaux = To unclog courts. Désengorgement (noun) = unclogging. Engorger = to clog (opposite).</li>
+    <li><strong>Affecter</strong>: "to affect" - to influence, to have an effect on. Ex: Des décisions qui affectent la vie = Decisions that affect life. Affectation (noun) = assignment/allocation. Ne pas confondre avec "effet" (effect, noun) et "affecter" (to pretend, different meaning).</li>
+  </ul>
+</div>
+</div>
+

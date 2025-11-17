@@ -2,14 +2,94 @@
 <h2>🇫🇷 L'uniformisation de la langue française</h2>
 
 <style>
-  .bilingual p { margin: 10px 0; line-height: 1.8; }
-  .fr { font-weight: 600; color: #1f2937; }
-  .en { font-style: italic; color: #475569; }
-  .vocab-box { background: #e6fffb; border-left: 4px solid #06b6d4; padding: 14px 16px; border-radius: 0 10px 10px 0; margin-top: 18px; }
-  .vocab-box h4 { margin: 0 0 8px 0; color: #0e7490; }
-  @media print { .print-hide { display: none !important; } }
-  .course-toolbar { text-align: right; margin-bottom: 12px; }
-  .print-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; border: 1px solid #764ba2; color: #764ba2; background: #f4f1ff; cursor: pointer; font-weight: 600; }
+    body {
+        font-family: 'Georgia', serif;
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        line-height: 1.85;
+        color: #212744;
+    }
+    .text-container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 36px 24px 48px;
+        box-sizing: border-box;
+    }
+    h2 {
+        color: #6d4ac3;
+        text-align: center;
+        font-size: 2.45em;
+        margin-bottom: 22px;
+        border-bottom: 2px solid rgba(118,75,162,0.2);
+        padding-bottom: 16px;
+    }
+    .bilingual p { 
+        margin: 10px 0; 
+        line-height: 1.88; 
+        font-size: 1.12em;
+        text-align: justify;
+    }
+    .fr { 
+        font-weight: 600; 
+        color: #2c3e50; 
+    }
+    .en { 
+        font-style: italic; 
+        color: #4f5d75;
+        margin: 14px 0 22px;
+        padding: 14px 22px;
+        border-left: 4px solid rgba(102,126,234,0.55);
+        background: rgba(102,126,234,0.07);
+        display: block;
+        border-radius: 0 12px 12px 0;
+    }
+    .vocab-box { 
+        background: #fff9e6; 
+        border-left: 4px solid #ffa500; 
+        padding: 16px 20px; 
+        border-radius: 0 12px 12px 0; 
+        margin: 20px 0;
+        box-shadow: 0 3px 8px rgba(255,165,0,0.15);
+    }
+    .vocab-box h4 { 
+        margin: 0 0 12px 0; 
+        color: #cc7a00; 
+        font-size: 1.05em;
+    }
+    .vocab-box ul {
+        margin: 8px 0 0 0;
+        padding-left: 20px;
+    }
+    .vocab-box li {
+        margin-bottom: 10px;
+        color: #5c4a00;
+        line-height: 1.6;
+    }
+    .vocab-box li strong {
+        color: #cc7a00;
+        display: inline;
+        margin-right: 6px;
+    }
+    @media print { .print-hide { display: none !important; } }
+    .course-toolbar { text-align: right; margin-bottom: 12px; }
+    .print-btn { 
+        display: inline-flex; 
+        align-items: center; 
+        gap: 8px; 
+        padding: 10px 14px; 
+        border-radius: 8px; 
+        border: 1px solid #764ba2; 
+        color: #764ba2; 
+        background: #f4f1ff; 
+        cursor: pointer; 
+        font-weight: 600; 
+    }
+    .print-btn:hover { background: #ece7ff; }
+    @media (max-width: 768px) {
+        body { padding: 24px 14px; }
+        .text-container { padding: 28px 20px; }
+    }
 </style>
 
 <div class="course-toolbar print-hide">
@@ -17,6 +97,7 @@
   <span class="level-badge" style="margin-left:8px; background:#10b981; color:#fff; padding:4px 8px; border-radius:8px; font-weight:700;">B1</span>
 </div>
 
+<div class="text-container">
 <div class="bilingual">
   <p class="fr">Aujourd'hui, presque tous les Français parlent français. Mais ça n'a pas toujours été le cas.</p>
   <p class="en">Today, almost all French people speak French. But it was not always the case.</p>
@@ -47,13 +128,14 @@
 </div>
 
 <div class="vocab-box">
-  <h4>📚 Verbes avancés et leurs différentes significations :</h4>
+  <h4>📚 Advanced Verbs and Their Different Meanings:</h4>
   <ul>
-    <li><strong>Universaliser</strong> : "to universalize" - rendre universel, généraliser. Ex: Ils voulaient universaliser la langue française = They wanted to universalize the French language. Universalisation (nom) = universalization.</li>
-    <li><strong>Anéantir</strong> : "to annihilate" ou "to destroy" - détruire complètement. Ex: Anéantir les patois = To annihilate patois. Expression forte, souvent utilisé pour parler d'une destruction totale.</li>
-    <li><strong>Diffuser</strong> : "to broadcast" ou "to spread" - répandre, transmettre. Ex: La radio a diffusé un français standardisé = Radio broadcast standardized French. Diffusion (nom) = broadcast/spreading. Ne pas confondre avec "confuser" = to confuse.</li>
-    <li><strong>Revitaliser</strong> : "to revitalize" - redonner de la vie, réanimer. Ex: Des régions tentent de revitaliser les langues = Some regions try to revitalize languages. Revitalisation (nom) = revitalization.</li>
-    <li><strong>Reconnaître</strong> : "to recognize" - identifier ou admettre officiellement. Ex: La Constitution reconnaît les langues régionales = The Constitution recognizes regional languages. Reconnaissance (nom) = recognition. Peut aussi signifier "to admit" : Je reconnais mon erreur = I admit my mistake.</li>
-    <li><strong>Cesser</strong> : "to cease" ou "to stop" - arrêter, mettre fin. Ex: Ils ont cessé de transmettre les langues = They stopped passing on languages. Cessation (nom) = cessation.</li>
+    <li><strong>Universaliser</strong>: "to universalize" - to make universal, to generalize. Ex: Ils voulaient universaliser la langue française = They wanted to universalize the French language. Universalisation (noun) = universalization.</li>
+    <li><strong>Anéantir</strong>: "to annihilate" or "to destroy" - to completely destroy. Ex: Anéantir les patois = To annihilate patois. Strong expression, often used to talk about total destruction.</li>
+    <li><strong>Diffuser</strong>: "to broadcast" or "to spread" - to spread, to transmit. Ex: La radio a diffusé un français standardisé = Radio broadcast standardized French. Diffusion (noun) = broadcast/spreading. Note: do not confuse with "confuser" (confondre) = to confuse.</li>
+    <li><strong>Revitaliser</strong>: "to revitalize" - to give new life to, to revive. Ex: Des régions tentent de revitaliser les langues = Some regions try to revitalize languages. Revitalisation (noun) = revitalization.</li>
+    <li><strong>Reconnaître</strong>: "to recognize" - to identify or officially admit. Ex: La Constitution reconnaît les langues régionales = The Constitution recognizes regional languages. Reconnaissance (noun) = recognition. Can also mean "to admit" (avouer): Je reconnais mon erreur = I admit my mistake.</li>
+    <li><strong>Cesser</strong>: "to cease" or "to stop" - to stop, to end. Ex: Ils ont cessé de transmettre les langues = They stopped passing on languages. Cessation (noun) = cessation.</li>
   </ul>
+</div>
 </div>
