@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un weekend à Paris - Lecture A2</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <button class="back-btn" onclick="backToSection('textes')">← Retour</button>
+    
+    <div class="container">
+        <h2>🗼 Un weekend à Paris</h2>
+        
+        <div class="info-box">
+            <h3>📖 Texte de lecture</h3>
+            <p><strong>Niveau :</strong> A2 | <strong>Mots :</strong> ~250</p>
+        </div>
+
+        <div class="text-paragraph" style="font-size: 1.1em; line-height: 1.8; margin: 30px 0;">
+            <p>
+                Samedi matin, je suis arrivé à Paris à 9 heures. J'ai pris le métro pour aller à mon hôtel près de la Tour Eiffel. Après avoir déposé mes bagages, je suis allé dans une boulangerie pour acheter un croissant et un café. C'était délicieux !
+            </p>
+            <p>
+                Ensuite, j'ai visité le musée du Louvre. Il y avait beaucoup de touristes, mais c'était magnifique. J'ai vu la Joconde et d'autres tableaux célèbres. Après le musée, j'ai marché le long de la Seine jusqu'à Notre-Dame.
+            </p>
+            <p>
+                Le soir, j'ai dîné dans un petit restaurant français. J'ai mangé du coq au vin et une tarte aux pommes. Le serveur était très sympa. Après le dîner, j'ai bu un verre de vin dans un café près de la Tour Eiffel. La vue était incroyable !
+            </p>
+            <p>
+                Dimanche, j'ai fait du shopping dans les Champs-Élysées. J'ai acheté des souvenirs pour ma famille. L'après-midi, j'ai visité Montmartre et la basilique du Sacré-Cœur. C'était très beau. Le weekend était parfait !
+            </p>
+        </div>
+
+        <div class="info-box" style="background: #e8f5e9; border-left-color: #4caf50;">
+            <h3>📚 Vocabulaire clé</h3>
+            <ul>
+                <li><strong>Métro</strong> - système de transport souterrain</li>
+                <li><strong>Boulangerie</strong> - magasin qui vend du pain et des pâtisseries</li>
+                <li><strong>Croissant</strong> - viennoiserie française en forme de croissant</li>
+                <li><strong>Musée</strong> - lieu où sont exposées des œuvres d'art</li>
+                <li><strong>Touriste</strong> - personne qui visite un lieu</li>
+                <li><strong>Seine</strong> - fleuve qui traverse Paris</li>
+                <li><strong>Restaurant</strong> - lieu où on mange</li>
+                <li><strong>Serveur</strong> - personne qui sert dans un restaurant</li>
+                <li><strong>Shopping</strong> - faire des achats</li>
+                <li><strong>Souvenir</strong> - objet acheté pour se rappeler d'un voyage</li>
+            </ul>
+        </div>
+
+        <div class="exercise">
+            <h3>📝 Questions de compréhension</h3>
+            
+            <div class="question">
+                <p><strong>1. À quelle heure est-il arrivé à Paris samedi matin ?</strong></p>
+                <input type="text" id="q1" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q1" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>2. Qu'a-t-il acheté dans la boulangerie ?</strong></p>
+                <input type="text" id="q2" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q2" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>3. Quel musée a-t-il visité ?</strong></p>
+                <input type="text" id="q3" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q3" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>4. Où a-t-il dîné le samedi soir ?</strong></p>
+                <input type="text" id="q4" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q4" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>5. Qu'a-t-il fait dimanche après-midi ?</strong></p>
+                <input type="text" id="q5" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q5" class="explanation"></div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers()">✅ Vérifier mes réponses</button>
+            <button class="check-btn" onclick="resetAnswers()" style="background: #ff9800;">🔄 Recommencer</button>
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "9 heures",
+            q2: "un croissant et un café",
+            q3: "le musée du Louvre",
+            q4: "dans un petit restaurant français",
+            q5: "il a visité Montmartre et la basilique du Sacré-Cœur"
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = Object.keys(correctAnswers).length;
+
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = correctAnswers[id].toLowerCase();
+
+                // Accepter plusieurs variantes
+                let isCorrect = false;
+                if (id === 'q1') {
+                    isCorrect = userAnswer.includes('9') || userAnswer.includes('neuf');
+                } else if (id === 'q2') {
+                    isCorrect = (userAnswer.includes('croissant') && userAnswer.includes('café')) || 
+                               (userAnswer.includes('croissant') && userAnswer.includes('cafe'));
+                } else if (id === 'q3') {
+                    isCorrect = userAnswer.includes('louvre');
+                } else if (id === 'q4') {
+                    isCorrect = userAnswer.includes('restaurant');
+                } else if (id === 'q5') {
+                    isCorrect = userAnswer.includes('montmartre') || userAnswer.includes('sacré');
+                }
+
+                if (isCorrect) {
+                    input.className = 'answer correct';
+                    explanation.className = 'explanation correct';
+                    explanation.textContent = '✅ Correct !';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                    explanation.className = 'explanation incorrect';
+                    explanation.textContent = `❌ Incorrect. Réponse attendue : ${correctAnswers[id]}`;
+                }
+            });
+
+            const result = document.getElementById('result');
+            const percentage = (correct / total) * 100;
+
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Excellent travail !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total} - Continue comme ça !`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Relis le texte et réessaye !`;
+            }
+        }
+
+        function resetAnswers() {
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                input.value = '';
+                input.className = 'answer';
+                explanation.className = 'explanation';
+                explanation.textContent = '';
+            });
+            document.getElementById('result').className = 'result';
+        }
+    </script>
+</body>
+</html>
+

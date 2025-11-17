@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Une journée de télétravail - Lecture B1</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <button class="back-btn" onclick="backToSection('textes')">← Retour</button>
+    
+    <div class="container">
+        <h2>💻 Une journée de télétravail</h2>
+        
+        <div class="info-box">
+            <h3>📖 Texte de lecture</h3>
+            <p><strong>Niveau :</strong> B1 | <strong>Mots :</strong> ~280</p>
+        </div>
+
+        <div class="text-paragraph" style="font-size: 1.1em; line-height: 1.8; margin: 30px 0;">
+            <p>
+                Aujourd'hui, je travaille depuis chez moi. Je me suis réveillé à 7h30, j'ai pris une douche et j'ai préparé un café. Pas besoin de prendre le métro ou de s'habiller en costume - c'est un des avantages du télétravail !
+            </p>
+            <p>
+                À 9 heures, j'ai allumé mon ordinateur et j'ai vérifié mes emails. J'ai répondu à plusieurs messages urgents. Ensuite, j'ai participé à une réunion en visioconférence avec mes collègues. On a parlé des projets de la semaine. La réunion a duré une heure.
+            </p>
+            <p>
+                Après la réunion, j'ai travaillé sur un rapport important. J'étais concentré et productif. À midi, j'ai fait une pause déjeuner. J'ai mangé un sandwich devant mon écran en regardant une vidéo. C'est moins agréable qu'un vrai déjeuner au restaurant, mais c'est pratique.
+            </p>
+            <p>
+                L'après-midi, j'ai continué mon travail. J'ai fait plusieurs appels téléphoniques et j'ai envoyé des documents par email. À 17 heures, j'ai fermé mon ordinateur. Le télétravail, c'est bien, mais parfois j'ai envie de voir mes collègues en vrai !
+            </p>
+        </div>
+
+        <div class="info-box" style="background: #e8f5e9; border-left-color: #4caf50;">
+            <h3>📚 Vocabulaire clé</h3>
+            <ul>
+                <li><strong>Télétravail</strong> - travail depuis la maison</li>
+                <li><strong>Avantage</strong> - point positif, bénéfice</li>
+                <li><strong>Visioconférence</strong> - réunion par vidéo</li>
+                <li><strong>Rapport</strong> - document de travail</li>
+                <li><strong>Concentré</strong> - qui fait attention, focalisé</li>
+                <li><strong>Productif</strong> - qui produit beaucoup de travail</li>
+                <li><strong>Pause</strong> - moment de repos</li>
+                <li><strong>Écran</strong> - surface d'affichage d'un ordinateur</li>
+                <li><strong>Appel téléphonique</strong> - conversation au téléphone</li>
+                <li><strong>Document</strong> - fichier, papier avec des informations</li>
+            </ul>
+        </div>
+
+        <div class="exercise">
+            <h3>📝 Questions de compréhension</h3>
+            
+            <div class="question">
+                <p><strong>1. À quelle heure s'est-il réveillé ?</strong></p>
+                <input type="text" id="q1" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q1" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>2. Quel est un avantage du télétravail mentionné ?</strong></p>
+                <input type="text" id="q2" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q2" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>3. Combien de temps a duré la réunion en visioconférence ?</strong></p>
+                <input type="text" id="q3" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q3" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>4. Qu'a-t-il fait pendant la pause déjeuner ?</strong></p>
+                <input type="text" id="q4" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q4" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>5. Quel est le point négatif du télétravail mentionné ?</strong></p>
+                <input type="text" id="q5" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q5" class="explanation"></div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers()">✅ Vérifier mes réponses</button>
+            <button class="check-btn" onclick="resetAnswers()" style="background: #ff9800;">🔄 Recommencer</button>
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "7h30",
+            q2: "pas besoin de prendre le métro ou de s'habiller en costume",
+            q3: "une heure",
+            q4: "il a mangé un sandwich devant son écran en regardant une vidéo",
+            q5: "parfois il a envie de voir ses collègues en vrai"
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = Object.keys(correctAnswers).length;
+
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                const userAnswer = input.value.trim().toLowerCase();
+
+                let isCorrect = false;
+                if (id === 'q1') {
+                    isCorrect = userAnswer.includes('7h30') || userAnswer.includes('7:30');
+                } else if (id === 'q2') {
+                    isCorrect = userAnswer.includes('métro') || userAnswer.includes('costume') || userAnswer.includes('habiller');
+                } else if (id === 'q3') {
+                    isCorrect = userAnswer.includes('heure') || userAnswer.includes('1');
+                } else if (id === 'q4') {
+                    isCorrect = userAnswer.includes('sandwich') || userAnswer.includes('écran') || userAnswer.includes('vidéo');
+                } else if (id === 'q5') {
+                    isCorrect = userAnswer.includes('collègue') || userAnswer.includes('voir');
+                }
+
+                if (isCorrect) {
+                    input.className = 'answer correct';
+                    explanation.className = 'explanation correct';
+                    explanation.textContent = '✅ Correct !';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                    explanation.className = 'explanation incorrect';
+                    explanation.textContent = `❌ Incorrect. Réponse attendue : ${correctAnswers[id]}`;
+                }
+            });
+
+            const result = document.getElementById('result');
+            const percentage = (correct / total) * 100;
+
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Excellent travail !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total} - Continue comme ça !`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Relis le texte et réessaye !`;
+            }
+        }
+
+        function resetAnswers() {
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                input.value = '';
+                input.className = 'answer';
+                explanation.className = 'explanation';
+                explanation.textContent = '';
+            });
+            document.getElementById('result').className = 'result';
+        }
+    </script>
+</body>
+</html>
+

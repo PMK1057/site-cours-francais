@@ -265,6 +265,49 @@
             color: #764ba2; background: #f4f1ff; cursor: pointer; font-weight: 600;
         }
         .print-btn:hover { background: #ece7ff; }
+        .table-of-contents {
+            background: #f4f1ff;
+            border: 2px solid #764ba2;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(118,75,162,0.15);
+        }
+        .table-of-contents h3 {
+            color: #764ba2;
+            margin: 0 0 16px 0;
+            font-size: 1.4em;
+            text-align: center;
+        }
+        .table-of-contents ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .table-of-contents li {
+            margin: 0;
+        }
+        .table-of-contents a {
+            color: #764ba2;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 6px;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        .table-of-contents a:hover {
+            background: #e8dff5;
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .table-of-contents ul {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -275,23 +318,45 @@
         <h1>🏛️ Grands Hommes Français</h1>
         <h2 style="text-align: center; color: #764ba2; border: none; margin-bottom: 25px;">Figures historiques de France</h2>
         
+        <div class="table-of-contents print-hide">
+            <h3>📑 Sommaire</h3>
+            <ul>
+                <li><a href="#napoleon" onclick="event.preventDefault(); document.getElementById('napoleon').scrollIntoView({behavior: 'smooth', block: 'start'});">Napoléon Bonaparte</a></li>
+                <li><a href="#de-gaulle" onclick="event.preventDefault(); document.getElementById('de-gaulle').scrollIntoView({behavior: 'smooth', block: 'start'});">Charles de Gaulle</a></li>
+                <li><a href="#voltaire" onclick="event.preventDefault(); document.getElementById('voltaire').scrollIntoView({behavior: 'smooth', block: 'start'});">Voltaire</a></li>
+                <li><a href="#louis-xiv" onclick="event.preventDefault(); document.getElementById('louis-xiv').scrollIntoView({behavior: 'smooth', block: 'start'});">Louis XIV</a></li>
+                <li><a href="#pasteur" onclick="event.preventDefault(); document.getElementById('pasteur').scrollIntoView({behavior: 'smooth', block: 'start'});">Louis Pasteur</a></li>
+                <li><a href="#hugo" onclick="event.preventDefault(); document.getElementById('hugo').scrollIntoView({behavior: 'smooth', block: 'start'});">Victor Hugo</a></li>
+                <li><a href="#curie" onclick="event.preventDefault(); document.getElementById('curie').scrollIntoView({behavior: 'smooth', block: 'start'});">Pierre et Marie Curie</a></li>
+                <li><a href="#richelieu" onclick="event.preventDefault(); document.getElementById('richelieu').scrollIntoView({behavior: 'smooth', block: 'start'});">Richelieu</a></li>
+                <li><a href="#robespierre" onclick="event.preventDefault(); document.getElementById('robespierre').scrollIntoView({behavior: 'smooth', block: 'start'});">Robespierre</a></li>
+                <li><a href="#clemenceau" onclick="event.preventDefault(); document.getElementById('clemenceau').scrollIntoView({behavior: 'smooth', block: 'start'});">Georges Clemenceau</a></li>
+                <li><a href="#moulin" onclick="event.preventDefault(); document.getElementById('moulin').scrollIntoView({behavior: 'smooth', block: 'start'});">Jean Moulin</a></li>
+                <li><a href="#lumiere" onclick="event.preventDefault(); document.getElementById('lumiere').scrollIntoView({behavior: 'smooth', block: 'start'});">Les frères Lumière</a></li>
+            </ul>
+        </div>
+        
         <div class="instructions">
-            <strong>Instructions:</strong> Ces textes présentent les grandes figures de l'histoire de France. Chaque section comprend le texte en français avec une traduction anglaise, et des encadrés avec les mots-clés importants à comprendre.
+            <strong>Instructions:</strong> Ces textes présentent les grandes figures de l'histoire de France. Chaque section comprend le texte en français avec une traduction anglaise, et des encadrés avec les verbes et expressions importants à comprendre.
+        </div>
+
+        <div class="vocab-box" style="margin-bottom: 30px;">
+            <strong>📚 Verbes avancés et leurs différentes significations :</strong>
+            <ul>
+                <li><strong>Devenir</strong> : "to become" - changer d'état ou de statut. Ex: Il est devenu roi = He became king. Peut aussi signifier "finir par" : Cela devient ennuyeux = This is becoming boring.</li>
+                <li><strong>Éclater</strong> : "to break out" ou "to burst" - commencer soudainement (guerre, révolte) ou exploser. Ex: La guerre a éclaté = The war broke out. La bombe a éclaté = The bomb exploded.</li>
+                <li><strong>S'engager</strong> : "to commit oneself" ou "to enlist" - prendre un engagement personnel ou rejoindre l'armée. Ex: Il s'est engagé dans l'armée = He enlisted in the army. S'engager à faire = to commit to doing.</li>
+                <li><strong>Rendre</strong> : verbe polysémique ! 1) "to give back" (rendre un livre), 2) "to make" + adjectif (rendre célèbre = to make famous), 3) "to return/go back" (je dois rendre visite = I must visit), 4) se rendre = to surrender ou to go somewhere.</li>
+                <li><strong>Conquérir</strong> : "to conquer" - prendre un territoire ou gagner (conquérir un marché). Conjugaison irrégulière : je conquiers, tu conquiers, il conquiert, nous conquérons, vous conquérez, ils conquièrent. Participe passé : conquis.</li>
+                <li><strong>Recevoir</strong> : "to receive" ou "to get" - obtenir quelque chose de quelqu'un. Conjugaison avec accent aigu : je reçois, tu reçois, il reçoit, nous recevons, vous recevez, ils reçoivent. Ne pas confondre avec "percevoir" = to perceive.</li>
+                <li><strong>Envahir</strong> : "to invade" - entrer par la force dans un territoire. Ex: Ils ont envahi la France = They invaded France. Peut aussi être figuratif : Les touristes envahissent la ville = Tourists invade the city.</li>
+                <li><strong>Abandonner</strong> : "to abandon" ou "to give up" - laisser, renoncer. Ex: Il a abandonné son armée = He abandoned his army. Ne pas abandonner = Don't give up. Abandonner une idée = to give up an idea.</li>
+            </ul>
         </div>
 
         <!-- NAPOLÉON -->
-        <div class="biography-section">
+        <div class="biography-section" id="napoleon">
             <h2>Napoléon Bonaparte - L'Empereur qui a dominé l'Europe</h2>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Empereur</strong> : Emperor - chef suprême d'un empire</li>
-                    <li><strong>Révolution</strong> : Revolution - changement politique violent</li>
-                    <li><strong>Coup d'État</strong> : Coup d'état - prise de pouvoir par la force</li>
-                    <li><strong>Empire</strong> : Empire - territoire contrôlé par un empereur</li>
-                </ul>
-            </div>
             
             <div class="text-paragraph">
                 Napoléon Bonaparte <strong>est né</strong> en 1769 à Ajaccio, en Corse. Il <strong>est devenu</strong> l'une des figures les plus importantes de l'histoire européenne. Il <strong>a grandi</strong> dans une famille noble corse. À neuf ans, il <strong>a quitté</strong> l'île pour étudier en France.
@@ -301,15 +366,6 @@
             <div class="text-paragraph">
                 En 1789, la Révolution française <strong>a éclaté</strong>. Napoléon <strong>s'est engagé</strong> dans l'armée révolutionnaire. Il <strong>s'est fait</strong> remarquer rapidement par ses talents militaires. En 1793, il <strong>a aidé</strong> à reprendre Toulon aux royalistes. Cette victoire <strong>l'a rendu</strong> célèbre. Il <strong>n'avait</strong> que 24 ans.
                 <span class="english">In 1789, the French Revolution broke out. Napoleon joined the revolutionary army. He quickly stood out for his military talents. In 1793, he helped retake Toulon from the royalists. This victory made him famous. He was only 24 years old.</span>
-            </div>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Campagne</strong> : Campaign - série de batailles militaires</li>
-                    <li><strong>Conquête</strong> : Conquest - prise de territoire par la force</li>
-                    <li><strong>Victoire</strong> : Victory - succès dans une bataille</li>
-                </ul>
             </div>
             
             <div class="text-paragraph">
@@ -327,14 +383,6 @@
                 <span class="english">On November 9, 1799 (18 Brumaire), Napoleon organized a coup d'état. He overthrew the Directory and appointed himself First Consul. France had three consuls, but Napoleon was the only real leader. He reorganized the administration, created the Bank of France, and established the Civil Code. This legal code modernized France and still influences French law today.</span>
             </div>
             
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Couronnement</strong> : Coronation - cérémonie où on devient empereur/roi</li>
-                    <li><strong>Sacré</strong> : Anointed - consacré par une cérémonie religieuse</li>
-                </ul>
-            </div>
-            
             <div class="text-paragraph">
                 En 1804, Napoléon <strong>s'est fait</strong> proclamer Empereur des Français. Le 2 décembre 1804, il <strong>s'est fait</strong> sacrer à Notre-Dame de Paris. Mais il <strong>a pris</strong> la couronne des mains du pape et <strong>se l'est mise</strong> lui-même sur la tête. Ce geste <strong>montrait</strong> qu'il ne <strong>devait</strong> son pouvoir à personne, pas même à Dieu. Il <strong>était</strong> son propre maître.
                 <span class="english">In 1804, Napoleon had himself proclaimed Emperor of the French. On December 2, 1804, he was crowned at Notre-Dame de Paris. But he took the crown from the pope's hands and placed it on his own head. This gesture showed that he owed his power to no one, not even God. He was his own master.</span>
@@ -348,15 +396,6 @@
             <div class="text-paragraph">
                 Mais Napoléon <strong>a commis</strong> une erreur fatale. En 1812, il <strong>a envahi</strong> la Russie avec une armée de 600 000 hommes. Les Russes <strong>ont refusé</strong> de se battre. Ils <strong>se sont retirés</strong> en brûlant tout sur leur passage. L'armée française <strong>a marché</strong> jusqu'à Moscou, mais la ville <strong>était</strong> vide et en flammes. L'hiver russe <strong>est arrivé</strong>. Il <strong>était</strong> terrible. Des centaines de milliers de soldats <strong>sont morts</strong> de froid et de faim. Moins de 100 000 hommes <strong>sont rentrés</strong> en France.
                 <span class="english">But Napoleon made a fatal mistake. In 1812, he invaded Russia with an army of 600,000 men. The Russians refused to fight. They withdrew, burning everything in their path. The French army marched to Moscow, but the city was empty and in flames. The Russian winter arrived. It was terrible. Hundreds of thousands of soldiers died from cold and hunger. Less than 100,000 men returned to France.</span>
-            </div>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Abdication</strong> : Abdication - renoncer au pouvoir</li>
-                    <li><strong>Exil</strong> : Exile - vivre forcé loin de son pays</li>
-                    <li><strong>Restauration</strong> : Restoration - retour d'un ancien régime</li>
-                </ul>
             </div>
             
             <div class="text-paragraph">
@@ -386,17 +425,8 @@
         </div>
 
         <!-- DE GAULLE -->
-        <div class="biography-section">
+        <div class="biography-section" id="de-gaulle">
             <h2>Charles de Gaulle - Le résistant devenu président</h2>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Résistance</strong> : Resistance - lutte contre l'occupation</li>
-                    <li><strong>Réfugié</strong> : Refugee - personne qui fuit son pays</li>
-                    <li><strong>Armistice</strong> : Armistice - accord pour arrêter une guerre</li>
-                </ul>
-            </div>
             
             <div class="text-paragraph">
                 Charles de Gaulle <strong>est né</strong> en 1890 à Lille dans une famille catholique et patriote. Il <strong>a choisi</strong> très jeune la carrière militaire.
@@ -420,17 +450,8 @@
         </div>
 
         <!-- VOLTAIRE -->
-        <div class="biography-section">
+        <div class="biography-section" id="voltaire">
             <h2>Voltaire - Le philosophe provocateur</h2>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Philosophe</strong> : Philosopher - penseur qui réfléchit sur la vie</li>
-                    <li><strong>Satirique</strong> : Satirical - qui critique avec humour</li>
-                    <li><strong>Exilé</strong> : Exiled - banni de son pays</li>
-                </ul>
-            </div>
             
             <div class="text-paragraph">
                 François-Marie Arouet, dit Voltaire, <strong>est né</strong> à Paris en 1694 dans une famille bourgeoise. Il <strong>a adopté</strong> le pseudonyme "Voltaire" vers 1718.
@@ -454,17 +475,8 @@
         </div>
 
         <!-- LOUIS XIV -->
-        <div class="biography-section">
+        <div class="biography-section" id="louis-xiv">
             <h2>Louis XIV - Le Roi-Soleil</h2>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Monarchie absolue</strong> : Absolute monarchy - roi avec tout le pouvoir</li>
-                    <li><strong>Règne</strong> : Reign - période où un roi gouverne</li>
-                    <li><strong>Cour</strong> : Court - entourage du roi</li>
-                </ul>
-            </div>
             
             <div class="text-paragraph">
                 Louis XIV <strong>est né</strong> en 1638. Il <strong>est devenu</strong> roi de France à l'âge de 5 ans, en 1643, après la mort de son père Louis XIII. Pendant son enfance, la France <strong>a connu</strong> une période de troubles : la Fronde. Des nobles <strong>se sont révoltés</strong> contre le pouvoir royal. Le jeune Louis <strong>a dû</strong> fuir Paris avec sa mère. Cette expérience <strong>l'a marqué</strong> profondément.
@@ -483,17 +495,8 @@
         </div>
 
         <!-- PASTEUR -->
-        <div class="biography-section">
+        <div class="biography-section" id="pasteur">
             <h2>Louis Pasteur - Le scientifique qui a sauvé des millions de vies</h2>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Microbe</strong> : Microbe - organisme invisible qui cause des maladies</li>
-                    <li><strong>Pasteurisation</strong> : Pasteurization - procédé pour tuer les microbes</li>
-                    <li><strong>Vaccin</strong> : Vaccine - médicament qui protège d'une maladie</li>
-                </ul>
-            </div>
             
             <div class="text-paragraph">
                 Louis Pasteur <strong>est né</strong> en 1822 dans une famille modeste du Jura. Il <strong>a étudié</strong> la chimie et <strong>est devenu</strong> professeur à l'université de Lille. Dans les années 1860, Pasteur <strong>a fait</strong> une découverte majeure : il <strong>a prouvé</strong> que les microbes <strong>causent</strong> les maladies et la fermentation.
@@ -507,17 +510,8 @@
         </div>
 
         <!-- HUGO -->
-        <div class="biography-section">
+        <div class="biography-section" id="hugo">
             <h2>Victor Hugo - L'écrivain engagé</h2>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Engagé</strong> : Committed - qui défend des causes politiques</li>
-                    <li><strong>Dénoncer</strong> : Denounce - critiquer publiquement</li>
-                    <li><strong>Exil</strong> : Exile - bannissement forcé</li>
-                </ul>
-            </div>
             
             <div class="text-paragraph">
                 Victor Hugo <strong>est né</strong> à Besançon en 1802. Il <strong>est devenu</strong> l'un des plus grands écrivains français du 19ème siècle. Il <strong>a écrit</strong> des romans célèbres comme <em>Notre-Dame de Paris</em> (1831) et <em>Les Misérables</em> (1862). Ces œuvres <strong>dénoncent</strong> la misère sociale et <strong>défendent</strong> les opprimés.
@@ -531,17 +525,8 @@
         </div>
 
         <!-- CURIE -->
-        <div class="biography-section">
+        <div class="biography-section" id="curie">
             <h2>Pierre et Marie Curie - Le couple de la radioactivité</h2>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Radioactivité</strong> : Radioactivity - propriété de certains éléments</li>
-                    <li><strong>Prix Nobel</strong> : Nobel Prize - prix scientifique prestigieux</li>
-                    <li><strong>Radiation</strong> : Radiation - énergie émise par des substances radioactives</li>
-                </ul>
-            </div>
             
             <div class="text-paragraph">
                 Marie Curie <strong>est née</strong> en Pologne en 1867 sous le nom de Maria Sklodowska. Elle <strong>a déménagé</strong> à Paris pour étudier la physique à la Sorbonne. En 1895, elle <strong>a épousé</strong> Pierre Curie, un physicien français. Ensemble, ils <strong>ont formé</strong> un couple scientifique exceptionnel.
@@ -555,17 +540,8 @@
         </div>
 
         <!-- RICHELIEU -->
-        <div class="biography-section">
+        <div class="biography-section" id="richelieu">
             <h2>Richelieu - Le cardinal qui a fait la France moderne</h2>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Cardinal</strong> : Cardinal - haut dignitaire de l'Église</li>
-                    <li><strong>Siège</strong> : Siege - encerclement d'une ville</li>
-                    <li><strong>Académie</strong> : Academy - institution savante</li>
-                </ul>
-            </div>
             
             <div class="text-paragraph">
                 Armand Jean du Plessis de Richelieu <strong>est né</strong> en 1585. En 1624, le roi Louis XIII <strong>l'a nommé</strong> principal ministre. Richelieu <strong>est resté</strong> au pouvoir jusqu'à sa mort en 1642. Pendant 18 ans, il <strong>a gouverné</strong> la France avec une autorité de fer.
@@ -579,17 +555,8 @@
         </div>
 
         <!-- ROBESPIERRE -->
-        <div class="biography-section">
+        <div class="biography-section" id="robespierre">
             <h2>Robespierre - L'Incorruptible de la Terreur</h2>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Terreur</strong> : Terror - période de violence politique</li>
-                    <li><strong>Guillotine</strong> : Guillotine - machine pour exécuter</li>
-                    <li><strong>Révolution</strong> : Revolution - changement politique violent</li>
-                </ul>
-            </div>
             
             <div class="text-paragraph">
                 Maximilien de Robespierre <strong>est né</strong> à Arras en 1758. En 1789, quand la Révolution <strong>a éclaté</strong>, Robespierre <strong>a été</strong> élu aux États généraux. On <strong>l'a surnommé</strong> "l'Incorruptible" parce qu'il <strong>refusait</strong> l'argent et le pouvoir personnel.
@@ -603,17 +570,8 @@
         </div>
 
         <!-- CLEMENCEAU -->
-        <div class="biography-section">
+        <div class="biography-section" id="clemenceau">
             <h2>Georges Clemenceau - Le Tigre de la Grande Guerre</h2>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Capituler</strong> : Capitulate - se rendre à l'ennemi</li>
-                    <li><strong>Traité</strong> : Treaty - accord de paix</li>
-                    <li><strong>Président du Conseil</strong> : Prime Minister - chef du gouvernement</li>
-                </ul>
-            </div>
             
             <div class="text-paragraph">
                 Georges Clemenceau <strong>est né</strong> en 1841 en Vendée. En 1917, la France <strong>était</strong> épuisée par trois ans de guerre. À 76 ans, Clemenceau <strong>est revenu</strong> au pouvoir comme président du Conseil. Son message <strong>était</strong> simple : "Je fais la guerre !" On <strong>l'a surnommé</strong> "le Tigre" et "le Père la Victoire".
@@ -627,17 +585,8 @@
         </div>
 
         <!-- MOULIN -->
-        <div class="biography-section">
+        <div class="biography-section" id="moulin">
             <h2>Jean Moulin - Le héros de la Résistance</h2>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Préfet</strong> : Prefect - représentant de l'État dans une région</li>
-                    <li><strong>Gestapo</strong> : Gestapo - police secrète nazie</li>
-                    <li><strong>Torturer</strong> : Torture - faire souffrir pour obtenir des informations</li>
-                </ul>
-            </div>
             
             <div class="text-paragraph">
                 Jean Moulin <strong>est né</strong> en 1899 à Béziers. Il <strong>est entré</strong> dans l'administration comme préfet, le plus jeune de France. En juin 1940, les Allemands <strong>lui ont ordonné</strong> de signer un document accusant faussement des tirailleurs sénégalais de crimes. Moulin <strong>a refusé</strong>. Pour ne pas céder sous la torture, il <strong>s'est tranché</strong> la gorge avec un morceau de verre. Il <strong>a survécu</strong> mais <strong>a gardé</strong> une cicatrice.
@@ -651,17 +600,8 @@
         </div>
 
         <!-- LUMIÈRE -->
-        <div class="biography-section">
+        <div class="biography-section" id="lumiere">
             <h2>Les frères Lumière - Les inventeurs du cinéma</h2>
-            
-            <div class="vocab-box">
-                <strong>📚 Mots-clés importants :</strong>
-                <ul>
-                    <li><strong>Cinématographe</strong> : Cinematograph - première machine de cinéma</li>
-                    <li><strong>Projection</strong> : Projection - affichage d'un film sur un écran</li>
-                    <li><strong>Opérateur</strong> : Operator - personne qui filme</li>
-                </ul>
-            </div>
             
             <div class="text-paragraph">
                 Auguste et Louis Lumière <strong>sont nés</strong> à Besançon dans les années 1860. Leur père <strong>possédait</strong> une usine de matériel photographique à Lyon. En 1895, ils <strong>ont inventé</strong> le cinématographe : une machine qui <strong>peut</strong> filmer et projeter des images en mouvement.

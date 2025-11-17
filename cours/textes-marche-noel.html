@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le marché de Noël en Alsace - Lecture A2</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <button class="back-btn" onclick="backToSection('textes')">← Retour</button>
+    
+    <div class="container">
+        <h2>🎄 Le marché de Noël en Alsace</h2>
+        
+        <div class="info-box">
+            <h3>📖 Texte de lecture</h3>
+            <p><strong>Niveau :</strong> A2 | <strong>Mots :</strong> ~220</p>
+        </div>
+
+        <div class="text-paragraph" style="font-size: 1.1em; line-height: 1.8; margin: 30px 0;">
+            <p>
+                En décembre, je suis allé visiter le marché de Noël à Strasbourg, en Alsace. C'est une tradition très ancienne et magnifique. Le marché se trouve dans le centre-ville, près de la cathédrale.
+            </p>
+            <p>
+                Il y avait beaucoup de stands avec des décorations de Noël : des sapins en bois, des boules colorées, des guirlandes lumineuses. L'odeur des sapins et des épices remplissait l'air. C'était magique !
+            </p>
+            <p>
+                J'ai acheté des spécialités alsaciennes : des bredeles (petits biscuits), du vin chaud et des pains d'épices. Le vin chaud était délicieux - il réchauffait mes mains dans le froid de décembre.
+            </p>
+            <p>
+                Partout, il y avait des lumières et des décorations. Les gens souriaient et se souhaitaient "Joyeux Noël !". L'ambiance était chaleureuse et festive. C'était une expérience inoubliable !
+            </p>
+        </div>
+
+        <div class="info-box" style="background: #e8f5e9; border-left-color: #4caf50;">
+            <h3>📚 Vocabulaire clé</h3>
+            <ul>
+                <li><strong>Marché de Noël</strong> - marché traditionnel pendant la période de Noël</li>
+                <li><strong>Tradition</strong> - coutume ancienne</li>
+                <li><strong>Cathédrale</strong> - grande église</li>
+                <li><strong>Stand</strong> - petit magasin temporaire</li>
+                <li><strong>Décoration</strong> - objet pour embellir</li>
+                <li><strong>Sapin</strong> - arbre de Noël</li>
+                <li><strong>Guirlande</strong> - décoration en forme de chaîne</li>
+                <li><strong>Vin chaud</strong> - boisson chaude à base de vin et d'épices</li>
+                <li><strong>Pain d'épices</strong> - gâteau aux épices</li>
+                <li><strong>Festif</strong> - qui célèbre une fête</li>
+            </ul>
+        </div>
+
+        <div class="exercise">
+            <h3>📝 Questions de compréhension</h3>
+            
+            <div class="question">
+                <p><strong>1. Où se trouve le marché de Noël visité ?</strong></p>
+                <input type="text" id="q1" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q1" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>2. Quelles décorations y avait-il dans les stands ?</strong></p>
+                <input type="text" id="q2" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q2" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>3. Quelles spécialités alsaciennes a-t-il achetées ?</strong></p>
+                <input type="text" id="q3" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q3" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>4. Pourquoi le vin chaud était-il agréable ?</strong></p>
+                <input type="text" id="q4" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q4" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>5. Comment était l'ambiance du marché ?</strong></p>
+                <input type="text" id="q5" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q5" class="explanation"></div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers()">✅ Vérifier mes réponses</button>
+            <button class="check-btn" onclick="resetAnswers()" style="background: #ff9800;">🔄 Recommencer</button>
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "à Strasbourg, en Alsace",
+            q2: "des sapins, des boules, des guirlandes",
+            q3: "des bredeles, du vin chaud et des pains d'épices",
+            q4: "il réchauffait les mains dans le froid",
+            q5: "chaleureuse et festive"
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = Object.keys(correctAnswers).length;
+
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                const userAnswer = input.value.trim().toLowerCase();
+
+                let isCorrect = false;
+                if (id === 'q1') {
+                    isCorrect = userAnswer.includes('strasbourg') || userAnswer.includes('alsace');
+                } else if (id === 'q2') {
+                    isCorrect = userAnswer.includes('sapin') || userAnswer.includes('boule') || userAnswer.includes('guirlande');
+                } else if (id === 'q3') {
+                    isCorrect = userAnswer.includes('bredel') || userAnswer.includes('vin chaud') || userAnswer.includes('pain d\'épice');
+                } else if (id === 'q4') {
+                    isCorrect = userAnswer.includes('réchauff') || userAnswer.includes('chaud') || userAnswer.includes('froid');
+                } else if (id === 'q5') {
+                    isCorrect = userAnswer.includes('chaleureux') || userAnswer.includes('festif');
+                }
+
+                if (isCorrect) {
+                    input.className = 'answer correct';
+                    explanation.className = 'explanation correct';
+                    explanation.textContent = '✅ Correct !';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                    explanation.className = 'explanation incorrect';
+                    explanation.textContent = `❌ Incorrect. Réponse attendue : ${correctAnswers[id]}`;
+                }
+            });
+
+            const result = document.getElementById('result');
+            const percentage = (correct / total) * 100;
+
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Excellent travail !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total} - Continue comme ça !`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Relis le texte et réessaye !`;
+            }
+        }
+
+        function resetAnswers() {
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                input.value = '';
+                input.className = 'answer';
+                explanation.className = 'explanation';
+                explanation.textContent = '';
+            });
+            document.getElementById('result').className = 'result';
+        }
+    </script>
+</body>
+</html>
+

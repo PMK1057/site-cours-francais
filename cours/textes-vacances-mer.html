@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les vacances au bord de la mer - Lecture A2</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <button class="back-btn" onclick="backToSection('textes')">← Retour</button>
+    
+    <div class="container">
+        <h2>🏖️ Les vacances au bord de la mer</h2>
+        
+        <div class="info-box">
+            <h3>📖 Texte de lecture</h3>
+            <p><strong>Niveau :</strong> A2 | <strong>Mots :</strong> ~240</p>
+        </div>
+
+        <div class="text-paragraph" style="font-size: 1.1em; line-height: 1.8; margin: 30px 0;">
+            <p>
+                L'été dernier, je suis parti en vacances à Nice, sur la Côte d'Azur. J'ai loué un petit appartement près de la plage. Chaque matin, je me réveillais avec le bruit des vagues.
+            </p>
+            <p>
+                Les journées étaient parfaites. Le matin, j'allais à la plage avec ma serviette et ma crème solaire. Je me baignais dans la mer Méditerranée - l'eau était chaude et bleue. Après la baignade, je me reposais sous un parasol en lisant un livre.
+            </p>
+            <p>
+                À midi, je mangeais dans un restaurant en bord de mer. J'ai goûté des spécialités de la région : de la salade niçoise, du poisson grillé, et bien sûr, de la glace pour le dessert. C'était délicieux !
+            </p>
+            <p>
+                Le soir, je me promenais sur la promenade des Anglais. Il y avait beaucoup de monde : des familles, des couples, des touristes. L'ambiance était détendue et joyeuse. J'ai adoré ces vacances !
+            </p>
+        </div>
+
+        <div class="info-box" style="background: #e8f5e9; border-left-color: #4caf50;">
+            <h3>📚 Vocabulaire clé</h3>
+            <ul>
+                <li><strong>Côte d'Azur</strong> - région côtière du sud de la France</li>
+                <li><strong>Louer</strong> - prendre en location</li>
+                <li><strong>Vague</strong> - mouvement de l'eau de mer</li>
+                <li><strong>Serviette</strong> - tissu pour s'essuyer</li>
+                <li><strong>Crème solaire</strong> - produit pour protéger du soleil</li>
+                <li><strong>Se baigner</strong> - nager, entrer dans l'eau</li>
+                <li><strong>Parasol</strong> - ombrelle pour se protéger du soleil</li>
+                <li><strong>Poisson grillé</strong> - poisson cuit au grill</li>
+                <li><strong>Promenade</strong> - lieu pour se promener</li>
+                <li><strong>Détendu</strong> - relaxé, sans stress</li>
+            </ul>
+        </div>
+
+        <div class="exercise">
+            <h3>📝 Questions de compréhension</h3>
+            
+            <div class="question">
+                <p><strong>1. Où est-il parti en vacances ?</strong></p>
+                <input type="text" id="q1" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q1" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>2. Qu'est-ce qu'il emportait à la plage le matin ?</strong></p>
+                <input type="text" id="q2" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q2" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>3. Comment était l'eau de la mer ?</strong></p>
+                <input type="text" id="q3" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q3" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>4. Quelles spécialités a-t-il goûtées ?</strong></p>
+                <input type="text" id="q4" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q4" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>5. Où se promenait-il le soir ?</strong></p>
+                <input type="text" id="q5" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q5" class="explanation"></div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers()">✅ Vérifier mes réponses</button>
+            <button class="check-btn" onclick="resetAnswers()" style="background: #ff9800;">🔄 Recommencer</button>
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "à Nice, sur la Côte d'Azur",
+            q2: "sa serviette et sa crème solaire",
+            q3: "chaude et bleue",
+            q4: "de la salade niçoise, du poisson grillé et de la glace",
+            q5: "sur la promenade des Anglais"
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = Object.keys(correctAnswers).length;
+
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                const userAnswer = input.value.trim().toLowerCase();
+
+                let isCorrect = false;
+                if (id === 'q1') {
+                    isCorrect = userAnswer.includes('nice') || userAnswer.includes('côte d\'azur');
+                } else if (id === 'q2') {
+                    isCorrect = userAnswer.includes('serviette') && userAnswer.includes('crème');
+                } else if (id === 'q3') {
+                    isCorrect = userAnswer.includes('chaude') && userAnswer.includes('bleue');
+                } else if (id === 'q4') {
+                    isCorrect = userAnswer.includes('salade') || userAnswer.includes('poisson') || userAnswer.includes('glace');
+                } else if (id === 'q5') {
+                    isCorrect = userAnswer.includes('promenade') || userAnswer.includes('anglais');
+                }
+
+                if (isCorrect) {
+                    input.className = 'answer correct';
+                    explanation.className = 'explanation correct';
+                    explanation.textContent = '✅ Correct !';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                    explanation.className = 'explanation incorrect';
+                    explanation.textContent = `❌ Incorrect. Réponse attendue : ${correctAnswers[id]}`;
+                }
+            });
+
+            const result = document.getElementById('result');
+            const percentage = (correct / total) * 100;
+
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Excellent travail !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total} - Continue comme ça !`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Relis le texte et réessaye !`;
+            }
+        }
+
+        function resetAnswers() {
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                input.value = '';
+                input.className = 'answer';
+                explanation.className = 'explanation';
+                explanation.textContent = '';
+            });
+            document.getElementById('result').className = 'result';
+        }
+    </script>
+</body>
+</html>
+

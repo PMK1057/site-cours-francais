@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faire les courses au supermarché - Lecture A2</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <button class="back-btn" onclick="backToSection('textes')">← Retour</button>
+    
+    <div class="container">
+        <h2>🛒 Faire les courses au supermarché</h2>
+        
+        <div class="info-box">
+            <h3>📖 Texte de lecture</h3>
+            <p><strong>Niveau :</strong> A2 | <strong>Mots :</strong> ~200</p>
+        </div>
+
+        <div class="text-paragraph" style="font-size: 1.1em; line-height: 1.8; margin: 30px 0;">
+            <p>
+                Samedi matin, je suis allé faire les courses au supermarché. J'avais une liste de courses avec tous les produits dont j'avais besoin : du pain, du lait, des œufs, des légumes et de la viande.
+            </p>
+            <p>
+                J'ai pris un caddie à l'entrée et j'ai commencé à parcourir les rayons. D'abord, je suis allé au rayon fruits et légumes. J'ai choisi des tomates, des carottes et une salade. Ensuite, je suis allé au rayon produits laitiers pour acheter du lait et du fromage.
+            </p>
+            <p>
+                J'ai aussi acheté de la viande au rayon boucherie et du pain à la boulangerie du supermarché. Mon caddie était presque plein ! À la caisse, la caissière a scanné tous mes produits. J'ai payé avec ma carte bancaire. C'était rapide et pratique.
+            </p>
+        </div>
+
+        <div class="info-box" style="background: #e8f5e9; border-left-color: #4caf50;">
+            <h3>📚 Vocabulaire clé</h3>
+            <ul>
+                <li><strong>Courses</strong> - achats de nourriture et produits</li>
+                <li><strong>Liste de courses</strong> - liste des produits à acheter</li>
+                <li><strong>Caddie</strong> - panier à roulettes du supermarché</li>
+                <li><strong>Rayon</strong> - section du magasin</li>
+                <li><strong>Produits laitiers</strong> - lait, fromage, yaourt</li>
+                <li><strong>Boucherie</strong> - section pour la viande</li>
+                <li><strong>Boulangerie</strong> - section pour le pain</li>
+                <li><strong>Caisse</strong> - endroit où on paie</li>
+                <li><strong>Caissière</strong> - personne qui encaisse</li>
+                <li><strong>Carte bancaire</strong> - carte de paiement</li>
+            </ul>
+        </div>
+
+        <div class="exercise">
+            <h3>📝 Questions de compréhension</h3>
+            
+            <div class="question">
+                <p><strong>1. Quel jour est-il allé faire les courses ?</strong></p>
+                <input type="text" id="q1" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q1" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>2. Quels légumes a-t-il achetés ?</strong></p>
+                <input type="text" id="q2" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q2" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>3. Qu'a-t-il acheté au rayon produits laitiers ?</strong></p>
+                <input type="text" id="q3" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q3" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>4. Où a-t-il acheté du pain ?</strong></p>
+                <input type="text" id="q4" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q4" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>3. Comment a-t-il payé ?</strong></p>
+                <input type="text" id="q5" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q5" class="explanation"></div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers()">✅ Vérifier mes réponses</button>
+            <button class="check-btn" onclick="resetAnswers()" style="background: #ff9800;">🔄 Recommencer</button>
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "samedi",
+            q2: "des tomates, des carottes et une salade",
+            q3: "du lait et du fromage",
+            q4: "à la boulangerie du supermarché",
+            q5: "avec sa carte bancaire"
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = Object.keys(correctAnswers).length;
+
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                const userAnswer = input.value.trim().toLowerCase();
+
+                let isCorrect = false;
+                if (id === 'q1') {
+                    isCorrect = userAnswer.includes('samedi');
+                } else if (id === 'q2') {
+                    isCorrect = userAnswer.includes('tomate') || userAnswer.includes('carotte') || userAnswer.includes('salade');
+                } else if (id === 'q3') {
+                    isCorrect = (userAnswer.includes('lait') || userAnswer.includes('fromage'));
+                } else if (id === 'q4') {
+                    isCorrect = userAnswer.includes('boulangerie');
+                } else if (id === 'q5') {
+                    isCorrect = userAnswer.includes('carte') || userAnswer.includes('bancaire');
+                }
+
+                if (isCorrect) {
+                    input.className = 'answer correct';
+                    explanation.className = 'explanation correct';
+                    explanation.textContent = '✅ Correct !';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                    explanation.className = 'explanation incorrect';
+                    explanation.textContent = `❌ Incorrect. Réponse attendue : ${correctAnswers[id]}`;
+                }
+            });
+
+            const result = document.getElementById('result');
+            const percentage = (correct / total) * 100;
+
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Excellent travail !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total} - Continue comme ça !`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Relis le texte et réessaye !`;
+            }
+        }
+
+        function resetAnswers() {
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                input.value = '';
+                input.className = 'answer';
+                explanation.className = 'explanation';
+                explanation.textContent = '';
+            });
+            document.getElementById('result').className = 'result';
+        }
+    </script>
+</body>
+</html>
+

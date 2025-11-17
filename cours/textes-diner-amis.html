@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un dîner entre amis - Lecture B1</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <button class="back-btn" onclick="backToSection('textes')">← Retour</button>
+    
+    <div class="container">
+        <h2>🍽️ Un dîner entre amis</h2>
+        
+        <div class="info-box">
+            <h3>📖 Texte de lecture</h3>
+            <p><strong>Niveau :</strong> B1 | <strong>Mots :</strong> ~300</p>
+        </div>
+
+        <div class="text-paragraph" style="font-size: 1.1em; line-height: 1.8; margin: 30px 0;">
+            <p>
+                Vendredi soir, mes amis Pierre et Marie m'ont invité à dîner chez eux. J'ai acheté une bouteille de vin et des fleurs pour les remercier. Je suis arrivé à 19h30.
+            </p>
+            <p>
+                Quand je suis entré, l'odeur de la cuisine remplissait l'appartement. Pierre était en train de préparer le plat principal - un coq au vin. Marie préparait l'apéritif : des olives, des chips et du fromage. On a trinqué avec du champagne.
+            </p>
+            <p>
+                Pendant l'apéritif, on a parlé de nos projets de vacances, de nos boulots et de nos dernières sorties. C'était agréable de se retrouver. On a beaucoup ri. La conversation était animée et intéressante.
+            </p>
+            <p>
+                Pour le dîner, on a mangé le coq au vin avec des pommes de terre et une salade verte. C'était délicieux ! Ensuite, Marie a servi un gâteau au chocolat pour le dessert. On a continué à discuter autour d'un café. La soirée s'est terminée vers minuit. C'était une belle soirée entre amis !
+            </p>
+        </div>
+
+        <div class="info-box" style="background: #e8f5e9; border-left-color: #4caf50;">
+            <h3>📚 Vocabulaire clé</h3>
+            <ul>
+                <li><strong>Inviter</strong> - demander à quelqu'un de venir</li>
+                <li><strong>Bouteille</strong> - récipient pour le vin</li>
+                <li><strong>Remercier</strong> - dire merci</li>
+                <li><strong>Apéritif</strong> - boisson et petits plats avant le repas</li>
+                <li><strong>Trinquer</strong> - lever son verre pour célébrer</li>
+                <li><strong>Champagne</strong> - vin pétillant français</li>
+                <li><strong>Animé</strong> - vivant, dynamique</li>
+                <li><strong>Coq au vin</strong> - plat traditionnel français</li>
+                <li><strong>Dessert</strong> - plat sucré à la fin du repas</li>
+                <li><strong>Discuter</strong> - parler, converser</li>
+            </ul>
+        </div>
+
+        <div class="exercise">
+            <h3>📝 Questions de compréhension</h3>
+            
+            <div class="question">
+                <p><strong>1. À quelle heure est-il arrivé chez ses amis ?</strong></p>
+                <input type="text" id="q1" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q1" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>2. Qu'a-t-il apporté pour ses amis ?</strong></p>
+                <input type="text" id="q2" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q2" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>3. Quel plat principal Pierre préparait-il ?</strong></p>
+                <input type="text" id="q3" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q3" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>4. De quoi ont-ils parlé pendant l'apéritif ?</strong></p>
+                <input type="text" id="q4" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q4" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>5. À quelle heure la soirée s'est-elle terminée ?</strong></p>
+                <input type="text" id="q5" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q5" class="explanation"></div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers()">✅ Vérifier mes réponses</button>
+            <button class="check-btn" onclick="resetAnswers()" style="background: #ff9800;">🔄 Recommencer</button>
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "19h30",
+            q2: "une bouteille de vin et des fleurs",
+            q3: "un coq au vin",
+            q4: "de leurs projets de vacances, de leurs boulots et de leurs sorties",
+            q5: "vers minuit"
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = Object.keys(correctAnswers).length;
+
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                const userAnswer = input.value.trim().toLowerCase();
+
+                let isCorrect = false;
+                if (id === 'q1') {
+                    isCorrect = userAnswer.includes('19h30') || userAnswer.includes('19:30');
+                } else if (id === 'q2') {
+                    isCorrect = (userAnswer.includes('vin') || userAnswer.includes('fleur'));
+                } else if (id === 'q3') {
+                    isCorrect = userAnswer.includes('coq au vin');
+                } else if (id === 'q4') {
+                    isCorrect = userAnswer.includes('vacance') || userAnswer.includes('boulot') || userAnswer.includes('sortie');
+                } else if (id === 'q5') {
+                    isCorrect = userAnswer.includes('minuit');
+                }
+
+                if (isCorrect) {
+                    input.className = 'answer correct';
+                    explanation.className = 'explanation correct';
+                    explanation.textContent = '✅ Correct !';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                    explanation.className = 'explanation incorrect';
+                    explanation.textContent = `❌ Incorrect. Réponse attendue : ${correctAnswers[id]}`;
+                }
+            });
+
+            const result = document.getElementById('result');
+            const percentage = (correct / total) * 100;
+
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Excellent travail !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total} - Continue comme ça !`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Relis le texte et réessaye !`;
+            }
+        }
+
+        function resetAnswers() {
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                input.value = '';
+                input.className = 'answer';
+                explanation.className = 'explanation';
+                explanation.textContent = '';
+            });
+            document.getElementById('result').className = 'result';
+        }
+    </script>
+</body>
+</html>
+

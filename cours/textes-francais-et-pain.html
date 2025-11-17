@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Français et le pain - Lecture A2/B1</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <button class="back-btn" onclick="backToSection('textes')">← Retour</button>
+    
+    <div class="container">
+        <h2>🥖 Les Français et le pain</h2>
+        
+        <div class="info-box">
+            <h3>📖 Texte de lecture</h3>
+            <p><strong>Niveau :</strong> A2/B1 | <strong>Mots :</strong> ~200</p>
+        </div>
+
+        <div class="text-paragraph" style="font-size: 1.1em; line-height: 1.8; margin: 30px 0;">
+            <p>
+                En France, le pain est très important dans la vie quotidienne. Les Français achètent du pain presque tous les jours, souvent le matin avant le petit-déjeuner ou le soir avant le dîner.
+            </p>
+            <p>
+                La boulangerie est un lieu essentiel dans chaque quartier. On y trouve plusieurs types de pain : la baguette traditionnelle, le pain de campagne, le pain complet, et bien d'autres. La baguette est la plus populaire - elle est croustillante à l'extérieur et moelleuse à l'intérieur.
+            </p>
+            <p>
+                Les Français mangent du pain à presque tous les repas. Au petit-déjeuner, ils le mangent avec de la confiture ou du beurre. Au déjeuner et au dîner, ils l'utilisent pour accompagner le fromage, la viande ou les légumes. C'est une tradition très ancrée dans la culture française.
+            </p>
+            <p>
+                Beaucoup de Français ne peuvent pas imaginer un repas sans pain. C'est un aliment de base, comme le riz en Asie ou les pâtes en Italie. Le pain fait partie de l'identité française !
+            </p>
+        </div>
+
+        <div class="info-box" style="background: #e8f5e9; border-left-color: #4caf50;">
+            <h3>📚 Vocabulaire clé</h3>
+            <ul>
+                <li><strong>Quotidien</strong> - de tous les jours</li>
+                <li><strong>Boulangerie</strong> - magasin qui vend du pain</li>
+                <li><strong>Quartier</strong> - partie d'une ville</li>
+                <li><strong>Baguette</strong> - pain long et fin typiquement français</li>
+                <li><strong>Croustillant</strong> - qui fait du bruit quand on le croque</li>
+                <li><strong>Moelleux</strong> - doux et tendre</li>
+                <li><strong>Confiture</strong> - préparation de fruits avec du sucre</li>
+                <li><strong>Accompagner</strong> - manger avec, servir de complément</li>
+                <li><strong>Tradition</strong> - coutume transmise de génération en génération</li>
+                <li><strong>Identité</strong> - ce qui caractérise une culture</li>
+            </ul>
+        </div>
+
+        <div class="exercise">
+            <h3>📝 Questions de compréhension</h3>
+            
+            <div class="question">
+                <p><strong>1. À quelle fréquence les Français achètent-ils du pain ?</strong></p>
+                <input type="text" id="q1" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q1" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>2. Quel est le type de pain le plus populaire en France ?</strong></p>
+                <input type="text" id="q2" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q2" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>3. Comment les Français mangent-ils le pain au petit-déjeuner ?</strong></p>
+                <input type="text" id="q3" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q3" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>4. Avec quoi les Français mangent-ils le pain au déjeuner et au dîner ?</strong></p>
+                <input type="text" id="q4" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q4" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>5. Pourquoi le pain est-il important pour les Français ?</strong></p>
+                <input type="text" id="q5" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q5" class="explanation"></div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers()">✅ Vérifier mes réponses</button>
+            <button class="check-btn" onclick="resetAnswers()" style="background: #ff9800;">🔄 Recommencer</button>
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "presque tous les jours",
+            q2: "la baguette",
+            q3: "avec de la confiture ou du beurre",
+            q4: "avec le fromage, la viande ou les légumes",
+            q5: "c'est un aliment de base et une tradition"
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = Object.keys(correctAnswers).length;
+
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                const userAnswer = input.value.trim().toLowerCase();
+
+                let isCorrect = false;
+                if (id === 'q1') {
+                    isCorrect = userAnswer.includes('jour') || userAnswer.includes('quotidien');
+                } else if (id === 'q2') {
+                    isCorrect = userAnswer.includes('baguette');
+                } else if (id === 'q3') {
+                    isCorrect = (userAnswer.includes('confiture') || userAnswer.includes('beurre'));
+                } else if (id === 'q4') {
+                    isCorrect = userAnswer.includes('fromage') || userAnswer.includes('viande') || userAnswer.includes('légume');
+                } else if (id === 'q5') {
+                    isCorrect = userAnswer.includes('tradition') || userAnswer.includes('base') || userAnswer.includes('identité');
+                }
+
+                if (isCorrect) {
+                    input.className = 'answer correct';
+                    explanation.className = 'explanation correct';
+                    explanation.textContent = '✅ Correct !';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                    explanation.className = 'explanation incorrect';
+                    explanation.textContent = `❌ Incorrect. Réponse attendue : ${correctAnswers[id]}`;
+                }
+            });
+
+            const result = document.getElementById('result');
+            const percentage = (correct / total) * 100;
+
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Excellent travail !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total} - Continue comme ça !`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Relis le texte et réessaye !`;
+            }
+        }
+
+        function resetAnswers() {
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                input.value = '';
+                input.className = 'answer';
+                explanation.className = 'explanation';
+                explanation.textContent = '';
+            });
+            document.getElementById('result').className = 'result';
+        }
+    </script>
+</body>
+</html>
+

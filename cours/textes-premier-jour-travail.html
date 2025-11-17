@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma première journée de travail - Lecture B1</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <button class="back-btn" onclick="backToSection('textes')">← Retour</button>
+    
+    <div class="container">
+        <h2>💼 Ma première journée de travail en France</h2>
+        
+        <div class="info-box">
+            <h3>📖 Texte de lecture</h3>
+            <p><strong>Niveau :</strong> B1 | <strong>Mots :</strong> ~300</p>
+        </div>
+
+        <div class="text-paragraph" style="font-size: 1.1em; line-height: 1.8; margin: 30px 0;">
+            <p>
+                Lundi matin, j'étais très nerveux. C'était mon premier jour dans une nouvelle entreprise française. J'ai mis mon costume et j'ai pris le métro à 8 heures. L'entreprise se trouvait dans le 15ème arrondissement de Paris.
+            </p>
+            <p>
+                Quand je suis arrivé, la réceptionniste m'a accueilli avec un grand sourire. Elle m'a donné un badge et m'a accompagné jusqu'à mon bureau. Mon nouveau collègue, Thomas, m'a présenté à toute l'équipe. Tout le monde était très sympathique.
+            </p>
+            <p>
+                À 10 heures, j'ai participé à ma première réunion. Mon manager, Sophie, a expliqué les projets en cours. J'ai pris beaucoup de notes. Après la réunion, j'ai installé mon ordinateur et j'ai commencé à lire les documents importants.
+            </p>
+            <p>
+                À midi, mes collègues m'ont invité à déjeuner dans un restaurant près du bureau. On a parlé de tout : le travail, la vie à Paris, nos hobbies. C'était agréable de faire connaissance. Le repas a duré une heure et demie - c'est normal en France !
+            </p>
+            <p>
+                L'après-midi, j'ai rencontré plusieurs personnes de différents départements. J'ai aussi reçu mon email professionnel et mon mot de passe. Le soir, j'étais fatigué mais content. Ma première journée s'était bien passée !
+            </p>
+        </div>
+
+        <div class="info-box" style="background: #e8f5e9; border-left-color: #4caf50;">
+            <h3>📚 Vocabulaire clé</h3>
+            <ul>
+                <li><strong>Nerveux</strong> - anxieux, stressé</li>
+                <li><strong>Entreprise</strong> - société, compagnie</li>
+                <li><strong>Arrondissement</strong> - division administrative de Paris</li>
+                <li><strong>Réceptionniste</strong> - personne qui accueille les visiteurs</li>
+                <li><strong>Collègue</strong> - personne qui travaille avec vous</li>
+                <li><strong>Réunion</strong> - rencontre professionnelle</li>
+                <li><strong>Manager</strong> - responsable, chef</li>
+                <li><strong>Département</strong> - service dans une entreprise</li>
+                <li><strong>Email professionnel</strong> - adresse email de travail</li>
+                <li><strong>Mot de passe</strong> - code secret pour accéder à un système</li>
+            </ul>
+        </div>
+
+        <div class="exercise">
+            <h3>📝 Questions de compréhension</h3>
+            
+            <div class="question">
+                <p><strong>1. À quelle heure a-t-il pris le métro ?</strong></p>
+                <input type="text" id="q1" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q1" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>2. Comment s'appelle son nouveau collègue ?</strong></p>
+                <input type="text" id="q2" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q2" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>3. À quelle heure a eu lieu la première réunion ?</strong></p>
+                <input type="text" id="q3" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q3" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>4. Combien de temps a duré le déjeuner ?</strong></p>
+                <input type="text" id="q4" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q4" class="explanation"></div>
+            </div>
+
+            <div class="question">
+                <p><strong>5. Comment s'est senti le narrateur à la fin de la journée ?</strong></p>
+                <input type="text" id="q5" class="answer" placeholder="Votre réponse...">
+                <div id="explanation-q5" class="explanation"></div>
+            </div>
+
+            <button class="check-btn" onclick="checkAnswers()">✅ Vérifier mes réponses</button>
+            <button class="check-btn" onclick="resetAnswers()" style="background: #ff9800;">🔄 Recommencer</button>
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "8 heures",
+            q2: "Thomas",
+            q3: "10 heures",
+            q4: "une heure et demie",
+            q5: "fatigué mais content"
+        };
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = Object.keys(correctAnswers).length;
+
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                const userAnswer = input.value.trim().toLowerCase();
+
+                let isCorrect = false;
+                if (id === 'q1') {
+                    isCorrect = userAnswer.includes('8') || userAnswer.includes('huit');
+                } else if (id === 'q2') {
+                    isCorrect = userAnswer.includes('thomas');
+                } else if (id === 'q3') {
+                    isCorrect = userAnswer.includes('10') || userAnswer.includes('dix');
+                } else if (id === 'q4') {
+                    isCorrect = userAnswer.includes('heure') && (userAnswer.includes('demi') || userAnswer.includes('1.5'));
+                } else if (id === 'q5') {
+                    isCorrect = (userAnswer.includes('fatigué') || userAnswer.includes('fatigue')) && 
+                               (userAnswer.includes('content') || userAnswer.includes('heureux'));
+                }
+
+                if (isCorrect) {
+                    input.className = 'answer correct';
+                    explanation.className = 'explanation correct';
+                    explanation.textContent = '✅ Correct !';
+                    correct++;
+                } else {
+                    input.className = 'answer incorrect';
+                    explanation.className = 'explanation incorrect';
+                    explanation.textContent = `❌ Incorrect. Réponse attendue : ${correctAnswers[id]}`;
+                }
+            });
+
+            const result = document.getElementById('result');
+            const percentage = (correct / total) * 100;
+
+            if (percentage === 100) {
+                result.className = 'result show success';
+                result.textContent = `🎉 Parfait ! ${correct}/${total} - Excellent travail !`;
+            } else if (percentage >= 70) {
+                result.className = 'result show partial';
+                result.textContent = `👍 Très bien ! ${correct}/${total} - Continue comme ça !`;
+            } else {
+                result.className = 'result show partial';
+                result.textContent = `💪 ${correct}/${total} - Relis le texte et réessaye !`;
+            }
+        }
+
+        function resetAnswers() {
+            Object.keys(correctAnswers).forEach(id => {
+                const input = document.getElementById(id);
+                const explanation = document.getElementById('explanation-' + id);
+                input.value = '';
+                input.className = 'answer';
+                explanation.className = 'explanation';
+                explanation.textContent = '';
+            });
+            document.getElementById('result').className = 'result';
+        }
+    </script>
+</body>
+</html>
+
