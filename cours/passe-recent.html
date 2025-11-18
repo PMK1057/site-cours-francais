@@ -299,14 +299,21 @@ function checkAnswerPasseRecent(inputId, inputIdB, correctAnswer, correctAnswerB
     
     // Fonction pour normaliser toutes les variantes d'apostrophes
     const normalizeApostrophe = (str) => {
-        if (!str) return str;
-        // Remplacer toutes les variantes d'apostrophes par une apostrophe droite standard
-        return str
+        if (!str) return '';
+        // Normaliser d'abord les entités HTML
+        let normalized = str
             .replace(/d&apos;/gi, "d'")
             .replace(/d&#39;/gi, "d'")
             .replace(/d&#x27;/gi, "d'")
-            .replace(/d[''']/gi, "d'") // Apostrophe droite, typographique gauche, typographique droite
+            .replace(/d&#8217;/gi, "d'") // Apostrophe typographique
+            .replace(/d&#8216;/gi, "d'") // Guillemet simple gauche
             .trim();
+        
+        // Ensuite, normaliser toutes les variantes d'apostrophes (droite, typographique, etc.)
+        // Remplacer "d" suivi de n'importe quel type d'apostrophe par "d'"
+        normalized = normalized.replace(/d['''`´]/gi, "d'");
+        
+        return normalized;
     };
     
     // Normaliser correctAnswerB : accepter toutes les variantes
