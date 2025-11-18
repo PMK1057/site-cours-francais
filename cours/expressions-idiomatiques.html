@@ -16,15 +16,33 @@
         .en { color: #425466; font-size: .95em; }
         .note { background: #fff7e6; border-left: 4px solid #ffb84d; padding: 12px 14px; border-radius: 8px; color: #7a5b10; margin: 10px 0 18px; }
         
-        /* Couleurs par registre - plus visibles */
-        .register-courant td { background-color: #e8f5e9 !important; border-left: 4px solid #4caf50; }
-        .register-un-peu-familier td { background-color: #fff9e6 !important; border-left: 4px solid #ffb84d; }
-        .register-familier td { background-color: #ffe6e6 !important; border-left: 4px solid #ff6b6b; }
+        /* Couleurs par registre - FORCÉES avec !important */
+        table tbody tr.register-courant td { 
+            background-color: #e8f5e9 !important; 
+            border-left: 4px solid #4caf50 !important; 
+        }
+        table tbody tr.register-un-peu-familier td { 
+            background-color: #fff9e6 !important; 
+            border-left: 4px solid #ffb84d !important; 
+        }
+        table tbody tr.register-familier td { 
+            background-color: #ffe6e6 !important; 
+            border-left: 4px solid #ff6b6b !important; 
+        }
         
         /* Hover ne doit pas masquer les couleurs */
-        .register-courant:hover td { background-color: #d4edda !important; }
-        .register-un-peu-familier:hover td { background-color: #fff3cd !important; }
-        .register-familier:hover td { background-color: #f8d7da !important; }
+        table tbody tr.register-courant:hover td { 
+            background-color: #d4edda !important; 
+            border-left: 4px solid #4caf50 !important;
+        }
+        table tbody tr.register-un-peu-familier:hover td { 
+            background-color: #fff3cd !important; 
+            border-left: 4px solid #ffb84d !important;
+        }
+        table tbody tr.register-familier:hover td { 
+            background-color: #f8d7da !important; 
+            border-left: 4px solid #ff6b6b !important;
+        }
         
         /* Étoiles pour les expressions importantes */
         .star { color: #ffb84d; font-size: 1.1em; margin-right: 4px; }
@@ -147,100 +165,103 @@
         }
     </script>
     <script>
-        (async function () {
-            function cleanFilename(text) {
-                if (!text) return '';
-                // Minuscule
-                text = text.toLowerCase();
-                // Enlever les accents
-                text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                // Remplacer tout ce qui n'est pas [a-z0-9] par des underscores
-                text = text.replace(/[^a-z0-9]+/g, '_');
-                // Enlever les underscores en début/fin
-                text = text.replace(/^_+|_+$/g, '');
-                return text;
-            }
-
-            async function loadAudioUrls() {
-                let audioUrls = {};
-                try {
-                    let response = await fetch('audio_urls.json');
-                    if (!response.ok) {
-                        response = await fetch('../audio_urls.json');
-                    }
-                    if (!response.ok) {
-                        response = await fetch('/audio_urls.json');
-                    }
-                    if (response.ok) {
-                        audioUrls = await response.json();
-                    } else {
-                        console.warn('Fichier audio_urls.json introuvable pour les expressions idiomatiques');
-                    }
-                } catch (error) {
-                    console.warn('Erreur lors du chargement des URLs audio pour les expressions idiomatiques:', error);
+        // Attendre que le DOM soit prêt
+        (function() {
+            function initAudioButtons() {
+                function cleanFilename(text) {
+                    if (!text) return '';
+                    text = text.toLowerCase();
+                    text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                    text = text.replace(/[^a-z0-9]+/g, '_');
+                    text = text.replace(/^_+|_+$/g, '');
+                    return text;
                 }
-                return audioUrls;
-            }
 
-            const audioUrls = await loadAudioUrls();
-            console.log('Audio URLs chargées:', Object.keys(audioUrls).length, 'fichiers');
-            
-            if (!audioUrls || Object.keys(audioUrls).length === 0) {
-                console.warn('Aucun fichier audio trouvé dans audio_urls.json');
-                return;
-            }
+                async function loadAudioUrls() {
+                    let audioUrls = {};
+                    const paths = ['audio_urls.json', '../audio_urls.json', '/audio_urls.json'];
+                    for (const path of paths) {
+                        try {
+                            const response = await fetch(path);
+                            if (response.ok) {
+                                audioUrls = await response.json();
+                                console.log(`✅ audio_urls.json chargé depuis: ${path}`);
+                                break;
+                            }
+                        } catch (error) {
+                            console.warn(`Erreur avec ${path}:`, error);
+                        }
+                    }
+                    return audioUrls;
+                }
 
-            const table = document.querySelector('.idioms-container table');
-            if (!table) {
-                console.warn('Tableau non trouvé');
-                return;
-            }
-
-            const rows = table.querySelectorAll('tbody tr');
-            rows.forEach(row => {
-                const firstCell = row.querySelector('td');
-                if (!firstCell) return;
-
-                // Extraire le texte en enlevant les étoiles et autres éléments
-                let expressionText = firstCell.textContent.trim();
-                // Enlever les étoiles et autres caractères spéciaux au début
-                expressionText = expressionText.replace(/^[⭐\s]+/, '').trim();
-                if (!expressionText) return;
-
-                const filename = cleanFilename(expressionText);
-                console.log(`Recherche audio pour: "${expressionText}" → filename: "${filename}"`);
-                const audioData = audioUrls[filename];
-                if (!audioData) {
-                    console.warn(`Audio non trouvé pour: ${filename}`);
+                const table = document.querySelector('.idioms-container table');
+                if (!table) {
+                    console.warn('Tableau non trouvé, réessai dans 100ms...');
+                    setTimeout(initAudioButtons, 100);
                     return;
                 }
 
-                const audioUrl = typeof audioData === 'string' ? audioData : audioData.url;
-                if (!audioUrl) {
-                    console.warn(`URL audio vide pour: ${filename}`);
-                    return;
-                }
-                console.log(`✅ Audio trouvé pour "${expressionText}": ${audioUrl}`);
-
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'audio-btn';
-                btn.textContent = '🔊';
-                btn.title = `Écouter "${expressionText}"`;
-                btn.setAttribute('aria-label', `Écouter la prononciation de "${expressionText}"`);
-                btn.addEventListener('click', () => {
-                    if (typeof playAudio === 'function') {
-                        playAudio(audioUrl);
-                    } else {
-                        // Fallback: jouer directement l'audio
-                        const audio = new Audio(audioUrl);
-                        audio.play().catch(e => console.error('Erreur lecture audio:', e));
+                loadAudioUrls().then(audioUrls => {
+                    if (!audioUrls || Object.keys(audioUrls).length === 0) {
+                        console.warn('Aucun fichier audio trouvé');
+                        return;
                     }
+
+                    const rows = table.querySelectorAll('tbody tr');
+                    let buttonsAdded = 0;
+                    
+                    rows.forEach(row => {
+                        const firstCell = row.querySelector('td:first-child');
+                        if (!firstCell) return;
+
+                        let expressionText = firstCell.textContent.trim();
+                        expressionText = expressionText.replace(/^[⭐\s]+/, '').trim();
+                        if (!expressionText) return;
+
+                        const filename = cleanFilename(expressionText);
+                        const audioData = audioUrls[filename];
+                        if (!audioData) return;
+
+                        const audioUrl = typeof audioData === 'string' ? audioData : audioData.url;
+                        if (!audioUrl) return;
+
+                        // Vérifier si le bouton existe déjà
+                        if (firstCell.querySelector('.audio-btn')) return;
+
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'audio-btn';
+                        btn.textContent = '🔊';
+                        btn.title = `Écouter "${expressionText}"`;
+                        btn.setAttribute('aria-label', `Écouter la prononciation de "${expressionText}"`);
+                        btn.style.cssText = 'display: inline-flex !important; align-items: center !important; justify-content: center !important; width: 36px !important; height: 36px !important; margin-left: 8px !important; background: linear-gradient(135deg, #667eea, #764ba2) !important; color: #ffffff !important; border: none !important; border-radius: 999px !important; cursor: pointer !important; font-size: 1.1em !important; box-shadow: 0 6px 14px rgba(102, 126, 234, 0.35) !important; vertical-align: middle !important;';
+                        btn.addEventListener('click', () => {
+                            if (typeof playAudio === 'function') {
+                                playAudio(audioUrl);
+                            } else {
+                                const audio = new Audio(audioUrl);
+                                audio.play().catch(e => console.error('Erreur lecture audio:', e));
+                            }
+                        });
+
+                        firstCell.appendChild(btn);
+                        buttonsAdded++;
+                    });
+                    
+                    console.log(`✅ ${buttonsAdded} boutons audio ajoutés`);
                 });
+            }
 
-                firstCell.appendChild(btn);
-                console.log(`✅ Bouton audio ajouté pour "${expressionText}"`);
-            });
+            // Essayer immédiatement
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initAudioButtons);
+            } else {
+                initAudioButtons();
+            }
+            
+            // Réessayer après un court délai au cas où le contenu serait chargé dynamiquement
+            setTimeout(initAudioButtons, 500);
         })();
     </script>
 </body>
