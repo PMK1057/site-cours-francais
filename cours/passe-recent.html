@@ -23,7 +23,7 @@
 <td style="padding: 10px; border: 1px solid #ddd;">Tú <strong>acabas de</strong> hablar</td>
 </tr>
 <tr>
-<td style="padding: 10px; border: 1px solid #ddd;">Il <strong>vient de</strong> arriver</td>
+<td style="padding: 10px; border: 1px solid #ddd;">Il <strong>vient d'</strong>arriver</td>
 <td style="padding: 10px; border: 1px solid #ddd;">He <strong>just</strong> arrived</td>
 <td style="padding: 10px; border: 1px solid #ddd;">Él <strong>acaba de</strong> llegar</td>
 </tr>
@@ -296,17 +296,24 @@ function checkAnswerPasseRecent(inputId, inputIdB, correctAnswer, correctAnswerB
     const userAnswer = input.value.trim().toLowerCase();
     const userAnswerB = inputB.value.trim().toLowerCase();
     const correct = correctAnswer.toLowerCase();
-    // Normaliser correctAnswerB : accepter à la fois "d'" et "d&apos;" (qui devient "d'" après interprétation HTML)
-    let correctB = correctAnswerB.toLowerCase();
-    // Si la réponse attendue est "d'", normaliser pour accepter les deux formats
-    if (correctB === 'd&apos;' || correctB === 'd\'' || correctB === 'd&#39;') {
-        correctB = 'd\'';
-    }
+    
+    // Fonction pour normaliser toutes les variantes d'apostrophes
+    const normalizeApostrophe = (str) => {
+        if (!str) return str;
+        // Remplacer toutes les variantes d'apostrophes par une apostrophe droite standard
+        return str
+            .replace(/d&apos;/gi, "d'")
+            .replace(/d&#39;/gi, "d'")
+            .replace(/d&#x27;/gi, "d'")
+            .replace(/d[''']/gi, "d'") // Apostrophe droite, typographique gauche, typographique droite
+            .trim();
+    };
+    
+    // Normaliser correctAnswerB : accepter toutes les variantes
+    let correctB = normalizeApostrophe(correctAnswerB.toLowerCase());
+    
     // Normaliser aussi la réponse de l'utilisateur
-    let normalizedUserB = userAnswerB;
-    if (normalizedUserB === 'd&apos;' || normalizedUserB === 'd&#39;') {
-        normalizedUserB = 'd\'';
-    }
+    let normalizedUserB = normalizeApostrophe(userAnswerB);
     
     // S'assurer que la div d'explication est visible
     explanationDiv.style.display = 'block';
@@ -336,10 +343,7 @@ function checkAnswerPasseRecent(inputId, inputIdB, correctAnswer, correctAnswerB
         explanationDiv.style.borderLeft = '4px solid #f44336';
         explanationDiv.style.borderRadius = '5px';
         // Afficher la bonne réponse en format lisible
-        let displayAnswerB = correctAnswerB;
-        if (displayAnswerB === 'd&apos;' || displayAnswerB === 'd&#39;') {
-            displayAnswerB = 'd\'';
-        }
+        let displayAnswerB = normalizeApostrophe(correctAnswerB);
         const fullAnswer = correctAnswer + ' ' + displayAnswerB;
         explanationDiv.innerHTML = '<span style="color: #f44336; font-weight: bold; font-size: 1.1em;">✗ Incorrect.</span><br><span style="color: #c62828;">La bonne réponse est <strong style="color: #d32f2f; font-size: 1.1em;">"' + fullAnswer + '"</strong>.</span><br><span style="color: #c62828;">' + explanation + '</span>';
     }

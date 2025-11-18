@@ -201,79 +201,21 @@ function executeScriptsInHTML(html, container) {
         setTimeout(() => {
             scriptsContent.forEach(scriptData => {
                 try {
-                    // Évaluer directement le script dans le contexte global pour expressions-courantes
-                    // Cela évite les problèmes de redéclaration
+                    // Pour expressions-courantes, utiliser le nouveau système simplifié
                     if (scriptData.innerHTML.includes('expressions-courantes') || 
                         scriptData.innerHTML.includes('window.expressionsData')) {
                         // Exécuter directement avec eval dans le contexte global
                         const scriptFunction = new Function(scriptData.innerHTML);
                         scriptFunction.call(window);
                         
-                        // Pour expressions-courantes, forcer l'initialisation après un délai supplémentaire
-                        if (scriptData.innerHTML.includes('expressions-courantes')) {
-                            // Fonction pour vérifier et forcer l'initialisation
-                            const checkAndForceInit = () => {
-                                const countElement = document.getElementById('count');
-                                const grid = document.getElementById('expressions-grid');
-                                const hasData = window.expressionsData && Array.isArray(window.expressionsData) && window.expressionsData.length > 0;
-                                const isEmpty = countElement && countElement.textContent === '0' && grid && grid.innerHTML === '';
-                                
-                                console.log('checkAndForceInit:', {
-                                    hasData,
-                                    isEmpty,
-                                    expressionsDataLength: window.expressionsData ? window.expressionsData.length : 0,
-                                    countText: countElement ? countElement.textContent : 'no element',
-                                    gridEmpty: grid ? grid.innerHTML === '' : 'no grid'
-                                });
-                                
-                                if (hasData && isEmpty) {
-                                    console.log('Forçage de l\'affichage des expressions');
-                                    // Appeler toutes les fonctions d'initialisation disponibles
-                                    if (typeof window.forceInitExpressions === 'function') {
-                                        window.forceInitExpressions();
-                                    }
-                                    if (typeof window.initializeExpressionsPage === 'function') {
-                                        window.initializeExpressionsPage();
-                                    }
-                                    if (typeof window.initExpressions === 'function') {
-                                        window.initExpressions();
-                                    }
-                                    if (typeof window.filterExpressions === 'function') {
-                                        window.filterExpressions();
-                                    }
-                                } else if (!hasData) {
-                                    // Les données ne sont pas encore disponibles, réessayer
-                                    console.log('Données pas encore disponibles, nouvelle tentative...');
-                                    setTimeout(checkAndForceInit, 200);
-                                }
-                            };
-                            
-                            // Appels multiples avec des délais croissants
-                            [300, 500, 800, 1200, 2000, 3000, 4000].forEach(delay => {
+                        // Appeler la fonction d'initialisation simplifiée
+                        if (typeof window.initExpressionsCourantes === 'function') {
+                            // Utiliser requestAnimationFrame pour s'assurer que le DOM est prêt
+                            requestAnimationFrame(() => {
                                 setTimeout(() => {
-                                    checkAndForceInit();
-                                }, delay);
+                                    window.initExpressionsCourantes();
+                                }, 100);
                             });
-                            
-                            // Observer le DOM pour détecter quand les éléments sont ajoutés
-                            const observer = new MutationObserver(() => {
-                                checkAndForceInit();
-                            });
-                            
-                            setTimeout(() => {
-                                const container = document.getElementById('course-container');
-                                if (container) {
-                                    observer.observe(container, {
-                                        childList: true,
-                                        subtree: true
-                                    });
-                                    
-                                    // Arrêter l'observer après 5 secondes
-                                    setTimeout(() => {
-                                        observer.disconnect();
-                                    }, 5000);
-                                }
-                            }, 100);
                         }
                     } else {
                         // Pour les autres scripts, utiliser la méthode normale
@@ -1654,7 +1596,7 @@ const conjugaisons = {
         "passé composé": {
             "je": { 
                 reponse: "ai été", 
-                explication: "Passé composé avec auxiliaire avoir : j'ai été. Le participe passé de être est 'été'." 
+                explication: "Passé composé avec auxiliaire avoir : j'ai été. Le participe passé du verbe être est 'été'." 
             },
             "tu": { 
                 reponse: "as été", 
@@ -1708,7 +1650,7 @@ const conjugaisons = {
         "passé composé": {
             "je": { 
                 reponse: "ai eu", 
-                explication: "Passé composé avec auxiliaire avoir : j'ai eu. Le participe passé de avoir est 'eu'." 
+                explication: "Passé composé avec auxiliaire avoir : j'ai eu. Le participe passé du verbe avoir est 'eu'." 
             },
             "tu": { 
                 reponse: "as eu", 
@@ -1762,7 +1704,7 @@ const conjugaisons = {
         "passé composé": {
             "je": { 
                 reponse: "suis allé", 
-                explication: "Passé composé avec auxiliaire être : je suis allé(e). Le participe passé de aller est 'allé' et s'accorde avec le sujet." 
+                explication: "Passé composé avec auxiliaire être : je suis allé(e). Le participe passé du verbe aller est 'allé' et s'accorde avec le sujet." 
             },
             "tu": { 
                 reponse: "es allé", 

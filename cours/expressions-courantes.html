@@ -389,9 +389,25 @@
     </style>
 
     <script>
-        // Utiliser window pour éviter les redéclarations si le script s'exécute plusieurs fois
-        if (typeof window.expressionsData === 'undefined') {
-            window.expressionsData = [
+        // ============================================
+        // SYSTÈME SIMPLIFIÉ D'AFFICHAGE DES EXPRESSIONS
+        // ============================================
+        // Ce système utilise un pattern d'initialisation unique et fiable
+        // pour éviter les bugs récurrents d'affichage
+        
+        (function() {
+            'use strict';
+            
+            // Vérifier si déjà initialisé pour éviter les doubles initialisations
+            if (window.expressionsCourantesInitialized) {
+                console.log('Expressions courantes déjà initialisées, réinitialisation...');
+                // Réinitialiser quand même si on recharge la page
+                window.expressionsCourantesInitialized = false;
+            }
+            
+            // Données des expressions - stockées une seule fois dans window
+            if (typeof window.expressionsData === 'undefined') {
+                window.expressionsData = [
             {
                 fr: "Ça marche",
                 level: "courant",
@@ -813,19 +829,19 @@
                 ]
             }
             ];
-        }
-        // Créer une référence locale
-        const expressions = window.expressionsData;
+            }
+            
+            // Variables d'état locales (isolées dans la closure)
+            let selectedLevel = 'all';
+            let searchTerm = '';
+            let isInitialized = false;
+            
+            // URLs audio - partagées globalement mais initialisées ici
+            if (typeof window.expressionsAudioUrls === 'undefined') {
+                window.expressionsAudioUrls = {};
+            }
 
-        let selectedLevel = 'all';
-        let searchTerm = '';
-        // Utiliser window pour éviter les redéclarations si le script s'exécute plusieurs fois
-        if (typeof window.expressionsAudioUrls === 'undefined') {
-            window.expressionsAudioUrls = {};
-        }
-        let audioUrls = window.expressionsAudioUrls;
-
-        const audioFallbacks = {
+            const audioFallbacks = {
             "ca_marche": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207604/cours-francais/vocabulaire/ca_marche.mp3",
             "ca_roule": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207605/cours-francais/vocabulaire/ca_roule.mp3",
             "cest_parti": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207606/cours-francais/vocabulaire/cest_parti.mp3",
@@ -853,10 +869,10 @@
             "en_effet": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207629/cours-francais/vocabulaire/en_effet.mp3",
             "certes": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207630/cours-francais/vocabulaire/certes.mp3",
             "neanmoins": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207631/cours-francais/vocabulaire/neanmoins.mp3"
-        };
+            };
 
-        // Mapping des expressions françaises vers leurs noms de fichiers
-        const expressionToFilename = {
+            // Mapping des expressions françaises vers leurs noms de fichiers
+            const expressionToFilename = {
             "Ça marche": "ca_marche",
             "Ça roule": "ca_roule",
             "C'est parti": "cest_parti",
@@ -887,103 +903,96 @@
             "Néanmoins": "neanmoins"
         };
 
-        // Charger les URLs audio
-        async function loadAudioUrls() {
-            try {
-                // Essayer différents chemins possibles
-                let response = await fetch('audio_urls.json');
-                if (!response.ok) {
-                    response = await fetch('../audio_urls.json');
+            // Charger les URLs audio (non bloquant)
+            async function loadAudioUrls() {
+                try {
+                    const candidates = ['audio_urls.json', '../audio_urls.json', '/audio_urls.json'];
+                    let loaded = false;
+                    
+                    for (const url of candidates) {
+                        try {
+                            const response = await fetch(url);
+                            if (response.ok) {
+                                const data = await response.json();
+                                window.expressionsAudioUrls = { ...audioFallbacks, ...data };
+                                loaded = true;
+                                break;
+                            }
+                        } catch (e) {
+                            continue;
+                        }
+                    }
+                    
+                    if (!loaded) {
+                        window.expressionsAudioUrls = { ...audioFallbacks };
+                    }
+                } catch (error) {
+                    console.warn('Erreur chargement audio, utilisation fallbacks:', error);
+                    window.expressionsAudioUrls = { ...audioFallbacks };
                 }
-                if (!response.ok) {
-                    response = await fetch('/audio_urls.json');
-                }
-                if (response.ok) {
-                    const data = await response.json();
-                    audioUrls = data;
-                    window.expressionsAudioUrls = audioUrls;
-                } else {
-                    throw new Error('Fichier audio_urls.json introuvable');
-                }
-            } catch (error) {
-                console.warn('Erreur lors du chargement des URLs audio, utilisation des fallbacks:', error);
-                // Utiliser uniquement les fallbacks si le chargement échoue
-                audioUrls = { ...audioFallbacks };
-                window.expressionsAudioUrls = audioUrls;
             }
-            
-            // Compléter avec les fallbacks (au cas où certaines URLs manqueraient)
-            audioUrls = { ...audioFallbacks, ...audioUrls };
-            window.expressionsAudioUrls = audioUrls;
-        }
 
-        // Obtenir l'URL audio pour une expression
-        function getAudioUrl(expression) {
-            const filename = expressionToFilename[expression];
-            if (!filename) return null;
-            
-            const audioData = audioUrls[filename];
-            if (!audioData) return null;
-            
-            return typeof audioData === 'string' ? audioData : audioData.url;
-        }
+            // Obtenir l'URL audio pour une expression
+            function getAudioUrl(expression) {
+                const filename = expressionToFilename[expression];
+                if (!filename) return null;
+                
+                const audioData = window.expressionsAudioUrls[filename];
+                if (!audioData) return null;
+                
+                return typeof audioData === 'string' ? audioData : audioData.url;
+            }
 
-        function filterExpressions() {
-            // Vérifier que expressions est défini (utiliser window.expressionsData si expressions n'est pas défini)
-            const expressionsToUse = expressions || window.expressionsData;
-            if (!expressionsToUse || !Array.isArray(expressionsToUse) || expressionsToUse.length === 0) {
-                console.error('expressions n\'est pas défini ou est vide', {
-                    expressions: expressions,
-                    windowExpressionsData: window.expressionsData,
-                    expressionsToUse: expressionsToUse
+            // Filtrer et afficher les expressions
+            function filterExpressions() {
+                const expressionsToUse = window.expressionsData;
+                
+                if (!expressionsToUse || !Array.isArray(expressionsToUse) || expressionsToUse.length === 0) {
+                    console.error('Données d\'expressions non disponibles');
+                    return;
+                }
+                
+                const filtered = expressionsToUse.filter(exp => {
+                    const matchesSearch = exp.fr.toLowerCase().includes(searchTerm.toLowerCase());
+                    const matchesLevel = selectedLevel === 'all' || exp.level === selectedLevel;
+                    return matchesSearch && matchesLevel;
                 });
-                return;
-            }
-            
-            console.log('filterExpressions appelé avec', expressionsToUse.length, 'expressions');
-            const filtered = expressionsToUse.filter(exp => {
-                const matchesSearch = exp.fr.toLowerCase().includes(searchTerm.toLowerCase());
-                const matchesLevel = selectedLevel === 'all' || exp.level === selectedLevel;
-                return matchesSearch && matchesLevel;
-            });
 
-            // Trier : expressions importantes en premier
-            filtered.sort((a, b) => {
-                if (a.important && !b.important) return -1;
-                if (!a.important && b.important) return 1;
-                return 0;
-            });
+                // Trier : expressions importantes en premier
+                filtered.sort((a, b) => {
+                    if (a.important && !b.important) return -1;
+                    if (!a.important && b.important) return 1;
+                    return 0;
+                });
 
-            renderExpressions(filtered);
-            
-            // Mettre à jour le compteur
-            const countElement = document.getElementById('count');
-            if (countElement) {
-                countElement.textContent = filtered.length;
-            } else {
-                console.warn('Élément #count non trouvé');
+                renderExpressions(filtered);
+                
+                // Mettre à jour le compteur
+                const countElement = document.getElementById('count');
+                if (countElement) {
+                    countElement.textContent = filtered.length;
+                }
+                
+                // Gérer l'affichage "no results"
+                const noResultsElement = document.getElementById('no-results');
+                if (noResultsElement) {
+                    noResultsElement.style.display = filtered.length === 0 ? 'block' : 'none';
+                }
             }
-            
-            // Gérer l'affichage "no results"
-            const noResultsElement = document.getElementById('no-results');
-            if (noResultsElement) {
-                noResultsElement.style.display = filtered.length === 0 ? 'block' : 'none';
-            }
-        }
 
-        function renderExpressions(expressionsToShow) {
-            const grid = document.getElementById('expressions-grid');
-            if (!grid) {
-                console.error('Élément #expressions-grid non trouvé');
-                return;
-            }
-            
-            grid.innerHTML = '';
+            // Rendre les expressions dans le DOM
+            function renderExpressions(expressionsToShow) {
+                const grid = document.getElementById('expressions-grid');
+                if (!grid) {
+                    console.error('Élément #expressions-grid non trouvé');
+                    return;
+                }
+                
+                grid.innerHTML = '';
 
-            if (!expressionsToShow || expressionsToShow.length === 0) {
-                console.warn('Aucune expression à afficher');
-                return;
-            }
+                if (!expressionsToShow || expressionsToShow.length === 0) {
+                    return;
+                }
 
             expressionsToShow.forEach(exp => {
                 const card = document.createElement('div');
@@ -1113,211 +1122,108 @@
             });
         }
 
-        // Fonction d'initialisation
-        function initExpressions() {
-            const expressionsToUse = expressions || window.expressionsData;
-            console.log('initExpressions appelé, expressions.length =', expressionsToUse ? expressionsToUse.length : 'undefined');
-            
-            if (!expressionsToUse || !Array.isArray(expressionsToUse) || expressionsToUse.length === 0) {
-                console.error('Impossible d\'initialiser: expressions non définies');
-                return;
-            }
-            
-            // Réinitialiser les variables d'état
-            selectedLevel = 'all';
-            searchTerm = '';
-            
-            // Réinitialiser les event listeners (éviter les doublons)
-            const searchInput = document.getElementById('search-input');
-            if (searchInput) {
-                // Cloner et remplacer pour supprimer les anciens listeners
-                const newSearchInput = searchInput.cloneNode(true);
-                searchInput.parentNode.replaceChild(newSearchInput, searchInput);
+            // Initialisation unique et fiable
+            function initExpressions() {
+                // Éviter les doubles initialisations
+                if (isInitialized) {
+                    console.log('Expressions déjà initialisées, skip');
+                    return;
+                }
                 
-                newSearchInput.addEventListener('input', (e) => {
+                // Vérifier que les données sont disponibles
+                if (!window.expressionsData || !Array.isArray(window.expressionsData) || window.expressionsData.length === 0) {
+                    console.error('Données d\'expressions non disponibles');
+                    return;
+                }
+                
+                // Vérifier que les éléments DOM existent
+                const searchInput = document.getElementById('search-input');
+                const grid = document.getElementById('expressions-grid');
+                const levelBtns = document.querySelectorAll('.level-btn');
+                
+                if (!searchInput || !grid || levelBtns.length === 0) {
+                    console.warn('Éléments DOM non disponibles, réessai dans 100ms');
+                    setTimeout(initExpressions, 100);
+                    return;
+                }
+                
+                // Marquer comme initialisé AVANT de continuer
+                isInitialized = true;
+                window.expressionsCourantesInitialized = true;
+                
+                // Réinitialiser les variables d'état
+                selectedLevel = 'all';
+                searchTerm = '';
+                
+                // Configurer le champ de recherche
+                searchInput.value = '';
+                searchInput.addEventListener('input', (e) => {
                     searchTerm = e.target.value;
                     filterExpressions();
                 });
-            }
 
-            // Réinitialiser les boutons de niveau
-            document.querySelectorAll('.level-btn').forEach(btn => {
-                const newBtn = btn.cloneNode(true);
-                btn.parentNode.replaceChild(newBtn, btn);
+                // Configurer les boutons de niveau
+                levelBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        levelBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedLevel = btn.dataset.level;
+                        filterExpressions();
+                    });
+                });
+
+                // Afficher les expressions immédiatement
+                filterExpressions();
                 
-                newBtn.addEventListener('click', () => {
-                    document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
-                    newBtn.classList.add('active');
-                    selectedLevel = newBtn.dataset.level;
+                // Charger les URLs audio en arrière-plan (non bloquant)
+                loadAudioUrls().then(() => {
+                    // Re-render pour ajouter les boutons audio si nécessaire
                     filterExpressions();
                 });
-            });
-
-            // Forcer le premier affichage immédiatement (PRIORITÉ)
-            console.log('Appel immédiat de filterExpressions depuis initExpressions');
-            filterExpressions();
-
-            // Initial render - appeler filterExpressions même si loadAudioUrls échoue
-            loadAudioUrls()
-                .then(() => {
-                    filterExpressions();
-                })
-                .catch((error) => {
-                    console.warn('Erreur lors du chargement des URLs audio:', error);
-                    // Initialiser quand même les expressions
-                    filterExpressions();
+            }
+            
+            // Fonction d'initialisation publique (appelée depuis scripts.js)
+            window.initExpressionsCourantes = function() {
+                // Utiliser requestAnimationFrame pour s'assurer que le DOM est prêt
+                requestAnimationFrame(() => {
+                    setTimeout(initExpressions, 50);
                 });
-        }
-
-        // Fonction pour attendre que les éléments soient présents et initialiser
-        function initializeExpressionsPage() {
-            const searchInput = document.getElementById('search-input');
-            const levelBtns = document.querySelectorAll('.level-btn');
-            const grid = document.getElementById('expressions-grid');
+            };
             
-            if (searchInput && grid && document.querySelector('.level-btn')) {
-                initExpressions();
-                return true;
-            }
-            return false;
-        }
-        
-        // Exposer les fonctions globalement pour qu'elles soient accessibles depuis scripts.js
-        window.initializeExpressionsPage = initializeExpressionsPage;
-        window.initExpressions = initExpressions;
-        window.filterExpressions = filterExpressions;
-
-        // Essayer plusieurs fois d'initialiser avec des délais croissants
-        function waitForElements(maxAttempts = 20, attempt = 0) {
-            if (initializeExpressionsPage()) {
-                return;
-            }
-            
-            if (attempt < maxAttempts) {
-                setTimeout(() => waitForElements(maxAttempts, attempt + 1), 100 * (attempt + 1));
+            // Auto-initialisation si le script est exécuté directement
+            // (utile si le HTML est chargé directement sans passer par scripts.js)
+            if (document.getElementById('expressions-grid')) {
+                // Les éléments sont déjà présents, initialiser immédiatement
+                requestAnimationFrame(() => {
+                    setTimeout(initExpressions, 50);
+                });
             } else {
-                console.error('Timeout: Les éléments ne sont pas disponibles après', maxAttempts, 'tentatives');
-                // Essayer quand même d'initialiser
-                setTimeout(() => {
-                    initExpressions();
-                }, 500);
-            }
-        }
-
-        // Fonction pour forcer l'initialisation immédiatement
-        function forceInit() {
-            const expressionsToUse = window.expressionsData || expressions;
-            const grid = document.getElementById('expressions-grid');
-            const countElement = document.getElementById('count');
-            const searchInput = document.getElementById('search-input');
-            
-            console.log('forceInit appelé', {
-                expressionsToUse: expressionsToUse ? expressionsToUse.length : 'undefined',
-                grid: !!grid,
-                countElement: !!countElement,
-                searchInput: !!searchInput
-            });
-            
-            if (expressionsToUse && expressionsToUse.length > 0 && grid && countElement) {
-                // Si le grid est vide ou le compteur est à 0, forcer l'affichage
-                if (grid.innerHTML === '' || countElement.textContent === '0') {
-                    console.log('Forçage de l\'affichage des expressions');
-                    filterExpressions();
-                }
-            }
-        }
-        
-        // Fonction pour forcer l'initialisation immédiate
-        let forceInitAttempts = 0;
-        const MAX_FORCE_INIT_ATTEMPTS = 30; // Augmenter le nombre de tentatives
-        
-        function forceInitExpressions() {
-            const expressionsToUse = window.expressionsData || expressions;
-            const grid = document.getElementById('expressions-grid');
-            const countElement = document.getElementById('count');
-            
-            console.log('forceInitExpressions appelé', {
-                expressionsToUse: expressionsToUse ? expressionsToUse.length : 'undefined',
-                grid: !!grid,
-                countElement: !!countElement,
-                attempt: forceInitAttempts
-            });
-            
-            // Si les données ne sont pas disponibles, réessayer
-            if (!expressionsToUse || !Array.isArray(expressionsToUse) || expressionsToUse.length === 0) {
-                if (forceInitAttempts < MAX_FORCE_INIT_ATTEMPTS) {
-                    forceInitAttempts++;
-                    setTimeout(forceInitExpressions, 150);
-                } else {
-                    console.error('Nombre maximum de tentatives atteint pour forceInitExpressions');
-                }
-                return;
-            }
-            
-            if (grid && countElement) {
-                // Si le grid est vide ou le compteur est à 0, forcer l'affichage
-                if (grid.innerHTML === '' || countElement.textContent === '0') {
-                    console.log('Forçage de l\'affichage des expressions');
-                    // Réinitialiser le compteur car on a réussi
-                    forceInitAttempts = 0;
-                    filterExpressions();
-                }
-            } else {
-                // Les éléments ne sont pas encore là, réessayer
-                if (forceInitAttempts < MAX_FORCE_INIT_ATTEMPTS) {
-                    forceInitAttempts++;
-                    setTimeout(forceInitExpressions, 100);
-                }
-            }
-        }
-        
-        // Exposer forceInitExpressions globalement
-        window.forceInitExpressions = forceInitExpressions;
-        
-        // Attendre que le DOM soit prêt
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                setTimeout(() => {
-                    waitForElements();
-                    forceInit();
-                    forceInitExpressions();
-                }, 200);
-            });
-        } else {
-            // Le DOM est déjà chargé, attendre que le HTML soit inséré
-            setTimeout(() => {
-                waitForElements();
-                forceInit();
-                forceInitExpressions();
-            }, 200);
-        }
-        
-        // Appels multiples pour forcer l'affichage
-        [300, 500, 800, 1000, 1500, 2000, 3000, 4000, 5000].forEach(delay => {
-            setTimeout(() => {
-                forceInit();
-                forceInitExpressions();
-            }, delay);
-        });
-        
-        // Observer les mutations du DOM pour détecter quand le HTML est inséré
-        const observer = new MutationObserver((mutations) => {
-            const grid = document.getElementById('expressions-grid');
-            const countElement = document.getElementById('count');
-            if (grid && countElement && (grid.innerHTML === '' || countElement.textContent === '0')) {
-                forceInit();
-                forceInitExpressions();
-            }
-        });
-        
-        // Observer le document pour les ajouts d'éléments
-        setTimeout(() => {
-            const container = document.getElementById('course-container') || document.body;
-            if (container) {
-                observer.observe(container, {
-                    childList: true,
-                    subtree: true
+                // Les éléments ne sont pas encore là, attendre qu'ils soient insérés
+                // via un observer simple
+                const observer = new MutationObserver(() => {
+                    if (document.getElementById('expressions-grid') && !isInitialized) {
+                        observer.disconnect();
+                        requestAnimationFrame(() => {
+                            setTimeout(initExpressions, 50);
+                        });
+                    }
                 });
+                
+                // Observer le body pour détecter l'insertion du contenu
+                if (document.body) {
+                    observer.observe(document.body, {
+                        childList: true,
+                        subtree: true
+                    });
+                    
+                    // Timeout de sécurité (arrêter l'observer après 5 secondes)
+                    setTimeout(() => {
+                        observer.disconnect();
+                        if (!isInitialized && document.getElementById('expressions-grid')) {
+                            initExpressions();
+                        }
+                    }, 5000);
+                }
             }
-        }, 100);
+        })();
     </script>
