@@ -202,25 +202,37 @@ function executeScriptsInHTML(html, container) {
             scriptsContent.forEach(scriptData => {
                 try {
                     // Pour expressions-courantes, utiliser le nouveau système simplifié
+                    // Ne pas utiliser new Function() car cela viole la CSP
+                    // Créer un élément script à la place
                     if (scriptData.innerHTML.includes('expressions-courantes') || 
                         scriptData.innerHTML.includes('window.expressionsData')) {
                         console.log('Script expressions-courantes détecté, exécution...');
-                        // Exécuter directement avec eval dans le contexte global
-                        const scriptFunction = new Function(scriptData.innerHTML);
-                        scriptFunction.call(window);
                         
-                        // Appeler la fonction d'initialisation simplifiée
-                        if (typeof window.initExpressionsCourantes === 'function') {
-                            console.log('Appel de initExpressionsCourantes depuis scripts.js');
-                            // Utiliser requestAnimationFrame pour s'assurer que le DOM est prêt
-                            requestAnimationFrame(() => {
-                                setTimeout(() => {
-                                    window.initExpressionsCourantes();
-                                }, 150);
-                            });
-                        } else {
-                            console.error('initExpressionsCourantes n\'est pas définie!');
-                        }
+                        // Créer un élément script pour exécuter le code (compatible CSP)
+                        const newScript = document.createElement('script');
+                        newScript.textContent = scriptData.innerHTML;
+                        document.head.appendChild(newScript);
+                        
+                        // Attendre que le script soit exécuté
+                        setTimeout(() => {
+                            // Appeler la fonction d'initialisation simplifiée
+                            if (typeof window.initExpressionsCourantes === 'function') {
+                                console.log('Appel de initExpressionsCourantes depuis scripts.js');
+                                // Utiliser requestAnimationFrame pour s'assurer que le DOM est prêt
+                                requestAnimationFrame(() => {
+                                    setTimeout(() => {
+                                        window.initExpressionsCourantes();
+                                    }, 150);
+                                });
+                            } else {
+                                console.error('initExpressionsCourantes n\'est pas définie!');
+                            }
+                            
+                            // Retirer le script après exécution pour éviter les conflits
+                            if (newScript.parentNode) {
+                                newScript.parentNode.removeChild(newScript);
+                            }
+                        }, 50);
                     } else {
                         // Pour les autres scripts, utiliser la méthode normale
                         const newScript = document.createElement('script');
