@@ -1297,47 +1297,65 @@ let audioUrls = {};
 let currentExpressionAudioUrl = null;
 
 // Charger les URLs audio (robuste avec fallback de chemins et vérif de type)
+// Utilise un cache pour éviter les multiples tentatives
+let audioUrlsLoadingPromise = null;
 async function loadAudioUrls() {
-    // Si déjà chargé, ne rien faire
-    if (Object.keys(audioUrls || {}).length > 0) {
+    // Si déjà chargé globalement, utiliser le cache
+    if (window.expressionsAudioUrls && Object.keys(window.expressionsAudioUrls).length > 0) {
+        audioUrls = window.expressionsAudioUrls;
         return;
     }
-    const candidates = [
-        'audio_urls.json',
-        '/audio_urls.json',
-        `${window.location.origin}/audio_urls.json`,
-        './audio_urls.json',
-        '../audio_urls.json'
-    ];
-    let loaded = false;
-    for (const url of candidates) {
-        try {
-            const response = await fetch(url, { cache: 'no-store' });
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const contentType = response.headers.get('content-type') || '';
-            if (!contentType.includes('application/json')) {
-                // Évite de parser du HTML de fallback (<!DOCTYPE ...)
-                throw new Error(`Type de contenu inattendu: ${contentType || 'inconnu'}`);
+    
+    // Si un chargement est déjà en cours, attendre qu'il se termine
+    if (audioUrlsLoadingPromise) {
+        await audioUrlsLoadingPromise;
+        return;
+    }
+    
+    // Créer une promesse de chargement unique
+    audioUrlsLoadingPromise = (async () => {
+        const candidates = [
+            'audio_urls.json',
+            '/audio_urls.json',
+            `${window.location.origin}/audio_urls.json`,
+            './audio_urls.json',
+            '../audio_urls.json'
+        ];
+        let loaded = false;
+        for (const url of candidates) {
+            try {
+                const response = await fetch(url, { cache: 'no-store' });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const contentType = response.headers.get('content-type') || '';
+                if (!contentType.includes('application/json')) {
+                    throw new Error(`Type de contenu inattendu: ${contentType || 'inconnu'}`);
+                }
+                const data = await response.json();
+                if (data && typeof data === 'object') {
+                    audioUrls = data;
+                    loaded = true;
+                    break;
+                }
+            } catch (err) {
+                // Ne pas logger les erreurs 404 pour éviter le spam dans la console
+                if (!err.message || !err.message.includes('404')) {
+                    console.warn(`Chargement audio_urls.json échoué via ${url}:`, err.message || err);
+                }
+                continue;
             }
-            const data = await response.json();
-            if (data && typeof data === 'object') {
-                audioUrls = data;
-                loaded = true;
-                break;
-            }
-        } catch (err) {
-            console.warn(`Chargement audio_urls.json échoué via ${url}:`, err.message || err);
-            continue;
         }
-    }
-    if (!loaded) {
-        // Utiliser uniquement les fallbacks Cloudinary
-        audioUrls = {};
-    }
-    // Compléter avec les fallbacks (priorité aux URLs locales si présentes)
-    audioUrls = { ...audioFallbacks, ...audioUrls };
-    // Exposer globalement pour réutilisation entre pages/courses
-    window.expressionsAudioUrls = audioUrls;
+        if (!loaded) {
+            // Utiliser uniquement les fallbacks Cloudinary
+            audioUrls = {};
+        }
+        // Compléter avec les fallbacks (priorité aux URLs locales si présentes)
+        audioUrls = { ...audioFallbacks, ...audioUrls };
+        // Exposer globalement pour réutilisation entre pages/courses
+        window.expressionsAudioUrls = audioUrls;
+        audioUrlsLoadingPromise = null; // Réinitialiser la promesse
+    })();
+    
+    await audioUrlsLoadingPromise;
 }
 
 // Obtenir l'URL audio pour une expression
@@ -1450,17 +1468,27 @@ async function initExpressionOfTheDayInternal(frElement, enElement, explanationE
     
     // Vérifier que expressionsData est défini et non vide AVANT de charger les audio
     // Utiliser window.expressionsData si expressionsData global n'est pas défini
-    const dataSource = window.expressionsData || expressionsData;
+    let dataSource = window.expressionsData || expressionsData;
     
+    // Si les données ne sont pas disponibles, attendre un peu et réessayer
     if (!dataSource || !Array.isArray(dataSource) || dataSource.length === 0) {
-        console.error('expressionsData n\'est pas défini ou est vide', {
-            expressionsData: expressionsData,
-            windowExpressionsData: window.expressionsData,
-            dataSource: dataSource,
-            length: dataSource ? dataSource.length : 'undefined'
+        console.warn('expressionsData non disponible, attente de 200ms...', {
+            windowExpressionsData: window.expressionsData ? window.expressionsData.length : 'undefined',
+            expressionsData: expressionsData ? expressionsData.length : 'undefined'
         });
-        // Ne pas réessayer ici, laisser initHomeGames gérer les réessais
-        return;
+        
+        // Attendre un peu et réessayer une fois
+        await new Promise(resolve => setTimeout(resolve, 200));
+        dataSource = window.expressionsData || expressionsData;
+        
+        if (!dataSource || !Array.isArray(dataSource) || dataSource.length === 0) {
+            console.error('expressionsData toujours non disponible après attente');
+            // Afficher un message de fallback pour éviter l'encart blanc
+            if (frElement) frElement.textContent = 'Chargement...';
+            if (enElement) enElement.textContent = 'Loading...';
+            if (explanationElement) explanationElement.textContent = 'Les expressions sont en cours de chargement.';
+            return;
+        }
     }
     
     // Charger les URLs audio si ce n'est pas déjà fait (non bloquant)
@@ -1514,23 +1542,40 @@ async function initExpressionOfTheDayInternal(frElement, enElement, explanationE
         console.log('Affichage de l\'expression:', expression.fr);
         
         // Vérifier à nouveau que les éléments existent avant de les modifier
+        // (ils peuvent avoir été supprimés ou modifiés pendant le traitement)
         frElement = document.getElementById('expression-fr');
         enElement = document.getElementById('expression-en');
         explanationElement = document.getElementById('expression-explanation');
+        
+        if (!frElement || !enElement || !explanationElement) {
+            console.error('Éléments DOM perdus pendant le traitement');
+            return;
+        }
         
         if (frElement) {
             frElement.textContent = expression.fr || '';
             // Forcer le reflow pour s'assurer que le texte est rendu
             frElement.offsetHeight;
+            // Vérifier que le texte a bien été défini
+            if (!frElement.textContent || frElement.textContent.trim() === '') {
+                console.warn('Le texte FR est vide après assignation');
+                frElement.textContent = expression.fr || 'Expression française';
+            }
             console.log('Texte FR défini:', frElement.textContent);
         } else {
             console.error('Élément expression-fr non trouvé au moment de l\'affichage');
         }
         
         if (enElement) {
-            enElement.textContent = expression.en ? `🇬🇧 ${expression.en}` : '';
+            const enText = expression.en ? `🇬🇧 ${expression.en}` : '';
+            enElement.textContent = enText;
             // Forcer le reflow
             enElement.offsetHeight;
+            // Vérifier que le texte a bien été défini
+            if (!enElement.textContent || enElement.textContent.trim() === '') {
+                console.warn('Le texte EN est vide après assignation');
+                enElement.textContent = expression.en ? `🇬🇧 ${expression.en}` : '🇬🇧 English translation';
+            }
             console.log('Texte EN défini:', enElement.textContent);
         } else {
             console.error('Élément expression-en non trouvé au moment de l\'affichage');
@@ -1540,6 +1585,11 @@ async function initExpressionOfTheDayInternal(frElement, enElement, explanationE
             explanationElement.textContent = expression.explanation || '';
             // Forcer le reflow
             explanationElement.offsetHeight;
+            // Vérifier que le texte a bien été défini
+            if (!explanationElement.textContent || explanationElement.textContent.trim() === '') {
+                console.warn('L\'explication est vide après assignation');
+                explanationElement.textContent = expression.explanation || 'Context and usage explanation.';
+            }
             console.log('Explication définie:', explanationElement.textContent.substring(0, 50) + '...');
         } else {
             console.error('Élément expression-explanation non trouvé au moment de l\'affichage');
@@ -2374,6 +2424,21 @@ async function initHomeGames() {
     // Réinitialiser le flag d'initialisation
     expressionInitialized = false;
     expressionInitAttempts = 0;
+    
+    // S'assurer que les éléments ont un contenu par défaut pour éviter l'encart blanc
+    const frElement = document.getElementById('expression-fr');
+    const enElement = document.getElementById('expression-en');
+    const explanationElement = document.getElementById('expression-explanation');
+    
+    if (frElement && (!frElement.textContent || frElement.textContent.trim() === '')) {
+        frElement.textContent = 'Chargement...';
+    }
+    if (enElement && (!enElement.textContent || enElement.textContent.trim() === '')) {
+        enElement.textContent = 'Loading...';
+    }
+    if (explanationElement && (!explanationElement.textContent || explanationElement.textContent.trim() === '')) {
+        explanationElement.textContent = 'Les expressions sont en cours de chargement.';
+    }
     
     // Attendre un peu que le DOM soit rendu
     await new Promise(resolve => {

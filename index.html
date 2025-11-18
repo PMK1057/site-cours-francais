@@ -288,91 +288,121 @@
         <!-- TEXTES -->
         <div id="textes" class="section" role="region" aria-labelledby="id-textes">
             <h2 id="id-textes" class="sr-only">Textes</h2>
-            <div class="section-menu">
-                <div class="section-card level-intermediate" onclick="showCourse('textes-francais-prepositions')">
-                    <span class="level-badge">A1</span>
-                    <h3>🔠 PRÉPOSITIONS EN CONTEXTE</h3>
-                    <p>Textes A2 avec passé composé, présent et prépositions en couleur</p>
+            
+            <!-- 📚 GRAMMAIRE EN CONTEXTE -->
+            <div class="textes-category">
+                <h3 class="textes-category-title">📚 Grammaire en contexte</h3>
+                <p class="textes-category-subtitle">Textes pour pratiquer la grammaire française</p>
+                <div class="section-menu">
+                    <div class="section-card level-intermediate" onclick="showCourse('textes-francais-prepositions')">
+                        <span class="level-badge">A1</span>
+                        <h3>🔠 PRÉPOSITIONS EN CONTEXTE</h3>
+                        <p>Textes A2 avec passé composé, présent et prépositions en couleur</p>
+                    </div>
+                    <div class="section-card level-intermediate" onclick="showCourse('textes_francais_debutants')">
+                        <span class="level-badge">A2</span>
+                        <h3>📖 MIX PASSÉ COMPOSÉ/PRÉSENT A2</h3>
+                        <p>Textes pour débutants avec présent et passé composé</p>
+                    </div>
+                    <div class="section-card level-intermediate" onclick="showCourse('textes_passe_compose_imparfait')">
+                        <span class="level-badge">B1</span>
+                        <h3>📖 MIX PASSÉ COMPOSÉ/IMPARFAIT</h3>
+                        <p>Textes avec passé composé et imparfait avec explications</p>
+                    </div>
+                    <div class="section-card level-intermediate" onclick="showCourse('textes_subjonctif_present')">
+                        <span class="level-badge">B2</span>
+                        <h3>📖 SUBJONCTIF PRÉSENT</h3>
+                        <p>Textes avec verbes au subjonctif présent (réguliers et irréguliers)</p>
+                    </div>
                 </div>
-                <div class="section-card level-intermediate" onclick="showCourse('textes_francais_debutants')">
-                    <span class="level-badge">A2</span>
-                    <h3>📖 MIX PASSÉ COMPOSÉ/PRÉSENT A2</h3>
-                    <p>Textes pour débutants avec présent et passé composé</p>
+            </div>
+
+            <!-- 🇫🇷 CULTURE & HISTOIRE -->
+            <div class="textes-category">
+                <h3 class="textes-category-title">🇫🇷 Culture & Histoire</h3>
+                <p class="textes-category-subtitle">Découvrez la culture et l'histoire françaises</p>
+                <div class="section-menu">
+                    <div class="section-card level-intermediate" onclick="showCourse('droit-des-femmes')">
+                        <span class="level-badge">B1</span>
+                        <h3>⚖️ DROIT DES FEMMES</h3>
+                        <p>Une longue bataille (texte bilingue + vocabulaire)</p>
+                    </div>
+                    <div class="section-card level-intermediate" onclick="showCourse('uniformisation-langue')">
+                        <span class="level-badge">B1</span>
+                        <h3>🇫🇷 UNIFORMISATION DU FRANÇAIS</h3>
+                        <p>Histoire de la langue (texte bilingue + vocabulaire)</p>
+                    </div>
+                    <div class="section-card level-intermediate" onclick="showCourse('separation-eglise-etat')">
+                        <span class="level-badge">B2</span>
+                        <h3>⛪ LOI DE 1905 — LAÏCITÉ</h3>
+                        <p>Séparation Église/État (texte bilingue + vocabulaire)</p>
+                    </div>
+                    <div class="section-card level-intermediate" onclick="showCourse('grands_hommes_francais')">
+                        <span class="level-badge">B1/B2</span>
+                        <h3>🏛️ GRANDS HOMMES FRANÇAIS</h3>
+                        <p>Textes biographiques (Napoléon, De Gaulle, Voltaire, Louis XIV, etc.)</p>
+                    </div>
                 </div>
-                <div class="section-card level-intermediate" onclick="showCourse('textes_passe_compose_imparfait')">
-                    <span class="level-badge">B1</span>
-                    <h3>📖 MIX PASSÉ COMPOSÉ/IMPARFAIT</h3>
-                    <p>Textes avec passé composé et imparfait avec explications</p>
+            </div>
+
+            <!-- 🤖 TECHNOLOGIE & SOCIÉTÉ -->
+            <div class="textes-category">
+                <h3 class="textes-category-title">🤖 Technologie & Société</h3>
+                <p class="textes-category-subtitle">Textes sur les enjeux technologiques contemporains</p>
+                <div class="section-menu">
+                    <div class="section-card level-advanced" onclick="showCourse('intelligence-artificielle')">
+                        <span class="level-badge">B2</span>
+                        <h3>🤖 INTELLIGENCE ARTIFICIELLE</h3>
+                        <p>Révolution technologique, travail, éducation et désinformation (texte bilingue + vocabulaire)</p>
+                    </div>
+                    <div class="section-card level-advanced" onclick="showCourse('ia-et-droit')">
+                        <span class="level-badge">B2</span>
+                        <h3>⚖️ IA ET LE DROIT</h3>
+                        <p>Vers des juges robots ? Algorithmes et justice (texte bilingue + vocabulaire)</p>
+                    </div>
+                    <div class="section-card level-advanced" onclick="showCourse('ia-science')">
+                        <span class="level-badge">B2</span>
+                        <h3>🔬 IA DANS LA SCIENCE</h3>
+                        <p>Une révolution en marche : médicaments, physique, climat (texte bilingue + vocabulaire)</p>
+                    </div>
+                    <div class="section-card level-advanced" onclick="showCourse('drones')">
+                        <span class="level-badge">B2</span>
+                        <h3>🚁 LES DRONES</h3>
+                        <p>De nouveaux outils qui changent tout : guerre, crime, vie quotidienne (texte bilingue + vocabulaire)</p>
+                    </div>
+                    <div class="section-card level-advanced" onclick="showCourse('credit-social-chine')">
+                        <span class="level-badge">B2</span>
+                        <h3>📊 CRÉDIT SOCIAL CHINE</h3>
+                        <p>Système de notation sociale : Big Brother devient réalité (texte bilingue + vocabulaire)</p>
+                    </div>
                 </div>
-                <div class="section-card level-intermediate" onclick="showCourse('textes_subjonctif_present')">
-                    <span class="level-badge">B2</span>
-                    <h3>📖 SUBJONCTIF PRÉSENT</h3>
-                    <p>Textes avec verbes au subjonctif présent (réguliers et irréguliers)</p>
-                </div>
-                <div class="section-card level-intermediate" onclick="showCourse('droit-des-femmes')">
-                    <span class="level-badge">B1</span>
-                    <h3>⚖️ DROIT DES FEMMES</h3>
-                    <p>Une longue bataille (texte bilingue + vocabulaire)</p>
-                </div>
-                <div class="section-card level-intermediate" onclick="showCourse('uniformisation-langue')">
-                    <span class="level-badge">B1</span>
-                    <h3>🇫🇷 UNIFORMISATION DU FRANÇAIS</h3>
-                    <p>Histoire de la langue (texte bilingue + vocabulaire)</p>
-                </div>
-                <div class="section-card level-intermediate" onclick="showCourse('separation-eglise-etat')">
-                    <span class="level-badge">B2</span>
-                    <h3>⛪ LOI DE 1905 — LAÏCITÉ</h3>
-                    <p>Séparation Église/État (texte bilingue + vocabulaire)</p>
-                </div>
-                <div class="section-card level-intermediate" onclick="showCourse('grands_hommes_francais')">
-                    <span class="level-badge">B1/B2</span>
-                    <h3>🏛️ GRANDS HOMMES FRANÇAIS</h3>
-                    <p>Textes biographiques (Napoléon, De Gaulle, Voltaire, Louis XIV, etc.)</p>
-                </div>
-                <div class="section-card level-advanced" onclick="showCourse('intelligence-artificielle')">
-                    <span class="level-badge">B2</span>
-                    <h3>🤖 INTELLIGENCE ARTIFICIELLE</h3>
-                    <p>Révolution technologique, travail, éducation et désinformation (texte bilingue + vocabulaire)</p>
-                </div>
-                <div class="section-card level-advanced" onclick="showCourse('ia-et-droit')">
-                    <span class="level-badge">B2</span>
-                    <h3>⚖️ IA ET LE DROIT</h3>
-                    <p>Vers des juges robots ? Algorithmes et justice (texte bilingue + vocabulaire)</p>
-                </div>
-                <div class="section-card level-advanced" onclick="showCourse('ia-science')">
-                    <span class="level-badge">B2</span>
-                    <h3>🔬 IA DANS LA SCIENCE</h3>
-                    <p>Une révolution en marche : médicaments, physique, climat (texte bilingue + vocabulaire)</p>
-                </div>
-                <div class="section-card level-advanced" onclick="showCourse('drones')">
-                    <span class="level-badge">B2</span>
-                    <h3>🚁 LES DRONES</h3>
-                    <p>De nouveaux outils qui changent tout : guerre, crime, vie quotidienne (texte bilingue + vocabulaire)</p>
-                </div>
-                <div class="section-card level-advanced" onclick="showCourse('credit-social-chine')">
-                    <span class="level-badge">B2</span>
-                    <h3>📊 CRÉDIT SOCIAL CHINE</h3>
-                    <p>Système de notation sociale : Big Brother devient réalité (texte bilingue + vocabulaire)</p>
-                </div>
-                <div class="section-card level-intermediate" onclick="showCourse('peine-de-mort')">
-                    <span class="level-badge">B2</span>
-                    <h3>⚖️ PEINE DE MORT — ABOLITION</h3>
-                    <p>De Badinter à l'abolition (texte bilingue + vocabulaire)</p>
-                </div>
-                <div class="section-card level-intermediate" onclick="showCourse('mariage-pour-tous')">
-                    <span class="level-badge">B1</span>
-                    <h3>💒 MARIAGE POUR TOUS</h3>
-                    <p>Un débat qui divise (texte bilingue + vocabulaire)</p>
-                </div>
-                <div class="section-card level-intermediate" onclick="showCourse('legalisation-cannabis')">
-                    <span class="level-badge">B2</span>
-                    <h3>🌿 LÉGALISATION DU CANNABIS</h3>
-                    <p>Un débat qui n'aboutit pas (texte bilingue + vocabulaire)</p>
-                </div>
-                <div class="section-card level-intermediate" onclick="showCourse('monarchie-europe')">
-                    <span class="level-badge">B2</span>
-                    <h3>👑 MONARCHIE EN EUROPE</h3>
-                    <p>Espagne et Royaume-Uni (texte bilingue + vocabulaire)</p>
+            </div>
+
+            <!-- ⚖️ DÉBATS DE SOCIÉTÉ -->
+            <div class="textes-category">
+                <h3 class="textes-category-title">⚖️ Débats de société</h3>
+                <p class="textes-category-subtitle">Textes sur les grands débats contemporains</p>
+                <div class="section-menu">
+                    <div class="section-card level-intermediate" onclick="showCourse('peine-de-mort')">
+                        <span class="level-badge">B2</span>
+                        <h3>⚖️ PEINE DE MORT — ABOLITION</h3>
+                        <p>De Badinter à l'abolition (texte bilingue + vocabulaire)</p>
+                    </div>
+                    <div class="section-card level-intermediate" onclick="showCourse('mariage-pour-tous')">
+                        <span class="level-badge">B1</span>
+                        <h3>💒 MARIAGE POUR TOUS</h3>
+                        <p>Un débat qui divise (texte bilingue + vocabulaire)</p>
+                    </div>
+                    <div class="section-card level-intermediate" onclick="showCourse('legalisation-cannabis')">
+                        <span class="level-badge">B2</span>
+                        <h3>🌿 LÉGALISATION DU CANNABIS</h3>
+                        <p>Un débat qui n'aboutit pas (texte bilingue + vocabulaire)</p>
+                    </div>
+                    <div class="section-card level-intermediate" onclick="showCourse('monarchie-europe')">
+                        <span class="level-badge">B2</span>
+                        <h3>👑 MONARCHIE EN EUROPE</h3>
+                        <p>Espagne et Royaume-Uni (texte bilingue + vocabulaire)</p>
+                    </div>
                 </div>
             </div>
         </div>
