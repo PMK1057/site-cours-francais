@@ -11,7 +11,6 @@
         table { width: 100%; border-collapse: collapse; margin: 12px 0 24px; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
         th, td { padding: 12px 14px; border-bottom: 1px solid #e9ecef; }
         th { background: #f5f6ff; color: #3f2f92; text-align: left; }
-        /* Hover seulement si pas de classe register */
         tr:not(.register-courant):not(.register-un-peu-familier):not(.register-familier):hover td { background: #fafbff; }
         .en { color: #425466; font-size: .95em; }
         .note { background: #fff7e6; border-left: 4px solid #ffb84d; padding: 12px 14px; border-radius: 8px; color: #7a5b10; margin: 10px 0 18px; }
@@ -44,9 +43,9 @@
             border-left: 4px solid #ff6b6b !important;
         }
         
-        /* Étoiles pour les expressions importantes */
-        .star { color: #ffb84d; font-size: 1.1em; margin-right: 4px; }
-        .star-important { color: #ff6b6b; font-size: 1.2em; margin-right: 4px; }
+        /* Étoiles pour les expressions importantes - avec espacement */
+        .star { color: #ffb84d; font-size: 1.1em; margin-right: 6px; }
+        .star-important { color: #ff6b6b; font-size: 1.2em; margin-right: 6px; }
         
         /* Légende */
         .legend { display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; }
@@ -56,37 +55,18 @@
         .legend-un-peu-familier { background-color: #fff9e6; border-left-color: #ffb84d; }
         .legend-familier { background-color: #ffe6e6; border-left-color: #ff6b6b; }
         
-        /* Boutons audio */
+        /* Boutons audio - style simple comme questions-pratiques */
         .audio-btn {
-            display: inline-flex !important;
-            align-items: center;
-            justify-content: center;
-            width: 36px !important;
-            height: 36px !important;
-            margin-left: 8px;
-            background: linear-gradient(135deg, #667eea, #764ba2) !important;
-            color: #ffffff !important;
+            background: none !important;
             border: none !important;
-            border-radius: 999px;
             cursor: pointer;
-            font-size: 1.1em !important;
-            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.35) !important;
-            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            font-size: 1.2em !important;
+            margin-left: 8px !important;
             vertical-align: middle;
+            padding: 0;
         }
-
         .audio-btn:hover {
-            transform: translateY(-1px) scale(1.04);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.45) !important;
-        }
-
-        .audio-btn:active {
-            transform: scale(0.95);
-        }
-
-        .audio-btn:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3) !important;
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -128,32 +108,32 @@
             </thead>
             <tbody>
                 <!-- Expressions avec étoiles (selon demande utilisateur) -->
-                <tr class="register-courant"><td><span class="star-important">⭐</span>Passer un coup de fil</td><td class="en">to make a phone call</td></tr>
-                <tr class="register-un-peu-familier"><td><span class="star-important">⭐</span>Avoir la flemme</td><td class="en">to feel too lazy / can't be bothered</td></tr>
-                <tr class="register-un-peu-familier"><td><span class="star-important">⭐</span>Être à la bourre</td><td class="en">to be running late (informal)</td></tr>
-                <tr class="register-un-peu-familier"><td><span class="star-important">⭐</span>Être crevé</td><td class="en">to be exhausted</td></tr>
-                <tr class="register-familier"><td><span class="star-important">⭐</span>C'est la galère</td><td class="en">it's a pain / it's tough</td></tr>
-                <tr class="register-courant"><td><span class="star-important">⭐</span>Faire la grasse matinée</td><td class="en">to sleep in</td></tr>
+                <tr class="register-courant"><td><span class="star-important">⭐</span> Passer un coup de fil<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417164/cours-francais/vocabulaire/passer_un_coup_de_fil.mp3")' title='Écouter "Passer un coup de fil"' type="button">🔊</button></td><td class="en">to make a phone call</td></tr>
+                <tr class="register-un-peu-familier"><td><span class="star-important">⭐</span> Avoir la flemme<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417167/cours-francais/vocabulaire/avoir_la_flemme.mp3")' title='Écouter "Avoir la flemme"' type="button">🔊</button></td><td class="en">to feel too lazy / can't be bothered</td></tr>
+                <tr class="register-un-peu-familier"><td><span class="star-important">⭐</span> Être à la bourre<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417174/cours-francais/vocabulaire/etre_a_la_bourre.mp3")' title='Écouter "Être à la bourre"' type="button">🔊</button></td><td class="en">to be running late (informal)</td></tr>
+                <tr class="register-un-peu-familier"><td><span class="star-important">⭐</span> Être crevé<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417176/cours-francais/vocabulaire/etre_creve.mp3")' title='Écouter "Être crevé"' type="button">🔊</button></td><td class="en">to be exhausted</td></tr>
+                <tr class="register-familier"><td><span class="star-important">⭐</span> C'est la galère<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417177/cours-francais/vocabulaire/cest_la_galere.mp3")' title='Écouter "C'est la galère"' type="button">🔊</button></td><td class="en">it's a pain / it's tough</td></tr>
+                <tr class="register-courant"><td><span class="star-important">⭐</span> Faire la grasse matinée<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417154/cours-francais/vocabulaire/faire_la_grasse_matinee.mp3")' title='Écouter "Faire la grasse matinée"' type="button">🔊</button></td><td class="en">to sleep in</td></tr>
                 
                 <!-- Autres expressions sans étoiles -->
-                <tr class="register-courant"><td>Filer un coup de main</td><td class="en">to give a hand, help out</td></tr>
-                <tr class="register-courant"><td>Faire d'une pierre deux coups</td><td class="en">to kill two birds with one stone</td></tr>
-                <tr class="register-courant"><td>Boire un coup</td><td class="en">to have a (quick) drink</td></tr>
-                <tr class="register-courant"><td>Faire marche arrière</td><td class="en">to backtrack, reverse a decision</td></tr>
-                <tr class="register-courant"><td>Avoir un coup de foudre</td><td class="en">love at first sight</td></tr>
-                <tr class="register-courant"><td>Avoir du pain sur la planche</td><td class="en">to have a lot on one's plate</td></tr>
-                <tr class="register-courant"><td>Tourner en rond</td><td class="en">to go around in circles, make no progress</td></tr>
-                <tr class="register-courant"><td>Mettre toutes les chances de son côté</td><td class="en">to stack the odds in one's favor</td></tr>
-                <tr class="register-un-peu-familier"><td>Se prendre la tête</td><td class="en">to overthink / stress oneself out</td></tr>
-                <tr class="register-un-peu-familier"><td>Prendre la tête (à quelqu'un)</td><td class="en">to annoy/bother (to get on someone's nerves)</td></tr>
-                <tr class="register-un-peu-familier"><td>Avoir un chat dans la gorge</td><td class="en">to have a frog in one's throat (hoarse)</td></tr>
-                <tr class="register-un-peu-familier"><td>Tomber dans les pommes</td><td class="en">to faint, pass out</td></tr>
-                <tr class="register-un-peu-familier"><td>Avoir un petit creux</td><td class="en">to feel a bit hungry</td></tr>
-                <tr class="register-un-peu-familier"><td>Avoir la gueule de bois</td><td class="en">to have a hangover</td></tr>
-                <tr class="register-familier"><td>Avoir la dalle</td><td class="en">to be starving (slang)</td></tr>
-                <tr class="register-familier"><td>Péter un câble</td><td class="en">to freak out / lose it (very informal)</td></tr>
-                <tr class="register-familier"><td>Prendre une cuite</td><td class="en">to get drunk (slang)</td></tr>
-                <tr class="register-familier"><td>Avoir le seum</td><td class="en">to be salty / annoyed (slang)</td></tr>
+                <tr class="register-courant"><td>Filer un coup de main<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417162/cours-francais/vocabulaire/filer_un_coup_de_main.mp3")' title='Écouter "Filer un coup de main"' type="button">🔊</button></td><td class="en">to give a hand, help out</td></tr>
+                <tr class="register-courant"><td>Faire d'une pierre deux coups<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417172/cours-francais/vocabulaire/faire_d_une_pierre_deux_coups.mp3")' title='Écouter "Faire d'une pierre deux coups"' type="button">🔊</button></td><td class="en">to kill two birds with one stone</td></tr>
+                <tr class="register-courant"><td>Boire un coup<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417178/cours-francais/vocabulaire/boire_un_coup.mp3")' title='Écouter "Boire un coup"' type="button">🔊</button></td><td class="en">to have a (quick) drink</td></tr>
+                <tr class="register-courant"><td>Faire marche arrière<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417174/cours-francais/vocabulaire/faire_marche_arriere.mp3")' title='Écouter "Faire marche arrière"' type="button">🔊</button></td><td class="en">to backtrack, reverse a decision</td></tr>
+                <tr class="register-courant"><td>Avoir un coup de foudre<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417157/cours-francais/vocabulaire/avoir_un_coup_de_foudre.mp3")' title='Écouter "Avoir un coup de foudre"' type="button">🔊</button></td><td class="en">love at first sight</td></tr>
+                <tr class="register-courant"><td>Avoir du pain sur la planche<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417160/cours-francais/vocabulaire/avoir_du_pain_sur_la_planche.mp3")' title='Écouter "Avoir du pain sur la planche"' type="button">🔊</button></td><td class="en">to have a lot on one's plate</td></tr>
+                <tr class="register-courant"><td>Tourner en rond<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417167/cours-francais/vocabulaire/tourner_en_rond.mp3")' title='Écouter "Tourner en rond"' type="button">🔊</button></td><td class="en">to go around in circles, make no progress</td></tr>
+                <tr class="register-courant"><td>Mettre toutes les chances de son côté<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417169/cours-francais/vocabulaire/mettre_toutes_les_chances_de_son_cote.mp3")' title='Écouter "Mettre toutes les chances de son côté"' type="button">🔊</button></td><td class="en">to stack the odds in one's favor</td></tr>
+                <tr class="register-un-peu-familier"><td>Se prendre la tête<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417170/cours-francais/vocabulaire/se_prendre_la_tete.mp3")' title='Écouter "Se prendre la tête"' type="button">🔊</button></td><td class="en">to overthink / stress oneself out</td></tr>
+                <tr class="register-un-peu-familier"><td>Prendre la tête (à quelqu'un)<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417171/cours-francais/vocabulaire/prendre_la_tete_a_quelqu_un.mp3")' title='Écouter "Prendre la tête (à quelqu'un)"' type="button">🔊</button></td><td class="en">to annoy/bother (to get on someone's nerves)</td></tr>
+                <tr class="register-un-peu-familier"><td>Avoir un chat dans la gorge<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417155/cours-francais/vocabulaire/avoir_un_chat_dans_la_gorge.mp3")' title='Écouter "Avoir un chat dans la gorge"' type="button">🔊</button></td><td class="en">to have a frog in one's throat (hoarse)</td></tr>
+                <tr class="register-un-peu-familier"><td>Tomber dans les pommes<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417157/cours-francais/vocabulaire/tomber_dans_les_pommes.mp3")' title='Écouter "Tomber dans les pommes"' type="button">🔊</button></td><td class="en">to faint, pass out</td></tr>
+                <tr class="register-un-peu-familier"><td>Avoir un petit creux<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417159/cours-francais/vocabulaire/avoir_un_petit_creux.mp3")' title='Écouter "Avoir un petit creux"' type="button">🔊</button></td><td class="en">to feel a bit hungry</td></tr>
+                <tr class="register-un-peu-familier"><td>Avoir la gueule de bois<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417161/cours-francais/vocabulaire/avoir_la_gueule_de_bois.mp3")' title='Écouter "Avoir la gueule de bois"' type="button">🔊</button></td><td class="en">to have a hangover</td></tr>
+                <tr class="register-familier"><td>Avoir la dalle<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417163/cours-francais/vocabulaire/avoir_la_dalle.mp3")' title='Écouter "Avoir la dalle"' type="button">🔊</button></td><td class="en">to be starving (slang)</td></tr>
+                <tr class="register-familier"><td>Péter un câble<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417161/cours-francais/vocabulaire/peter_un_cable.mp3")' title='Écouter "Péter un câble"' type="button">🔊</button></td><td class="en">to freak out / lose it (very informal)</td></tr>
+                <tr class="register-familier"><td>Prendre une cuite<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417166/cours-francais/vocabulaire/prendre_une_cuite.mp3")' title='Écouter "Prendre une cuite"' type="button">🔊</button></td><td class="en">to get drunk (slang)</td></tr>
+                <tr class="register-familier"><td>Avoir le seum<button class="audio-btn" onclick='playAudio("https://res.cloudinary.com/da9yduppr/video/upload/v1763417173/cours-francais/vocabulaire/avoir_le_seum.mp3")' title='Écouter "Avoir le seum"' type="button">🔊</button></td><td class="en">to be salty / annoyed (slang)</td></tr>
             </tbody>
         </table>
     </div>
@@ -164,107 +144,5 @@
             window.backToSection = function(sectionId){ window.location.hash = '#section=' + (sectionId || 'expressions'); };
         }
     </script>
-    <script>
-        // Attendre que le DOM soit prêt
-        (function() {
-            function initAudioButtons() {
-                function cleanFilename(text) {
-                    if (!text) return '';
-                    text = text.toLowerCase();
-                    text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    text = text.replace(/[^a-z0-9]+/g, '_');
-                    text = text.replace(/^_+|_+$/g, '');
-                    return text;
-                }
-
-                async function loadAudioUrls() {
-                    let audioUrls = {};
-                    const paths = ['audio_urls.json', '../audio_urls.json', '/audio_urls.json'];
-                    for (const path of paths) {
-                        try {
-                            const response = await fetch(path);
-                            if (response.ok) {
-                                audioUrls = await response.json();
-                                console.log(`✅ audio_urls.json chargé depuis: ${path}`);
-                                break;
-                            }
-                        } catch (error) {
-                            console.warn(`Erreur avec ${path}:`, error);
-                        }
-                    }
-                    return audioUrls;
-                }
-
-                const table = document.querySelector('.idioms-container table');
-                if (!table) {
-                    console.warn('Tableau non trouvé, réessai dans 100ms...');
-                    setTimeout(initAudioButtons, 100);
-                    return;
-                }
-
-                loadAudioUrls().then(audioUrls => {
-                    if (!audioUrls || Object.keys(audioUrls).length === 0) {
-                        console.warn('Aucun fichier audio trouvé');
-                        return;
-                    }
-
-                    const rows = table.querySelectorAll('tbody tr');
-                    let buttonsAdded = 0;
-                    
-                    rows.forEach(row => {
-                        const firstCell = row.querySelector('td:first-child');
-                        if (!firstCell) return;
-
-                        let expressionText = firstCell.textContent.trim();
-                        expressionText = expressionText.replace(/^[⭐\s]+/, '').trim();
-                        if (!expressionText) return;
-
-                        const filename = cleanFilename(expressionText);
-                        const audioData = audioUrls[filename];
-                        if (!audioData) return;
-
-                        const audioUrl = typeof audioData === 'string' ? audioData : audioData.url;
-                        if (!audioUrl) return;
-
-                        // Vérifier si le bouton existe déjà
-                        if (firstCell.querySelector('.audio-btn')) return;
-
-                        const btn = document.createElement('button');
-                        btn.type = 'button';
-                        btn.className = 'audio-btn';
-                        btn.textContent = '🔊';
-                        btn.title = `Écouter "${expressionText}"`;
-                        btn.setAttribute('aria-label', `Écouter la prononciation de "${expressionText}"`);
-                        btn.style.cssText = 'display: inline-flex !important; align-items: center !important; justify-content: center !important; width: 36px !important; height: 36px !important; margin-left: 8px !important; background: linear-gradient(135deg, #667eea, #764ba2) !important; color: #ffffff !important; border: none !important; border-radius: 999px !important; cursor: pointer !important; font-size: 1.1em !important; box-shadow: 0 6px 14px rgba(102, 126, 234, 0.35) !important; vertical-align: middle !important;';
-                        btn.addEventListener('click', () => {
-                            if (typeof playAudio === 'function') {
-                                playAudio(audioUrl);
-                            } else {
-                                const audio = new Audio(audioUrl);
-                                audio.play().catch(e => console.error('Erreur lecture audio:', e));
-                            }
-                        });
-
-                        firstCell.appendChild(btn);
-                        buttonsAdded++;
-                    });
-                    
-                    console.log(`✅ ${buttonsAdded} boutons audio ajoutés`);
-                });
-            }
-
-            // Essayer immédiatement
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initAudioButtons);
-            } else {
-                initAudioButtons();
-            }
-            
-            // Réessayer après un court délai au cas où le contenu serait chargé dynamiquement
-            setTimeout(initAudioButtons, 500);
-        })();
-    </script>
 </body>
 </html>
-
-
