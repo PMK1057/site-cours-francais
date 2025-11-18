@@ -204,18 +204,22 @@ function executeScriptsInHTML(html, container) {
                     // Pour expressions-courantes, utiliser le nouveau système simplifié
                     if (scriptData.innerHTML.includes('expressions-courantes') || 
                         scriptData.innerHTML.includes('window.expressionsData')) {
+                        console.log('Script expressions-courantes détecté, exécution...');
                         // Exécuter directement avec eval dans le contexte global
                         const scriptFunction = new Function(scriptData.innerHTML);
                         scriptFunction.call(window);
                         
                         // Appeler la fonction d'initialisation simplifiée
                         if (typeof window.initExpressionsCourantes === 'function') {
+                            console.log('Appel de initExpressionsCourantes depuis scripts.js');
                             // Utiliser requestAnimationFrame pour s'assurer que le DOM est prêt
                             requestAnimationFrame(() => {
                                 setTimeout(() => {
                                     window.initExpressionsCourantes();
-                                }, 100);
+                                }, 150);
                             });
+                        } else {
+                            console.error('initExpressionsCourantes n\'est pas définie!');
                         }
                     } else {
                         // Pour les autres scripts, utiliser la méthode normale

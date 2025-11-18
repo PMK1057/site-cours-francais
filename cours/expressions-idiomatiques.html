@@ -48,12 +48,8 @@
         .star-important { color: #ff6b6b; font-size: 1.2em; margin-right: 6px; }
         
         /* Légende */
-        .legend { display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; }
-        .legend-item { display: flex; align-items: center; gap: 8px; }
-        .legend-color { width: 20px; height: 20px; border-radius: 4px; border-left: 4px solid; }
-        .legend-courant { background-color: #e8f5e9; border-left-color: #4caf50; }
-        .legend-un-peu-familier { background-color: #fff9e6; border-left-color: #ffb84d; }
-        .legend-familier { background-color: #ffe6e6; border-left-color: #ff6b6b; }
+        .legend { display: flex; gap: 15px; flex-wrap: wrap; margin: 10px 0; padding: 8px 12px; background: #f8f9fa; border-radius: 8px; align-items: center; }
+        .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.95em; }
         
         /* Boutons audio - style simple comme questions-pratiques */
         .audio-btn {
@@ -102,22 +98,10 @@
         </div>
 
         <div class="legend">
-            <div class="legend-item">
-                <div class="legend-color legend-courant"></div>
-                <span>Courant</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color legend-un-peu-familier"></div>
-                <span>Un peu familier</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color legend-familier"></div>
-                <span>Familier</span>
-            </div>
-            <div class="legend-item">
-                <span class="star-important">⭐</span>
-                <span>Important</span>
-            </div>
+            <div class="legend-item">🟢 <span>Courant</span></div>
+            <div class="legend-item">🟠 <span>Un peu familier</span></div>
+            <div class="legend-item">🔴 <span>Familier</span></div>
+            <div class="legend-item"><span class="star-important">⭐</span> <span>Important</span></div>
         </div>
 
         <table>

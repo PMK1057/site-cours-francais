@@ -407,6 +407,7 @@
             
             // Données des expressions - stockées une seule fois dans window
             if (typeof window.expressionsData === 'undefined') {
+                console.log('Chargement des données d\'expressions...');
                 window.expressionsData = [
             {
                 fr: "Ça marche",
@@ -829,6 +830,9 @@
                 ]
             }
             ];
+                console.log('Données d\'expressions chargées:', window.expressionsData.length, 'expressions');
+            } else {
+                console.log('Données d\'expressions déjà présentes:', window.expressionsData.length, 'expressions');
             }
             
             // Variables d'état locales (isolées dans la closure)
@@ -948,15 +952,19 @@
                 const expressionsToUse = window.expressionsData;
                 
                 if (!expressionsToUse || !Array.isArray(expressionsToUse) || expressionsToUse.length === 0) {
-                    console.error('Données d\'expressions non disponibles');
+                    console.error('filterExpressions: Données d\'expressions non disponibles');
                     return;
                 }
+                
+                console.log('filterExpressions: Filtrage de', expressionsToUse.length, 'expressions');
                 
                 const filtered = expressionsToUse.filter(exp => {
                     const matchesSearch = exp.fr.toLowerCase().includes(searchTerm.toLowerCase());
                     const matchesLevel = selectedLevel === 'all' || exp.level === selectedLevel;
                     return matchesSearch && matchesLevel;
                 });
+
+                console.log('filterExpressions:', filtered.length, 'expressions après filtrage');
 
                 // Trier : expressions importantes en premier
                 filtered.sort((a, b) => {
@@ -984,13 +992,15 @@
             function renderExpressions(expressionsToShow) {
                 const grid = document.getElementById('expressions-grid');
                 if (!grid) {
-                    console.error('Élément #expressions-grid non trouvé');
+                    console.error('renderExpressions: Élément #expressions-grid non trouvé');
                     return;
                 }
                 
+                console.log('renderExpressions: Rendu de', expressionsToShow ? expressionsToShow.length : 0, 'expressions');
                 grid.innerHTML = '';
 
                 if (!expressionsToShow || expressionsToShow.length === 0) {
+                    console.warn('renderExpressions: Aucune expression à afficher');
                     return;
                 }
 
@@ -1124,15 +1134,16 @@
 
             // Initialisation unique et fiable
             function initExpressions() {
-                // Éviter les doubles initialisations
-                if (isInitialized) {
-                    console.log('Expressions déjà initialisées, skip');
-                    return;
-                }
+                console.log('initExpressions appelé', {
+                    isInitialized,
+                    hasData: !!(window.expressionsData && Array.isArray(window.expressionsData)),
+                    dataLength: window.expressionsData ? window.expressionsData.length : 0
+                });
                 
                 // Vérifier que les données sont disponibles
                 if (!window.expressionsData || !Array.isArray(window.expressionsData) || window.expressionsData.length === 0) {
-                    console.error('Données d\'expressions non disponibles');
+                    console.error('Données d\'expressions non disponibles, réessai dans 200ms');
+                    setTimeout(initExpressions, 200);
                     return;
                 }
                 
@@ -1147,7 +1158,17 @@
                     return;
                 }
                 
-                // Marquer comme initialisé AVANT de continuer
+                // Si déjà initialisé, réinitialiser quand même les event listeners
+                // mais ne pas refaire tout le travail
+                if (isInitialized) {
+                    console.log('Réinitialisation des event listeners');
+                    // Réinitialiser juste les listeners
+                    searchInput.value = searchTerm;
+                    filterExpressions();
+                    return;
+                }
+                
+                // Marquer comme initialisé
                 isInitialized = true;
                 window.expressionsCourantesInitialized = true;
                 
@@ -1157,22 +1178,36 @@
                 
                 // Configurer le champ de recherche
                 searchInput.value = '';
-                searchInput.addEventListener('input', (e) => {
-                    searchTerm = e.target.value;
-                    filterExpressions();
-                });
+                // Supprimer tous les anciens listeners en clonant l'élément
+                const newSearchInput = searchInput.cloneNode(true);
+                searchInput.parentNode.replaceChild(newSearchInput, searchInput);
+                // Utiliser la nouvelle référence
+                const finalSearchInput = document.getElementById('search-input');
+                if (finalSearchInput) {
+                    finalSearchInput.addEventListener('input', (e) => {
+                        searchTerm = e.target.value;
+                        filterExpressions();
+                    });
+                }
 
-                // Configurer les boutons de niveau
-                levelBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        levelBtns.forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        selectedLevel = btn.dataset.level;
+                // Configurer les boutons de niveau (récupérer après le clonage)
+                const finalLevelBtns = document.querySelectorAll('.level-btn');
+                finalLevelBtns.forEach((btn) => {
+                    // Cloner pour supprimer les anciens listeners
+                    const newBtn = btn.cloneNode(true);
+                    const level = btn.dataset.level;
+                    btn.parentNode.replaceChild(newBtn, btn);
+                    // Ajouter le listener au nouveau bouton
+                    newBtn.addEventListener('click', () => {
+                        document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+                        newBtn.classList.add('active');
+                        selectedLevel = level;
                         filterExpressions();
                     });
                 });
 
                 // Afficher les expressions immédiatement
+                console.log('Affichage des expressions...');
                 filterExpressions();
                 
                 // Charger les URLs audio en arrière-plan (non bloquant)
@@ -1184,28 +1219,58 @@
             
             // Fonction d'initialisation publique (appelée depuis scripts.js)
             window.initExpressionsCourantes = function() {
+                console.log('initExpressionsCourantes appelé depuis scripts.js');
+                // Réinitialiser le flag pour permettre une nouvelle initialisation
+                isInitialized = false;
+                window.expressionsCourantesInitialized = false;
+                
                 // Utiliser requestAnimationFrame pour s'assurer que le DOM est prêt
                 requestAnimationFrame(() => {
-                    setTimeout(initExpressions, 50);
+                    setTimeout(() => {
+                        initExpressions();
+                    }, 100);
                 });
             };
             
             // Auto-initialisation si le script est exécuté directement
             // (utile si le HTML est chargé directement sans passer par scripts.js)
-            if (document.getElementById('expressions-grid')) {
-                // Les éléments sont déjà présents, initialiser immédiatement
-                requestAnimationFrame(() => {
-                    setTimeout(initExpressions, 50);
-                });
-            } else {
+            function tryAutoInit() {
+                const grid = document.getElementById('expressions-grid');
+                if (grid) {
+                    console.log('Auto-initialisation détectée (éléments présents)');
+                    requestAnimationFrame(() => {
+                        setTimeout(() => {
+                            initExpressions();
+                        }, 100);
+                    });
+                    return true;
+                }
+                return false;
+            }
+            
+            // Essayer l'auto-initialisation immédiatement
+            if (!tryAutoInit()) {
                 // Les éléments ne sont pas encore là, attendre qu'ils soient insérés
                 // via un observer simple
+                let observerAttempts = 0;
+                const maxObserverAttempts = 50; // 5 secondes max (50 * 100ms)
+                
                 const observer = new MutationObserver(() => {
+                    observerAttempts++;
                     if (document.getElementById('expressions-grid') && !isInitialized) {
+                        console.log('Observer détecte l\'insertion des éléments');
                         observer.disconnect();
                         requestAnimationFrame(() => {
-                            setTimeout(initExpressions, 50);
+                            setTimeout(() => {
+                                initExpressions();
+                            }, 100);
                         });
+                    } else if (observerAttempts >= maxObserverAttempts) {
+                        console.warn('Observer timeout, tentative d\'initialisation finale');
+                        observer.disconnect();
+                        if (document.getElementById('expressions-grid')) {
+                            initExpressions();
+                        }
                     }
                 });
                 
@@ -1220,6 +1285,7 @@
                     setTimeout(() => {
                         observer.disconnect();
                         if (!isInitialized && document.getElementById('expressions-grid')) {
+                            console.log('Timeout de sécurité, initialisation forcée');
                             initExpressions();
                         }
                     }, 5000);
