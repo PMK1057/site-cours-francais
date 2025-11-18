@@ -1181,6 +1181,11 @@
             }
             return false;
         }
+        
+        // Exposer les fonctions globalement pour qu'elles soient accessibles depuis scripts.js
+        window.initializeExpressionsPage = initializeExpressionsPage;
+        window.initExpressions = initExpressions;
+        window.filterExpressions = filterExpressions;
 
         // Essayer plusieurs fois d'initialiser avec des délais croissants
         function waitForElements(maxAttempts = 20, attempt = 0) {
@@ -1222,12 +1227,60 @@
             }
         }
         
+        // Fonction pour forcer l'initialisation immédiate
+        let forceInitAttempts = 0;
+        const MAX_FORCE_INIT_ATTEMPTS = 30; // Augmenter le nombre de tentatives
+        
+        function forceInitExpressions() {
+            const expressionsToUse = window.expressionsData || expressions;
+            const grid = document.getElementById('expressions-grid');
+            const countElement = document.getElementById('count');
+            
+            console.log('forceInitExpressions appelé', {
+                expressionsToUse: expressionsToUse ? expressionsToUse.length : 'undefined',
+                grid: !!grid,
+                countElement: !!countElement,
+                attempt: forceInitAttempts
+            });
+            
+            // Si les données ne sont pas disponibles, réessayer
+            if (!expressionsToUse || !Array.isArray(expressionsToUse) || expressionsToUse.length === 0) {
+                if (forceInitAttempts < MAX_FORCE_INIT_ATTEMPTS) {
+                    forceInitAttempts++;
+                    setTimeout(forceInitExpressions, 150);
+                } else {
+                    console.error('Nombre maximum de tentatives atteint pour forceInitExpressions');
+                }
+                return;
+            }
+            
+            if (grid && countElement) {
+                // Si le grid est vide ou le compteur est à 0, forcer l'affichage
+                if (grid.innerHTML === '' || countElement.textContent === '0') {
+                    console.log('Forçage de l\'affichage des expressions');
+                    // Réinitialiser le compteur car on a réussi
+                    forceInitAttempts = 0;
+                    filterExpressions();
+                }
+            } else {
+                // Les éléments ne sont pas encore là, réessayer
+                if (forceInitAttempts < MAX_FORCE_INIT_ATTEMPTS) {
+                    forceInitAttempts++;
+                    setTimeout(forceInitExpressions, 100);
+                }
+            }
+        }
+        
+        // Exposer forceInitExpressions globalement
+        window.forceInitExpressions = forceInitExpressions;
+        
         // Attendre que le DOM soit prêt
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     waitForElements();
                     forceInit();
+                    forceInitExpressions();
                 }, 200);
             });
         } else {
@@ -1235,13 +1288,15 @@
             setTimeout(() => {
                 waitForElements();
                 forceInit();
+                forceInitExpressions();
             }, 200);
         }
         
         // Appels multiples pour forcer l'affichage
-        [300, 500, 800, 1000, 1500].forEach(delay => {
+        [300, 500, 800, 1000, 1500, 2000, 3000, 4000, 5000].forEach(delay => {
             setTimeout(() => {
                 forceInit();
+                forceInitExpressions();
             }, delay);
         });
         
@@ -1251,15 +1306,18 @@
             const countElement = document.getElementById('count');
             if (grid && countElement && (grid.innerHTML === '' || countElement.textContent === '0')) {
                 forceInit();
+                forceInitExpressions();
             }
         });
         
         // Observer le document pour les ajouts d'éléments
         setTimeout(() => {
             const container = document.getElementById('course-container') || document.body;
-            observer.observe(container, {
-                childList: true,
-                subtree: true
-            });
+            if (container) {
+                observer.observe(container, {
+                    childList: true,
+                    subtree: true
+                });
+            }
         }, 100);
     </script>

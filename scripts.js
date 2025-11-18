@@ -208,6 +208,73 @@ function executeScriptsInHTML(html, container) {
                         // Exécuter directement avec eval dans le contexte global
                         const scriptFunction = new Function(scriptData.innerHTML);
                         scriptFunction.call(window);
+                        
+                        // Pour expressions-courantes, forcer l'initialisation après un délai supplémentaire
+                        if (scriptData.innerHTML.includes('expressions-courantes')) {
+                            // Fonction pour vérifier et forcer l'initialisation
+                            const checkAndForceInit = () => {
+                                const countElement = document.getElementById('count');
+                                const grid = document.getElementById('expressions-grid');
+                                const hasData = window.expressionsData && Array.isArray(window.expressionsData) && window.expressionsData.length > 0;
+                                const isEmpty = countElement && countElement.textContent === '0' && grid && grid.innerHTML === '';
+                                
+                                console.log('checkAndForceInit:', {
+                                    hasData,
+                                    isEmpty,
+                                    expressionsDataLength: window.expressionsData ? window.expressionsData.length : 0,
+                                    countText: countElement ? countElement.textContent : 'no element',
+                                    gridEmpty: grid ? grid.innerHTML === '' : 'no grid'
+                                });
+                                
+                                if (hasData && isEmpty) {
+                                    console.log('Forçage de l\'affichage des expressions');
+                                    // Appeler toutes les fonctions d'initialisation disponibles
+                                    if (typeof window.forceInitExpressions === 'function') {
+                                        window.forceInitExpressions();
+                                    }
+                                    if (typeof window.initializeExpressionsPage === 'function') {
+                                        window.initializeExpressionsPage();
+                                    }
+                                    if (typeof window.initExpressions === 'function') {
+                                        window.initExpressions();
+                                    }
+                                    if (typeof window.filterExpressions === 'function') {
+                                        window.filterExpressions();
+                                    }
+                                } else if (!hasData) {
+                                    // Les données ne sont pas encore disponibles, réessayer
+                                    console.log('Données pas encore disponibles, nouvelle tentative...');
+                                    setTimeout(checkAndForceInit, 200);
+                                }
+                            };
+                            
+                            // Appels multiples avec des délais croissants
+                            [300, 500, 800, 1200, 2000, 3000, 4000].forEach(delay => {
+                                setTimeout(() => {
+                                    checkAndForceInit();
+                                }, delay);
+                            });
+                            
+                            // Observer le DOM pour détecter quand les éléments sont ajoutés
+                            const observer = new MutationObserver(() => {
+                                checkAndForceInit();
+                            });
+                            
+                            setTimeout(() => {
+                                const container = document.getElementById('course-container');
+                                if (container) {
+                                    observer.observe(container, {
+                                        childList: true,
+                                        subtree: true
+                                    });
+                                    
+                                    // Arrêter l'observer après 5 secondes
+                                    setTimeout(() => {
+                                        observer.disconnect();
+                                    }, 5000);
+                                }
+                            }, 100);
+                        }
                     } else {
                         // Pour les autres scripts, utiliser la méthode normale
                         const newScript = document.createElement('script');
@@ -1374,11 +1441,51 @@ async function initExpressionOfTheDay() {
                 resolve();
             } catch (error) {
                 console.error('Erreur dans initExpressionOfTheDay:', error);
-                resolve();
+                // Réessayer une fois en cas d'erreur
+                if (expressionInitAttempts < MAX_EXPRESSION_INIT_ATTEMPTS) {
+                    expressionInitAttempts++;
+                    if (expressionInitTimeout) {
+                        clearTimeout(expressionInitTimeout);
+                    }
+                    expressionInitTimeout = setTimeout(() => {
+                        expressionInitTimeout = null;
+                        initExpressionOfTheDay().then(resolve);
+                    }, 300);
+                } else {
+                    resolve();
+                }
             }
         });
     });
 }
+
+// Fonction pour forcer l'affichage de l'expression du jour
+function forceInitExpressionOfTheDay() {
+    const frElement = document.getElementById('expression-fr');
+    const enElement = document.getElementById('expression-en');
+    const explanationElement = document.getElementById('expression-explanation');
+    
+    // Vérifier si les éléments existent mais sont vides
+    if (frElement && enElement && explanationElement) {
+        const isEmpty = (!frElement.textContent || frElement.textContent.trim() === '') &&
+                       (!enElement.textContent || enElement.textContent.trim() === '');
+        
+        if (isEmpty) {
+            console.log('Forçage de l\'affichage de l\'expression du jour');
+            // Réinitialiser les tentatives pour permettre un nouveau cycle
+            expressionInitAttempts = 0;
+            initExpressionOfTheDay();
+        }
+    } else if (!frElement || !enElement || !explanationElement) {
+        // Les éléments n'existent pas encore, réessayer
+        if (expressionInitAttempts < MAX_EXPRESSION_INIT_ATTEMPTS) {
+            setTimeout(forceInitExpressionOfTheDay, 100);
+        }
+    }
+}
+
+// Exposer la fonction globalement
+window.forceInitExpressionOfTheDay = forceInitExpressionOfTheDay;
 
 // Fonction interne pour l'initialisation de l'expression
 async function initExpressionOfTheDayInternal(frElement, enElement, explanationElement) {
@@ -1539,7 +1646,7 @@ const conjugaisons = {
                 reponse: "êtes", 
                 explication: "Verbe être au présent : vous êtes. Forme irrégulière." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "sont", 
                 explication: "Verbe être au présent : ils/elles sont. Forme irrégulière." 
             }
@@ -1565,7 +1672,7 @@ const conjugaisons = {
                 reponse: "avez été", 
                 explication: "Passé composé : vous avez été. Auxiliaire avoir + participe passé 'été'." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "ont été", 
                 explication: "Passé composé : ils/elles ont été. Auxiliaire avoir + participe passé 'été'." 
             }
@@ -1593,7 +1700,7 @@ const conjugaisons = {
                 reponse: "avez", 
                 explication: "Verbe avoir au présent : vous avez. Forme irrégulière." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "ont", 
                 explication: "Verbe avoir au présent : ils/elles ont. Forme irrégulière." 
             }
@@ -1619,7 +1726,7 @@ const conjugaisons = {
                 reponse: "avez eu", 
                 explication: "Passé composé : vous avez eu. Auxiliaire avoir + participe passé 'eu'." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "ont eu", 
                 explication: "Passé composé : ils/elles ont eu. Auxiliaire avoir + participe passé 'eu'." 
             }
@@ -1647,7 +1754,7 @@ const conjugaisons = {
                 reponse: "allez", 
                 explication: "Verbe aller au présent : vous allez. Forme irrégulière." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "vont", 
                 explication: "Verbe aller au présent : ils/elles vont. Forme irrégulière." 
             }
@@ -1673,9 +1780,9 @@ const conjugaisons = {
                 reponse: "êtes allés", 
                 explication: "Passé composé : vous êtes allé(e)s. Auxiliaire être + participe passé 'allé' (accord avec le sujet)." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "sont allés", 
-                explication: "Passé composé : ils sont allés / elles sont allées. Auxiliaire être + participe passé 'allé' (accord avec le sujet)." 
+                explication: "Passé composé : ils sont allés. Auxiliaire être + participe passé 'allé' (accord avec le sujet masculin pluriel)." 
             }
         }
     },
@@ -1701,7 +1808,7 @@ const conjugaisons = {
                 reponse: "faites", 
                 explication: "Verbe faire au présent : vous faites. Forme irrégulière." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "font", 
                 explication: "Verbe faire au présent : ils/elles font. Forme irrégulière." 
             }
@@ -1727,7 +1834,7 @@ const conjugaisons = {
                 reponse: "avez fait", 
                 explication: "Passé composé : vous avez fait. Auxiliaire avoir + participe passé 'fait'." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "ont fait", 
                 explication: "Passé composé : ils/elles ont fait. Auxiliaire avoir + participe passé 'fait'." 
             }
@@ -1755,7 +1862,7 @@ const conjugaisons = {
                 reponse: "pouvez", 
                 explication: "Verbe pouvoir au présent : vous pouvez. Forme irrégulière." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "peuvent", 
                 explication: "Verbe pouvoir au présent : ils/elles peuvent. Forme irrégulière." 
             }
@@ -1781,7 +1888,7 @@ const conjugaisons = {
                 reponse: "avez pu", 
                 explication: "Passé composé : vous avez pu. Auxiliaire avoir + participe passé 'pu'." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "ont pu", 
                 explication: "Passé composé : ils/elles ont pu. Auxiliaire avoir + participe passé 'pu'." 
             }
@@ -1809,7 +1916,7 @@ const conjugaisons = {
                 reponse: "voulez", 
                 explication: "Verbe vouloir au présent : vous voulez. Forme irrégulière." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "veulent", 
                 explication: "Verbe vouloir au présent : ils/elles veulent. Forme irrégulière." 
             }
@@ -1835,7 +1942,7 @@ const conjugaisons = {
                 reponse: "avez voulu", 
                 explication: "Passé composé : vous avez voulu. Auxiliaire avoir + participe passé 'voulu'." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "ont voulu", 
                 explication: "Passé composé : ils/elles ont voulu. Auxiliaire avoir + participe passé 'voulu'." 
             }
@@ -1863,7 +1970,7 @@ const conjugaisons = {
                 reponse: "devez", 
                 explication: "Verbe devoir au présent : vous devez. Forme irrégulière." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "doivent", 
                 explication: "Verbe devoir au présent : ils/elles doivent. Forme irrégulière." 
             }
@@ -1889,7 +1996,7 @@ const conjugaisons = {
                 reponse: "avez dû", 
                 explication: "Passé composé : vous avez dû. Auxiliaire avoir + participe passé 'dû' (avec accent circonflexe)." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "ont dû", 
                 explication: "Passé composé : ils/elles ont dû. Auxiliaire avoir + participe passé 'dû' (avec accent circonflexe)." 
             }
@@ -1917,7 +2024,7 @@ const conjugaisons = {
                 reponse: "savez", 
                 explication: "Verbe savoir au présent : vous savez. Forme irrégulière." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "savent", 
                 explication: "Verbe savoir au présent : ils/elles savent. Forme irrégulière." 
             }
@@ -1943,7 +2050,7 @@ const conjugaisons = {
                 reponse: "avez su", 
                 explication: "Passé composé : vous avez su. Auxiliaire avoir + participe passé 'su'." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "ont su", 
                 explication: "Passé composé : ils/elles ont su. Auxiliaire avoir + participe passé 'su'." 
             }
@@ -1971,7 +2078,7 @@ const conjugaisons = {
                 reponse: "venez", 
                 explication: "Verbe venir au présent : vous venez. Forme irrégulière." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "viennent", 
                 explication: "Verbe venir au présent : ils/elles viennent. Forme irrégulière." 
             }
@@ -1997,7 +2104,7 @@ const conjugaisons = {
                 reponse: "êtes venus", 
                 explication: "Passé composé : vous êtes venu(e)s. Auxiliaire être + participe passé 'venu' (accord avec le sujet)." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "sont venus", 
                 explication: "Passé composé : ils sont venus / elles sont venues. Auxiliaire être + participe passé 'venu' (accord avec le sujet)." 
             }
@@ -2025,7 +2132,7 @@ const conjugaisons = {
                 reponse: "prenez", 
                 explication: "Verbe prendre au présent : vous prenez. Forme irrégulière." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "prennent", 
                 explication: "Verbe prendre au présent : ils/elles prennent. Forme irrégulière." 
             }
@@ -2051,7 +2158,7 @@ const conjugaisons = {
                 reponse: "avez pris", 
                 explication: "Passé composé : vous avez pris. Auxiliaire avoir + participe passé 'pris'." 
             },
-            "ils/elles": { 
+            "ils": { 
                 reponse: "ont pris", 
                 explication: "Passé composé : ils/elles ont pris. Auxiliaire avoir + participe passé 'pris'." 
             }
@@ -2120,7 +2227,7 @@ function nextConjugation() {
     // Sélectionner un verbe, un temps et une personne aléatoires
     const verbes = Object.keys(conjugaisons);
     const temps = ["présent", "passé composé"];
-    const personnes = ["je", "tu", "il/elle", "nous", "vous", "ils/elles"];
+    const personnes = ["je", "tu", "il/elle", "nous", "vous", "ils"];
     
     const verbe = verbes[Math.floor(Math.random() * verbes.length)];
     const tempsChoisi = temps[Math.floor(Math.random() * temps.length)];
@@ -2335,28 +2442,41 @@ async function initHomeGames() {
         const hasContent = frElement && frElement.textContent && frElement.textContent.trim() !== '' &&
                           enElement && enElement.textContent && enElement.textContent.trim() !== '';
         
-        if (!hasContent && expressionInitAttempts < MAX_EXPRESSION_INIT_ATTEMPTS) {
-            expressionInitAttempts++;
-            console.warn(`L'expression n'est toujours pas affichée (tentative ${expressionInitAttempts}/${MAX_EXPRESSION_INIT_ATTEMPTS}), nouvelle tentative...`);
-            initExpressionOfTheDay();
-        } else if (hasContent) {
+        if (!hasContent) {
+            if (expressionInitAttempts < MAX_EXPRESSION_INIT_ATTEMPTS) {
+                expressionInitAttempts++;
+                console.warn(`L'expression n'est toujours pas affichée (tentative ${expressionInitAttempts}/${MAX_EXPRESSION_INIT_ATTEMPTS}), nouvelle tentative...`);
+                // Réinitialiser les tentatives pour initExpressionOfTheDay
+                expressionInitAttempts = 0;
+                initExpressionOfTheDay();
+                // Aussi forcer l'initialisation
+                forceInitExpressionOfTheDay();
+            }
+        } else {
             expressionInitialized = true;
             console.log('Expression du jour initialisée avec succès');
         }
     };
     
     // Vérifications à intervalles multiples (tous stockés pour nettoyage)
-    [200, 400, 600, 800, 1000, 1500, 2000].forEach(delay => {
-        const timeoutId = setTimeout(checkAndRetry, delay);
+    [200, 400, 600, 800, 1000, 1500, 2000, 2500, 3000].forEach(delay => {
+        const timeoutId = setTimeout(() => {
+            checkAndRetry();
+            forceInitExpressionOfTheDay();
+        }, delay);
         homeGamesTimeoutIds.push(timeoutId);
     });
     
     // Observer les mutations du DOM pour détecter quand les éléments sont ajoutés
     homeGamesObserver = new MutationObserver((mutations) => {
         const frElement = document.getElementById('expression-fr');
-        if (frElement && (!frElement.textContent || frElement.textContent.trim() === '') && 
-            expressionInitAttempts < MAX_EXPRESSION_INIT_ATTEMPTS) {
+        const enElement = document.getElementById('expression-en');
+        const isEmpty = frElement && (!frElement.textContent || frElement.textContent.trim() === '') &&
+                       enElement && (!enElement.textContent || enElement.textContent.trim() === '');
+        
+        if (isEmpty && expressionInitAttempts < MAX_EXPRESSION_INIT_ATTEMPTS) {
             checkAndRetry();
+            forceInitExpressionOfTheDay();
         }
     });
     

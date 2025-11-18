@@ -11,14 +11,20 @@
         table { width: 100%; border-collapse: collapse; margin: 12px 0 24px; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
         th, td { padding: 12px 14px; border-bottom: 1px solid #e9ecef; }
         th { background: #f5f6ff; color: #3f2f92; text-align: left; }
-        tr:hover td { background: #fafbff; }
+        /* Hover seulement si pas de classe register */
+        tr:not(.register-courant):not(.register-un-peu-familier):not(.register-familier):hover td { background: #fafbff; }
         .en { color: #425466; font-size: .95em; }
         .note { background: #fff7e6; border-left: 4px solid #ffb84d; padding: 12px 14px; border-radius: 8px; color: #7a5b10; margin: 10px 0 18px; }
         
-        /* Couleurs par registre */
-        .register-courant { background-color: #e8f5e9; border-left: 4px solid #4caf50; }
-        .register-un-peu-familier { background-color: #fff9e6; border-left: 4px solid #ffb84d; }
-        .register-familier { background-color: #ffe6e6; border-left: 4px solid #ff6b6b; }
+        /* Couleurs par registre - plus visibles */
+        .register-courant td { background-color: #e8f5e9 !important; border-left: 4px solid #4caf50; }
+        .register-un-peu-familier td { background-color: #fff9e6 !important; border-left: 4px solid #ffb84d; }
+        .register-familier td { background-color: #ffe6e6 !important; border-left: 4px solid #ff6b6b; }
+        
+        /* Hover ne doit pas masquer les couleurs */
+        .register-courant:hover td { background-color: #d4edda !important; }
+        .register-un-peu-familier:hover td { background-color: #fff3cd !important; }
+        .register-familier:hover td { background-color: #f8d7da !important; }
         
         /* Étoiles pour les expressions importantes */
         .star { color: #ffb84d; font-size: 1.1em; margin-right: 4px; }
@@ -31,6 +37,39 @@
         .legend-courant { background-color: #e8f5e9; border-left-color: #4caf50; }
         .legend-un-peu-familier { background-color: #fff9e6; border-left-color: #ffb84d; }
         .legend-familier { background-color: #ffe6e6; border-left-color: #ff6b6b; }
+        
+        /* Boutons audio */
+        .audio-btn {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 36px !important;
+            height: 36px !important;
+            margin-left: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2) !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 1.1em !important;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.35) !important;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            vertical-align: middle;
+        }
+
+        .audio-btn:hover {
+            transform: translateY(-1px) scale(1.04);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.45) !important;
+        }
+
+        .audio-btn:active {
+            transform: scale(0.95);
+        }
+
+        .audio-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3) !important;
+        }
     </style>
 </head>
 <body>
@@ -58,7 +97,7 @@
             </div>
             <div class="legend-item">
                 <span class="star-important">⭐</span>
-                <span>Très important</span>
+                <span>Important</span>
             </div>
         </div>
 
@@ -70,30 +109,30 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Expressions très importantes en haut -->
+                <!-- Expressions avec étoiles (selon demande utilisateur) -->
                 <tr class="register-courant"><td><span class="star-important">⭐</span>Passer un coup de fil</td><td class="en">to make a phone call</td></tr>
-                <tr class="register-courant"><td><span class="star-important">⭐</span>Filer un coup de main</td><td class="en">to give a hand, help out</td></tr>
-                <tr class="register-courant"><td><span class="star-important">⭐</span>Faire d'une pierre deux coups</td><td class="en">to kill two birds with one stone</td></tr>
-                <tr class="register-courant"><td><span class="star-important">⭐</span>Boire un coup</td><td class="en">to have a (quick) drink</td></tr>
-                <tr class="register-courant"><td><span class="star-important">⭐</span>Faire marche arrière</td><td class="en">to backtrack, reverse a decision</td></tr>
                 <tr class="register-un-peu-familier"><td><span class="star-important">⭐</span>Avoir la flemme</td><td class="en">to feel too lazy / can't be bothered</td></tr>
-                <tr class="register-un-peu-familier"><td><span class="star-important">⭐</span>Se prendre la tête</td><td class="en">to overthink / stress oneself out</td></tr>
-                <tr class="register-un-peu-familier"><td><span class="star-important">⭐</span>Prendre la tête (à quelqu'un)</td><td class="en">to annoy/bother (to get on someone's nerves)</td></tr>
                 <tr class="register-un-peu-familier"><td><span class="star-important">⭐</span>Être à la bourre</td><td class="en">to be running late (informal)</td></tr>
                 <tr class="register-un-peu-familier"><td><span class="star-important">⭐</span>Être crevé</td><td class="en">to be exhausted</td></tr>
                 <tr class="register-familier"><td><span class="star-important">⭐</span>C'est la galère</td><td class="en">it's a pain / it's tough</td></tr>
+                <tr class="register-courant"><td><span class="star-important">⭐</span>Faire la grasse matinée</td><td class="en">to sleep in</td></tr>
                 
-                <!-- Autres expressions importantes -->
-                <tr class="register-courant"><td><span class="star">⭐</span>Faire la grasse matinée</td><td class="en">to sleep in</td></tr>
-                <tr class="register-courant"><td><span class="star">⭐</span>Avoir un coup de foudre</td><td class="en">love at first sight</td></tr>
-                <tr class="register-courant"><td><span class="star">⭐</span>Avoir du pain sur la planche</td><td class="en">to have a lot on one's plate</td></tr>
-                <tr class="register-courant"><td><span class="star">⭐</span>Tourner en rond</td><td class="en">to go around in circles, make no progress</td></tr>
-                <tr class="register-courant"><td><span class="star">⭐</span>Mettre toutes les chances de son côté</td><td class="en">to stack the odds in one's favor</td></tr>
-                <tr class="register-un-peu-familier"><td><span class="star">⭐</span>Avoir un chat dans la gorge</td><td class="en">to have a frog in one's throat (hoarse)</td></tr>
-                <tr class="register-un-peu-familier"><td><span class="star">⭐</span>Tomber dans les pommes</td><td class="en">to faint, pass out</td></tr>
-                <tr class="register-un-peu-familier"><td><span class="star">⭐</span>Avoir un petit creux</td><td class="en">to feel a bit hungry</td></tr>
-                <tr class="register-un-peu-familier"><td><span class="star">⭐</span>Avoir la gueule de bois</td><td class="en">to have a hangover</td></tr>
-                <tr class="register-familier"><td><span class="star">⭐</span>Avoir la dalle</td><td class="en">to be starving (slang)</td></tr>
+                <!-- Autres expressions sans étoiles -->
+                <tr class="register-courant"><td>Filer un coup de main</td><td class="en">to give a hand, help out</td></tr>
+                <tr class="register-courant"><td>Faire d'une pierre deux coups</td><td class="en">to kill two birds with one stone</td></tr>
+                <tr class="register-courant"><td>Boire un coup</td><td class="en">to have a (quick) drink</td></tr>
+                <tr class="register-courant"><td>Faire marche arrière</td><td class="en">to backtrack, reverse a decision</td></tr>
+                <tr class="register-courant"><td>Avoir un coup de foudre</td><td class="en">love at first sight</td></tr>
+                <tr class="register-courant"><td>Avoir du pain sur la planche</td><td class="en">to have a lot on one's plate</td></tr>
+                <tr class="register-courant"><td>Tourner en rond</td><td class="en">to go around in circles, make no progress</td></tr>
+                <tr class="register-courant"><td>Mettre toutes les chances de son côté</td><td class="en">to stack the odds in one's favor</td></tr>
+                <tr class="register-un-peu-familier"><td>Se prendre la tête</td><td class="en">to overthink / stress oneself out</td></tr>
+                <tr class="register-un-peu-familier"><td>Prendre la tête (à quelqu'un)</td><td class="en">to annoy/bother (to get on someone's nerves)</td></tr>
+                <tr class="register-un-peu-familier"><td>Avoir un chat dans la gorge</td><td class="en">to have a frog in one's throat (hoarse)</td></tr>
+                <tr class="register-un-peu-familier"><td>Tomber dans les pommes</td><td class="en">to faint, pass out</td></tr>
+                <tr class="register-un-peu-familier"><td>Avoir un petit creux</td><td class="en">to feel a bit hungry</td></tr>
+                <tr class="register-un-peu-familier"><td>Avoir la gueule de bois</td><td class="en">to have a hangover</td></tr>
+                <tr class="register-familier"><td>Avoir la dalle</td><td class="en">to be starving (slang)</td></tr>
                 <tr class="register-familier"><td>Péter un câble</td><td class="en">to freak out / lose it (very informal)</td></tr>
                 <tr class="register-familier"><td>Prendre une cuite</td><td class="en">to get drunk (slang)</td></tr>
                 <tr class="register-familier"><td>Avoir le seum</td><td class="en">to be salty / annoyed (slang)</td></tr>
@@ -144,17 +183,18 @@
             }
 
             const audioUrls = await loadAudioUrls();
+            console.log('Audio URLs chargées:', Object.keys(audioUrls).length, 'fichiers');
+            
             if (!audioUrls || Object.keys(audioUrls).length === 0) {
-                return;
-            }
-
-            if (typeof playAudio !== 'function') {
-                console.warn('Fonction playAudio indisponible, pas d’audio pour les expressions idiomatiques.');
+                console.warn('Aucun fichier audio trouvé dans audio_urls.json');
                 return;
             }
 
             const table = document.querySelector('.idioms-container table');
-            if (!table) return;
+            if (!table) {
+                console.warn('Tableau non trouvé');
+                return;
+            }
 
             const rows = table.querySelectorAll('tbody tr');
             rows.forEach(row => {
@@ -168,20 +208,38 @@
                 if (!expressionText) return;
 
                 const filename = cleanFilename(expressionText);
+                console.log(`Recherche audio pour: "${expressionText}" → filename: "${filename}"`);
                 const audioData = audioUrls[filename];
-                if (!audioData) return;
+                if (!audioData) {
+                    console.warn(`Audio non trouvé pour: ${filename}`);
+                    return;
+                }
 
                 const audioUrl = typeof audioData === 'string' ? audioData : audioData.url;
-                if (!audioUrl) return;
+                if (!audioUrl) {
+                    console.warn(`URL audio vide pour: ${filename}`);
+                    return;
+                }
+                console.log(`✅ Audio trouvé pour "${expressionText}": ${audioUrl}`);
 
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.className = 'audio-btn';
                 btn.textContent = '🔊';
                 btn.title = `Écouter "${expressionText}"`;
-                btn.addEventListener('click', () => playAudio(audioUrl));
+                btn.setAttribute('aria-label', `Écouter la prononciation de "${expressionText}"`);
+                btn.addEventListener('click', () => {
+                    if (typeof playAudio === 'function') {
+                        playAudio(audioUrl);
+                    } else {
+                        // Fallback: jouer directement l'audio
+                        const audio = new Audio(audioUrl);
+                        audio.play().catch(e => console.error('Erreur lecture audio:', e));
+                    }
+                });
 
                 firstCell.appendChild(btn);
+                console.log(`✅ Bouton audio ajouté pour "${expressionText}"`);
             });
         })();
     </script>
