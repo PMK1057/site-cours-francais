@@ -71,12 +71,17 @@
         
         /* Pastilles de couleur pour le registre */
         .register-badge {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
+            display: inline-block !important;
+            width: 16px !important;
+            height: 16px !important;
+            min-width: 16px !important;
+            min-height: 16px !important;
             border-radius: 50%;
-            margin-left: 6px;
+            margin-left: 8px;
             vertical-align: middle;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
         }
         .register-badge-courant {
             background-color: #4caf50;
