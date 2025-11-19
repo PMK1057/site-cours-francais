@@ -176,26 +176,182 @@
                 grid-template-columns: 1fr;
             }
         }
-        .dialogue-line {
-            margin-bottom: 10px;
-        }
-        .dialogue-line strong {
-            color: #3f2f92;
-            font-weight: 600;
-        }
-        .time-marker {
-            text-align: center;
-            font-size: 1.3em;
-            color: #764ba2;
-            font-weight: bold;
-            margin: 30px 0;
-            padding: 15px;
-            background: rgba(118,75,162,0.1);
-            border-radius: 8px;
-        }
     </style>
 </head>
 <body>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            line-height: 1.85;
+            color: #212744;
+        }
+        .men-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 36px 24px 48px;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #6d4ac3;
+            text-align: center;
+            font-size: 2.45em;
+            margin-bottom: 22px;
+            border-bottom: 2px solid rgba(118,75,162,0.2);
+            padding-bottom: 16px;
+        }
+        .biography-section {
+            margin-bottom: 30px;
+            padding: 30px 26px;
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(118,75,162,0.12);
+            box-shadow: 0 6px 16px rgba(44, 52, 92, 0.12);
+        }
+        .biography-section h2 {
+            color: #3f2f92;
+            margin: 0 0 20px 0;
+            font-size: 1.78em;
+            text-transform: none;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.55px;
+        }
+        .text-paragraph {
+            font-size: 1.12em;
+            color: #2c3e50;
+            margin-bottom: 18px;
+            line-height: 1.88;
+            text-align: justify;
+        }
+        .english {
+            font-size: 0.9em;
+            color: #4f5d75;
+            font-style: italic;
+            margin: 14px 0 22px;
+            padding: 14px 22px;
+            border-left: 4px solid rgba(102,126,234,0.55);
+            background: rgba(102,126,234,0.07);
+            display: block;
+            border-radius: 0 12px 12px 0;
+        }
+        .vocab-box {
+            background: #fff9e6;
+            border-left: 4px solid #ffa500;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 3px 8px rgba(255,165,0,0.15);
+        }
+        .vocab-box strong {
+            color: #cc7a00;
+            font-size: 1.05em;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .vocab-box ul {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+        }
+        .vocab-box li {
+            margin-bottom: 6px;
+            color: #5c4a00;
+            line-height: 1.6;
+        }
+        .vocab-box li strong {
+            color: #cc7a00;
+            display: inline;
+            margin-right: 6px;
+        }
+        .instructions {
+            background: #d1ecf1;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #0c5460;
+            color: #0c5460;
+            font-size: 1.05em;
+        }
+        .instructions strong {
+            font-size: 1.1em;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            color: #546a7b;
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 24px 14px;
+            }
+            .men-container {
+                padding: 28px 20px;
+            }
+            .biography-section {
+                padding: 26px 20px;
+            }
+        }
+        /* Impression: masquer éléments non essentiels, optimiser marges */
+        @media print {
+            .print-hide { display: none !important; }
+            body { background: #fff !important; }
+            .men-container { box-shadow: none !important; border: none !important; }
+        }
+        .print-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 14px; border-radius: 8px; border: 1px solid #764ba2;
+            color: #764ba2; background: #f4f1ff; cursor: pointer; font-weight: 600;
+        }
+        .print-btn:hover { background: #ece7ff; }
+        .table-of-contents {
+            background: #f4f1ff;
+            border: 2px solid #764ba2;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(118,75,162,0.15);
+        }
+        .table-of-contents h3 {
+            color: #764ba2;
+            margin: 0 0 16px 0;
+            font-size: 1.4em;
+            text-align: center;
+        }
+        .table-of-contents ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .table-of-contents li {
+            margin: 0;
+        }
+        .table-of-contents a {
+            color: #764ba2;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 6px;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        .table-of-contents a:hover {
+            background: #e8dff5;
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .table-of-contents ul {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
     <div class="men-container">
         <div class="print-hide" style="text-align:right; margin-bottom: 12px;">
             <button class="print-btn" onclick="window.print()" type="button">🖨️ Télécharger en PDF</button>
@@ -253,77 +409,77 @@
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Bonjour Monsieur Bernard, Caroline Morel de ClimaFrance à l'appareil. Vous allez bien ?</div>
+                <strong>Caroline :</strong> Bonjour Monsieur Bernard, Caroline Morel de ClimaFrance à l'appareil. Vous allez bien ?
                 <span class="english">Caroline: Hello Mr. Bernard, Caroline Morel from ClimaFrance speaking. How are you?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Bernard :</strong> Bonjour Caroline, oui très bien merci. Et vous ?</div>
+                <strong>M. Bernard :</strong> Bonjour Caroline, oui très bien merci. Et vous ?
                 <span class="english">Mr. Bernard: Hello Caroline, yes very well thank you. And you?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Très bien également, merci. Je vous appelle suite à notre échange d'emails de la semaine dernière concernant votre projet de rénovation du système de climatisation. Est-ce que vous avez eu le temps de regarder le document technique que je vous ai envoyé ?</div>
+                <strong>Caroline :</strong> Très bien également, merci. Je vous appelle suite à notre échange d'emails de la semaine dernière concernant votre projet de rénovation du système de climatisation. Est-ce que vous avez eu le temps de regarder le document technique que je vous ai envoyé ?
                 <span class="english">Caroline: Very well too, thank you. I'm calling you following our email exchange from last week regarding your air conditioning system renovation project. Did you have time to look at the technical document I sent you?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Bernard :</strong> Oui, j'ai parcouru le document. C'est intéressant, mais j'avoue que j'ai besoin de plus de détails. Surtout sur la question de l'installation et des délais.</div>
+                <strong>M. Bernard :</strong> Oui, j'ai parcouru le document. C'est intéressant, mais j'avoue que j'ai besoin de plus de détails. Surtout sur la question de l'installation et des délais.
                 <span class="english">Mr. Bernard: Yes, I've looked through the document. It's interesting, but I admit I need more details. Especially about installation and deadlines.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Je comprends tout à fait. C'est justement pour ça que je vous appelle. Je me disais qu'on pourrait organiser une réunion sur place pour discuter de tout ça plus en détail. Je pourrais venir avec notre responsable technique pour qu'il évalue vos besoins précis.</div>
+                <strong>Caroline :</strong> Je comprends tout à fait. C'est justement pour ça que je vous appelle. Je me disais qu'on pourrait organiser une réunion sur place pour discuter de tout ça plus en détail. Je pourrais venir avec notre responsable technique pour qu'il évalue vos besoins précis.
                 <span class="english">Caroline: I completely understand. That's exactly why I'm calling. I thought we could organize an on-site meeting to discuss all of this in more detail. I could come with our technical manager so he can assess your precise needs.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Bernard :</strong> Oui, c'est une bonne idée. Vous êtes disponible quand ?</div>
+                <strong>M. Bernard :</strong> Oui, c'est une bonne idée. Vous êtes disponible quand ?
                 <span class="english">Mr. Bernard: Yes, that's a good idea. When are you available?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Alors, cette semaine je suis assez chargée... Par contre, jeudi prochain je suis dispo toute la journée. Qu'est-ce qui vous arrangerait ? Plutôt le matin ou l'après-midi ?</div>
+                <strong>Caroline :</strong> Alors, cette semaine je suis assez chargée... Par contre, jeudi prochain je suis dispo toute la journée. Qu'est-ce qui vous arrangerait ? Plutôt le matin ou l'après-midi ?
                 <span class="english">Caroline: Well, this week I'm quite busy... However, next Thursday I'm available all day. What would work for you? Morning or afternoon?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Bernard :</strong> Le matin c'est mieux pour moi. Disons 10h ?</div>
+                <strong>M. Bernard :</strong> Le matin c'est mieux pour moi. Disons 10h ?
                 <span class="english">Mr. Bernard: Morning is better for me. Let's say 10am?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> 10h, c'est parfait pour moi. Je note : jeudi 23 novembre à 10h à l'hôtel Mercure, rue Nationale. Je viens avec Julien Moreau, notre responsable technique. On prévoit environ une heure et demie de réunion, ça vous va ?</div>
+                <strong>Caroline :</strong> 10h, c'est parfait pour moi. Je note : jeudi 23 novembre à 10h à l'hôtel Mercure, rue Nationale. Je viens avec Julien Moreau, notre responsable technique. On prévoit environ une heure et demie de réunion, ça vous va ?
                 <span class="english">Caroline: 10am, that's perfect for me. I'm noting: Thursday November 23rd at 10am at the Mercure hotel, rue Nationale. I'm coming with Julien Moreau, our technical manager. We're planning about an hour and a half meeting, is that okay with you?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Bernard :</strong> Oui, très bien. Vous voulez que je prépare quelque chose de mon côté ?</div>
+                <strong>M. Bernard :</strong> Oui, très bien. Vous voulez que je prépare quelque chose de mon côté ?
                 <span class="english">Mr. Bernard: Yes, very good. Do you want me to prepare something on my side?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Si vous avez les plans de l'hôtel, ce serait top. Et aussi, si vous pouvez me lister les principaux problèmes que vous rencontrez actuellement avec votre système, ça nous permettra d'être plus efficaces pendant la réunion.</div>
+                <strong>Caroline :</strong> Si vous avez les plans de l'hôtel, ce serait top. Et aussi, si vous pouvez me lister les principaux problèmes que vous rencontrez actuellement avec votre système, ça nous permettra d'être plus efficaces pendant la réunion.
                 <span class="english">Caroline: If you have the hotel plans, that would be great. And also, if you can list the main problems you're currently experiencing with your system, that will allow us to be more efficient during the meeting.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Bernard :</strong> Pas de problème, je prépare tout ça. Ah, et je vais aussi inviter notre directeur général parce que c'est lui qui va valider le budget final.</div>
+                <strong>M. Bernard :</strong> Pas de problème, je prépare tout ça. Ah, et je vais aussi inviter notre directeur général parce que c'est lui qui va valider le budget final.
                 <span class="english">Mr. Bernard: No problem, I'll prepare all of that. Ah, and I'll also invite our general manager because he's the one who will validate the final budget.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Excellente idée ! Comme ça, on pourra discuter de tous les aspects du projet en une seule fois. Je vous envoie une invitation par email avec tous les détails et l'ordre du jour proposé. Ça vous convient ?</div>
+                <strong>Caroline :</strong> Excellente idée ! Comme ça, on pourra discuter de tous les aspects du projet en une seule fois. Je vous envoie une invitation par email avec tous les détails et l'ordre du jour proposé. Ça vous convient ?
                 <span class="english">Caroline: Excellent idea! That way, we can discuss all aspects of the project in one go. I'll send you an email invitation with all the details and the proposed agenda. Does that work for you?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Bernard :</strong> Parfait. Merci Caroline, à jeudi alors.</div>
+                <strong>M. Bernard :</strong> Parfait. Merci Caroline, à jeudi alors.
                 <span class="english">Mr. Bernard: Perfect. Thank you Caroline, see you Thursday then.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Merci à vous Monsieur Bernard. Excellente journée, et à très bientôt !</div>
+                <strong>Caroline :</strong> Merci à vous Monsieur Bernard. Excellente journée, et à très bientôt !
                 <span class="english">Caroline: Thank you Mr. Bernard. Have a great day, and see you very soon!</span>
             </div>
         </div>
@@ -338,87 +494,87 @@
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Philippe, t'as deux minutes ?</div>
+                <strong>Caroline :</strong> Philippe, t'as deux minutes ?
                 <span class="english">Caroline: Philippe, do you have two minutes?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Philippe :</strong> Ouais, vas-y. Qu'est-ce qu'il y a ?</div>
+                <strong>Philippe :</strong> Ouais, vas-y. Qu'est-ce qu'il y a ?
                 <span class="english">Philippe: Yeah, go ahead. What's up?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Je viens de caler la réunion avec l'hôtel Mercure. C'est jeudi prochain à 10h.</div>
+                <strong>Caroline :</strong> Je viens de caler la réunion avec l'hôtel Mercure. C'est jeudi prochain à 10h.
                 <span class="english">Caroline: I just scheduled the meeting with the Mercure hotel. It's next Thursday at 10am.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Philippe :</strong> Ah super ! T'y vas avec qui ?</div>
+                <strong>Philippe :</strong> Ah super ! T'y vas avec qui ?
                 <span class="english">Philippe: Ah great! Who are you going with?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Avec Julien, le responsable technique. On va rencontrer leur directeur technique et normalement leur DG sera là aussi.</div>
+                <strong>Caroline :</strong> Avec Julien, le responsable technique. On va rencontrer leur directeur technique et normalement leur DG sera là aussi.
                 <span class="english">Caroline: With Julien, the technical manager. We're going to meet their technical director and normally their GM will be there too.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Philippe :</strong> Nickel. C'est bon signe qu'ils fassent venir le DG. Ça veut dire qu'ils sont sérieux. T'as préparé ton pitch ?</div>
+                <strong>Philippe :</strong> Nickel. C'est bon signe qu'ils fassent venir le DG. Ça veut dire qu'ils sont sérieux. T'as préparé ton pitch ?
                 <span class="english">Philippe: Perfect. It's a good sign that they're bringing the GM. That means they're serious. Have you prepared your pitch?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Ouais, je suis en train de finaliser la proposition commerciale. Par contre, j'ai besoin que tu me valides les marges. On est sur un contrat qui peut aller jusqu'à 200 000 euros, mais je sais pas quelle marge on peut se permettre pour rester compétitifs.</div>
+                <strong>Caroline :</strong> Ouais, je suis en train de finaliser la proposition commerciale. Par contre, j'ai besoin que tu me valides les marges. On est sur un contrat qui peut aller jusqu'à 200 000 euros, mais je sais pas quelle marge on peut se permettre pour rester compétitifs.
                 <span class="english">Caroline: Yeah, I'm finalizing the commercial proposal. However, I need you to validate the margins. We're looking at a contract that could go up to 200,000 euros, but I don't know what margin we can afford to stay competitive.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Philippe :</strong> OK, envoie-moi ta propo demain matin, je regarde ça dans la journée. Mais en gros, sur ce type de contrat, on peut descendre jusqu'à 18% de marge si vraiment il faut. En dessous, ça vaut pas le coup.</div>
+                <strong>Philippe :</strong> OK, envoie-moi ta propo demain matin, je regarde ça dans la journée. Mais en gros, sur ce type de contrat, on peut descendre jusqu'à 18% de marge si vraiment il faut. En dessous, ça vaut pas le coup.
                 <span class="english">Philippe: OK, send me your proposal tomorrow morning, I'll look at it during the day. But roughly, on this type of contract, we can go down to 18% margin if we really have to. Below that, it's not worth it.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> D'accord, je note. Sinon, ils vont sûrement demander des facilités de paiement. C'est quoi notre politique là-dessus ?</div>
+                <strong>Caroline :</strong> D'accord, je note. Sinon, ils vont sûrement demander des facilités de paiement. C'est quoi notre politique là-dessus ?
                 <span class="english">Caroline: Okay, I'm noting that. Otherwise, they'll probably ask for payment facilities. What's our policy on that?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Philippe :</strong> Pour un contrat de cette taille, on peut proposer un paiement en trois fois : 30% à la commande, 40% en milieu de chantier, et 30% à la réception. Par contre, pas de délai de paiement au-delà de 30 jours. On est clairs là-dessus.</div>
+                <strong>Philippe :</strong> Pour un contrat de cette taille, on peut proposer un paiement en trois fois : 30% à la commande, 40% en milieu de chantier, et 30% à la réception. Par contre, pas de délai de paiement au-delà de 30 jours. On est clairs là-dessus.
                 <span class="english">Philippe: For a contract of this size, we can offer payment in three installments: 30% on order, 40% mid-project, and 30% on completion. However, no payment terms beyond 30 days. We're clear on that.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Okay, parfait. Ah, et dernière question : si jamais on remporte l'affaire, vous avez le budget pour recruter un installateur en plus ? Parce que là, on est déjà à fond sur les autres chantiers.</div>
+                <strong>Caroline :</strong> Okay, parfait. Ah, et dernière question : si jamais on remporte l'affaire, vous avez le budget pour recruter un installateur en plus ? Parce que là, on est déjà à fond sur les autres chantiers.
                 <span class="english">Caroline: Okay, perfect. Ah, and last question: if we win the deal, do you have the budget to hire an additional installer? Because right now, we're already maxed out on the other sites.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Philippe :</strong> Mouais, c'est un peu tendu en ce moment. Mais si on signe ce contrat, on trouvera une solution. Peut-être qu'on peut prendre un intérimaire ou faire appel à un sous-traitant. On verra. L'important, c'est de décrocher le contrat d'abord.</div>
+                <strong>Philippe :</strong> Mouais, c'est un peu tendu en ce moment. Mais si on signe ce contrat, on trouvera une solution. Peut-être qu'on peut prendre un intérimaire ou faire appel à un sous-traitant. On verra. L'important, c'est de décrocher le contrat d'abord.
                 <span class="english">Philippe: Hmm, it's a bit tight right now. But if we sign this contract, we'll find a solution. Maybe we can take a temp or call on a subcontractor. We'll see. The important thing is to land the contract first.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> OK. Bon bah je te tiens au courant après la réunion de jeudi.</div>
+                <strong>Caroline :</strong> OK. Bon bah je te tiens au courant après la réunion de jeudi.
                 <span class="english">Caroline: OK. Well, I'll keep you posted after Thursday's meeting.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Philippe :</strong> Ouais, fais-moi un débriefing vendredi matin. Et Caroline ?</div>
+                <strong>Philippe :</strong> Ouais, fais-moi un débriefing vendredi matin. Et Caroline ?
                 <span class="english">Philippe: Yeah, give me a debriefing Friday morning. And Caroline?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Ouais ?</div>
+                <strong>Caroline :</strong> Ouais ?
                 <span class="english">Caroline: Yeah?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Philippe :</strong> Défonce-les. On a vraiment besoin de ce contrat pour finir l'année en beauté.</div>
+                <strong>Philippe :</strong> Défonce-les. On a vraiment besoin de ce contrat pour finir l'année en beauté.
                 <span class="english">Philippe: Crush them. We really need this contract to finish the year strong.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> T'inquiète, je vais tout donner !</div>
+                <strong>Caroline :</strong> T'inquiète, je vais tout donner !
                 <span class="english">Caroline: Don't worry, I'll give it my all!</span>
             </div>
         </div>
@@ -433,138 +589,137 @@
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Bonjour Madame Lefebvre, bonjour Monsieur Bernard. Merci de nous recevoir aujourd'hui.</div>
+                <strong>Caroline :</strong> Bonjour Madame Lefebvre, bonjour Monsieur Bernard. Merci de nous recevoir aujourd'hui.
                 <span class="english">Caroline: Hello Mrs. Lefebvre, hello Mr. Bernard. Thank you for receiving us today.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Mme Lefebvre :</strong> Bonjour Caroline, bonjour Julien. Je vous en prie, installez-vous. Vous voulez un café ?</div>
+                <strong>Mme Lefebvre :</strong> Bonjour Caroline, bonjour Julien. Je vous en prie, installez-vous. Vous voulez un café ?
                 <span class="english">Mrs. Lefebvre: Hello Caroline, hello Julien. Please, have a seat. Would you like a coffee?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Julien :</strong> Volontiers, merci !</div>
+                <strong>Julien :</strong> Volontiers, merci !
                 <span class="english">Julien: Yes please, thank you!</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Bernard :</strong> Alors, on vous écoute. Qu'est-ce que vous nous proposez exactement ?</div>
+                <strong>M. Bernard :</strong> Alors, on vous écoute. Qu'est-ce que vous nous proposez exactement ?
                 <span class="english">Mr. Bernard: So, we're listening. What exactly are you proposing?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Parfait. Donc, on a étudié votre cahier des charges et les plans que vous nous avez envoyés. Julien a préparé une solution technique adaptée à vos besoins. Julien, tu veux présenter ?</div>
+                <strong>Caroline :</strong> Parfait. Donc, on a étudié votre cahier des charges et les plans que vous nous avez envoyés. Julien a préparé une solution technique adaptée à vos besoins. Julien, tu veux présenter ?
                 <span class="english">Caroline: Perfect. So, we've studied your specifications and the plans you sent us. Julien has prepared a technical solution adapted to your needs. Julien, would you like to present?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Julien :</strong> Oui, merci Caroline. Alors, votre hôtel compte 80 chambres sur quatre étages, plus les espaces communs : le restaurant, le bar, la salle de séminaire et la réception. Actuellement, vous avez un système centralisé qui a 15 ans d'âge et qui commence à montrer des signes de faiblesse.</div>
+                <strong>Julien :</strong> Oui, merci Caroline. Alors, votre hôtel compte 80 chambres sur quatre étages, plus les espaces communs : le restaurant, le bar, la salle de séminaire et la réception. Actuellement, vous avez un système centralisé qui a 15 ans d'âge et qui commence à montrer des signes de faiblesse.
                 <span class="english">Julien: Yes, thank you Caroline. So, your hotel has 80 rooms on four floors, plus common areas: the restaurant, the bar, the seminar room and the reception. Currently, you have a centralized system that's 15 years old and starting to show signs of weakness.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Bernard :</strong> C'est le moins qu'on puisse dire ! On a des pannes régulières, et les clients se plaignent. L'été dernier, on a eu des chambres sans clim pendant trois jours. Ça a été un désastre.</div>
+                <strong>M. Bernard :</strong> C'est le moins qu'on puisse dire ! On a des pannes régulières, et les clients se plaignent. L'été dernier, on a eu des chambres sans clim pendant trois jours. Ça a été un désastre.
                 <span class="english">Mr. Bernard: That's putting it mildly! We have regular breakdowns, and customers are complaining. Last summer, we had rooms without AC for three days. It was a disaster.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Julien :</strong> Je comprends. Ce qu'on vous propose, c'est un système multi-split moderne avec des unités individuelles par chambre. L'avantage, c'est que si une unité tombe en panne, ça n'affecte pas les autres chambres. Plus de fiabilité, moins de risques.</div>
+                <strong>Julien :</strong> Je comprends. Ce qu'on vous propose, c'est un système multi-split moderne avec des unités individuelles par chambre. L'avantage, c'est que si une unité tombe en panne, ça n'affecte pas les autres chambres. Plus de fiabilité, moins de risques.
                 <span class="english">Julien: I understand. What we're proposing is a modern multi-split system with individual units per room. The advantage is that if one unit breaks down, it doesn't affect the other rooms. More reliability, less risk.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Mme Lefebvre :</strong> Et niveau consommation d'énergie ? Parce que nos factures d'électricité sont déjà très élevées.</div>
+                <strong>Mme Lefebvre :</strong> Et niveau consommation d'énergie ? Parce que nos factures d'électricité sont déjà très élevées.
                 <span class="english">Mrs. Lefebvre: And energy consumption? Because our electricity bills are already very high.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Excellente question. Avec les nouveaux systèmes à haute efficacité énergétique qu'on installe, vous allez économiser environ 30 à 35% sur votre facture de climatisation. Sur un an, ça représente environ 15 000 euros d'économies.</div>
+                <strong>Caroline :</strong> Excellente question. Avec les nouveaux systèmes à haute efficacité énergétique qu'on installe, vous allez économiser environ 30 à 35% sur votre facture de climatisation. Sur un an, ça représente environ 15 000 euros d'économies.
                 <span class="english">Caroline: Excellent question. With the new high energy efficiency systems we install, you'll save about 30 to 35% on your air conditioning bill. Over a year, that represents about 15,000 euros in savings.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Mme Lefebvre :</strong> C'est intéressant. Et vous parlez de combien pour l'installation complète ?</div>
+                <strong>Mme Lefebvre :</strong> C'est intéressant. Et vous parlez de combien pour l'installation complète ?
                 <span class="english">Mrs. Lefebvre: That's interesting. And what are you talking about for the complete installation?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Alors, on a chiffré le projet à 185 000 euros TTC, tout compris : fourniture, installation, mise en service et formation de vos équipes techniques. On propose aussi un contrat de maintenance sur trois ans inclus dans le prix.</div>
+                <strong>Caroline :</strong> Alors, on a chiffré le projet à 185 000 euros TTC, tout compris : fourniture, installation, mise en service et formation de vos équipes techniques. On propose aussi un contrat de maintenance sur trois ans inclus dans le prix.
                 <span class="english">Caroline: So, we've estimated the project at 185,000 euros including tax, all included: supply, installation, commissioning and training of your technical teams. We also offer a three-year maintenance contract included in the price.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Bernard :</strong> C'est un peu plus cher que les autres devis qu'on a reçus.</div>
+                <strong>M. Bernard :</strong> C'est un peu plus cher que les autres devis qu'on a reçus.
                 <span class="english">Mr. Bernard: It's a bit more expensive than the other quotes we received.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Je comprends votre remarque. Mais notre offre inclut du matériel haut de gamme avec garantie constructeur de 5 ans, et surtout, on est la seule entreprise de la région avec une équipe disponible 24h/24 en cas d'urgence. Pour un hôtel, c'est quand même un argument important, non ?</div>
+                <strong>Caroline :</strong> Je comprends votre remarque. Mais notre offre inclut du matériel haut de gamme avec garantie constructeur de 5 ans, et surtout, on est la seule entreprise de la région avec une équipe disponible 24h/24 en cas d'urgence. Pour un hôtel, c'est quand même un argument important, non ?
                 <span class="english">Caroline: I understand your remark. But our offer includes high-end equipment with a 5-year manufacturer warranty, and above all, we're the only company in the region with a team available 24/7 in case of emergency. For a hotel, that's still an important argument, right?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Mme Lefebvre :</strong> C'est vrai. Et les délais d'installation ?</div>
+                <strong>Mme Lefebvre :</strong> C'est vrai. Et les délais d'installation ?
                 <span class="english">Mrs. Lefebvre: That's true. And installation deadlines?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Julien :</strong> On peut commencer dans trois semaines. L'installation complète prend environ six semaines. On travaille chambre par chambre pour que vous puissiez continuer à accueillir des clients pendant les travaux.</div>
+                <strong>Julien :</strong> On peut commencer dans trois semaines. L'installation complète prend environ six semaines. On travaille chambre par chambre pour que vous puissiez continuer à accueillir des clients pendant les travaux.
                 <span class="english">Julien: We can start in three weeks. The complete installation takes about six weeks. We work room by room so you can continue to welcome customers during the work.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Mme Lefebvre :</strong> Six semaines, c'est long. On peut pas faire plus rapide ?</div>
+                <strong>Mme Lefebvre :</strong> Six semaines, c'est long. On peut pas faire plus rapide ?
                 <span class="english">Mrs. Lefebvre: Six weeks is long. Can't we do it faster?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> On peut essayer de réduire à cinq semaines en mettant plus de techniciens, mais ça augmenterait le coût d'environ 8 000 euros.</div>
+                <strong>Caroline :</strong> On peut essayer de réduire à cinq semaines en mettant plus de techniciens, mais ça augmenterait le coût d'environ 8 000 euros.
                 <span class="english">Caroline: We can try to reduce it to five weeks by putting more technicians, but that would increase the cost by about 8,000 euros.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Mme Lefebvre :</strong> Non, six semaines, ça ira. Par contre, niveau paiement, comment ça se passe ?</div>
+                <strong>Mme Lefebvre :</strong> Non, six semaines, ça ira. Par contre, niveau paiement, comment ça se passe ?
                 <span class="english">Mrs. Lefebvre: No, six weeks will be fine. However, regarding payment, how does that work?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> On propose un paiement en trois fois : 30% à la signature du contrat, 40% à mi-parcours, et le solde de 30% à la fin des travaux, après votre validation.</div>
+                <strong>Caroline :</strong> On propose un paiement en trois fois : 30% à la signature du contrat, 40% à mi-parcours, et le solde de 30% à la fin des travaux, après votre validation.
                 <span class="english">Caroline: We propose payment in three installments: 30% on contract signing, 40% mid-project, and the remaining 30% at the end of the work, after your validation.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Mme Lefebvre :</strong> Hmm... Est-ce qu'on peut plutôt faire 20-30-50 ? Ça nous arrange mieux au niveau trésorerie.</div>
+                <strong>Mme Lefebvre :</strong> Hmm... Est-ce qu'on peut plutôt faire 20-30-50 ? Ça nous arrange mieux au niveau trésorerie.
                 <span class="english">Mrs. Lefebvre: Hmm... Can we rather do 20-30-50? That works better for us in terms of cash flow.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> <em>hésite</em> Je vais être honnête avec vous : normalement, on fait pas ça. Mais vu l'importance du contrat et parce qu'on a vraiment envie de travailler avec vous, je pense qu'on peut s'arranger. Je dois juste valider avec ma direction, mais ça devrait passer.</div>
+                <strong>Caroline :</strong> <em>hésite</em> Je vais être honnête avec vous : normalement, on fait pas ça. Mais vu l'importance du contrat et parce qu'on a vraiment envie de travailler avec vous, je pense qu'on peut s'arranger. Je dois juste valider avec ma direction, mais ça devrait passer.
                 <span class="english">Caroline: <em>hesitates</em> I'm going to be honest with you: normally, we don't do that. But given the importance of the contract and because we really want to work with you, I think we can arrange something. I just need to validate with my management, but it should go through.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Mme Lefebvre :</strong> Parfait. Bon, je pense qu'on a fait le tour. On va se réunir en interne et on vous donne une réponse d'ici la fin de la semaine. Ça vous va ?</div>
+                <strong>Mme Lefebvre :</strong> Parfait. Bon, je pense qu'on a fait le tour. On va se réunir en interne et on vous donne une réponse d'ici la fin de la semaine. Ça vous va ?
                 <span class="english">Mrs. Lefebvre: Perfect. Well, I think we've covered everything. We'll meet internally and give you an answer by the end of the week. Does that work for you?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> C'est parfait. Je vous envoie la proposition formelle par email cet après-midi avec tous les détails dont on a discuté aujourd'hui.</div>
+                <strong>Caroline :</strong> C'est parfait. Je vous envoie la proposition formelle par email cet après-midi avec tous les détails dont on a discuté aujourd'hui.
                 <span class="english">Caroline: That's perfect. I'll send you the formal proposal by email this afternoon with all the details we discussed today.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Bernard :</strong> Très bien. Merci à vous deux pour cette présentation.</div>
+                <strong>M. Bernard :</strong> Très bien. Merci à vous deux pour cette présentation.
                 <span class="english">Mr. Bernard: Very good. Thank you both for this presentation.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Caroline :</strong> Merci à vous de nous avoir reçus. On croise les doigts !</div>
+                <strong>Caroline :</strong> Merci à vous de nous avoir reçus. On croise les doigts !
                 <span class="english">Caroline: Thank you for receiving us. Fingers crossed!</span>
             </div>
         </div>
 
-        <!-- MARQUEUR TEMPOREL -->
-        <div class="time-marker">
+        <div class="text-paragraph" style="text-align: center; font-size: 1.3em; color: #764ba2; font-weight: bold; margin: 30px 0; padding: 15px; background: rgba(118,75,162,0.1); border-radius: 8px;">
             ⏰ DEUX SEMAINES PLUS TARD ⏰
         </div>
 
@@ -578,67 +733,67 @@
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> Bonjour, ClimaFrance, service support technique, Thomas à l'appareil. Comment puis-je vous aider ?</div>
+                <strong>Thomas :</strong> Bonjour, ClimaFrance, service support technique, Thomas à l'appareil. Comment puis-je vous aider ?
                 <span class="english">Thomas: Hello, ClimaFrance, technical support service, Thomas speaking. How can I help you?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Dupont :</strong> Bonjour, je vous appelle de la part de l'entreprise LogiStock à Lille. Nous avons un problème urgent avec notre système de climatisation dans l'entrepôt.</div>
+                <strong>M. Dupont :</strong> Bonjour, je vous appelle de la part de l'entreprise LogiStock à Lille. Nous avons un problème urgent avec notre système de climatisation dans l'entrepôt.
                 <span class="english">Mr. Dupont: Hello, I'm calling on behalf of LogiStock company in Lille. We have an urgent problem with our air conditioning system in the warehouse.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> Je comprends, Monsieur. Pouvez-vous me donner votre numéro de client s'il vous plaît ?</div>
+                <strong>Thomas :</strong> Je comprends, Monsieur. Pouvez-vous me donner votre numéro de client s'il vous plaît ?
                 <span class="english">Thomas: I understand, sir. Can you give me your customer number please?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Dupont :</strong> Oui, c'est le LS-4782.</div>
+                <strong>M. Dupont :</strong> Oui, c'est le LS-4782.
                 <span class="english">Mr. Dupont: Yes, it's LS-4782.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> Parfait, je vois votre compte. Vous êtes client depuis 2019, c'est bien ça ? Alors, quel est le problème exactement ?</div>
+                <strong>Thomas :</strong> Parfait, je vois votre compte. Vous êtes client depuis 2019, c'est bien ça ? Alors, quel est le problème exactement ?
                 <span class="english">Thomas: Perfect, I see your account. You've been a customer since 2019, is that right? So, what exactly is the problem?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Dupont :</strong> Le système principal ne démarre plus depuis ce matin. On a essayé de le relancer plusieurs fois, mais rien. Et vous savez, avec la chaleur qu'il fait, on a des marchandises périssables dans l'entrepôt. C'est vraiment critique.</div>
+                <strong>M. Dupont :</strong> Le système principal ne démarre plus depuis ce matin. On a essayé de le relancer plusieurs fois, mais rien. Et vous savez, avec la chaleur qu'il fait, on a des marchandises périssables dans l'entrepôt. C'est vraiment critique.
                 <span class="english">Mr. Dupont: The main system hasn't started since this morning. We've tried to restart it several times, but nothing. And you know, with the heat, we have perishable goods in the warehouse. It's really critical.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> Je comprends tout à fait l'urgence de la situation. Vous avez un contrat de maintenance premium avec nous, donc je vais pouvoir vous envoyer un technicien en priorité. Le système affiche un message d'erreur particulier ?</div>
+                <strong>Thomas :</strong> Je comprends tout à fait l'urgence de la situation. Vous avez un contrat de maintenance premium avec nous, donc je vais pouvoir vous envoyer un technicien en priorité. Le système affiche un message d'erreur particulier ?
                 <span class="english">Thomas: I completely understand the urgency of the situation. You have a premium maintenance contract with us, so I'll be able to send you a technician on priority. Does the system display a particular error message?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Dupont :</strong> Oui, il y a un code qui clignote : E-47.</div>
+                <strong>M. Dupont :</strong> Oui, il y a un code qui clignote : E-47.
                 <span class="english">Mr. Dupont: Yes, there's a code flashing: E-47.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> D'accord. Le code E-47, c'est généralement un problème de compresseur ou de carte électronique. Je vais ouvrir un ticket prioritaire immédiatement. Un technicien peut être chez vous cet après-midi, vers 14h30. Ça vous convient ?</div>
+                <strong>Thomas :</strong> D'accord. Le code E-47, c'est généralement un problème de compresseur ou de carte électronique. Je vais ouvrir un ticket prioritaire immédiatement. Un technicien peut être chez vous cet après-midi, vers 14h30. Ça vous convient ?
                 <span class="english">Thomas: Okay. The E-47 code is generally a compressor or electronic board problem. I'll open a priority ticket immediately. A technician can be at your place this afternoon, around 2:30pm. Does that work for you?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Dupont :</strong> Oui, c'est parfait. Vous pouvez me confirmer par email ?</div>
+                <strong>M. Dupont :</strong> Oui, c'est parfait. Vous pouvez me confirmer par email ?
                 <span class="english">Mr. Dupont: Yes, that's perfect. Can you confirm by email?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> Bien sûr. Je vous envoie un email de confirmation dans les cinq minutes avec le nom du technicien et l'heure d'intervention. Vous allez recevoir aussi un SMS une heure avant son arrivée. Autre chose que je puisse faire pour vous ?</div>
+                <strong>Thomas :</strong> Bien sûr. Je vous envoie un email de confirmation dans les cinq minutes avec le nom du technicien et l'heure d'intervention. Vous allez recevoir aussi un SMS une heure avant son arrivée. Autre chose que je puisse faire pour vous ?
                 <span class="english">Thomas: Of course. I'll send you a confirmation email within five minutes with the technician's name and intervention time. You'll also receive an SMS one hour before his arrival. Anything else I can do for you?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Dupont :</strong> Non, ça ira. Merci beaucoup pour votre réactivité.</div>
+                <strong>M. Dupont :</strong> Non, ça ira. Merci beaucoup pour votre réactivité.
                 <span class="english">Mr. Dupont: No, that will be fine. Thank you very much for your responsiveness.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> Je vous en prie, c'est normal. Bonne journée Monsieur Dupont, et à bientôt.</div>
+                <strong>Thomas :</strong> Je vous en prie, c'est normal. Bonne journée Monsieur Dupont, et à bientôt.
                 <span class="english">Thomas: You're welcome, it's normal. Have a good day Mr. Dupont, and see you soon.</span>
             </div>
         </div>
@@ -653,27 +808,27 @@
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> Bonjour, je suis Marc, de ClimaFrance. C'est vous qui avez appelé pour le problème de climatisation ?</div>
+                <strong>Marc :</strong> Bonjour, je suis Marc, de ClimaFrance. C'est vous qui avez appelé pour le problème de climatisation ?
                 <span class="english">Marc: Hello, I'm Marc, from ClimaFrance. Are you the one who called about the air conditioning problem?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Dupont :</strong> Oui, bonjour ! Merci d'être venu aussi vite. Je vous présente Julie, notre responsable logistique. C'est elle qui gère tout ce qui concerne l'entrepôt.</div>
+                <strong>M. Dupont :</strong> Oui, bonjour ! Merci d'être venu aussi vite. Je vous présente Julie, notre responsable logistique. C'est elle qui gère tout ce qui concerne l'entrepôt.
                 <span class="english">Mr. Dupont: Yes, hello! Thank you for coming so quickly. Let me introduce you to Julie, our logistics manager. She manages everything related to the warehouse.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Julie :</strong> Bonjour Marc. Franchement, on est contents que vous soyez là. La température monte dans l'entrepôt, on commence à vraiment s'inquiéter.</div>
+                <strong>Julie :</strong> Bonjour Marc. Franchement, on est contents que vous soyez là. La température monte dans l'entrepôt, on commence à vraiment s'inquiéter.
                 <span class="english">Julie: Hello Marc. Honestly, we're glad you're here. The temperature is rising in the warehouse, we're starting to really worry.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> Je comprends. Bon, je vais jeter un œil au système. Vous pouvez me montrer où se trouve l'unité centrale ?</div>
+                <strong>Marc :</strong> Je comprends. Bon, je vais jeter un œil au système. Vous pouvez me montrer où se trouve l'unité centrale ?
                 <span class="english">Marc: I understand. Well, I'll take a look at the system. Can you show me where the central unit is?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Julie :</strong> Oui, suivez-moi. C'est au fond de l'entrepôt, dans le local technique.</div>
+                <strong>Julie :</strong> Oui, suivez-moi. C'est au fond de l'entrepôt, dans le local technique.
                 <span class="english">Julie: Yes, follow me. It's at the back of the warehouse, in the technical room.</span>
             </div>
 
@@ -683,47 +838,47 @@
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> Alors... Effectivement, le compresseur a lâché. Il va falloir le remplacer. Par contre, j'ai pas la pièce avec moi. C'est un modèle assez spécifique.</div>
+                <strong>Marc :</strong> Alors... Effectivement, le compresseur a lâché. Il va falloir le remplacer. Par contre, j'ai pas la pièce avec moi. C'est un modèle assez spécifique.
                 <span class="english">Marc: So... Indeed, the compressor has failed. It will need to be replaced. However, I don't have the part with me. It's a fairly specific model.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Julie :</strong> Ah merde... Pardon. Ça veut dire quoi concrètement ?</div>
+                <strong>Julie :</strong> Ah merde... Pardon. Ça veut dire quoi concrètement ?
                 <span class="english">Julie: Ah damn... Sorry. What does that mean concretely?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> Ça veut dire que je dois commander la pièce. En général, on l'a en stock au dépôt central, donc je peux revenir demain matin pour faire le remplacement. L'intervention prend environ deux heures.</div>
+                <strong>Marc :</strong> Ça veut dire que je dois commander la pièce. En général, on l'a en stock au dépôt central, donc je peux revenir demain matin pour faire le remplacement. L'intervention prend environ deux heures.
                 <span class="english">Marc: It means I need to order the part. Generally, we have it in stock at the central depot, so I can come back tomorrow morning to do the replacement. The intervention takes about two hours.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Dupont :</strong> Demain matin seulement ? On ne peut vraiment rien faire aujourd'hui ?</div>
+                <strong>M. Dupont :</strong> Demain matin seulement ? On ne peut vraiment rien faire aujourd'hui ?
                 <span class="english">Mr. Dupont: Only tomorrow morning? Can't we really do anything today?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> Malheureusement non. Mais je vais appeler le dépôt tout de suite pour bloquer la pièce. Comme ça, demain à la première heure, je suis chez vous. Je peux être là à 8h si vous voulez.</div>
+                <strong>Marc :</strong> Malheureusement non. Mais je vais appeler le dépôt tout de suite pour bloquer la pièce. Comme ça, demain à la première heure, je suis chez vous. Je peux être là à 8h si vous voulez.
                 <span class="english">Marc: Unfortunately no. But I'll call the depot right away to reserve the part. That way, tomorrow first thing, I'll be at your place. I can be there at 8am if you want.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Julie :</strong> Oui, 8h c'est parfait. On ouvre à 7h30 donc ça nous arrange. Vous pensez que ça va coûter combien ?</div>
+                <strong>Julie :</strong> Oui, 8h c'est parfait. On ouvre à 7h30 donc ça nous arrange. Vous pensez que ça va coûter combien ?
                 <span class="english">Julie: Yes, 8am is perfect. We open at 7:30 so that works for us. How much do you think it will cost?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> Alors, vous avez le contrat premium, donc la main-d'œuvre est incluse. Il y aura juste la pièce à payer. Le compresseur, c'est environ 800 euros HT. Mais je vais faire valider le devis par mon chef et on vous envoie ça ce soir par email.</div>
+                <strong>Marc :</strong> Alors, vous avez le contrat premium, donc la main-d'œuvre est incluse. Il y aura juste la pièce à payer. Le compresseur, c'est environ 800 euros HT. Mais je vais faire valider le devis par mon chef et on vous envoie ça ce soir par email.
                 <span class="english">Marc: So, you have the premium contract, so labor is included. There will just be the part to pay for. The compressor is about 800 euros excluding tax. But I'll have the quote validated by my boss and we'll send it to you tonight by email.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>M. Dupont :</strong> OK, pas de souci. On attend votre devis. À demain alors.</div>
+                <strong>M. Dupont :</strong> OK, pas de souci. On attend votre devis. À demain alors.
                 <span class="english">Mr. Dupont: OK, no problem. We'll wait for your quote. See you tomorrow then.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> À demain, 8h pile. Tenez bon !</div>
+                <strong>Marc :</strong> À demain, 8h pile. Tenez bon !
                 <span class="english">Marc: See you tomorrow, 8am sharp. Hang in there!</span>
             </div>
         </div>
@@ -738,67 +893,67 @@
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> Alors, comment ça s'est passé chez LogiStock ?</div>
+                <strong>Thomas :</strong> Alors, comment ça s'est passé chez LogiStock ?
                 <span class="english">Thomas: So, how did it go at LogiStock?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> Bof, pas terrible. Le compresseur est mort. Je dois y retourner demain matin avec la pièce.</div>
+                <strong>Marc :</strong> Bof, pas terrible. Le compresseur est mort. Je dois y retourner demain matin avec la pièce.
                 <span class="english">Marc: Meh, not great. The compressor is dead. I have to go back tomorrow morning with the part.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> Ah merde. Le client a pas trop gueulé ?</div>
+                <strong>Thomas :</strong> Ah merde. Le client a pas trop gueulé ?
                 <span class="english">Thomas: Ah damn. The client didn't yell too much?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> Non, ils ont été corrects. Bon, ils sont un peu dans la merde parce qu'ils ont des produits qui peuvent pas supporter la chaleur, mais ils ont compris que je pouvais pas sortir un compresseur de mon chapeau.</div>
+                <strong>Marc :</strong> Non, ils ont été corrects. Bon, ils sont un peu dans la merde parce qu'ils ont des produits qui peuvent pas supporter la chaleur, mais ils ont compris que je pouvais pas sortir un compresseur de mon chapeau.
                 <span class="english">Marc: No, they were correct. Well, they're a bit in trouble because they have products that can't handle the heat, but they understood that I couldn't pull a compressor out of my hat.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> T'as pensé à leur proposer une solution temporaire ? Genre des clims mobiles ?</div>
+                <strong>Thomas :</strong> T'as pensé à leur proposer une solution temporaire ? Genre des clims mobiles ?
                 <span class="english">Thomas: Did you think to offer them a temporary solution? Like mobile AC units?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> Ah putain, j'y ai même pas pensé ! C'est con. Bon, c'est peut-être pas trop tard. Je vais leur envoyer un message.</div>
+                <strong>Marc :</strong> Ah putain, j'y ai même pas pensé ! C'est con. Bon, c'est peut-être pas trop tard. Je vais leur envoyer un message.
                 <span class="english">Marc: Ah damn, I didn't even think of that! That's stupid. Well, it might not be too late. I'll send them a message.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> Ouais, fais-le. Ça montre qu'on est proactifs. En plus, les clims mobiles, on les facture, donc c'est du chiffre en plus.</div>
+                <strong>Thomas :</strong> Ouais, fais-le. Ça montre qu'on est proactifs. En plus, les clims mobiles, on les facture, donc c'est du chiffre en plus.
                 <span class="english">Thomas: Yeah, do it. It shows we're proactive. Plus, mobile AC units, we charge for them, so it's additional revenue.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> T'as raison. Je m'en occupe. Sinon, t'as entendu ? Caroline a décroché le contrat avec l'hôtel Mercure !</div>
+                <strong>Marc :</strong> T'as raison. Je m'en occupe. Sinon, t'as entendu ? Caroline a décroché le contrat avec l'hôtel Mercure !
                 <span class="english">Marc: You're right. I'll take care of it. Otherwise, did you hear? Caroline landed the contract with the Mercure hotel!</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> Ah ouais ? C'est génial ! C'était pas le gros contrat à 200 000 euros ?</div>
+                <strong>Thomas :</strong> Ah ouais ? C'est génial ! C'était pas le gros contrat à 200 000 euros ?
                 <span class="english">Thomas: Ah yeah? That's great! Wasn't that the big 200,000 euro contract?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> Exactement. Apparemment, ils ont signé la semaine dernière. Caroline est aux anges. Philippe aussi d'ailleurs, ça va bien booster les chiffres de fin d'année.</div>
+                <strong>Marc :</strong> Exactement. Apparemment, ils ont signé la semaine dernière. Caroline est aux anges. Philippe aussi d'ailleurs, ça va bien booster les chiffres de fin d'année.
                 <span class="english">Marc: Exactly. Apparently, they signed last week. Caroline is over the moon. Philippe too by the way, it's going to really boost the end-of-year figures.</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> Nickel. Bon, du coup on va avoir du boulot en plus avec ce chantier...</div>
+                <strong>Thomas :</strong> Nickel. Bon, du coup on va avoir du boulot en plus avec ce chantier...
                 <span class="english">Thomas: Perfect. Well, so we're going to have more work with this site...</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Marc :</strong> Ouais, mais du bon boulot. Mieux vaut être débordés que sans boulot, non ?</div>
+                <strong>Marc :</strong> Ouais, mais du bon boulot. Mieux vaut être débordés que sans boulot, non ?
                 <span class="english">Marc: Yeah, but good work. Better to be overwhelmed than without work, right?</span>
             </div>
 
             <div class="text-paragraph">
-                <div class="dialogue-line"><strong>Thomas :</strong> C'est sûr !</div>
+                <strong>Thomas :</strong> C'est sûr !
                 <span class="english">Thomas: That's for sure!</span>
             </div>
         </div>
