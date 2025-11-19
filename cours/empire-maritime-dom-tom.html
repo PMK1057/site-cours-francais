@@ -133,6 +133,138 @@
             color: #764ba2; background: #f4f1ff; cursor: pointer; font-weight: 600;
         }
         .print-btn:hover { background: #ece7ff; }
+    </style>
+</head>
+<body>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            line-height: 1.85;
+            color: #212744;
+        }
+        .men-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 36px 24px 48px;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #6d4ac3;
+            text-align: center;
+            font-size: 2.45em;
+            margin-bottom: 22px;
+            border-bottom: 2px solid rgba(118,75,162,0.2);
+            padding-bottom: 16px;
+        }
+        .biography-section {
+            margin-bottom: 30px;
+            padding: 30px 26px;
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(118,75,162,0.12);
+            box-shadow: 0 6px 16px rgba(44, 52, 92, 0.12);
+        }
+        .biography-section h2 {
+            color: #3f2f92;
+            margin: 0 0 20px 0;
+            font-size: 1.78em;
+            text-transform: none;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.55px;
+        }
+        .text-paragraph {
+            font-size: 1.12em;
+            color: #2c3e50;
+            margin-bottom: 18px;
+            line-height: 1.88;
+            text-align: justify;
+        }
+        .english {
+            font-size: 0.9em;
+            color: #4f5d75;
+            font-style: italic;
+            margin: 14px 0 22px;
+            padding: 14px 22px;
+            border-left: 4px solid rgba(102,126,234,0.55);
+            background: rgba(102,126,234,0.07);
+            display: block;
+            border-radius: 0 12px 12px 0;
+        }
+        .vocab-box {
+            background: #fff9e6;
+            border-left: 4px solid #ffa500;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 3px 8px rgba(255,165,0,0.15);
+        }
+        .vocab-box strong {
+            color: #cc7a00;
+            font-size: 1.05em;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .vocab-box ul {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+        }
+        .vocab-box li {
+            margin-bottom: 6px;
+            color: #5c4a00;
+            line-height: 1.6;
+        }
+        .vocab-box li strong {
+            color: #cc7a00;
+            display: inline;
+            margin-right: 6px;
+        }
+        .instructions {
+            background: #d1ecf1;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #0c5460;
+            color: #0c5460;
+            font-size: 1.05em;
+        }
+        .instructions strong {
+            font-size: 1.1em;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            color: #546a7b;
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 24px 14px;
+            }
+            .men-container {
+                padding: 28px 20px;
+            }
+            .biography-section {
+                padding: 26px 20px;
+            }
+        }
+        /* Impression: masquer éléments non essentiels, optimiser marges */
+        @media print {
+            .print-hide { display: none !important; }
+            body { background: #fff !important; }
+            .men-container { box-shadow: none !important; border: none !important; }
+        }
+        .print-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 14px; border-radius: 8px; border: 1px solid #764ba2;
+            color: #764ba2; background: #f4f1ff; cursor: pointer; font-weight: 600;
+        }
+        .print-btn:hover { background: #ece7ff; }
         .table-of-contents {
             background: #f4f1ff;
             border: 2px solid #764ba2;
@@ -552,26 +684,9 @@
             </div>
         </div>
 
-        <!-- MOTS CLÉS -->
-        <div class="biography-section" style="background: #f0f4ff; border: 2px solid #667eea;">
-            <h2 style="color: #667eea;">Mots Clés à Retenir</h2>
-            <div class="vocab-box" style="background: #fff; margin-top: 20px;">
-                <ul>
-                    <li><strong>l'outre-mer</strong> = overseas</li>
-                    <li><strong>la métropole</strong> = mainland France</li>
-                    <li><strong>la base militaire</strong> = military base</li>
-                    <li><strong>la zone économique exclusive</strong> = exclusive economic zone</li>
-                    <li><strong>les ressources naturelles</strong> = natural resources</li>
-                    <li><strong>la position stratégique</strong> = strategic position</li>
-                    <li><strong>la puissance mondiale</strong> = world power</li>
-                    <li><strong>surveiller</strong> = to monitor</li>
-                    <li><strong>protéger</strong> = to protect</li>
-                </ul>
-            </div>
-        </div>
-
         <div class="footer">
-            <p>Fin des textes sur l'Empire Maritime Français et les DOM-TOM</p>
+            <p><strong>Vocabulaire avancé :</strong> outre-mer, métropole, zone économique exclusive, ressources naturelles, position stratégique, puissance mondiale, base militaire, surveillance, protection</p>
+            <p>✨ Textes créés pour l'apprentissage du français avancé ✨</p>
         </div>
     </div>
 </body>
