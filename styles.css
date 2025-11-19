@@ -223,12 +223,6 @@ nav {
     color: rgba(255,255,255,0.92);
 }
 
-/* Style spécifique pour la carte CHIFFRES & NOMBRES - texte bleu/violet cohérent avec les dégradés */
-.section-card[onclick*="chiffres-nombres"] h3,
-.section-card[onclick*="chiffres-nombres"] p {
-    color: #4a5fd8 !important;
-}
-
 /* Catégories de textes - Organisation visuelle */
 .textes-category {
     margin-bottom: 50px;
@@ -345,6 +339,7 @@ th {
     text-align: left;
     font-weight: 600;
 }
+
 
 td {
     padding: 12px 15px;

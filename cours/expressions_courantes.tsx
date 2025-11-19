@@ -53,8 +53,8 @@ const FrenchExpressions = () => {
       fr: "Vas-y",
       level: "courant",
       translations: {
-        fr: "Commence, fais-le, je t'écoute / Continue ⚠️ Pour inconnu : 'Allez-y'",
-        en: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'. Very common in conversations to show you're ready to listen or support someone's action. ⚠️ Use 'Allez-y' (vous form) when speaking to someone you don't know or in formal situations.",
+        fr: "Commence, fais-le, je t'écoute / Continue",
+        en: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'. Very common in conversations to show you're ready to listen or support someone's action.",
         es: ""
       },
       examples: [

@@ -1126,8 +1126,8 @@ const expressionsData = [
     },
     {
         fr: "Vas-y",
-        en: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'. Very common in conversations to show you're ready to listen or support someone's action. ⚠️ Use 'Allez-y' (vous form) when speaking to someone you don't know or in formal situations.",
-        explanation: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'. ⚠️ Use 'Allez-y' (vous form) when speaking to someone you don't know or in formal situations."
+        en: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'. Very common in conversations to show you're ready to listen or support someone's action.",
+        explanation: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'."
     },
     {
         fr: "Allez-y",
