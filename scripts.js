@@ -5,6 +5,195 @@ let currentSection = 'home';
 let currentCourse = null;
 let hashUpdateEnabled = true;
 
+// Mapping des connexions de navigation "Vous aimerez aussi"
+const relatedCoursesMap = {
+    // Conjugaison et temps verbaux
+    'futur-proche': ['passe-recent'],
+    'passe-recent': ['futur-proche'],
+    'passe-compose': ['imparfait', 'passe-compose-vs-imparfait'],
+    'imparfait': ['passe-compose', 'passe-compose-vs-imparfait'],
+    'passe-compose-vs-imparfait': ['passe-compose', 'imparfait'],
+    'present-indicatif': ['futur-proche', 'passe-recent'],
+    'subjonctif-present': ['subjonctif-passe'],
+    'subjonctif-passe': ['subjonctif-present'],
+    'conditionnel-present': ['conditionnel-passe'],
+    'conditionnel-passe': ['conditionnel-present', 'plus-que-parfait'],
+    'plus-que-parfait': ['conditionnel-passe'],
+    
+    // Déterminants et pronoms
+    'determinants-possessifs': ['pronoms-possessifs'],
+    'pronoms-possessifs': ['determinants-possessifs'],
+    'determinants-demonstratifs': ['pronoms-demonstratifs'],
+    'pronoms-demonstratifs': ['determinants-demonstratifs'],
+    'cod-coi': ['en-y', 'exercice-cod-coi'],
+    'en-y': ['cod-coi'],
+    'QUIQUEDONT': ['lequelauquelduquel'],
+    'lequelauquelduquel': ['QUIQUEDONT'],
+    'verbes-pronominaux': ['cod-coi'],
+    
+    // Prépositions et grammaire
+    'prepositions': ['de-des-du', 'textes-francais-prepositions'],
+    'de-des-du': ['prepositions'],
+    'reperes-temporels': ['reperes-spatiaux'],
+    'reperes-spatiaux': ['reperes-temporels'],
+    
+    // Expressions et vocabulaire
+    'expressions-courantes': ['expressions-idiomatiques', 'vocabulaire-familier'],
+    'expressions-idiomatiques': ['expressions-courantes', 'vocabulaire-familier'],
+    'vocabulaire-familier': ['expressions-courantes', 'expressions-idiomatiques'],
+    'expressions-essentielles': ['expressions-courantes'],
+    'faux-amis-hispanophones': ['faux-amis-anglophones'],
+    'faux-amis-anglophones': ['faux-amis-hispanophones'],
+    
+    // Textes et progression
+    'textes_francais_debutants': ['textes_passe_compose_imparfait', 'textes-francais-prepositions'],
+    'textes_passe_compose_imparfait': ['textes_subjonctif_present', 'textes_francais_debutants'],
+    'textes_subjonctif_present': ['textes_passe_compose_imparfait'],
+    'textes-francais-prepositions': ['textes_francais_debutants', 'prepositions'],
+    
+    // Culture et société
+    'grands_hommes_francais': ['femmes_francaises_celebres'],
+    'femmes_francaises_celebres': ['grands_hommes_francais'],
+    'droit-des-femmes': ['mariage-pour-tous'],
+    'mariage-pour-tous': ['droit-des-femmes', 'peine-de-mort'],
+    'intelligence-artificielle': ['ia-et-droit', 'ia-science'],
+    'ia-et-droit': ['intelligence-artificielle', 'ia-science'],
+    'ia-science': ['intelligence-artificielle', 'ia-et-droit'],
+    'peine-de-mort': ['mariage-pour-tous'],
+    'legalisation-cannabis': ['monarchie-europe'],
+    'monarchie-europe': ['legalisation-cannabis'],
+    
+    // Bases et communication
+    'tutoiement-vouvoiement': ['presentations'],
+    'presentations': ['tutoiement-vouvoiement', 'expressions-essentielles'],
+    'questions-pratiques': ['expressions-courantes'],
+    
+    // Exercices
+    'exercice-cod-coi': ['cod-coi', 'exercice-pronoms-determinants'],
+    'exercice-pronoms-determinants': ['exercice-cod-coi', 'exercice-conjugaison-mixte'],
+    'exercice-conjugaison-mixte': ['exercice-pronoms-determinants', 'textes_passe_compose_imparfait'],
+    
+    // Connexions supplémentaires exercices-cours
+    'geographie_france': ['reperes-spatiaux'],
+    'textes-climafrance': ['questions-pratiques'],
+    'textes-courses-supermarche': ['expressions-courantes'],
+    'textes-diner-amis': ['expressions-courantes'],
+    'textes-marche-noel': ['expressions-courantes'],
+    'textes-premier-jour-travail': ['textes-teletravail'],
+    'textes-teletravail': ['textes-premier-jour-travail'],
+    'textes-vacances-mer': ['reperes-temporels'],
+    'textes-voyage-train': ['questions-pratiques'],
+    'textes-weekend-paris': ['reperes-spatiaux'],
+    'textes-francais-et-pain': ['expressions-courantes'],
+};
+
+// Noms des cours pour l'affichage
+const courseNames = {
+    'futur-proche': 'Futur Proche',
+    'passe-recent': 'Passé Récent',
+    'passe-compose': 'Passé Composé',
+    'imparfait': 'Imparfait',
+    'passe-compose-vs-imparfait': 'Passé Composé vs Imparfait',
+    'present-indicatif': 'Présent de l\'Indicatif',
+    'subjonctif-present': 'Subjonctif Présent',
+    'subjonctif-passe': 'Subjonctif Passé',
+    'conditionnel-present': 'Conditionnel Présent',
+    'conditionnel-passe': 'Conditionnel Passé',
+    'plus-que-parfait': 'Plus-que-Parfait',
+    'determinants-possessifs': 'Déterminants Possessifs',
+    'pronoms-possessifs': 'Pronoms Possessifs',
+    'determinants-demonstratifs': 'Déterminants Démonstratifs',
+    'pronoms-demonstratifs': 'Pronoms Démonstratifs',
+    'cod-coi': 'COD/COI',
+    'en-y': 'EN et Y',
+    'QUIQUEDONT': 'QUI/QUE/DONT',
+    'lequelauquelduquel': 'LEQUEL/AUQUEL/DUQUEL',
+    'verbes-pronominaux': 'Verbes Pronominaux',
+    'prepositions': 'Les Prépositions',
+    'de-des-du': 'DE/DES/DU',
+    'reperes-temporels': 'Repères Temporels',
+    'reperes-spatiaux': 'Repères Spatiaux',
+    'expressions-courantes': 'Expressions Courantes',
+    'expressions-idiomatiques': 'Expressions Idiomatiques',
+    'vocabulaire-familier': 'Vocabulaire Familier',
+    'expressions-essentielles': 'Expressions Essentielles',
+    'faux-amis-hispanophones': 'Faux Amis (Hispanophones)',
+    'faux-amis-anglophones': 'Faux Amis (Anglophones)',
+    'textes_francais_debutants': 'Textes Débutants',
+    'textes_passe_compose_imparfait': 'Textes Passé Composé/Imparfait',
+    'textes_subjonctif_present': 'Textes Subjonctif Présent',
+    'textes-francais-prepositions': 'Textes Prépositions',
+    'grands_hommes_francais': 'Grands Hommes Français',
+    'femmes_francaises_celebres': 'Femmes Françaises Célèbres',
+    'droit-des-femmes': 'Droit des Femmes',
+    'mariage-pour-tous': 'Mariage pour Tous',
+    'intelligence-artificielle': 'Intelligence Artificielle',
+    'ia-et-droit': 'IA et le Droit',
+    'ia-science': 'IA dans la Science',
+    'peine-de-mort': 'Peine de Mort',
+    'legalisation-cannabis': 'Légalisation du Cannabis',
+    'monarchie-europe': 'Monarchie en Europe',
+    'tutoiement-vouvoiement': 'Tutoiement/Vouvoiement',
+    'presentations': 'Présentations',
+    'questions-pratiques': 'Questions Pratiques',
+    'exercice-cod-coi': 'Exercice COD/COI',
+    'exercice-pronoms-determinants': 'Exercice Pronoms & Déterminants',
+    'exercice-conjugaison-mixte': 'Exercice Conjugaison Mixte',
+    'geographie_france': 'Géographie de la France',
+    'textes-climafrance': 'Conversations Professionnelles',
+    'textes-courses-supermarche': 'Courses au Supermarché',
+    'textes-diner-amis': 'Dîner entre Amis',
+    'textes-marche-noel': 'Marché de Noël',
+    'textes-premier-jour-travail': 'Premier Jour de Travail',
+    'textes-teletravail': 'Télétravail',
+    'textes-vacances-mer': 'Vacances à la Mer',
+    'textes-voyage-train': 'Voyage en Train',
+    'textes-weekend-paris': 'Weekend à Paris',
+    'textes-francais-et-pain': 'Le Français et le Pain',
+    'imperatif': 'Impératif',
+    'pronoms-interrogatifs': 'Pronoms Interrogatifs',
+    'pronoms-toniques': 'Pronoms Toniques',
+    'locutions-impersonnelles': 'Locutions Impersonnelles',
+    'eux-vs-leur': 'EUX vs LEUR',
+    'comparaisons-francais': 'Comparaisons',
+    'causes-francais': 'La Cause',
+    'chiffres-nombres': 'Chiffres & Nombres',
+    'couleurs': 'Les Couleurs',
+    'famille': 'La Famille',
+    'nationalites': 'Nationalités',
+    'phrases-utiles-cours-paul': 'Phrases Utiles Pendant les Cours',
+    'contractions-oral': 'Contractions à l\'Oral',
+    'vocabulaire-thematique': 'Vocabulaire Thématique',
+    'uniformisation-langue': 'Uniformisation du Français',
+    'separation-eglise-etat': 'Loi de 1905 — Laïcité',
+    'revolution-industrielle': 'Révolution Industrielle',
+    'empire-maritime-dom-tom': 'Empire Maritime & DOM-TOM',
+    'drones': 'Les Drones',
+    'credit-social-chine': 'Crédit Social Chine',
+};
+
+// Fonction pour créer la section "Vous aimerez aussi"
+function createRelatedCoursesSection(courseId) {
+    const relatedCourses = relatedCoursesMap[courseId];
+    if (!relatedCourses || relatedCourses.length === 0) {
+        return '';
+    }
+    
+    const buttons = relatedCourses.map(relatedId => {
+        const courseName = courseNames[relatedId] || relatedId.replace(/-/g, ' ').replace(/_/g, ' ');
+        return `<button class="related-course-btn" onclick="showCourse('${relatedId}')">${courseName}</button>`;
+    }).join('');
+    
+    return `
+        <div class="related-courses-section">
+            <h3 class="related-courses-title">Vous aimerez aussi</h3>
+            <div class="related-courses-container">
+                ${buttons}
+            </div>
+        </div>
+    `;
+}
+
 function updateURLHash({ section = null, course = null } = {}) {
     let hash = '';
     if (course) {
@@ -147,7 +336,7 @@ function fetchWithTimeout(url, timeout = 10000) {
 }
 
 // Fonction pour exécuter les scripts dans un HTML
-function executeScriptsInHTML(html, container) {
+function executeScriptsInHTML(html, container, courseId = null) {
     try {
         // Vider le container d'abord pour éviter les conflits
         container.innerHTML = '';
@@ -175,6 +364,17 @@ function executeScriptsInHTML(html, container) {
         // Créer un HTML sans les scripts
         scripts.forEach(script => script.remove());
         container.innerHTML = doc.body.innerHTML;
+        
+        // Injecter la section "Vous aimerez aussi" si courseId est fourni
+        if (courseId) {
+            const relatedSection = createRelatedCoursesSection(courseId);
+            if (relatedSection) {
+                // Vérifier si la section n'existe pas déjà
+                if (!container.querySelector('.related-courses-section')) {
+                    container.insertAdjacentHTML('beforeend', relatedSection);
+                }
+            }
+        }
         
         // Injecter une barre d'outils PDF si absente
         try {
@@ -314,7 +514,7 @@ function showCourse(courseId, retryCount = 0) {
             const cachedContent = typeof courseCache[courseId] === 'string' 
                 ? courseCache[courseId] 
                 : courseCache[courseId].html;
-            executeScriptsInHTML(cachedContent, container);
+            executeScriptsInHTML(cachedContent, container, courseId);
             return;
         } catch (cacheError) {
             console.warn('Erreur avec le cache, rechargement:', cacheError);
@@ -351,7 +551,7 @@ function showCourse(courseId, retryCount = 0) {
                 timestamp: Date.now()
             };
             
-            executeScriptsInHTML(html, container);
+            executeScriptsInHTML(html, container, courseId);
         })
         .catch(error => {
             console.error('Erreur lors du chargement du cours:', error);

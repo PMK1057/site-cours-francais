@@ -1084,3 +1084,103 @@ em {
         font-size: 1.5em;
     }
 }
+
+/* Section "Vous aimerez aussi" - Navigation entre cours */
+.related-courses-section {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 3px solid rgba(255, 193, 7, 0.3);
+}
+
+.related-courses-title {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #212744;
+    margin-bottom: 25px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.related-courses-title::before,
+.related-courses-title::after {
+    content: '✨';
+    font-size: 0.9em;
+}
+
+.related-courses-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.related-course-btn {
+    background: linear-gradient(145deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+    color: #212744;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.related-course-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.related-course-btn:hover::before {
+    left: 100%;
+}
+
+.related-course-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.6);
+    color: #212744;
+    text-decoration: none;
+}
+
+.related-course-btn:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+.related-course-btn:focus {
+    outline: 3px solid rgba(255, 193, 7, 0.5);
+    outline-offset: 3px;
+}
+
+/* Responsive pour les boutons de navigation */
+@media (max-width: 768px) {
+    .related-courses-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .related-course-btn {
+        width: 100%;
+        max-width: 300px;
+        padding: 12px 20px;
+        font-size: 0.95em;
+    }
+    
+    .related-courses-title {
+        font-size: 1.5em;
+    }
+}
