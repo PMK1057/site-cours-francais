@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Révolution Industrielle en France - Histoire</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            line-height: 1.85;
+            color: #212744;
+        }
+        .men-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 36px 24px 48px;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #6d4ac3;
+            text-align: center;
+            font-size: 2.45em;
+            margin-bottom: 22px;
+            border-bottom: 2px solid rgba(118,75,162,0.2);
+            padding-bottom: 16px;
+        }
+        .biography-section {
+            margin-bottom: 30px;
+            padding: 30px 26px;
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(118,75,162,0.12);
+            box-shadow: 0 6px 16px rgba(44, 52, 92, 0.12);
+        }
+        .biography-section h2 {
+            color: #3f2f92;
+            margin: 0 0 20px 0;
+            font-size: 1.78em;
+            text-transform: none;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.55px;
+        }
+        .text-paragraph {
+            font-size: 1.12em;
+            color: #2c3e50;
+            margin-bottom: 18px;
+            line-height: 1.88;
+            text-align: justify;
+        }
+        .english {
+            font-size: 0.9em;
+            color: #4f5d75;
+            font-style: italic;
+            margin: 14px 0 22px;
+            padding: 14px 22px;
+            border-left: 4px solid rgba(102,126,234,0.55);
+            background: rgba(102,126,234,0.07);
+            display: block;
+            border-radius: 0 12px 12px 0;
+        }
+        .vocab-box {
+            background: #fff9e6;
+            border-left: 4px solid #ffa500;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 3px 8px rgba(255,165,0,0.15);
+        }
+        .vocab-box strong {
+            color: #cc7a00;
+            font-size: 1.05em;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .vocab-box ul {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+        }
+        .vocab-box li {
+            margin-bottom: 6px;
+            color: #5c4a00;
+            line-height: 1.6;
+        }
+        .vocab-box li strong {
+            color: #cc7a00;
+            display: inline;
+            margin-right: 6px;
+        }
+        .instructions {
+            background: #d1ecf1;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #0c5460;
+            color: #0c5460;
+            font-size: 1.05em;
+        }
+        .instructions strong {
+            font-size: 1.1em;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            color: #546a7b;
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 24px 14px;
+            }
+            .men-container {
+                padding: 28px 20px;
+            }
+            .biography-section {
+                padding: 26px 20px;
+            }
+        }
+        /* Impression: masquer éléments non essentiels, optimiser marges */
+        @media print {
+            .print-hide { display: none !important; }
+            body { background: #fff !important; }
+            .men-container { box-shadow: none !important; border: none !important; }
+        }
+        .print-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 14px; border-radius: 8px; border: 1px solid #764ba2;
+            color: #764ba2; background: #f4f1ff; cursor: pointer; font-weight: 600;
+        }
+        .print-btn:hover { background: #ece7ff; }
+        .table-of-contents {
+            background: #f4f1ff;
+            border: 2px solid #764ba2;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(118,75,162,0.15);
+        }
+        .table-of-contents h3 {
+            color: #764ba2;
+            margin: 0 0 16px 0;
+            font-size: 1.4em;
+            text-align: center;
+        }
+        .table-of-contents ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .table-of-contents li {
+            margin: 0;
+        }
+        .table-of-contents a {
+            color: #764ba2;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 6px;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        .table-of-contents a:hover {
+            background: #e8dff5;
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .table-of-contents ul {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="men-container">
+        <div class="print-hide" style="text-align:right; margin-bottom: 12px;">
+            <button class="print-btn" onclick="window.print()" type="button">🖨️ Télécharger en PDF</button>
+        </div>
+        <h1>🏭 La Révolution Industrielle en France</h1>
+        <h2 style="text-align: center; color: #764ba2; border: none; margin-bottom: 25px;">Textes avec passé composé et imparfait</h2>
+        
+        <div class="table-of-contents print-hide">
+            <h3>📑 Sommaire</h3>
+            <ul>
+                <li><a href="#texte-1" onclick="event.preventDefault(); document.getElementById('texte-1').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 1 : Qu'est-ce que la Révolution Industrielle ?</a></li>
+                <li><a href="#texte-2" onclick="event.preventDefault(); document.getElementById('texte-2').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 2 : La France et le Début de l'Industrialisation</a></li>
+                <li><a href="#texte-3" onclick="event.preventDefault(); document.getElementById('texte-3').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 3 : L'Industrie Textile en France</a></li>
+                <li><a href="#texte-4" onclick="event.preventDefault(); document.getElementById('texte-4').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 4 : Les Chemins de Fer Français</a></li>
+                <li><a href="#texte-5" onclick="event.preventDefault(); document.getElementById('texte-5').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 5 : L'Industrie du Fer et de l'Acier</a></li>
+                <li><a href="#texte-6" onclick="event.preventDefault(); document.getElementById('texte-6').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 6 : Paris se Transforme</a></li>
+                <li><a href="#texte-7" onclick="event.preventDefault(); document.getElementById('texte-7').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 7 : Les Inventeurs et Scientifiques Français</a></li>
+                <li><a href="#texte-8" onclick="event.preventDefault(); document.getElementById('texte-8').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 8 : La Vie des Ouvriers</a></li>
+                <li><a href="#texte-9" onclick="event.preventDefault(); document.getElementById('texte-9').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 9 : L'Héritage de la Révolution Industrielle</a></li>
+            </ul>
+        </div>
+        
+        <div class="instructions">
+            <strong>Contexte historique :</strong> Ces textes vous plongent dans la <strong>Révolution Industrielle en France</strong> (1760-1870), une période de transformation majeure qui a modernisé le pays. Chaque texte mélange le <strong>passé composé</strong> (pour les actions principales) et l'<strong>imparfait</strong> (pour les descriptions, habitudes et contexte). Vous découvrirez comment la France est passée d'une société agricole à une puissance industrielle, avec ses innovations, ses défis et ses conséquences sociales. Chaque texte comprend le contenu en français avec sa traduction anglaise, ainsi que des encadrés avec le vocabulaire historique et technique essentiel.
+        </div>
+
+        <div class="vocab-box" style="margin-bottom: 30px;">
+            <strong>📚 Vocabulaire historique important :</strong>
+            <ul>
+                <li><strong>Révolution industrielle</strong> = Industrial Revolution</li>
+                <li><strong>Fabriquer</strong> = to manufacture, to make</li>
+                <li><strong>Atelier</strong> = workshop</li>
+                <li><strong>Machine à vapeur</strong> = steam engine</li>
+                <li><strong>Usine</strong> = factory</li>
+                <li><strong>Industrialisation</strong> = industrialization</li>
+                <li><strong>Artisan</strong> = craftsman</li>
+                <li><strong>Charbon</strong> = coal</li>
+                <li><strong>Chemin de fer</strong> = railway</li>
+                <li><strong>Ouvrier</strong> = worker</li>
+                <li><strong>Syndicat</strong> = trade union</li>
+            </ul>
+        </div>
+
+        <!-- TEXTE 1 -->
+        <div class="biography-section" id="texte-1">
+            <h2>Texte 1 : Qu'est-ce que la Révolution Industrielle ?</h2>
+            
+            <div class="text-paragraph">
+                La révolution industrielle <strong>a été</strong> un grand changement dans l'histoire. Avant, les gens <strong>fabriquaient</strong> des objets à la main, dans de petits ateliers. Avec la révolution industrielle, les machines <strong>ont remplacé</strong> le travail manuel.
+                <span class="english">The Industrial Revolution was a major change in history. Before, people made objects by hand, in small workshops. With the Industrial Revolution, machines replaced manual labor.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Ce changement <strong>a commencé</strong> en Angleterre vers 1760. Les Anglais <strong>ont inventé</strong> des machines pour fabriquer des tissus plus rapidement. Ils <strong>utilisaient</strong> aussi la machine à vapeur pour faire fonctionner ces machines.
+                <span class="english">This change began in England around 1760. The English invented machines to manufacture fabrics more quickly. They also used the steam engine to operate these machines.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                La révolution industrielle <strong>a transformé</strong> la société. Les usines <strong>sont apparues</strong> dans les villes. Beaucoup de personnes <strong>ont quitté</strong> la campagne pour travailler dans ces usines. La vie des gens <strong>a changé</strong> complètement.
+                <span class="english">The Industrial Revolution transformed society. Factories appeared in cities. Many people left the countryside to work in these factories. People's lives changed completely.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Cette période <strong>a duré</strong> environ cent ans, de 1760 à 1870. Elle <strong>a changé</strong> d'abord l'Angleterre, puis elle <strong>est arrivée</strong> dans d'autres pays européens comme la France, l'Allemagne et la Belgique.
+                <span class="english">This period lasted about one hundred years, from 1760 to 1870. It first changed England, then it arrived in other European countries like France, Germany, and Belgium.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Verbes importants :</strong>
+                <ul>
+                    <li><strong>Fabriquer</strong> (PC: a fabriqué) = to manufacture, to make</li>
+                    <li><strong>Remplacer</strong> (PC: a remplacé) = to replace</li>
+                    <li><strong>Apparaître</strong> (PC: est apparu) = to appear</li>
+                    <li><strong>Quitter</strong> (PC: a quitté) = to leave</li>
+                    <li><strong>Utiliser</strong> (IMP: utilisait) = to use</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 2 -->
+        <div class="biography-section" id="texte-2">
+            <h2>Texte 2 : La France et le Début de l'Industrialisation</h2>
+            
+            <div class="text-paragraph">
+                En France, la révolution industrielle <strong>a commencé</strong> plus tard qu'en Angleterre. Pourquoi ce retard ? Il <strong>y a eu</strong> plusieurs raisons importantes.
+                <span class="english">In France, the Industrial Revolution began later than in England. Why this delay? There were several important reasons.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                D'abord, la Révolution française de 1789 <strong>a créé</strong> beaucoup de troubles dans le pays. Ensuite, les guerres napoléoniennes (1799-1815) <strong>ont coûté</strong> très cher à la France. Ces événements <strong>ont ralenti</strong> le développement économique.
+                <span class="english">First, the French Revolution of 1789 created many troubles in the country. Then, the Napoleonic Wars (1799-1815) cost France very dearly. These events slowed down economic development.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                La France <strong>avait</strong> aussi une économie différente de l'Angleterre. Beaucoup de Français <strong>travaillaient</strong> encore dans l'agriculture. Les artisans <strong>étaient</strong> nombreux et <strong>produisaient</strong> des objets de qualité. Ils ne <strong>voulaient</strong> pas changer leurs méthodes de travail.
+                <span class="english">France also had a different economy from England. Many French people were still working in agriculture. Craftsmen were numerous and produced quality objects. They did not want to change their working methods.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Mais vers 1830, la France <strong>a commencé</strong> vraiment son industrialisation. Le gouvernement <strong>a aidé</strong> cette transformation. Il <strong>a construit</strong> des routes et <strong>a encouragé</strong> les nouvelles industries.
+                <span class="english">But around 1830, France really began its industrialization. The government helped this transformation. It built roads and encouraged new industries.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les premières industries françaises <strong>se sont développées</strong> dans certaines régions : l'Alsace, le Nord, et la région parisienne. Ces régions <strong>avaient</strong> des ressources naturelles comme le charbon.
+                <span class="english">The first French industries developed in certain regions: Alsace, the North, and the Paris region. These regions had natural resources like coal.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Verbes importants :</strong>
+                <ul>
+                    <li><strong>Coûter</strong> (PC: a coûté) = to cost</li>
+                    <li><strong>Ralentir</strong> (PC: a ralenti) = to slow down</li>
+                    <li><strong>Travailler</strong> (IMP: travaillait) = to work</li>
+                    <li><strong>Produire</strong> (IMP: produisait) = to produce</li>
+                    <li><strong>Vouloir</strong> (IMP: voulait) = to want</li>
+                    <li><strong>Se développer</strong> (PC: s'est développé) = to develop</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 3 -->
+        <div class="biography-section" id="texte-3">
+            <h2>Texte 3 : L'Industrie Textile en France</h2>
+            
+            <div class="text-paragraph">
+                L'industrie textile <strong>a été</strong> une des premières industries à se développer en France. Le textile, c'<strong>était</strong> la fabrication de tissus et de vêtements.
+                <span class="english">The textile industry was one of the first industries to develop in France. Textile was the manufacturing of fabrics and clothing.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Lyon <strong>était</strong> la capitale française de la soie. Depuis longtemps, Lyon <strong>produisait</strong> des tissus de soie magnifiques pour les vêtements de luxe. Avec la révolution industrielle, Lyon <strong>a utilisé</strong> de nouvelles machines. La production <strong>a beaucoup augmenté</strong>.
+                <span class="english">Lyon was the French capital of silk. For a long time, Lyon produced magnificent silk fabrics for luxury clothing. With the Industrial Revolution, Lyon used new machines. Production increased greatly.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Dans le Nord de la France, d'autres villes <strong>ont développé</strong> l'industrie du coton et de la laine. Lille, Roubaix et Tourcoing <strong>sont devenues</strong> des centres textiles importants. Des milliers de personnes <strong>travaillaient</strong> dans les usines de ces villes.
+                <span class="english">In the North of France, other cities developed the cotton and wool industry. Lille, Roubaix, and Tourcoing became important textile centers. Thousands of people worked in the factories of these cities.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les machines <strong>tissaient</strong> le tissu beaucoup plus vite que les artisans. Une machine <strong>pouvait</strong> faire le travail de dix personnes. Mais les conditions de travail dans les usines <strong>étaient</strong> difficiles. Les ouvriers <strong>travaillaient</strong> douze heures par jour, six jours par semaine.
+                <span class="english">Machines wove fabric much faster than craftsmen. One machine could do the work of ten people. But working conditions in factories were difficult. Workers worked twelve hours a day, six days a week.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                L'Alsace <strong>a développé</strong> aussi une grande industrie textile, surtout à Mulhouse. Cette ville <strong>produisait</strong> des tissus imprimés avec des couleurs vives.
+                <span class="english">Alsace also developed a large textile industry, especially in Mulhouse. This city produced printed fabrics with bright colors.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Verbes importants :</strong>
+                <ul>
+                    <li><strong>Augmenter</strong> (PC: a augmenté) = to increase</li>
+                    <li><strong>Développer</strong> (PC: a développé) = to develop</li>
+                    <li><strong>Devenir</strong> (PC: est devenu) = to become</li>
+                    <li><strong>Tisser</strong> (IMP: tissait) = to weave</li>
+                    <li><strong>Pouvoir</strong> (IMP: pouvait) = to be able to, can</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 4 -->
+        <div class="biography-section" id="texte-4">
+            <h2>Texte 4 : Les Chemins de Fer Français</h2>
+            
+            <div class="text-paragraph">
+                Les chemins de fer <strong>ont transformé</strong> la France au 19ème siècle. Le premier train français <strong>a circulé</strong> en 1827, mais c'<strong>était</strong> un petit train pour transporter du charbon.
+                <span class="english">Railways transformed France in the 19th century. The first French train ran in 1827, but it was a small train to transport coal.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                La première vraie ligne de passagers <strong>a ouvert</strong> en 1837. Elle <strong>reliait</strong> Paris à Saint-Germain-en-Laye, une distance de seulement 19 kilomètres. Ça <strong>a été</strong> un grand succès ! Des milliers de personnes <strong>voulaient</strong> voyager en train.
+                <span class="english">The first real passenger line opened in 1837. It connected Paris to Saint-Germain-en-Laye, a distance of only 19 kilometers. It was a great success! Thousands of people wanted to travel by train.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Entre 1840 et 1870, la France <strong>a construit</strong> un grand réseau ferroviaire. Le gouvernement <strong>a fait</strong> un plan : toutes les lignes <strong>partaient</strong> de Paris vers les autres régions. C'<strong>était</strong> comme une étoile avec Paris au centre.
+                <span class="english">Between 1840 and 1870, France built a large railway network. The government made a plan: all lines started from Paris towards other regions. It was like a star with Paris at the center.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les trains <strong>ont changé</strong> la vie des Français. Avant, voyager de Paris à Marseille <strong>prenait</strong> plusieurs jours en voiture à cheval. Avec le train, le voyage <strong>prenait</strong> seulement douze heures. C'<strong>était</strong> une révolution !
+                <span class="english">Trains changed the lives of the French. Before, traveling from Paris to Marseille took several days by horse-drawn carriage. With the train, the journey took only twelve hours. It was a revolution!</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les chemins de fer <strong>ont aidé</strong> aussi l'économie. Les trains <strong>transportaient</strong> des marchandises rapidement : du charbon, du fer, des produits alimentaires. Les régions de France <strong>étaient</strong> maintenant mieux connectées.
+                <span class="english">Railways also helped the economy. Trains transported goods quickly: coal, iron, food products. The regions of France were now better connected.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Verbes importants :</strong>
+                <ul>
+                    <li><strong>Circuler</strong> (PC: a circulé) = to run, to travel</li>
+                    <li><strong>Relier</strong> (IMP: reliait) = to connect</li>
+                    <li><strong>Partir</strong> (IMP: partait) = to leave, to start from</li>
+                    <li><strong>Prendre</strong> (IMP: prenait) = to take (time)</li>
+                    <li><strong>Transporter</strong> (IMP: transportait) = to transport</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 5 -->
+        <div class="biography-section" id="texte-5">
+            <h2>Texte 5 : L'Industrie du Fer et de l'Acier</h2>
+            
+            <div class="text-paragraph">
+                La France <strong>avait</strong> besoin de beaucoup de fer et d'acier pour son industrialisation. Le fer <strong>servait</strong> à fabriquer des machines, des ponts, des bâtiments et des rails de train.
+                <span class="english">France needed a lot of iron and steel for its industrialization. Iron was used to manufacture machines, bridges, buildings, and train rails.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Le Nord et la Lorraine <strong>sont devenus</strong> les régions principales pour cette industrie. Ces régions <strong>avaient</strong> des mines de charbon et de fer. Le charbon <strong>était</strong> nécessaire pour fondre le fer et produire de l'acier.
+                <span class="english">The North and Lorraine became the main regions for this industry. These regions had coal and iron mines. Coal was necessary to melt iron and produce steel.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Au Creusot, en Bourgogne, une grande usine <strong>s'est développée</strong>. Cette usine <strong>fabriquait</strong> des locomotives, des machines à vapeur et des canons. Elle <strong>employait</strong> des milliers d'ouvriers.
+                <span class="english">In Le Creusot, in Burgundy, a large factory developed. This factory manufactured locomotives, steam engines, and cannons. It employed thousands of workers.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                La famille Schneider <strong>possédait</strong> l'usine du Creusot. Elle <strong>est devenue</strong> une des familles les plus riches de France. Les Schneider <strong>ont construit</strong> aussi des écoles et des maisons pour leurs ouvriers.
+                <span class="english">The Schneider family owned the Le Creusot factory. It became one of the richest families in France. The Schneiders also built schools and houses for their workers.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                L'industrie du fer <strong>a changé</strong> le paysage français. De grandes usines avec des cheminées qui <strong>fumaient</strong> <strong>sont apparues</strong> dans les régions industrielles. La pollution <strong>a commencé</strong> à devenir un problème.
+                <span class="english">The iron industry changed the French landscape. Large factories with smoking chimneys appeared in industrial regions. Pollution began to become a problem.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Verbes importants :</strong>
+                <ul>
+                    <li><strong>Servir</strong> (IMP: servait) = to serve, to be used for</li>
+                    <li><strong>Fondre</strong> (IMP: fondait) = to melt</li>
+                    <li><strong>Employer</strong> (IMP: employait) = to employ</li>
+                    <li><strong>Posséder</strong> (IMP: possédait) = to own</li>
+                    <li><strong>Fumer</strong> (IMP: fumait) = to smoke</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 6 -->
+        <div class="biography-section" id="texte-6">
+            <h2>Texte 6 : Paris se Transforme</h2>
+            
+            <div class="text-paragraph">
+                Paris <strong>a changé</strong> énormément pendant la révolution industrielle. Vers 1850, Paris <strong>était</strong> une ville médiévale avec des rues étroites et sales. La ville <strong>avait</strong> besoin de se moderniser.
+                <span class="english">Paris changed enormously during the Industrial Revolution. Around 1850, Paris was a medieval city with narrow and dirty streets. The city needed to modernize.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Napoléon III, l'empereur de France, <strong>voulait</strong> transformer Paris en une belle capitale moderne. Il <strong>a nommé</strong> le baron Haussmann pour diriger ce grand projet. Haussmann <strong>a travaillé</strong> à Paris de 1853 à 1870.
+                <span class="english">Napoleon III, the Emperor of France, wanted to transform Paris into a beautiful modern capital. He appointed Baron Haussmann to lead this great project. Haussmann worked in Paris from 1853 to 1870.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Haussmann <strong>a détruit</strong> beaucoup de vieux quartiers. Il <strong>a créé</strong> de larges boulevards droits. Ces nouveaux boulevards <strong>facilitaient</strong> la circulation et <strong>apportaient</strong> de l'air et de la lumière dans la ville.
+                <span class="english">Haussmann destroyed many old neighborhoods. He created wide straight boulevards. These new boulevards facilitated traffic and brought air and light into the city.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Paris <strong>a construit</strong> aussi de nouvelles infrastructures. La ville <strong>a installé</strong> un système d'eau courante et des égouts modernes. Le gaz <strong>est arrivé</strong> pour éclairer les rues la nuit. Plus tard, l'électricité <strong>a remplacé</strong> le gaz.
+                <span class="english">Paris also built new infrastructure. The city installed a running water system and modern sewers. Gas arrived to light the streets at night. Later, electricity replaced gas.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les gares de train <strong>étaient</strong> de magnifiques bâtiments en fer et en verre. La Gare du Nord, la Gare de l'Est et la Gare Saint-Lazare <strong>montraient</strong> la modernité de Paris.
+                <span class="english">Train stations were magnificent buildings of iron and glass. Gare du Nord, Gare de l'Est, and Gare Saint-Lazare showed the modernity of Paris.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Paris <strong>est devenue</strong> une des plus belles villes du monde. Mais cette transformation <strong>a coûté</strong> très cher et <strong>a détruit</strong> aussi des quartiers populaires.
+                <span class="english">Paris became one of the most beautiful cities in the world. But this transformation cost very dearly and also destroyed working-class neighborhoods.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Verbes importants :</strong>
+                <ul>
+                    <li><strong>Moderniser</strong> (PC: a modernisé) = to modernize</li>
+                    <li><strong>Nommer</strong> (PC: a nommé) = to appoint, to name</li>
+                    <li><strong>Détruire</strong> (PC: a détruit) = to destroy</li>
+                    <li><strong>Faciliter</strong> (IMP: facilitait) = to facilitate</li>
+                    <li><strong>Apporter</strong> (IMP: apportait) = to bring</li>
+                    <li><strong>Installer</strong> (PC: a installé) = to install</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 7 -->
+        <div class="biography-section" id="texte-7">
+            <h2>Texte 7 : Les Inventeurs et Scientifiques Français</h2>
+            
+            <div class="text-paragraph">
+                La France <strong>a contribué</strong> à la révolution industrielle avec des inventions et des découvertes scientifiques importantes.
+                <span class="english">France contributed to the Industrial Revolution with important inventions and scientific discoveries.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Louis Pasteur <strong>était</strong> un scientifique très célèbre. Il <strong>a découvert</strong> que les microbes <strong>causaient</strong> des maladies. Ses découvertes <strong>ont aidé</strong> l'industrie alimentaire. Grâce à Pasteur, on <strong>pouvait</strong> conserver le lait plus longtemps avec la pasteurisation.
+                <span class="english">Louis Pasteur was a very famous scientist. He discovered that microbes caused diseases. His discoveries helped the food industry. Thanks to Pasteur, milk could be preserved longer with pasteurization.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les frères Lumière, Auguste et Louis, <strong>ont inventé</strong> le cinéma en 1895. Leur première projection publique <strong>a eu lieu</strong> à Lyon. C'<strong>était</strong> le début d'une nouvelle forme de divertissement.
+                <span class="english">The Lumière brothers, Auguste and Louis, invented cinema in 1895. Their first public screening took place in Lyon. It was the beginning of a new form of entertainment.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Gustave Eiffel <strong>était</strong> un ingénieur brillant. Il <strong>a construit</strong> des ponts et des structures en fer. Sa création la plus célèbre <strong>a été</strong> la Tour Eiffel, construite en 1889 pour l'Exposition Universelle de Paris.
+                <span class="english">Gustave Eiffel was a brilliant engineer. He built bridges and iron structures. His most famous creation was the Eiffel Tower, built in 1889 for the Universal Exposition of Paris.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Alexandre-Gustave Eiffel <strong>a travaillé</strong> aussi sur le canal de Panama et sur la structure intérieure de la Statue de la Liberté.
+                <span class="english">Alexandre-Gustave Eiffel also worked on the Panama Canal and on the internal structure of the Statue of Liberty.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Ces inventeurs et scientifiques <strong>ont montré</strong> que la France <strong>participait</strong> activement au progrès technique de la révolution industrielle.
+                <span class="english">These inventors and scientists showed that France actively participated in the technical progress of the Industrial Revolution.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Verbes importants :</strong>
+                <ul>
+                    <li><strong>Contribuer</strong> (PC: a contribué) = to contribute</li>
+                    <li><strong>Découvrir</strong> (PC: a découvert) = to discover</li>
+                    <li><strong>Causer</strong> (IMP: causait) = to cause</li>
+                    <li><strong>Conserver</strong> (IMP: pouvait conserver) = to preserve</li>
+                    <li><strong>Inventer</strong> (PC: a inventé) = to invent</li>
+                    <li><strong>Avoir lieu</strong> (PC: a eu lieu) = to take place</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 8 -->
+        <div class="biography-section" id="texte-8">
+            <h2>Texte 8 : La Vie des Ouvriers</h2>
+            
+            <div class="text-paragraph">
+                La révolution industrielle <strong>a créé</strong> une nouvelle classe sociale : les ouvriers industriels. Leur vie <strong>était</strong> très difficile.
+                <span class="english">The Industrial Revolution created a new social class: industrial workers. Their life was very difficult.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Dans les usines, les ouvriers <strong>travaillaient</strong> de longues heures, souvent douze à quatorze heures par jour. Ils <strong>travaillaient</strong> six jours par semaine. Le dimanche <strong>était</strong> le seul jour de repos.
+                <span class="english">In factories, workers worked long hours, often twelve to fourteen hours a day. They worked six days a week. Sunday was the only day of rest.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les conditions de travail <strong>étaient</strong> dangereuses. Les machines <strong>étaient</strong> bruyantes et <strong>pouvaient</strong> blesser les ouvriers. Il n'<strong>y avait</strong> pas de protection sociale. Si un ouvrier <strong>avait</strong> un accident, il <strong>perdait</strong> son travail et son salaire.
+                <span class="english">Working conditions were dangerous. Machines were noisy and could injure workers. There was no social protection. If a worker had an accident, he lost his job and his salary.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les femmes et les enfants <strong>travaillaient</strong> aussi dans les usines. Ils <strong>recevaient</strong> des salaires plus bas que les hommes. Des enfants de sept ou huit ans <strong>travaillaient</strong> dans les mines de charbon.
+                <span class="english">Women and children also worked in factories. They received lower wages than men. Children of seven or eight years old worked in coal mines.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les ouvriers <strong>habitaient</strong> souvent dans des quartiers pauvres près des usines. Les maisons <strong>étaient</strong> petites et surpeuplées. L'hygiène <strong>était</strong> mauvaise et les maladies <strong>étaient</strong> fréquentes.
+                <span class="english">Workers often lived in poor neighborhoods near factories. Houses were small and overcrowded. Hygiene was poor and diseases were frequent.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Peu à peu, les ouvriers <strong>se sont organisés</strong> pour demander de meilleures conditions. Ils <strong>ont créé</strong> des syndicats pour défendre leurs droits.
+                <span class="english">Gradually, workers organized themselves to demand better conditions. They created trade unions to defend their rights.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Verbes importants :</strong>
+                <ul>
+                    <li><strong>Blesser</strong> (IMP: pouvait blesser) = to injure</li>
+                    <li><strong>Perdre</strong> (IMP: perdait) = to lose</li>
+                    <li><strong>Recevoir</strong> (IMP: recevait) = to receive</li>
+                    <li><strong>Habiter</strong> (IMP: habitait) = to live</li>
+                    <li><strong>Se organiser</strong> (PC: s'est organisé) = to organize oneself</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 9 -->
+        <div class="biography-section" id="texte-9">
+            <h2>Texte 9 : L'Héritage de la Révolution Industrielle</h2>
+            
+            <div class="text-paragraph">
+                La révolution industrielle <strong>a transformé</strong> la France de manière permanente. Elle <strong>a créé</strong> la France moderne que nous <strong>connaissons</strong> aujourd'hui.
+                <span class="english">The Industrial Revolution transformed France permanently. It created the modern France that we know today.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                L'industrialisation <strong>a enrichi</strong> le pays. La France <strong>est devenue</strong> une des grandes puissances économiques du monde au 19ème siècle. L'industrie <strong>créait</strong> de la richesse et des emplois.
+                <span class="english">Industrialization enriched the country. France became one of the great economic powers of the world in the 19th century. Industry created wealth and jobs.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Mais il <strong>y avait</strong> aussi des problèmes. La pollution de l'air et de l'eau <strong>a commencé</strong>. Les villes industrielles <strong>avaient</strong> un environnement dégradé. L'écart entre les riches industriels et les ouvriers pauvres <strong>créait</strong> des tensions sociales.
+                <span class="english">But there were also problems. Air and water pollution began. Industrial cities had a degraded environment. The gap between rich industrialists and poor workers created social tensions.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                La révolution industrielle <strong>a changé</strong> aussi la société française. De plus en plus de gens <strong>vivaient</strong> dans les villes. La population urbaine <strong>a augmenté</strong> rapidement. La vie rurale traditionnelle <strong>disparaissait</strong> lentement.
+                <span class="english">The Industrial Revolution also changed French society. More and more people lived in cities. The urban population increased rapidly. Traditional rural life was slowly disappearing.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les progrès techniques <strong>ont continué</strong> après 1870. La France <strong>a développé</strong> l'électricité, l'automobile et l'aviation. Ces nouvelles technologies <strong>étaient</strong> les héritières de la révolution industrielle.
+                <span class="english">Technical progress continued after 1870. France developed electricity, the automobile, and aviation. These new technologies were the heirs of the Industrial Revolution.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Aujourd'hui, nous <strong>vivons</strong> toujours avec cet héritage. Les industries modernes, les transports, les villes : tout cela <strong>vient</strong> de cette période de transformation.
+                <span class="english">Today, we still live with this legacy. Modern industries, transportation, cities: all of this comes from this period of transformation.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Verbes importants :</strong>
+                <ul>
+                    <li><strong>Enrichir</strong> (PC: a enrichi) = to enrich</li>
+                    <li><strong>Connaître</strong> (PRÉSENT: connaissons) = to know</li>
+                    <li><strong>Créer</strong> (IMP: créait) = to create</li>
+                    <li><strong>Vivre</strong> (IMP: vivait) = to live</li>
+                    <li><strong>Disparaître</strong> (IMP: disparaissait) = to disappear</li>
+                    <li><strong>Continuer</strong> (PC: a continué) = to continue</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Fin des textes sur la Révolution Industrielle en France</p>
+        </div>
+    </div>
+</body>
+</html>
+

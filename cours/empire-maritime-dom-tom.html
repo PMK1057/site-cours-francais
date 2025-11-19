@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Empire Maritime Français et les DOM-TOM - Géographie</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            line-height: 1.85;
+            color: #212744;
+        }
+        .men-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 36px 24px 48px;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #6d4ac3;
+            text-align: center;
+            font-size: 2.45em;
+            margin-bottom: 22px;
+            border-bottom: 2px solid rgba(118,75,162,0.2);
+            padding-bottom: 16px;
+        }
+        .biography-section {
+            margin-bottom: 30px;
+            padding: 30px 26px;
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid rgba(118,75,162,0.12);
+            box-shadow: 0 6px 16px rgba(44, 52, 92, 0.12);
+        }
+        .biography-section h2 {
+            color: #3f2f92;
+            margin: 0 0 20px 0;
+            font-size: 1.78em;
+            text-transform: none;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 0.55px;
+        }
+        .text-paragraph {
+            font-size: 1.12em;
+            color: #2c3e50;
+            margin-bottom: 18px;
+            line-height: 1.88;
+            text-align: justify;
+        }
+        .english {
+            font-size: 0.9em;
+            color: #4f5d75;
+            font-style: italic;
+            margin: 14px 0 22px;
+            padding: 14px 22px;
+            border-left: 4px solid rgba(102,126,234,0.55);
+            background: rgba(102,126,234,0.07);
+            display: block;
+            border-radius: 0 12px 12px 0;
+        }
+        .vocab-box {
+            background: #fff9e6;
+            border-left: 4px solid #ffa500;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 3px 8px rgba(255,165,0,0.15);
+        }
+        .vocab-box strong {
+            color: #cc7a00;
+            font-size: 1.05em;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .vocab-box ul {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+        }
+        .vocab-box li {
+            margin-bottom: 6px;
+            color: #5c4a00;
+            line-height: 1.6;
+        }
+        .vocab-box li strong {
+            color: #cc7a00;
+            display: inline;
+            margin-right: 6px;
+        }
+        .instructions {
+            background: #d1ecf1;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #0c5460;
+            color: #0c5460;
+            font-size: 1.05em;
+        }
+        .instructions strong {
+            font-size: 1.1em;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            color: #546a7b;
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 24px 14px;
+            }
+            .men-container {
+                padding: 28px 20px;
+            }
+            .biography-section {
+                padding: 26px 20px;
+            }
+        }
+        /* Impression: masquer éléments non essentiels, optimiser marges */
+        @media print {
+            .print-hide { display: none !important; }
+            body { background: #fff !important; }
+            .men-container { box-shadow: none !important; border: none !important; }
+        }
+        .print-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 14px; border-radius: 8px; border: 1px solid #764ba2;
+            color: #764ba2; background: #f4f1ff; cursor: pointer; font-weight: 600;
+        }
+        .print-btn:hover { background: #ece7ff; }
+        .table-of-contents {
+            background: #f4f1ff;
+            border: 2px solid #764ba2;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(118,75,162,0.15);
+        }
+        .table-of-contents h3 {
+            color: #764ba2;
+            margin: 0 0 16px 0;
+            font-size: 1.4em;
+            text-align: center;
+        }
+        .table-of-contents ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .table-of-contents li {
+            margin: 0;
+        }
+        .table-of-contents a {
+            color: #764ba2;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 6px;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        .table-of-contents a:hover {
+            background: #e8dff5;
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .table-of-contents ul {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="men-container">
+        <div class="print-hide" style="text-align:right; margin-bottom: 12px;">
+            <button class="print-btn" onclick="window.print()" type="button">🖨️ Télécharger en PDF</button>
+        </div>
+        <h1>🌊 L'Empire Maritime Français et les DOM-TOM</h1>
+        <h2 style="text-align: center; color: #764ba2; border: none; margin-bottom: 25px;">Géographie et influence mondiale de la France</h2>
+        
+        <div class="table-of-contents print-hide">
+            <h3>📑 Sommaire</h3>
+            <ul>
+                <li><a href="#texte-1" onclick="event.preventDefault(); document.getElementById('texte-1').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 1 : Qu'est-ce qu'un DOM-TOM ?</a></li>
+                <li><a href="#texte-2" onclick="event.preventDefault(); document.getElementById('texte-2').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 2 : Les Territoires Français d'Outre-Mer</a></li>
+                <li><a href="#texte-3" onclick="event.preventDefault(); document.getElementById('texte-3').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 3 : L'Histoire de l'Empire Colonial Français</a></li>
+                <li><a href="#texte-4" onclick="event.preventDefault(); document.getElementById('texte-4').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 4 : La Vie dans les DOM-TOM</a></li>
+                <li><a href="#texte-5" onclick="event.preventDefault(); document.getElementById('texte-5').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 5 : Pourquoi les DOM-TOM sont Importants</a></li>
+                <li><a href="#texte-6" onclick="event.preventDefault(); document.getElementById('texte-6').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 6 : L'Importance Militaire des DOM-TOM</a></li>
+                <li><a href="#texte-7" onclick="event.preventDefault(); document.getElementById('texte-7').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 7 : L'Importance Économique des DOM-TOM</a></li>
+                <li><a href="#texte-8" onclick="event.preventDefault(); document.getElementById('texte-8').scrollIntoView({behavior: 'smooth', block: 'start'});">Texte 8 : La Position Stratégique de la France</a></li>
+            </ul>
+        </div>
+        
+        <div class="instructions">
+            <strong>Contexte géographique :</strong> Ces textes vous plongent dans l'<strong>Empire Maritime Français</strong> et les <strong>DOM-TOM</strong> (Départements et Territoires d'Outre-Mer). Vous découvrirez comment la France possède des territoires sur tous les océans et tous les continents, ce qui en fait une puissance mondiale unique. Chaque texte explore un aspect différent : la géographie, l'histoire coloniale, la vie quotidienne, l'importance militaire, économique et stratégique de ces territoires. Chaque texte comprend le contenu en français avec sa traduction anglaise, ainsi que des encadrés avec le vocabulaire géographique et politique essentiel.
+        </div>
+
+        <div class="vocab-box" style="margin-bottom: 30px;">
+            <strong>📚 Vocabulaire géographique important :</strong>
+            <ul>
+                <li><strong>DOM-TOM</strong> = Départements et Territoires d'Outre-Mer (Overseas Departments and Territories)</li>
+                <li><strong>DROM-COM</strong> = Départements et Régions d'Outre-Mer, Collectivités d'Outre-Mer</li>
+                <li><strong>La métropole</strong> = Mainland France</li>
+                <li><strong>L'outre-mer</strong> = Overseas</li>
+                <li><strong>La zone maritime</strong> = Maritime zone</li>
+                <li><strong>La zone économique exclusive (ZEE)</strong> = Exclusive Economic Zone</li>
+                <li><strong>La base militaire</strong> = Military base</li>
+                <li><strong>Les ressources naturelles</strong> = Natural resources</li>
+                <li><strong>La position stratégique</strong> = Strategic position</li>
+            </ul>
+        </div>
+
+        <!-- TEXTE 1 -->
+        <div class="biography-section" id="texte-1">
+            <h2>Texte 1 : Qu'est-ce qu'un DOM-TOM ?</h2>
+            
+            <div class="text-paragraph">
+                DOM-TOM signifie "Départements d'Outre-Mer" et "Territoires d'Outre-Mer". Ce sont des terres françaises <strong>situées</strong> loin de la France métropolitaine. Elles sont dans l'océan Atlantique, l'océan Pacifique et l'océan Indien.
+                <span class="english">DOM-TOM means "Overseas Departments" and "Overseas Territories". These are French lands located far from mainland France. They are in the Atlantic Ocean, the Pacific Ocean, and the Indian Ocean.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Aujourd'hui, on dit plutôt "DROM-COM" : Départements et Régions d'Outre-Mer, et Collectivités d'Outre-Mer.
+                <span class="english">Today, we rather say "DROM-COM": Overseas Departments and Regions, and Overseas Communities.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les habitants de ces territoires sont français. Ils ont un passeport français et votent aux élections françaises.
+                <span class="english">The inhabitants of these territories are French. They have a French passport and vote in French elections.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Vocabulaire utile :</strong>
+                <ul>
+                    <li><strong>situé(e)</strong> = located</li>
+                    <li><strong>loin de</strong> = far from</li>
+                    <li><strong>les habitants</strong> = the inhabitants</li>
+                    <li><strong>le passeport</strong> = passport</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 2 -->
+        <div class="biography-section" id="texte-2">
+            <h2>Texte 2 : Les Territoires Français d'Outre-Mer</h2>
+            
+            <div class="text-paragraph">
+                La France <strong>possède</strong> plusieurs territoires dans le monde :
+                <span class="english">France possesses several territories around the world:</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>Dans l'océan Atlantique :</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>La Guadeloupe (Caraïbes)</li>
+                    <li>La Martinique (Caraïbes)</li>
+                    <li>La Guyane (Amérique du Sud)</li>
+                    <li>Saint-Pierre-et-Miquelon (près du Canada)</li>
+                </ul>
+                <span class="english"><strong>In the Atlantic Ocean:</strong> Guadeloupe (Caribbean), Martinique (Caribbean), French Guiana (South America), Saint-Pierre-et-Miquelon (near Canada)</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>Dans l'océan Indien :</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>La Réunion (près de Madagascar)</li>
+                    <li>Mayotte (près de Madagascar)</li>
+                </ul>
+                <span class="english"><strong>In the Indian Ocean:</strong> Réunion (near Madagascar), Mayotte (near Madagascar)</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>Dans l'océan Pacifique :</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>La Polynésie française (Tahiti)</li>
+                    <li>La Nouvelle-Calédonie</li>
+                    <li>Wallis-et-Futuna</li>
+                </ul>
+                <span class="english"><strong>In the Pacific Ocean:</strong> French Polynesia (Tahiti), New Caledonia, Wallis and Futuna</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Grâce à ces territoires, la France a la deuxième plus grande zone maritime du monde !
+                <span class="english">Thanks to these territories, France has the second largest maritime zone in the world!</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Vocabulaire utile :</strong>
+                <ul>
+                    <li><strong>posséder</strong> = to possess</li>
+                    <li><strong>près de</strong> = near</li>
+                    <li><strong>grâce à</strong> = thanks to</li>
+                    <li><strong>la zone maritime</strong> = maritime zone</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 3 -->
+        <div class="biography-section" id="texte-3">
+            <h2>Texte 3 : L'Histoire de l'Empire Colonial Français</h2>
+            
+            <div class="text-paragraph">
+                L'empire colonial français <strong>a commencé</strong> au 16ème siècle. Les explorateurs français <strong>sont partis</strong> découvrir le monde. Ils <strong>ont colonisé</strong> des terres en Amérique, en Afrique, en Asie et en Océanie.
+                <span class="english">The French colonial empire began in the 16th century. French explorers set out to discover the world. They colonized lands in America, Africa, Asia, and Oceania.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Au 19ème siècle, l'empire français <strong>était</strong> très grand. C'<strong>était</strong> le deuxième plus grand empire colonial après l'empire britannique.
+                <span class="english">In the 19th century, the French empire was very large. It was the second largest colonial empire after the British empire.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Après la Seconde Guerre mondiale (1945), beaucoup de colonies <strong>sont devenues</strong> indépendantes. Mais quelques territoires <strong>sont restés</strong> français. Ce sont les DOM-TOM d'aujourd'hui.
+                <span class="english">After World War II (1945), many colonies became independent. But some territories remained French. These are today's DOM-TOM.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Vocabulaire utile :</strong>
+                <ul>
+                    <li><strong>commencer</strong> = to begin</li>
+                    <li><strong>découvrir</strong> = to discover</li>
+                    <li><strong>la guerre mondiale</strong> = world war</li>
+                    <li><strong>indépendant(e)</strong> = independent</li>
+                    <li><strong>rester</strong> = to remain</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 4 -->
+        <div class="biography-section" id="texte-4">
+            <h2>Texte 4 : La Vie dans les DOM-TOM</h2>
+            
+            <div class="text-paragraph">
+                La vie dans les DOM-TOM <strong>est</strong> différente de la vie en France métropolitaine. Le climat <strong>est</strong> tropical. Il fait chaud toute l'année. Il y a des plages magnifiques et une nature exceptionnelle.
+                <span class="english">Life in the DOM-TOM is different from life in mainland France. The climate is tropical. It is hot all year round. There are beautiful beaches and exceptional nature.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les cultures locales <strong>sont</strong> riches et variées. La cuisine, la musique et les traditions <strong>sont</strong> uniques. Par exemple, en Martinique et en Guadeloupe, on parle créole et français.
+                <span class="english">Local cultures are rich and varied. Cuisine, music, and traditions are unique. For example, in Martinique and Guadeloupe, people speak Creole and French.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Les DOM-TOM ont aussi des problèmes économiques. La vie <strong>est</strong> souvent plus chère qu'en métropole. Le chômage <strong>est</strong> plus élevé.
+                <span class="english">The DOM-TOM also have economic problems. Life is often more expensive than in mainland France. Unemployment is higher.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Vocabulaire utile :</strong>
+                <ul>
+                    <li><strong>le climat</strong> = climate</li>
+                    <li><strong>toute l'année</strong> = all year round</li>
+                    <li><strong>la plage</strong> = beach</li>
+                    <li><strong>cher/chère</strong> = expensive</li>
+                    <li><strong>le chômage</strong> = unemployment</li>
+                    <li><strong>élevé(e)</strong> = high</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 5 -->
+        <div class="biography-section" id="texte-5">
+            <h2>Texte 5 : Pourquoi les DOM-TOM sont Importants</h2>
+            
+            <div class="text-paragraph">
+                Les DOM-TOM <strong>sont</strong> très importants pour la France pour plusieurs raisons :
+                <span class="english">The DOM-TOM are very important for France for several reasons:</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>1. La zone maritime :</strong> Grâce aux DOM-TOM, la France contrôle une immense zone maritime. Cela donne accès aux ressources de la mer.
+                <span class="english"><strong>1. The maritime zone:</strong> Thanks to the DOM-TOM, France controls a huge maritime zone. This gives access to sea resources.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>2. La présence mondiale :</strong> La France <strong>est</strong> présente sur tous les continents grâce à ces territoires.
+                <span class="english"><strong>2. Global presence:</strong> France is present on all continents thanks to these territories.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>3. La culture :</strong> Les DOM-TOM <strong>enrichissent</strong> la culture française avec leurs traditions, leur cuisine et leur musique.
+                <span class="english"><strong>3. Culture:</strong> The DOM-TOM enrich French culture with their traditions, cuisine, and music.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>4. La science :</strong> En Guyane, il y a le Centre Spatial Guyanais. C'est de là que <strong>partent</strong> les fusées européennes Ariane !
+                <span class="english"><strong>4. Science:</strong> In French Guiana, there is the Guiana Space Center. This is where European Ariane rockets launch from!</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Vocabulaire utile :</strong>
+                <ul>
+                    <li><strong>plusieurs raisons</strong> = several reasons</li>
+                    <li><strong>immense</strong> = huge</li>
+                    <li><strong>la présence</strong> = presence</li>
+                    <li><strong>enrichir</strong> = to enrich</li>
+                    <li><strong>la fusée</strong> = rocket</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 6 -->
+        <div class="biography-section" id="texte-6">
+            <h2>Texte 6 : L'Importance Militaire des DOM-TOM</h2>
+            
+            <div class="text-paragraph">
+                Les DOM-TOM <strong>ont</strong> une grande importance militaire pour la France. Ils <strong>permettent</strong> à l'armée française d'être présente partout dans le monde.
+                <span class="english">The DOM-TOM have great military importance for France. They allow the French army to be present everywhere in the world.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>Les bases militaires françaises :</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>À la Réunion, il y a des forces armées qui <strong>surveillent</strong> l'océan Indien</li>
+                    <li>En Guyane, l'armée <strong>protège</strong> le Centre Spatial</li>
+                    <li>En Nouvelle-Calédonie et en Polynésie, la marine française <strong>surveille</strong> le Pacifique</li>
+                    <li>Aux Antilles, la France <strong>surveille</strong> la zone des Caraïbes</li>
+                </ul>
+                <span class="english"><strong>French military bases:</strong> In Réunion, there are armed forces that monitor the Indian Ocean. In French Guiana, the army protects the Space Center. In New Caledonia and Polynesia, the French navy monitors the Pacific. In the Antilles, France monitors the Caribbean zone.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Ces bases militaires <strong>protègent</strong> les territoires français. Elles <strong>aident</strong> aussi à combattre le trafic de drogue et la pêche illégale. La France peut aussi <strong>aider</strong> rapidement les pays voisins en cas de catastrophe naturelle, comme un cyclone.
+                <span class="english">These military bases protect French territories. They also help fight drug trafficking and illegal fishing. France can also quickly help neighboring countries in case of natural disasters, such as a cyclone.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                Grâce aux DOM-TOM, la France <strong>est</strong> une puissance mondiale. Elle peut projeter sa force partout sur la planète.
+                <span class="english">Thanks to the DOM-TOM, France is a world power. It can project its power everywhere on the planet.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Vocabulaire utile :</strong>
+                <ul>
+                    <li><strong>l'armée</strong> = the army</li>
+                    <li><strong>surveiller</strong> = to monitor, to watch</li>
+                    <li><strong>protéger</strong> = to protect</li>
+                    <li><strong>combattre</strong> = to fight</li>
+                    <li><strong>la puissance</strong> = power</li>
+                    <li><strong>projeter sa force</strong> = to project power</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 7 -->
+        <div class="biography-section" id="texte-7">
+            <h2>Texte 7 : L'Importance Économique des DOM-TOM</h2>
+            
+            <div class="text-paragraph">
+                Les DOM-TOM <strong>sont</strong> très importants pour l'économie française.
+                <span class="english">The DOM-TOM are very important for the French economy.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>Les ressources naturelles :</strong>
+                <br>La zone maritime française <strong>est</strong> immense : 11 millions de kilomètres carrés ! C'est la deuxième plus grande zone maritime du monde. Cette zone <strong>contient</strong> beaucoup de poissons, du pétrole, du gaz naturel et des minéraux rares.
+                <span class="english"><strong>Natural resources:</strong> The French maritime zone is huge: 11 million square kilometers! It is the second largest maritime zone in the world. This zone contains a lot of fish, oil, natural gas, and rare minerals.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>Les ressources spéciales :</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>En Nouvelle-Calédonie, il y a 25% des réserves mondiales de nickel. Le nickel <strong>est</strong> un métal très important pour l'industrie.</li>
+                    <li>En Polynésie française, il y a des perles de grande qualité.</li>
+                    <li>En Guyane, il y a de l'or et des forêts tropicales.</li>
+                </ul>
+                <span class="english"><strong>Special resources:</strong> In New Caledonia, there is 25% of the world's nickel reserves. Nickel is a very important metal for industry. In French Polynesia, there are high-quality pearls. In French Guiana, there is gold and tropical forests.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>Le Centre Spatial :</strong>
+                <br>Le Centre Spatial Guyanais <strong>est</strong> très important pour l'Europe. Les fusées Ariane <strong>partent</strong> de là. Pourquoi la Guyane ? Parce qu'elle <strong>est</strong> proche de l'équateur. Cela <strong>économise</strong> du carburant pour les fusées. Ce centre <strong>rapporte</strong> beaucoup d'argent et <strong>crée</strong> des emplois.
+                <span class="english"><strong>The Space Center:</strong> The Guiana Space Center is very important for Europe. Ariane rockets launch from there. Why French Guiana? Because it is close to the equator. This saves fuel for rockets. This center brings in a lot of money and creates jobs.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>Le tourisme :</strong>
+                <br>Les DOM-TOM <strong>attirent</strong> des millions de touristes chaque année. Les plages, les montagnes, les récifs de corail <strong>sont</strong> magnifiques. Le tourisme <strong>crée</strong> beaucoup d'emplois.
+                <span class="english"><strong>Tourism:</strong> The DOM-TOM attract millions of tourists each year. The beaches, mountains, and coral reefs are magnificent. Tourism creates many jobs.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Vocabulaire utile :</strong>
+                <ul>
+                    <li><strong>les ressources naturelles</strong> = natural resources</li>
+                    <li><strong>le pétrole</strong> = oil</li>
+                    <li><strong>le gaz naturel</strong> = natural gas</li>
+                    <li><strong>les minéraux</strong> = minerals</li>
+                    <li><strong>le nickel</strong> = nickel</li>
+                    <li><strong>l'équateur</strong> = the equator</li>
+                    <li><strong>le carburant</strong> = fuel</li>
+                    <li><strong>rapporter de l'argent</strong> = to bring in money</li>
+                    <li><strong>le récif de corail</strong> = coral reef</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TEXTE 8 -->
+        <div class="biography-section" id="texte-8">
+            <h2>Texte 8 : La Position Stratégique de la France</h2>
+            
+            <div class="text-paragraph">
+                Grâce aux DOM-TOM, la France <strong>a</strong> une position stratégique unique au monde.
+                <span class="english">Thanks to the DOM-TOM, France has a unique strategic position in the world.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>Présence sur tous les continents :</strong>
+                <br>La France <strong>est</strong> le seul pays européen présent sur tous les océans et tous les continents. Cela <strong>donne</strong> à la France une influence diplomatique importante. La France peut parler et négocier au nom de différentes régions du monde.
+                <span class="english"><strong>Presence on all continents:</strong> France is the only European country present on all oceans and all continents. This gives France important diplomatic influence. France can speak and negotiate on behalf of different regions of the world.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>La Zone Économique Exclusive (ZEE) :</strong>
+                <br>La France contrôle une ZEE de 11 millions de km². Dans cette zone, la France <strong>a</strong> le droit exclusif de pêcher et d'exploiter les ressources. C'est une richesse énorme pour le futur. Dans 20 ou 30 ans, ces ressources <strong>seront</strong> encore plus importantes.
+                <span class="english"><strong>The Exclusive Economic Zone (EEZ):</strong> France controls an EEZ of 11 million km². In this zone, France has the exclusive right to fish and exploit resources. This is enormous wealth for the future. In 20 or 30 years, these resources will be even more important.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>Les routes maritimes :</strong>
+                <br>Certains DOM-TOM <strong>sont situés</strong> près de routes maritimes importantes. Par exemple, La Réunion et Mayotte <strong>sont</strong> près du Canal du Mozambique, où <strong>passent</strong> de nombreux bateaux. La France peut <strong>surveiller</strong> ces routes et <strong>assurer</strong> la sécurité maritime.
+                <span class="english"><strong>Shipping routes:</strong> Some DOM-TOM are located near important shipping routes. For example, Réunion and Mayotte are near the Mozambique Channel, where many ships pass. France can monitor these routes and ensure maritime security.</span>
+            </div>
+            
+            <div class="text-paragraph">
+                <strong>La recherche scientifique :</strong>
+                <br>Les DOM-TOM <strong>permettent</strong> à la France de faire de la recherche scientifique importante. En Guyane, on <strong>étudie</strong> la forêt amazonienne. En Polynésie, on <strong>étudie</strong> les océans et le climat. En Antarctique, la France <strong>a</strong> des bases scientifiques accessibles depuis La Réunion.
+                <span class="english"><strong>Scientific research:</strong> The DOM-TOM allow France to conduct important scientific research. In French Guiana, we study the Amazon rainforest. In Polynesia, we study oceans and climate. In Antarctica, France has scientific bases accessible from Réunion.</span>
+            </div>
+
+            <div class="vocab-box">
+                <strong>📝 Vocabulaire utile :</strong>
+                <ul>
+                    <li><strong>l'influence</strong> = influence</li>
+                    <li><strong>négocier</strong> = to negotiate</li>
+                    <li><strong>le droit</strong> = the right</li>
+                    <li><strong>exploiter</strong> = to exploit, to use</li>
+                    <li><strong>la route maritime</strong> = shipping route</li>
+                    <li><strong>assurer</strong> = to ensure</li>
+                    <li><strong>la sécurité maritime</strong> = maritime security</li>
+                    <li><strong>la recherche scientifique</strong> = scientific research</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MOTS CLÉS -->
+        <div class="biography-section" style="background: #f0f4ff; border: 2px solid #667eea;">
+            <h2 style="color: #667eea;">Mots Clés à Retenir</h2>
+            <div class="vocab-box" style="background: #fff; margin-top: 20px;">
+                <ul>
+                    <li><strong>l'outre-mer</strong> = overseas</li>
+                    <li><strong>la métropole</strong> = mainland France</li>
+                    <li><strong>la base militaire</strong> = military base</li>
+                    <li><strong>la zone économique exclusive</strong> = exclusive economic zone</li>
+                    <li><strong>les ressources naturelles</strong> = natural resources</li>
+                    <li><strong>la position stratégique</strong> = strategic position</li>
+                    <li><strong>la puissance mondiale</strong> = world power</li>
+                    <li><strong>surveiller</strong> = to monitor</li>
+                    <li><strong>protéger</strong> = to protect</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Fin des textes sur l'Empire Maritime Français et les DOM-TOM</p>
+        </div>
+    </div>
+</body>
+</html>
+
