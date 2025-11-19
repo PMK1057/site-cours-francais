@@ -1096,7 +1096,7 @@ em {
     font-size: 1.8em;
     font-weight: 700;
     color: #212744;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     text-align: center;
     display: flex;
     align-items: center;
@@ -1111,73 +1111,71 @@ em {
 }
 
 .related-courses-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
 }
 
-.related-course-btn {
-    background: linear-gradient(145deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
-    color: #212744;
-    border: none;
-    padding: 14px 24px;
-    border-radius: 12px;
+/* Style des cartes "Vous aimerez aussi" - même design que les cartes principales */
+.related-course-card {
+    color: #ffffff;
+    padding: 28px 24px;
+    border-radius: 26px;
     cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
-    text-decoration: none;
-    display: inline-block;
+    transition: transform 0.25s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    text-align: center;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 16px 30px rgba(255, 193, 7, 0.25);
+    background: linear-gradient(145deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
 }
 
-.related-course-btn::before {
+.related-course-card::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s;
+    inset: 14px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.18);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.related-course-btn:hover::before {
-    left: 100%;
+.related-course-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 46px rgba(255, 193, 7, 0.4);
+    filter: brightness(1.03);
 }
 
-.related-course-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.6);
-    color: #212744;
-    text-decoration: none;
+.related-course-card:hover::after {
+    opacity: 1;
 }
 
-.related-course-btn:active {
-    transform: translateY(-1px) scale(1.02);
+.related-course-card h3 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: 600;
 }
 
-.related-course-btn:focus {
-    outline: 3px solid rgba(255, 193, 7, 0.5);
-    outline-offset: 3px;
+.related-course-card p {
+    font-size: 0.9em;
+    opacity: 0.92;
+    color: rgba(255,255,255,0.92);
+    margin: 0;
 }
 
-/* Responsive pour les boutons de navigation */
+.related-course-card:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, .9);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(255, 193, 7, .35);
+}
+
+/* Responsive pour les cartes de navigation */
 @media (max-width: 768px) {
     .related-courses-container {
-        flex-direction: column;
-        gap: 12px;
-    }
-    
-    .related-course-btn {
-        width: 100%;
-        max-width: 300px;
-        padding: 12px 20px;
-        font-size: 0.95em;
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
     
     .related-courses-title {

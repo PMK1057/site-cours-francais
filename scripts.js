@@ -179,16 +179,22 @@ function createRelatedCoursesSection(courseId) {
         return '';
     }
     
-    const buttons = relatedCourses.map(relatedId => {
+    const cards = relatedCourses.map(relatedId => {
         const courseName = courseNames[relatedId] || relatedId.replace(/-/g, ' ').replace(/_/g, ' ');
-        return `<button class="related-course-btn" onclick="showCourse('${relatedId}')">${courseName}</button>`;
+        // Formater le nom pour avoir un titre court et une description
+        const title = courseName.length > 30 ? courseName.substring(0, 30) + '...' : courseName;
+        return `
+            <div class="related-course-card section-card" onclick="showCourse('${relatedId}')" role="button" tabindex="0" aria-label="Ouvrir le cours ${courseName}">
+                <h3>${courseName}</h3>
+            </div>
+        `;
     }).join('');
     
     return `
         <div class="related-courses-section">
             <h3 class="related-courses-title">Vous aimerez aussi</h3>
             <div class="related-courses-container">
-                ${buttons}
+                ${cards}
             </div>
         </div>
     `;
