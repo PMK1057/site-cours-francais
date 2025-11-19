@@ -53,14 +53,28 @@ const FrenchExpressions = () => {
       fr: "Vas-y",
       level: "courant",
       translations: {
-        fr: "Commence, fais-le, je t'écoute / Continue",
-        en: "Go ahead, do it, I'm listening",
-        es: "Adelante, hazlo, continúa"
+        fr: "Commence, fais-le, je t'écoute / Continue ⚠️ Pour inconnu : 'Allez-y'",
+        en: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'. Very common in conversations to show you're ready to listen or support someone's action. ⚠️ Use 'Allez-y' (vous form) when speaking to someone you don't know or in formal situations.",
+        es: ""
       },
       examples: [
         "- Je peux te poser une question ? - Vas-y, je t'écoute.",
         "Vas-y, lance-toi, n'aie pas peur !",
         "Tu voulais me dire quelque chose ? Vas-y, je suis là."
+      ]
+    },
+    {
+      fr: "Allez-y",
+      level: "courant",
+      translations: {
+        fr: "Commencez, faites-le, je vous écoute / Continuez (forme de politesse pour inconnu)",
+        en: "Polite form of 'vas-y' used when speaking to someone you don't know or in formal situations. Uses the 'vous' form to show respect. Essential for proper French politeness when addressing strangers, older people, or in professional contexts.",
+        es: ""
+      },
+      examples: [
+        "- Excusez-moi, puis-je vous poser une question ? - Allez-y, je vous écoute.",
+        "Allez-y, n'hésitez pas, je suis là pour vous aider.",
+        "Vous vouliez me dire quelque chose ? Allez-y, je vous écoute."
       ]
     },
     {

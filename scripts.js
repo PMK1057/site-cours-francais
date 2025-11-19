@@ -1078,9 +1078,26 @@ function setSelectFeedback(id, isCorrect, expected, selectEl) {
     }
 }
 
+// Cache pour les objets Audio afin d'éviter de créer plusieurs instances
+const audioCache = {};
+
 // Fonction pour jouer les audios des mots de vocabulaire
 function playAudio(url) {
-    const audio = new Audio(url);
+    if (!url) return;
+    
+    // Utiliser le cache si l'audio existe déjà
+    if (!audioCache[url]) {
+        audioCache[url] = new Audio(url);
+        // Précharger l'audio pour éviter les requêtes répétées
+        audioCache[url].preload = 'auto';
+    }
+    
+    // Réinitialiser l'audio s'il est déjà en cours de lecture
+    const audio = audioCache[url];
+    if (audio.currentTime > 0) {
+        audio.currentTime = 0;
+    }
+    
     audio.play().catch(err => {
         console.error('Erreur lecture audio:', err);
     });
@@ -1109,8 +1126,13 @@ const expressionsData = [
     },
     {
         fr: "Vas-y",
-        en: "Go ahead, do it, I'm listening",
-        explanation: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'."
+        en: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'. Very common in conversations to show you're ready to listen or support someone's action. ⚠️ Use 'Allez-y' (vous form) when speaking to someone you don't know or in formal situations.",
+        explanation: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'. ⚠️ Use 'Allez-y' (vous form) when speaking to someone you don't know or in formal situations."
+    },
+    {
+        fr: "Allez-y",
+        en: "Polite form of 'vas-y' used when speaking to someone you don't know or in formal situations. Uses the 'vous' form to show respect. Essential for proper French politeness when addressing strangers, older people, or in professional contexts.",
+        explanation: "Polite form of 'vas-y' used when speaking to someone you don't know or in formal situations. Uses the 'vous' form to show respect. Essential for proper French politeness when addressing strangers, older people, or in professional contexts."
     },
     {
         fr: "Carrément",
@@ -1235,6 +1257,7 @@ const expressionToFilename = {
     "Ça roule": "ca_roule",
     "C'est parti": "cest_parti",
     "Vas-y": "vas_y",
+    "Allez-y": "allez_y",
     "Carrément": "carrement",
     "Nickel": "nickel",
     "Impeccable": "impeccable",
@@ -1267,6 +1290,7 @@ const audioFallbacks = {
     "ca_roule": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207605/cours-francais/vocabulaire/ca_roule.mp3",
     "cest_parti": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207606/cours-francais/vocabulaire/cest_parti.mp3",
     "vas_y": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207608/cours-francais/vocabulaire/vas_y.mp3",
+    "allez_y": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207608/cours-francais/vocabulaire/allez_y.mp3",
     "carrement": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207609/cours-francais/vocabulaire/carrement.mp3",
     "nickel": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207610/cours-francais/vocabulaire/nickel.mp3",
     "impeccable": "https://res.cloudinary.com/da9yduppr/video/upload/v1762207611/cours-francais/vocabulaire/impeccable.mp3",
@@ -1314,17 +1338,20 @@ async function loadAudioUrls() {
     
     // Créer une promesse de chargement unique
     audioUrlsLoadingPromise = (async () => {
+        // Limiter à 2 tentatives seulement pour éviter trop de requêtes
         const candidates = [
             'audio_urls.json',
-            '/audio_urls.json',
-            `${window.location.origin}/audio_urls.json`,
-            './audio_urls.json',
-            '../audio_urls.json'
+            '/audio_urls.json'
         ];
         let loaded = false;
         for (const url of candidates) {
             try {
-                const response = await fetch(url, { cache: 'no-store' });
+                // Utiliser le cache du navigateur au lieu de 'no-store' pour réduire les requêtes
+                const response = await fetch(url, { 
+                    cache: 'default',
+                    // Ajouter un timeout pour éviter les requêtes qui traînent
+                    signal: AbortSignal.timeout(5000)
+                });
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const contentType = response.headers.get('content-type') || '';
                 if (!contentType.includes('application/json')) {
@@ -1337,8 +1364,8 @@ async function loadAudioUrls() {
                     break;
                 }
             } catch (err) {
-                // Ne pas logger les erreurs 404 pour éviter le spam dans la console
-                if (!err.message || !err.message.includes('404')) {
+                // Ne pas logger les erreurs 404 ou timeout pour éviter le spam dans la console
+                if (!err.message || (!err.message.includes('404') && !err.message.includes('timeout') && !err.message.includes('aborted'))) {
                     console.warn(`Chargement audio_urls.json échoué via ${url}:`, err.message || err);
                 }
                 continue;
