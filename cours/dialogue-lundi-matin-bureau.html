@@ -15,6 +15,9 @@
 .dialogue-container {
     max-width: 900px;
     margin: 40px auto;
+    padding: 20px;
+    min-height: 200px;
+    background: transparent;
 }
 
 .dialogue-line {
@@ -182,11 +185,16 @@ async function loadDialogue() {
     
     if (!container) {
         console.error('❌ dialogue-container non trouvé dans le DOM');
+        console.error('🔍 Recherche de tous les éléments avec "dialogue" dans l\'ID...');
+        const allElements = document.querySelectorAll('[id*="dialogue"]');
+        console.log('Éléments trouvés:', allElements);
         return;
     }
     
+    console.log('✅ Conteneur trouvé:', container);
+    
     // Afficher un message de chargement
-    container.innerHTML = '<p style="text-align: center; color: #666;">Chargement du dialogue...</p>';
+    container.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">Chargement du dialogue...</p>';
     console.log('📝 Message de chargement affiché');
     
     try {
@@ -234,10 +242,11 @@ async function loadDialogue() {
             }];
             const dialogue = fallbackData.find(d => d.id === 'dialogue1');
             if (dialogue) {
+                console.log('✅ Utilisation des données de fallback');
                 renderDialogue(container, dialogue);
                 return;
             }
-            throw new Error('Impossible de charger dialogue-data.json');
+            throw new Error('Impossible de charger dialogue-data.json et données de fallback non disponibles');
         }
         
         const dialogues = await response.json();
@@ -245,9 +254,13 @@ async function loadDialogue() {
         const dialogue = dialogues.find(d => d.id === 'dialogue1');
         
         if (!dialogue) {
-            console.error('❌ Dialogue dialogue1 non trouvé');
+            console.error('❌ Dialogue dialogue1 non trouvé dans:', dialogues);
             container.innerHTML = 
-                '<p style="color: red; text-align: center;">Dialogue non trouvé dans les données</p>';
+                '<div style="color: red; text-align: center; padding: 20px;">' +
+                '<h3>❌ Dialogue non trouvé</h3>' +
+                '<p>Le dialogue "dialogue1" n\'existe pas dans les données.</p>' +
+                '<p>Dialogues disponibles: ' + dialogues.map(d => d.id).join(', ') + '</p>' +
+                '</div>';
             return;
         }
         
@@ -292,7 +305,8 @@ function renderDialogue(container, dialogue) {
     });
     
     console.log('📝 Génération du HTML pour', correctedLines.length, 'lignes');
-    container.innerHTML = correctedLines.map((line, index) => `
+    
+    const htmlContent = correctedLines.map((line, index) => `
             <div class="dialogue-line">
                 <div class="speaker-avatar">${line.speaker.charAt(0)}</div>
                 <div class="dialogue-content">
@@ -318,6 +332,33 @@ function renderDialogue(container, dialogue) {
                 </div>
             </div>
         `).join('');
+    
+    console.log('📦 HTML généré, longueur:', htmlContent.length, 'caractères');
+    console.log('📦 Premiers caractères:', htmlContent.substring(0, 200));
+    
+    // Insérer le HTML dans le conteneur
+    try {
+        console.log('📦 Avant insertion, conteneur:', container);
+        console.log('📦 Style du conteneur:', window.getComputedStyle(container).display);
+        container.innerHTML = htmlContent;
+        console.log('✅ HTML inséré dans le conteneur');
+        console.log('📊 Conteneur après insertion:', container.children.length, 'enfants');
+        console.log('📊 Contenu du conteneur:', container.innerHTML.substring(0, 300));
+        
+        // Vérifier la visibilité
+        const rect = container.getBoundingClientRect();
+        console.log('📐 Position du conteneur:', {
+            top: rect.top,
+            left: rect.left,
+            width: rect.width,
+            height: rect.height,
+            visible: rect.width > 0 && rect.height > 0
+        });
+    } catch (error) {
+        console.error('❌ Erreur lors de l\'insertion du HTML:', error);
+        container.innerHTML = '<p style="color: red;">Erreur lors de l\'affichage du dialogue: ' + error.message + '</p>';
+        return;
+    }
         
     // Initialiser les événements audio
     correctedLines.forEach((line, index) => {
@@ -414,10 +455,30 @@ function formatTime(seconds) {
 }
 
 // Charger le dialogue au chargement de la page
+console.log('📄 Script dialogue-lundi-matin-bureau.html chargé');
+console.log('📄 État du document:', document.readyState);
+
+// Attendre que le conteneur soit disponible
+function initDialogue() {
+    console.log('🔧 initDialogue() appelée');
+    const container = document.getElementById('dialogue-container');
+    if (container) {
+        console.log('✅ Conteneur trouvé, chargement du dialogue...');
+        loadDialogue();
+    } else {
+        console.warn('⚠️ Conteneur non trouvé, nouvelle tentative dans 100ms...');
+        setTimeout(initDialogue, 100);
+    }
+}
+
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadDialogue);
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('📄 DOMContentLoaded déclenché');
+        setTimeout(initDialogue, 100);
+    });
 } else {
-    loadDialogue();
+    console.log('📄 DOM déjà chargé, initialisation immédiate');
+    setTimeout(initDialogue, 100);
 }
 </script>
 
