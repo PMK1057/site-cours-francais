@@ -30,8 +30,8 @@ const fetch = globalThis.fetch;
 
 // Configuration
 const INPUT_FILE = path.join(__dirname, 'dialogue-input.txt');
-const OUTPUT_DIR = path.join(__dirname, 'public', 'audio');
-const DATA_FILE = path.join(__dirname, 'public', 'dialogue-data.json');
+const OUTPUT_DIR = path.join(__dirname, 'audio');
+const DATA_FILE = path.join(__dirname, 'dialogue-data.json');
 const VOICE_CONFIG_FILE = path.join(__dirname, 'voice-config.json');
 const SPEAKER_MAPPING_FILE = path.join(__dirname, 'speaker-mapping.json');
 
@@ -284,7 +284,7 @@ async function main() {
       const gender = speakerMapping[line.speaker] || 'homme';
       const audioFileName = `${dialogue.id}_line${i}.mp3`;
       const audioPath = path.join(OUTPUT_DIR, audioFileName);
-      const audioUrl = `/audio/${audioFileName}`;
+      const audioUrl = `/dialogues/audio/${audioFileName}`;
 
       try {
         const preview = line.text.substring(0, 50);

@@ -6,32 +6,32 @@
       {
         "speaker": "Julie",
         "text": "Salut Marc ! Ça va ?",
-        "audioPath": "/audio/dialogue1_line0.mp3"
+        "audioPath": "/dialogues/audio/dialogue1_line0.mp3"
       },
       {
         "speaker": "Marc",
         "text": "Bof, pas terrible... J'ai pas bien dormi ce week-end. Et toi ?",
-        "audioPath": "/audio/dialogue1_line1.mp3"
+        "audioPath": "/dialogues/audio/dialogue1_line1.mp3"
       },
       {
         "speaker": "Julie",
         "text": "Ouais, ça va. Un peu fatiguée aussi. T'as fait quoi ce week-end ?",
-        "audioPath": "/audio/dialogue1_line2.mp3"
+        "audioPath": "/dialogues/audio/dialogue1_line2.mp3"
       },
       {
         "speaker": "Marc",
         "text": "Pas grand-chose, j'ai regardé des séries. Toi ?",
-        "audioPath": "/audio/dialogue1_line3.mp3"
+        "audioPath": "/dialogues/audio/dialogue1_line3.mp3"
       },
       {
         "speaker": "Julie",
         "text": "Pareil, j'ai pas bougé de chez moi. Bon, allez, bon courage pour aujourd'hui !",
-        "audioPath": "/audio/dialogue1_line4.mp3"
+        "audioPath": "/dialogues/audio/dialogue1_line4.mp3"
       },
       {
         "speaker": "Marc",
         "text": "Merci, toi aussi !",
-        "audioPath": "/audio/dialogue1_line5.mp3"
+        "audioPath": "/dialogues/audio/dialogue1_line5.mp3"
       }
     ]
   }

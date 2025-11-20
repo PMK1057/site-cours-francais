@@ -4,7 +4,7 @@
   "description": "Site de cours de français avec génération de dialogues audio",
   "main": "generate-audio.js",
   "scripts": {
-    "generate-audio": "node generate-audio.js"
+    "generate-audio": "node dialogues/generate-audio.js"
   },
   "keywords": [
     "français",

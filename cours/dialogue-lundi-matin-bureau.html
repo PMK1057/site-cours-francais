@@ -177,19 +177,27 @@ audio {
 <script>
 // Charger et afficher le dialogue
 async function loadDialogue() {
+    console.log('🎬 loadDialogue() appelée');
     const container = document.getElementById('dialogue-container');
+    
+    if (!container) {
+        console.error('❌ dialogue-container non trouvé dans le DOM');
+        return;
+    }
     
     // Afficher un message de chargement
     container.innerHTML = '<p style="text-align: center; color: #666;">Chargement du dialogue...</p>';
+    console.log('📝 Message de chargement affiché');
     
     try {
         // Essayer plusieurs chemins possibles
         let response;
         const paths = [
-            '/public/dialogue-data.json',
+            '/dialogues/dialogue-data.json',
             '/dialogue-data.json',
-            './public/dialogue-data.json',
-            '../public/dialogue-data.json'
+            './dialogues/dialogue-data.json',
+            '../dialogues/dialogue-data.json',
+            '/public/dialogue-data.json'
         ];
         
         let loaded = false;
@@ -216,12 +224,12 @@ async function loadDialogue() {
                 "id": "dialogue1",
                 "title": "Lundi matin au bureau",
                 "lines": [
-                    {"speaker": "Julie", "text": "Salut Marc ! Ça va ?", "audioPath": "/audio/dialogue1_line0.mp3"},
-                    {"speaker": "Marc", "text": "Bof, pas terrible... J'ai pas bien dormi ce week-end. Et toi ?", "audioPath": "/audio/dialogue1_line1.mp3"},
-                    {"speaker": "Julie", "text": "Ouais, ça va. Un peu fatiguée aussi. T'as fait quoi ce week-end ?", "audioPath": "/audio/dialogue1_line2.mp3"},
-                    {"speaker": "Marc", "text": "Pas grand-chose, j'ai regardé des séries. Toi ?", "audioPath": "/audio/dialogue1_line3.mp3"},
-                    {"speaker": "Julie", "text": "Pareil, j'ai pas bougé de chez moi. Bon, allez, bon courage pour aujourd'hui !", "audioPath": "/audio/dialogue1_line4.mp3"},
-                    {"speaker": "Marc", "text": "Merci, toi aussi !", "audioPath": "/audio/dialogue1_line5.mp3"}
+                    {"speaker": "Julie", "text": "Salut Marc ! Ça va ?", "audioPath": "/dialogues/audio/dialogue1_line0.mp3"},
+                    {"speaker": "Marc", "text": "Bof, pas terrible... J'ai pas bien dormi ce week-end. Et toi ?", "audioPath": "/dialogues/audio/dialogue1_line1.mp3"},
+                    {"speaker": "Julie", "text": "Ouais, ça va. Un peu fatiguée aussi. T'as fait quoi ce week-end ?", "audioPath": "/dialogues/audio/dialogue1_line2.mp3"},
+                    {"speaker": "Marc", "text": "Pas grand-chose, j'ai regardé des séries. Toi ?", "audioPath": "/dialogues/audio/dialogue1_line3.mp3"},
+                    {"speaker": "Julie", "text": "Pareil, j'ai pas bougé de chez moi. Bon, allez, bon courage pour aujourd'hui !", "audioPath": "/dialogues/audio/dialogue1_line4.mp3"},
+                    {"speaker": "Marc", "text": "Merci, toi aussi !", "audioPath": "/dialogues/audio/dialogue1_line5.mp3"}
                 ]
             }];
             const dialogue = fallbackData.find(d => d.id === 'dialogue1');
@@ -233,14 +241,17 @@ async function loadDialogue() {
         }
         
         const dialogues = await response.json();
+        console.log('✅ JSON chargé, dialogues trouvés:', dialogues.length);
         const dialogue = dialogues.find(d => d.id === 'dialogue1');
         
         if (!dialogue) {
+            console.error('❌ Dialogue dialogue1 non trouvé');
             container.innerHTML = 
                 '<p style="color: red; text-align: center;">Dialogue non trouvé dans les données</p>';
             return;
         }
         
+        console.log('✅ Dialogue trouvé:', dialogue.title, 'avec', dialogue.lines.length, 'lignes');
         renderDialogue(container, dialogue);
     } catch (error) {
         console.error('Erreur lors du chargement du dialogue:', error);
@@ -261,17 +272,26 @@ async function loadDialogue() {
 }
 
 function renderDialogue(container, dialogue) {
+    console.log('🎨 renderDialogue() appelée avec', dialogue.lines.length, 'lignes');
+    
+    if (!container) {
+        console.error('❌ Container non trouvé dans renderDialogue');
+        return;
+    }
+    
     // Corriger les chemins audio si nécessaire
     const correctedLines = dialogue.lines.map(line => {
         let audioPath = line.audioPath;
-        // Si le chemin commence par /audio/, essayer /public/audio/ aussi
+        // Normaliser les chemins vers /dialogues/audio/
         if (audioPath.startsWith('/audio/')) {
-            // Garder le chemin tel quel, mais créer un fallback
-            return { ...line, audioPath };
+            audioPath = audioPath.replace('/audio/', '/dialogues/audio/');
+        } else if (audioPath.startsWith('/public/audio/')) {
+            audioPath = audioPath.replace('/public/audio/', '/dialogues/audio/');
         }
-        return line;
+        return { ...line, audioPath };
     });
     
+    console.log('📝 Génération du HTML pour', correctedLines.length, 'lignes');
     container.innerHTML = correctedLines.map((line, index) => `
             <div class="dialogue-line">
                 <div class="speaker-avatar">${line.speaker.charAt(0)}</div>
@@ -310,10 +330,19 @@ function renderDialogue(container, dialogue) {
             });
             audio.addEventListener('error', (e) => {
                 console.error(`Erreur audio ${index}:`, e);
-                // Essayer un chemin alternatif
-                const altPath = line.audioPath.replace('/audio/', '/public/audio/');
-                if (audio.src !== altPath) {
-                    audio.src = altPath;
+                // Essayer plusieurs chemins alternatifs
+                const originalPath = line.audioPath;
+                const altPaths = [
+                    originalPath.replace('/public/audio/', '/audio/'),
+                    originalPath.replace('/audio/', './audio/'),
+                    originalPath.replace('/audio/', '../public/audio/'),
+                    originalPath
+                ];
+                
+                let currentIndex = altPaths.indexOf(audio.src) + 1;
+                if (currentIndex < altPaths.length) {
+                    audio.src = altPaths[currentIndex];
+                    console.log(`Tentative chemin alternatif ${currentIndex + 1}/${altPaths.length}: ${altPaths[currentIndex]}`);
                 }
             });
         }

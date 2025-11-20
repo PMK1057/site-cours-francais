@@ -8,7 +8,7 @@ Le système est déjà configuré avec :
 - ✅ Voice IDs configurés dans `voice-config.json`
 - ✅ Scripts de génération créés
 - ✅ Composant React `DialoguePlayer.jsx` prêt
-- ✅ Dossier `/public/audio/` créé
+- ✅ Dossier `audio/` créé pour les MP3
 
 ## 🚀 Utilisation via Chat Cursor
 
@@ -40,8 +40,8 @@ Cliente : Du pain complet, s'il vous plaît.
 **Le script va ensuite :**
 6. ✅ Lire `speaker-mapping.json` (pas de détection automatique)
 7. ✅ Attribuer les voix intelligemment avec alternance
-8. ✅ Générer tous les fichiers MP3
-9. ✅ Créer `dialogue-data.json`
+8. ✅ Générer tous les fichiers MP3 dans `dialogues/audio/`
+9. ✅ Créer `dialogue-data.json` dans `dialogues/`
 10. ✅ Afficher un résumé
 
 ## 🧠 Détection Intelligente du Genre par l'IA
@@ -59,16 +59,25 @@ L'IA analyse le contexte pour déterminer le genre :
 - Même logique pour les femmes
 - Chaque locuteur garde la même voix dans tout le dialogue
 
-## 📁 Fichiers du Système
+## 📁 Structure du Dossier `dialogues/`
 
-- `voice-config.json` - Configuration des 4 Voice IDs
-- `speaker-mapping.json` - **Créé par l'IA** : mapping locuteur → genre
-- `generate-audio.js` - Script principal de génération (lit speaker-mapping.json)
-- `parse-dialogues.js` - Helper pour parser les dialogues
-- `dialogue-input.txt` - Fichier de stockage des dialogues
-- `DialoguePlayer.jsx` - Composant React pour afficher les dialogues
-- `/public/audio/` - Dossier contenant les MP3 générés
-- `/public/dialogue-data.json` - Métadonnées des dialogues
+Tous les fichiers liés à la génération de dialogues sont regroupés dans le dossier `dialogues/` :
+
+```
+dialogues/
+├── generate-audio.js          # Script principal de génération
+├── parse-dialogues.js          # Helper pour parser les dialogues
+├── voice-config.json          # Configuration des 4 Voice IDs
+├── speaker-mapping.json       # Mapping locuteur → genre (créé par l'IA)
+├── dialogue-input.txt         # Fichier de stockage des dialogues
+├── dialogue-data.json         # Métadonnées des dialogues générés
+├── DialoguePlayer.jsx         # Composant React pour afficher les dialogues
+├── README-DIALOGUES.md        # Documentation
+└── audio/                     # Dossier contenant les MP3 générés
+    ├── dialogue1_line0.mp3
+    ├── dialogue1_line1.mp3
+    └── ...
+```
 
 ## 🎨 Utilisation du Composant React
 
