@@ -5,6 +5,7 @@
     <div class="info-box">
         <h3>📌 Introduction</h3>
         <p>Les verbes pronominaux utilisent les pronoms réfléchis : <strong>me, te, se, nous, vous, se</strong></p>
+        <p><strong>⚠️ Important :</strong> Au passé composé, les verbes pronominaux utilisent <strong>systématiquement l'auxiliaire "être"</strong> (et non "avoir") !</p>
     </div>
 
     <div class="warning-box">
@@ -38,27 +39,35 @@
     <div class="exercise">
         <div class="question">
             <p>1. Chaque matin, je <input type="text" id="q1" class="answer"> (se réveiller) à 7 heures.</p>
+            <div id="feedback-q1" class="feedback"></div>
         </div>
         <div class="question">
             <p>2. Tu <input type="text" id="q2" class="answer"> (s'habiller) rapidement pour aller au travail.</p>
+            <div id="feedback-q2" class="feedback"></div>
         </div>
         <div class="question">
             <p>3. Elle <input type="text" id="q3" class="answer"> (se maquiller) devant le miroir.</p>
+            <div id="feedback-q3" class="feedback"></div>
         </div>
         <div class="question">
             <p>4. Nous <input type="text" id="q4" class="answer"> (se promener) dans le parc tous les dimanches.</p>
+            <div id="feedback-q4" class="feedback"></div>
         </div>
         <div class="question">
             <p>5. Vous <input type="text" id="q5" class="answer"> (se reposer) après le déjeuner.</p>
+            <div id="feedback-q5" class="feedback"></div>
         </div>
         <div class="question">
             <p>6. Marie <input type="text" id="q6" class="answer"> (se coucher) tard tous les soirs.</p>
+            <div id="feedback-q6" class="feedback"></div>
         </div>
         <div class="question">
             <p>7. Nous <input type="text" id="q7" class="answer"> (se rencontrer) au café demain.</p>
+            <div id="feedback-q7" class="feedback"></div>
         </div>
         <div class="question">
             <p>8. Vous <input type="text" id="q8" class="answer"> (s'ennuyer) pendant le cours ?</p>
+            <div id="feedback-q8" class="feedback"></div>
         </div>
         <button onclick="checkVerbesPronominauxPresent()">Vérifier mes réponses</button>
         <button onclick="resetVerbesPronominauxPresent()">Recommencer</button>
@@ -69,27 +78,35 @@
     <div class="exercise">
         <div class="question">
             <p>1. Hier, ils <input type="text" id="q9" class="answer"> (se baigner) dans la mer.</p>
+            <div id="feedback-q9" class="feedback"></div>
         </div>
         <div class="question">
-            <p>2. Je <input type="text" id="q10" class="answer"> (s'amuser) beaucoup à la fête hier soir.</p>
+            <p>2. Je <input type="text" id="q10a" class="answer" placeholder="auxiliaire + pronom"> <strong>beaucoup</strong> <input type="text" id="q10b" class="answer" placeholder="participe passé"> (s'amuser) à la fête hier soir.</p>
+            <div id="feedback-q10" class="feedback"></div>
         </div>
         <div class="question">
             <p>3. Tu <input type="text" id="q11" class="answer"> (se lever) tôt ce matin ?</p>
+            <div id="feedback-q11" class="feedback"></div>
         </div>
         <div class="question">
             <p>4. Les enfants <input type="text" id="q12" class="answer"> (se laver) les mains avant de manger.</p>
+            <div id="feedback-q12" class="feedback"></div>
         </div>
         <div class="question">
             <p>5. Je <input type="text" id="q13" class="answer"> (s'intéresser) à ce film la semaine dernière.</p>
+            <div id="feedback-q13" class="feedback"></div>
         </div>
         <div class="question">
             <p>6. Tu <input type="text" id="q14" class="answer"> (se souvenir) de notre première rencontre hier ?</p>
+            <div id="feedback-q14" class="feedback"></div>
         </div>
         <div class="question">
             <p>7. Elles <input type="text" id="q15" class="answer"> (se préparer) pour la soirée hier.</p>
+            <div id="feedback-q15" class="feedback"></div>
         </div>
         <div class="question">
             <p>8. Elle <input type="text" id="q16" class="answer"> (se reposer) après son voyage.</p>
+            <div id="feedback-q16" class="feedback"></div>
         </div>
         <button onclick="checkVerbesPronominauxPC()">Vérifier mes réponses</button>
         <button onclick="resetVerbesPronominauxPC()">Recommencer</button>
@@ -110,13 +127,84 @@
 
         const correctAnswersPC = {
             q9: ["se sont baignés", "se sont baignes", "se sont baignées", "se sont baignees"],
-            q10: ["me suis amusé", "me suis amusée", "me suis amuse", "me suis amusee"],
+            q10a: ["me suis", "me suis"],
+            q10b: ["amusé", "amusée", "amuse", "amusee"],
             q11: ["t'es levé", "t'es levée", "t es leve", "t es levee", "t'es levé(e)", "t'es levee"],
             q12: ["se sont lavés", "se sont laves", "se sont lavées", "se sont lavees"],
             q13: ["m'intéressé", "m interesse", "me suis intéressé", "me suis interesse", "me suis intéressée", "me suis interessée"],
             q14: ["t'es souvenu", "t'es souvenue", "t es souvenu", "t es souvenue"],
             q15: ["se sont préparées", "se sont preparées", "se sont prepares", "se sont préparés"],
             q16: ["s'est reposée", "s'est reposee", "s'est repose"]
+        };
+
+        const feedbacksPresent = {
+            q1: {
+                correct: "✅ Parfait ! 'Je me réveille' - N'oubliez pas le pronom réfléchi 'me'.",
+                incorrect: "❌ Réponse attendue : 'me réveille'. N'oubliez pas le pronom réfléchi 'me' avant le verbe."
+            },
+            q2: {
+                correct: "✅ Excellent ! 'Tu t'habilles' - L'élision 'te' → 't'' est nécessaire devant une voyelle.",
+                incorrect: "❌ Réponse attendue : 't'habilles'. Devant une voyelle, 'te' devient 't'' (élision)."
+            },
+            q3: {
+                correct: "✅ Très bien ! 'Elle se maquille' - Le pronom réfléchi 'se' est à la 3e personne.",
+                incorrect: "❌ Réponse attendue : 'se maquille'. Avec 'elle', utilisez le pronom réfléchi 'se'."
+            },
+            q4: {
+                correct: "✅ Parfait ! 'Nous nous promenons' - Le pronom réfléchi 'nous' est répété.",
+                incorrect: "❌ Réponse attendue : 'nous promenons'. N'oubliez pas le pronom réfléchi 'nous' avant le verbe."
+            },
+            q5: {
+                correct: "✅ Excellent ! 'Vous vous reposez' - Le pronom réfléchi 'vous' est nécessaire.",
+                incorrect: "❌ Réponse attendue : 'vous reposez'. N'oubliez pas le pronom réfléchi 'vous' avant le verbe."
+            },
+            q6: {
+                correct: "✅ Très bien ! 'Marie se couche' - Avec un sujet à la 3e personne, utilisez 'se'.",
+                incorrect: "❌ Réponse attendue : 'se couche'. Avec 'Marie' (3e personne), utilisez le pronom réfléchi 'se'."
+            },
+            q7: {
+                correct: "✅ Parfait ! 'Nous nous rencontrons' - Le pronom réfléchi 'nous' est répété.",
+                incorrect: "❌ Réponse attendue : 'nous rencontrons'. N'oubliez pas le pronom réfléchi 'nous' avant le verbe."
+            },
+            q8: {
+                correct: "✅ Excellent ! 'Vous vous ennuyez' - Le pronom réfléchi 'vous' est nécessaire.",
+                incorrect: "❌ Réponse attendue : 'vous ennuyez'. N'oubliez pas le pronom réfléchi 'vous' avant le verbe."
+            }
+        };
+
+        const feedbacksPC = {
+            q9: {
+                correct: "✅ Parfait ! 'Ils se sont baignés' - Auxiliaire 'être' + accord avec le sujet pluriel.",
+                incorrect: "❌ Réponse attendue : 'se sont baignés'. N'oubliez pas : auxiliaire 'être' (pas 'avoir') et accord avec 'ils'."
+            },
+            q10: {
+                correct: "✅ Excellent ! 'Je me suis beaucoup amusé' - L'adverbe 'beaucoup' se place entre l'auxiliaire et le participe passé.",
+                incorrect: "❌ Réponse attendue : 'me suis' + 'amusé'. L'auxiliaire 'être' est obligatoire, et 'beaucoup' se place entre l'auxiliaire et le participe passé."
+            },
+            q11: {
+                correct: "✅ Très bien ! 'Tu t'es levé' - Auxiliaire 'être' avec élision 'te' → 't''.",
+                incorrect: "❌ Réponse attendue : 't'es levé'. Auxiliaire 'être' (pas 'avoir') et élision 'te' → 't'' devant voyelle."
+            },
+            q12: {
+                correct: "✅ Parfait ! 'Les enfants se sont lavés' - Auxiliaire 'être' + accord avec le sujet pluriel.",
+                incorrect: "❌ Réponse attendue : 'se sont lavés'. Auxiliaire 'être' (pas 'avoir') et accord avec 'les enfants' (pluriel)."
+            },
+            q13: {
+                correct: "✅ Excellent ! 'Je me suis intéressé' - Auxiliaire 'être' obligatoire pour les verbes pronominaux.",
+                incorrect: "❌ Réponse attendue : 'me suis intéressé' ou 'm'intéressé'. Auxiliaire 'être' (pas 'avoir') pour les verbes pronominaux."
+            },
+            q14: {
+                correct: "✅ Très bien ! 'Tu t'es souvenu' - Auxiliaire 'être' avec élision 'te' → 't''.",
+                incorrect: "❌ Réponse attendue : 't'es souvenu'. Auxiliaire 'être' (pas 'avoir') et élision 'te' → 't'' devant voyelle."
+            },
+            q15: {
+                correct: "✅ Parfait ! 'Elles se sont préparées' - Auxiliaire 'être' + accord avec 'elles' (féminin pluriel).",
+                incorrect: "❌ Réponse attendue : 'se sont préparées'. Auxiliaire 'être' (pas 'avoir') et accord avec 'elles' (féminin pluriel)."
+            },
+            q16: {
+                correct: "✅ Excellent ! 'Elle s'est reposée' - Auxiliaire 'être' + accord avec 'elle' (féminin).",
+                incorrect: "❌ Réponse attendue : 's'est reposée'. Auxiliaire 'être' (pas 'avoir') et accord avec 'elle' (féminin)."
+            }
         };
 
         function normalizeAnswer(answer) {
@@ -129,14 +217,19 @@
 
             Object.keys(correctAnswersPresent).forEach(id => {
                 const input = document.getElementById(id);
+                const feedbackDiv = document.getElementById(`feedback-${id}`);
                 const userAnswer = normalizeAnswer(input.value || '');
                 const validAnswers = correctAnswersPresent[id].map(a => normalizeAnswer(a));
                 
                 if (validAnswers.includes(userAnswer)) {
                     input.className = 'answer correct';
+                    feedbackDiv.className = 'feedback show correct';
+                    feedbackDiv.textContent = feedbacksPresent[id].correct;
                     correct++;
                 } else {
                     input.className = 'answer incorrect';
+                    feedbackDiv.className = 'feedback show incorrect';
+                    feedbackDiv.textContent = feedbacksPresent[id].incorrect;
                 }
             });
 
@@ -158,26 +251,67 @@
         function resetVerbesPronominauxPresent() {
             Object.keys(correctAnswersPresent).forEach(id => {
                 const input = document.getElementById(id);
+                const feedbackDiv = document.getElementById(`feedback-${id}`);
                 input.value = '';
                 input.className = 'answer';
+                if (feedbackDiv) {
+                    feedbackDiv.className = 'feedback';
+                    feedbackDiv.textContent = '';
+                }
             });
             document.getElementById('result-verbes-pronominaux-present').className = 'result';
         }
 
         function checkVerbesPronominauxPC() {
             let correct = 0;
-            const total = Object.keys(correctAnswersPC).length;
+            // Pour q10, on compte comme une seule question avec deux champs
+            const total = Object.keys(correctAnswersPC).length - 1; // -1 car q10a et q10b comptent pour 1
 
+            // Traitement spécial pour q10 (deux champs)
+            const input10a = document.getElementById('q10a');
+            const input10b = document.getElementById('q10b');
+            const feedback10 = document.getElementById('feedback-q10');
+            const answer10a = normalizeAnswer(input10a.value || '');
+            const answer10b = normalizeAnswer(input10b.value || '');
+            const valid10a = correctAnswersPC.q10a.map(a => normalizeAnswer(a));
+            const valid10b = correctAnswersPC.q10b.map(a => normalizeAnswer(a));
+            
+            const q10Correct = valid10a.includes(answer10a) && valid10b.includes(answer10b);
+            if (q10Correct) {
+                input10a.className = 'answer correct';
+                input10b.className = 'answer correct';
+                feedback10.className = 'feedback show correct';
+                feedback10.textContent = feedbacksPC.q10.correct;
+                correct++;
+            } else {
+                input10a.className = 'answer incorrect';
+                input10b.className = 'answer incorrect';
+                feedback10.className = 'feedback show incorrect';
+                feedback10.textContent = feedbacksPC.q10.incorrect;
+            }
+
+            // Traitement des autres questions
             Object.keys(correctAnswersPC).forEach(id => {
+                if (id === 'q10a' || id === 'q10b') return; // Déjà traité
+                
                 const input = document.getElementById(id);
+                const feedbackDiv = document.getElementById(`feedback-${id}`);
                 const userAnswer = normalizeAnswer(input.value || '');
                 const validAnswers = correctAnswersPC[id].map(a => normalizeAnswer(a));
                 
                 if (validAnswers.includes(userAnswer)) {
                     input.className = 'answer correct';
+                    if (feedbackDiv) {
+                        feedbackDiv.className = 'feedback show correct';
+                        feedbackDiv.textContent = feedbacksPC[id].correct;
+                    }
                     correct++;
                 } else {
                     input.className = 'answer incorrect';
+                    if (feedbackDiv) {
+                        feedbackDiv.className = 'feedback show incorrect';
+                        feedbackDiv.textContent = feedbacksPC[id].incorrect;
+                    }
                 }
             });
 
@@ -199,9 +333,20 @@
         function resetVerbesPronominauxPC() {
             Object.keys(correctAnswersPC).forEach(id => {
                 const input = document.getElementById(id);
+                const feedbackDiv = document.getElementById(`feedback-${id}`);
                 input.value = '';
                 input.className = 'answer';
+                if (feedbackDiv) {
+                    feedbackDiv.className = 'feedback';
+                    feedbackDiv.textContent = '';
+                }
             });
+            // Reset spécial pour q10
+            const feedback10 = document.getElementById('feedback-q10');
+            if (feedback10) {
+                feedback10.className = 'feedback';
+                feedback10.textContent = '';
+            }
             document.getElementById('result-verbes-pronominaux-pc').className = 'result';
         }
     </script>

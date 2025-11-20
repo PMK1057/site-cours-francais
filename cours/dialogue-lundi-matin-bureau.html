@@ -1,0 +1,297 @@
+<div class="course-content">
+    <div class="back-button-container">
+        <button class="back-btn" onclick="backToSection('dialogues')">← Retour aux Dialogues</button>
+    </div>
+
+    <h1>💼 Lundi matin au bureau</h1>
+    <p class="course-intro">Dialogue informel entre deux collègues au bureau. Pratiquez votre compréhension orale et votre prononciation avec les lecteurs audio interactifs.</p>
+
+    <div id="dialogue-container" class="dialogue-container">
+        <!-- Le dialogue sera chargé dynamiquement depuis dialogue-data.json -->
+    </div>
+</div>
+
+<style>
+.dialogue-container {
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.dialogue-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    transition: background 0.2s;
+}
+
+.dialogue-line:hover {
+    background: #e9ecef;
+}
+
+.speaker-avatar {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.dialogue-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.speaker-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.dialogue-text {
+    color: #555;
+    margin-bottom: 12px;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.audio-player {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.play-btn {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-size: 16px;
+}
+
+.play-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.play-btn:active {
+    transform: scale(0.95);
+}
+
+.progress-container {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #e9ecef;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 3px;
+    transition: width 0.1s;
+}
+
+.time-display {
+    flex-shrink: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #666;
+    min-width: 90px;
+    text-align: right;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.volume-slider {
+    width: 80px;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #e9ecef;
+    border-radius: 2px;
+    outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #667eea;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: #667eea;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+audio {
+    display: none;
+}
+</style>
+
+<script>
+// Charger et afficher le dialogue
+async function loadDialogue() {
+    try {
+        const response = await fetch('/dialogue-data.json');
+        if (!response.ok) throw new Error('Erreur de chargement');
+        
+        const dialogues = await response.json();
+        const dialogue = dialogues.find(d => d.id === 'dialogue1');
+        
+        if (!dialogue) {
+            document.getElementById('dialogue-container').innerHTML = 
+                '<p style="color: red;">Dialogue non trouvé</p>';
+            return;
+        }
+        
+        const container = document.getElementById('dialogue-container');
+        container.innerHTML = dialogue.lines.map((line, index) => `
+            <div class="dialogue-line">
+                <div class="speaker-avatar">${line.speaker.charAt(0)}</div>
+                <div class="dialogue-content">
+                    <div class="speaker-name">${line.speaker}</div>
+                    <div class="dialogue-text">${line.text}</div>
+                    <div class="audio-player">
+                        <audio id="audio-${index}" src="${line.audioPath}" preload="metadata"></audio>
+                        <div class="audio-controls">
+                            <button class="play-btn" onclick="togglePlay(${index})" id="play-btn-${index}">▶</button>
+                            <div class="progress-container" onclick="seekTo(event, ${index})">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-${index}" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="time-display" id="time-${index}">0:00 / 0:00</div>
+                            <div class="volume-control">
+                                <span>🔊</span>
+                                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" 
+                                       oninput="setVolume(${index}, this.value)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+        // Initialiser les événements audio
+        dialogue.lines.forEach((line, index) => {
+            const audio = document.getElementById(`audio-${index}`);
+            if (audio) {
+                audio.addEventListener('loadedmetadata', () => updateTime(index));
+                audio.addEventListener('timeupdate', () => updateTime(index));
+                audio.addEventListener('ended', () => {
+                    document.getElementById(`play-btn-${index}`).textContent = '▶';
+                });
+            }
+        });
+        
+    } catch (error) {
+        console.error('Erreur:', error);
+        document.getElementById('dialogue-container').innerHTML = 
+            '<p style="color: red;">Erreur de chargement du dialogue</p>';
+    }
+}
+
+function togglePlay(index) {
+    const audio = document.getElementById(`audio-${index}`);
+    const btn = document.getElementById(`play-btn-${index}`);
+    
+    if (audio.paused) {
+        audio.play();
+        btn.textContent = '⏸';
+    } else {
+        audio.pause();
+        btn.textContent = '▶';
+    }
+}
+
+function updateTime(index) {
+    const audio = document.getElementById(`audio-${index}`);
+    const progress = document.getElementById(`progress-${index}`);
+    const timeDisplay = document.getElementById(`time-${index}`);
+    
+    if (!audio || !progress || !timeDisplay) return;
+    
+    const current = audio.currentTime || 0;
+    const duration = audio.duration || 0;
+    const percent = duration > 0 ? (current / duration) * 100 : 0;
+    
+    progress.style.width = percent + '%';
+    timeDisplay.textContent = formatTime(current) + ' / ' + formatTime(duration);
+}
+
+function seekTo(event, index) {
+    const audio = document.getElementById(`audio-${index}`);
+    const container = event.currentTarget;
+    const rect = container.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const percent = x / rect.width;
+    
+    if (audio.duration) {
+        audio.currentTime = percent * audio.duration;
+    }
+}
+
+function setVolume(index, value) {
+    const audio = document.getElementById(`audio-${index}`);
+    if (audio) {
+        audio.volume = parseFloat(value);
+    }
+}
+
+function formatTime(seconds) {
+    if (isNaN(seconds)) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+// Charger le dialogue au chargement de la page
+loadDialogue();
+</script>
+

@@ -7,8 +7,26 @@
 
 const fs = require('fs');
 const path = require('path');
-const fetch = require('node-fetch');
-require('dotenv').config();
+
+// Charger .env manuellement si dotenv n'est pas disponible
+try {
+  require('dotenv').config();
+} catch (e) {
+  // Si dotenv n'est pas installé, charger .env manuellement
+  const envPath = path.join(__dirname, '.env');
+  if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    envContent.split('\n').forEach(line => {
+      const match = line.match(/^([^=]+)=(.*)$/);
+      if (match) {
+        process.env[match[1].trim()] = match[2].trim();
+      }
+    });
+  }
+}
+
+// Node.js 18+ a fetch natif
+const fetch = globalThis.fetch;
 
 // Configuration
 const INPUT_FILE = path.join(__dirname, 'dialogue-input.txt');
@@ -229,7 +247,9 @@ async function generateAudio(text, voiceId, outputPath) {
     throw new Error(`API ElevenLabs erreur (${response.status}): ${errorText}`);
   }
 
-  const buffer = await response.buffer();
+  // Récupérer le buffer (compatible avec fetch natif et node-fetch)
+  const arrayBuffer = await response.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
   fs.writeFileSync(outputPath, buffer);
 }
 

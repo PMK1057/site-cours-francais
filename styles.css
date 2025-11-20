@@ -415,6 +415,32 @@ input.incorrect {
     background: #ffebee;
 }
 
+/* Feedback individuel pour chaque question */
+.feedback {
+    margin-top: 8px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    display: none;
+    line-height: 1.5;
+}
+
+.feedback.show {
+    display: block;
+}
+
+.feedback.correct {
+    background: #e8f5e9;
+    border-left: 4px solid #4caf50;
+    color: #2e7d32;
+}
+
+.feedback.incorrect {
+    background: #ffebee;
+    border-left: 4px solid #f44336;
+    color: #c62828;
+}
+
 /* Couleurs pour le passé composé */
 .auxiliaire {
     color: #667eea;
