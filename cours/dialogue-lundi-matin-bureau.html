@@ -177,28 +177,93 @@ audio {
 <script>
 // Charger et afficher le dialogue
 async function loadDialogue() {
+    const container = document.getElementById('dialogue-container');
+    
+    // Afficher un message de chargement
+    container.innerHTML = '<p style="text-align: center; color: #666;">Chargement du dialogue...</p>';
+    
     try {
-        const response = await fetch('/dialogue-data.json');
-        if (!response.ok) throw new Error('Erreur de chargement');
+        // Essayer plusieurs chemins possibles
+        let response;
+        const paths = [
+            '/public/dialogue-data.json',
+            '/dialogue-data.json',
+            './public/dialogue-data.json',
+            '../public/dialogue-data.json'
+        ];
+        
+        let loaded = false;
+        let lastError = null;
+        for (const path of paths) {
+            try {
+                response = await fetch(path);
+                if (response.ok) {
+                    loaded = true;
+                    console.log('✅ Fichier chargé depuis:', path);
+                    break;
+                }
+            } catch (e) {
+                lastError = e;
+                console.warn('❌ Erreur avec le chemin:', path);
+                continue;
+            }
+        }
+        
+        if (!loaded || !response.ok) {
+            // Fallback : utiliser les données directement si le JSON ne charge pas
+            console.warn('⚠️ Impossible de charger le JSON, utilisation des données en dur');
+            const fallbackData = [{
+                "id": "dialogue1",
+                "title": "Lundi matin au bureau",
+                "lines": [
+                    {"speaker": "Julie", "text": "Salut Marc ! Ça va ?", "audioPath": "/audio/dialogue1_line0.mp3"},
+                    {"speaker": "Marc", "text": "Bof, pas terrible... J'ai pas bien dormi ce week-end. Et toi ?", "audioPath": "/audio/dialogue1_line1.mp3"},
+                    {"speaker": "Julie", "text": "Ouais, ça va. Un peu fatiguée aussi. T'as fait quoi ce week-end ?", "audioPath": "/audio/dialogue1_line2.mp3"},
+                    {"speaker": "Marc", "text": "Pas grand-chose, j'ai regardé des séries. Toi ?", "audioPath": "/audio/dialogue1_line3.mp3"},
+                    {"speaker": "Julie", "text": "Pareil, j'ai pas bougé de chez moi. Bon, allez, bon courage pour aujourd'hui !", "audioPath": "/audio/dialogue1_line4.mp3"},
+                    {"speaker": "Marc", "text": "Merci, toi aussi !", "audioPath": "/audio/dialogue1_line5.mp3"}
+                ]
+            }];
+            const dialogue = fallbackData.find(d => d.id === 'dialogue1');
+            if (dialogue) {
+                renderDialogue(container, dialogue);
+                return;
+            }
+            throw new Error('Impossible de charger dialogue-data.json');
+        }
         
         const dialogues = await response.json();
         const dialogue = dialogues.find(d => d.id === 'dialogue1');
         
         if (!dialogue) {
-            document.getElementById('dialogue-container').innerHTML = 
-                '<p style="color: red;">Dialogue non trouvé</p>';
+            container.innerHTML = 
+                '<p style="color: red; text-align: center;">Dialogue non trouvé dans les données</p>';
             return;
         }
         
-        const container = document.getElementById('dialogue-container');
-        container.innerHTML = dialogue.lines.map((line, index) => `
+        renderDialogue(container, dialogue);
+}
+
+function renderDialogue(container, dialogue) {
+    // Corriger les chemins audio si nécessaire
+    const correctedLines = dialogue.lines.map(line => {
+        let audioPath = line.audioPath;
+        // Si le chemin commence par /audio/, essayer /public/audio/ aussi
+        if (audioPath.startsWith('/audio/')) {
+            // Garder le chemin tel quel, mais créer un fallback
+            return { ...line, audioPath };
+        }
+        return line;
+    });
+    
+    container.innerHTML = correctedLines.map((line, index) => `
             <div class="dialogue-line">
                 <div class="speaker-avatar">${line.speaker.charAt(0)}</div>
                 <div class="dialogue-content">
                     <div class="speaker-name">${line.speaker}</div>
                     <div class="dialogue-text">${line.text}</div>
                     <div class="audio-player">
-                        <audio id="audio-${index}" src="${line.audioPath}" preload="metadata"></audio>
+                        <audio id="audio-${index}" src="${line.audioPath}" preload="metadata" onerror="handleAudioError(${index}, '${line.audioPath}')"></audio>
                         <div class="audio-controls">
                             <button class="play-btn" onclick="togglePlay(${index})" id="play-btn-${index}">▶</button>
                             <div class="progress-container" onclick="seekTo(event, ${index})">
@@ -218,22 +283,34 @@ async function loadDialogue() {
             </div>
         `).join('');
         
-        // Initialiser les événements audio
-        dialogue.lines.forEach((line, index) => {
-            const audio = document.getElementById(`audio-${index}`);
-            if (audio) {
-                audio.addEventListener('loadedmetadata', () => updateTime(index));
-                audio.addEventListener('timeupdate', () => updateTime(index));
-                audio.addEventListener('ended', () => {
-                    document.getElementById(`play-btn-${index}`).textContent = '▶';
-                });
-            }
-        });
-        
-    } catch (error) {
-        console.error('Erreur:', error);
-        document.getElementById('dialogue-container').innerHTML = 
-            '<p style="color: red;">Erreur de chargement du dialogue</p>';
+    // Initialiser les événements audio
+    correctedLines.forEach((line, index) => {
+        const audio = document.getElementById(`audio-${index}`);
+        if (audio) {
+            audio.addEventListener('loadedmetadata', () => updateTime(index));
+            audio.addEventListener('timeupdate', () => updateTime(index));
+            audio.addEventListener('ended', () => {
+                document.getElementById(`play-btn-${index}`).textContent = '▶';
+            });
+            audio.addEventListener('error', (e) => {
+                console.error(`Erreur audio ${index}:`, e);
+                // Essayer un chemin alternatif
+                const altPath = line.audioPath.replace('/audio/', '/public/audio/');
+                if (audio.src !== altPath) {
+                    audio.src = altPath;
+                }
+            });
+        }
+    });
+}
+
+function handleAudioError(index, originalPath) {
+    console.warn(`Erreur de chargement audio ${index}: ${originalPath}`);
+    // Essayer un chemin alternatif
+    const audio = document.getElementById(`audio-${index}`);
+    if (audio) {
+        const altPath = originalPath.replace('/audio/', '/public/audio/');
+        audio.src = altPath;
     }
 }
 
@@ -292,6 +369,10 @@ function formatTime(seconds) {
 }
 
 // Charger le dialogue au chargement de la page
-loadDialogue();
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadDialogue);
+} else {
+    loadDialogue();
+}
 </script>
 
