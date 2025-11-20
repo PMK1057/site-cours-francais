@@ -87,6 +87,39 @@ const relatedCoursesMap = {
     'textes-francais-et-pain': ['expressions-courantes'],
 };
 
+// Mapping des niveaux pour chaque cours (pour les cartes de navigation)
+const courseLevels = {
+    'tutoiement-vouvoiement': 'level-beginner',
+    'conditionnel-present': 'level-beginner',
+    'plus-que-parfait': 'level-advanced',
+    'conditionnel-passe': 'level-advanced',
+    'subjonctif-present': 'level-advanced',
+    'subjonctif-passe': 'level-advanced',
+    'contractions-oral': 'level-advanced',
+    'expressions-idiomatiques': 'level-advanced',
+    'vocabulaire-familier': 'level-advanced',
+    'intelligence-artificielle': 'level-advanced',
+    'ia-et-droit': 'level-advanced',
+    'ia-science': 'level-advanced',
+    'drones': 'level-advanced',
+    'credit-social-chine': 'level-advanced',
+    'femmes_francaises_celebres': 'level-advanced',
+    'prepositions': 'level-orange',
+    'de-des-du': 'level-orange',
+    'locutions-impersonnelles': 'level-orange',
+    'eux-vs-leur': 'level-orange',
+    'comparaisons-francais': 'level-orange',
+    'causes-francais': 'level-orange',
+    'lequelauquelduquel': 'level-orange',
+    'passe-compose': 'level-orange',
+    'imparfait': 'level-orange',
+    'passe-compose-vs-imparfait': 'level-orange',
+    'faux-amis-hispanophones': 'level-orange',
+    'faux-amis-anglophones': 'level-orange',
+    'verbes-pronominaux': 'level-green',
+    // Par défaut, level-intermediate pour tous les autres
+};
+
 // Noms des cours pour l'affichage
 const courseNames = {
     'futur-proche': 'Futur Proche',
@@ -181,10 +214,10 @@ function createRelatedCoursesSection(courseId) {
     
     const cards = relatedCourses.map(relatedId => {
         const courseName = courseNames[relatedId] || relatedId.replace(/-/g, ' ').replace(/_/g, ' ');
-        // Formater le nom pour avoir un titre court et une description
-        const title = courseName.length > 30 ? courseName.substring(0, 30) + '...' : courseName;
+        // Déterminer le niveau du cours (par défaut level-intermediate)
+        const levelClass = courseLevels[relatedId] || 'level-intermediate';
         return `
-            <div class="related-course-card section-card" onclick="showCourse('${relatedId}')" role="button" tabindex="0" aria-label="Ouvrir le cours ${courseName}">
+            <div class="related-course-card section-card ${levelClass}" onclick="showCourse('${relatedId}')" role="button" tabindex="0" aria-label="Ouvrir le cours ${courseName}">
                 <h3>${courseName}</h3>
             </div>
         `;

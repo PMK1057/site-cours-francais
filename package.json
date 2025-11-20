@@ -1,0 +1,22 @@
+{
+  "name": "site-cours-francais",
+  "version": "1.0.0",
+  "description": "Site de cours de français avec génération de dialogues audio",
+  "main": "generate-audio.js",
+  "scripts": {
+    "generate-audio": "node generate-audio.js"
+  },
+  "keywords": [
+    "français",
+    "education",
+    "elevenlabs",
+    "audio"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.7.0",
+    "dotenv": "^16.3.1"
+  }
+}
+

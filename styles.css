@@ -1127,8 +1127,8 @@ em {
     text-align: center;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 16px 30px rgba(255, 193, 7, 0.25);
-    background: linear-gradient(145deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+    box-shadow: 0 16px 30px rgba(45, 55, 125, 0.25);
+    /* Le background sera défini par les classes level-* comme les autres cartes */
 }
 
 .related-course-card::after {
