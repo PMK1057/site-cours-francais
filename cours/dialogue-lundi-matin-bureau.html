@@ -1,14 +1,12 @@
-<div class="course-content">
-    <div class="back-button-container">
-        <button class="back-btn" onclick="backToSection('dialogues')">← Retour aux Dialogues</button>
-    </div>
+<div class="back-button-container">
+    <button class="back-btn" onclick="backToSection('dialogues')">← Retour aux Dialogues</button>
+</div>
 
-    <h1>💼 Lundi matin au bureau</h1>
-    <p class="course-intro">Dialogue informel entre deux collègues au bureau. Pratiquez votre compréhension orale et votre prononciation avec les lecteurs audio interactifs.</p>
+<h1>💼 Lundi matin au bureau</h1>
+<p class="course-intro">Dialogue informel entre deux collègues au bureau. Pratiquez votre compréhension orale et votre prononciation avec les lecteurs audio interactifs.</p>
 
-    <div id="dialogue-container" class="dialogue-container">
-        <!-- Le dialogue sera chargé dynamiquement depuis dialogue-data.json -->
-    </div>
+<div id="dialogue-container" class="dialogue-container">
+    <!-- Le dialogue sera chargé dynamiquement depuis dialogue-data.json -->
 </div>
 
 <style>
@@ -347,13 +345,32 @@ function renderDialogue(container, dialogue) {
         
         // Vérifier la visibilité
         const rect = container.getBoundingClientRect();
+        const computedStyle = window.getComputedStyle(container);
         console.log('📐 Position du conteneur:', {
             top: rect.top,
             left: rect.left,
             width: rect.width,
             height: rect.height,
-            visible: rect.width > 0 && rect.height > 0
+            visible: rect.width > 0 && rect.height > 0,
+            display: computedStyle.display,
+            visibility: computedStyle.visibility,
+            opacity: computedStyle.opacity,
+            zIndex: computedStyle.zIndex
         });
+        
+        // Vérifier les enfants
+        const children = container.children;
+        console.log('👶 Enfants du conteneur:', children.length);
+        for (let i = 0; i < Math.min(children.length, 2); i++) {
+            const childRect = children[i].getBoundingClientRect();
+            console.log(`  Enfant ${i}:`, {
+                tagName: children[i].tagName,
+                className: children[i].className,
+                width: childRect.width,
+                height: childRect.height,
+                visible: childRect.width > 0 && childRect.height > 0
+            });
+        }
     } catch (error) {
         console.error('❌ Erreur lors de l\'insertion du HTML:', error);
         container.innerHTML = '<p style="color: red;">Erreur lors de l\'affichage du dialogue: ' + error.message + '</p>';
