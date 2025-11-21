@@ -2,87 +2,145 @@
     <button class="back-btn" onclick="backToSection('dialogues')">← Retour aux Dialogues</button>
 </div>
 
-<h1>💼 Lundi matin au bureau</h1>
-<p class="course-intro">Dialogue informel entre deux collègues au bureau. Pratiquez votre compréhension orale et votre prononciation avec les lecteurs audio interactifs.</p>
+<h1 style="text-align: center; font-size: 2rem; font-weight: bold; color: #1f2937; margin-bottom: 8px;">💼 Lundi matin au bureau</h1>
+<p class="course-intro" style="text-align: center; color: #6b7280; font-size: 0.95rem; margin-bottom: 30px;">Dialogue informel entre deux collègues au bureau. Pratiquez votre compréhension orale et votre prononciation avec les lecteurs audio interactifs.</p>
 
 <div id="dialogue-container" class="dialogue-container">
     <!-- Le dialogue sera chargé dynamiquement depuis dialogue-data.json -->
 </div>
 
 <style>
+/* Container principal style chat */
 .dialogue-container {
-    max-width: 900px;
+    max-width: 800px;
     margin: 40px auto;
-    padding: 20px;
+    padding: 30px 20px;
     min-height: 200px;
-    background: transparent;
+    background: #f8f9fa;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
+/* Bulles de messages style chat */
 .dialogue-line {
     display: flex;
     align-items: flex-start;
-    gap: 16px;
-    padding: 20px;
-    margin-bottom: 16px;
-    background: #f8f9fa;
-    border-radius: 12px;
-    transition: background 0.2s;
+    gap: 12px;
+    margin-bottom: 20px;
+    position: relative;
+    transition: all 0.3s ease;
 }
 
-.dialogue-line:hover {
-    background: #e9ecef;
+/* Bulle alignée à gauche (première personne) */
+.dialogue-line.left {
+    justify-content: flex-start;
 }
 
+/* Bulle alignée à droite (deuxième personne) */
+.dialogue-line.right {
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+}
+
+/* Avatar circulaire */
 .speaker-avatar {
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
+/* Avatar pour personne 1 (gauche) - bleu/violet */
+.dialogue-line.left .speaker-avatar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Avatar pour personne 2 (droite) - rose/corail */
+.dialogue-line.right .speaker-avatar {
+    background: linear-gradient(135deg, #ff5e7a 0%, #ff84a3 100%);
+}
+
+/* Contenu de la bulle */
 .dialogue-content {
-    flex: 1;
-    min-width: 0;
+    max-width: 75%;
+    position: relative;
 }
 
+@media (max-width: 640px) {
+    .dialogue-content {
+        max-width: 85%;
+    }
+}
+
+/* Bulle de message */
+.message-bubble {
+    padding: 14px 18px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.dialogue-line.left .message-bubble {
+    background: linear-gradient(135deg, #e0e7ff 0%, #e9d5ff 100%);
+    border-top-left-radius: 4px;
+}
+
+.dialogue-line.right .message-bubble {
+    background: linear-gradient(135deg, #fce7f3 0%, #ffe4e6 100%);
+    border-top-right-radius: 4px;
+}
+
+.dialogue-line:hover .message-bubble {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+/* Nom du locuteur */
 .speaker-name {
     font-weight: 600;
-    color: #333;
+    color: #4b5563;
     margin-bottom: 8px;
-    font-size: 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.85;
+    display: block;
 }
 
+/* Texte du message */
 .dialogue-text {
-    color: #555;
-    margin-bottom: 12px;
+    color: #1f2937;
     line-height: 1.6;
     font-size: 15px;
+    margin-bottom: 10px;
 }
 
-.audio-player {
-    background: white;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    padding: 12px;
+/* Lecteur audio intégré */
+.audio-player-inline {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0,0,0,0.1);
 }
 
 .audio-controls {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
+/* Bouton play/pause */
 .play-btn {
     flex-shrink: 0;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: none;
@@ -91,12 +149,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    font-size: 16px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3);
 }
 
 .play-btn:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
@@ -104,6 +163,7 @@
     transform: scale(0.95);
 }
 
+/* Barre de progression */
 .progress-container {
     flex: 1;
     position: relative;
@@ -111,9 +171,9 @@
 }
 
 .progress-bar {
-    height: 6px;
-    background: #e9ecef;
-    border-radius: 3px;
+    height: 4px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 2px;
     position: relative;
     overflow: hidden;
 }
@@ -121,32 +181,37 @@
 .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    border-radius: 3px;
-    transition: width 0.1s;
+    border-radius: 2px;
+    transition: width 0.1s ease;
 }
 
+/* Temps affiché discrètement */
 .time-display {
     flex-shrink: 0;
     font-family: 'Courier New', monospace;
-    font-size: 13px;
-    color: #666;
-    min-width: 90px;
+    font-size: 11px;
+    color: #6b7280;
+    min-width: 70px;
     text-align: right;
+}
+
+.dialogue-line.left .time-display {
+    text-align: left;
 }
 
 .volume-control {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     flex-shrink: 0;
 }
 
 .volume-slider {
-    width: 80px;
-    height: 4px;
+    width: 60px;
+    height: 3px;
     -webkit-appearance: none;
     appearance: none;
-    background: #e9ecef;
+    background: rgba(0,0,0,0.1);
     border-radius: 2px;
     outline: none;
 }
@@ -154,24 +219,56 @@
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background: #667eea;
     border-radius: 50%;
     cursor: pointer;
+    transition: all 0.2s;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    background: #764ba2;
+    transform: scale(1.2);
 }
 
 .volume-slider::-moz-range-thumb {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background: #667eea;
     border-radius: 50%;
     cursor: pointer;
     border: none;
+    transition: all 0.2s;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+    background: #764ba2;
+    transform: scale(1.2);
 }
 
 audio {
     display: none;
+}
+
+/* Animation pour les bulles */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dialogue-line {
+    animation: slideIn 0.3s ease;
+}
+
+.dialogue-line:nth-child(even) {
+    animation-delay: 0.05s;
 }
 </style>
 
@@ -304,32 +401,44 @@ function renderDialogue(container, dialogue) {
     
     console.log('📝 Génération du HTML pour', correctedLines.length, 'lignes');
     
-    const htmlContent = correctedLines.map((line, index) => `
-            <div class="dialogue-line">
+    // Déterminer l'alignement alterné (gauche/droite)
+    const speakers = [...new Set(correctedLines.map(l => l.speaker))];
+    const speakerAlignment = {};
+    speakers.forEach((speaker, idx) => {
+        speakerAlignment[speaker] = idx % 2 === 0 ? 'left' : 'right';
+    });
+    
+    const htmlContent = correctedLines.map((line, index) => {
+        const alignment = speakerAlignment[line.speaker] || 'left';
+        return `
+            <div class="dialogue-line ${alignment}">
                 <div class="speaker-avatar">${line.speaker.charAt(0)}</div>
                 <div class="dialogue-content">
-                    <div class="speaker-name">${line.speaker}</div>
-                    <div class="dialogue-text">${line.text}</div>
-                    <div class="audio-player">
-                        <audio id="audio-${index}" src="${line.audioPath}" preload="metadata" onerror="handleAudioError(${index}, '${line.audioPath}')"></audio>
-                        <div class="audio-controls">
-                            <button class="play-btn" onclick="togglePlay(${index})" id="play-btn-${index}">▶</button>
-                            <div class="progress-container" onclick="seekTo(event, ${index})">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" id="progress-${index}" style="width: 0%"></div>
+                    <div class="message-bubble">
+                        <div class="speaker-name">${line.speaker}</div>
+                        <div class="dialogue-text">${line.text}</div>
+                        <div class="audio-player-inline">
+                            <audio id="audio-${index}" src="${line.audioPath}" preload="metadata" onerror="handleAudioError(${index}, '${line.audioPath}')"></audio>
+                            <div class="audio-controls">
+                                <button class="play-btn" onclick="togglePlay(${index})" id="play-btn-${index}" aria-label="Play/Pause">▶</button>
+                                <div class="progress-container" onclick="seekTo(event, ${index})">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="progress-${index}" style="width: 0%"></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="time-display" id="time-${index}">0:00 / 0:00</div>
-                            <div class="volume-control">
-                                <span>🔊</span>
-                                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" 
-                                       oninput="setVolume(${index}, this.value)">
+                                <div class="time-display" id="time-${index}">0:00 / 0:00</div>
+                                <div class="volume-control">
+                                    <span style="font-size: 12px; color: #6b7280;">🔊</span>
+                                    <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" 
+                                           oninput="setVolume(${index}, this.value)" aria-label="Volume">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        `).join('');
+        `;
+    }).join('');
     
     console.log('📦 HTML généré, longueur:', htmlContent.length, 'caractères');
     console.log('📦 Premiers caractères:', htmlContent.substring(0, 200));
@@ -442,7 +551,8 @@ function updateTime(index) {
     const percent = duration > 0 ? (current / duration) * 100 : 0;
     
     progress.style.width = percent + '%';
-    timeDisplay.textContent = formatTime(current) + ' / ' + formatTime(duration);
+    // Afficher seulement le temps actuel pour un design plus épuré
+    timeDisplay.textContent = formatTimeShort(current);
 }
 
 function seekTo(event, index) {
@@ -469,6 +579,13 @@ function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+function formatTimeShort(seconds) {
+    if (isNaN(seconds)) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return mins > 0 ? `${mins}:${secs.toString().padStart(2, '0')}` : `0:${secs.toString().padStart(2, '0')}`;
 }
 
 // Charger le dialogue au chargement de la page
