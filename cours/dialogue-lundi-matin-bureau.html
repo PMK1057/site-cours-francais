@@ -166,7 +166,11 @@
 
 /* Mots individuels avec transitions fluides */
 .dialogue-text .word {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: 
+        background 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 3px 6px;
     border-radius: 6px;
     display: inline-block;
@@ -543,11 +547,28 @@ function updateKaraokeHighlight(lineIndex, progress) {
     const highlightedCount = Math.floor(wordCount * progress);
     
     words.forEach((word, index) => {
-        word.classList.remove('highlighted', 'pending');
-        if (index < highlightedCount) {
-            word.classList.add('highlighted');
-        } else if (index === highlightedCount && progress < 1) {
-            word.classList.add('pending');
+        // Éviter le flash blanc en appliquant les changements de manière atomique
+        const shouldBeHighlighted = index < highlightedCount;
+        const shouldBePending = index === highlightedCount && progress < 1;
+        
+        // Ne retirer les classes que si nécessaire
+        if (shouldBeHighlighted) {
+            // Ajouter highlighted directement sans retirer d'abord (évite le flash)
+            if (!word.classList.contains('highlighted')) {
+                word.classList.remove('pending');
+                word.classList.add('highlighted');
+            }
+        } else if (shouldBePending) {
+            // Ajouter pending directement
+            if (!word.classList.contains('pending')) {
+                word.classList.remove('highlighted');
+                word.classList.add('pending');
+            }
+        } else {
+            // Retirer toutes les classes seulement si nécessaire
+            if (word.classList.contains('highlighted') || word.classList.contains('pending')) {
+                word.classList.remove('highlighted', 'pending');
+            }
         }
     });
 }
