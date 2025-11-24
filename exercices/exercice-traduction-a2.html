@@ -1,11 +1,6 @@
     <button class="back-btn" onclick="backToSection('exercices')">← Retour</button>
     
     <h2>🌍 Exercice de Traduction - Niveau A2</h2>
-    
-    <div class="info-box">
-        <p><strong>Traduisez les phrases suivantes de l'anglais vers le français.</strong></p>
-        <p>Une question à la fois - Accepte les synonymes (ex: étrange/bizarre)</p>
-    </div>
 
     <div class="exercise translation-exercise">
         <div class="game-card translation-card">
@@ -76,7 +71,7 @@
             { en: "We sing in the shower.", fr: "Nous chantons sous la douche.", synonyms: ["Nous chantons dans la douche"] },
             { en: "He missed the train this morning.", fr: "Il a raté le train ce matin.", synonyms: ["Il a manqué le train ce matin"] },
             { en: "They know the answer.", fr: "Ils connaissent la réponse.", synonyms: ["Ils savent la réponse"] },
-            { en: "You helped your sister yesterday.", fr: "Tu as aidé ta sœur hier.", synonyms: ["Vous avez aidé votre sœur hier"] },
+            { en: "You helped your sister yesterday.", fr: "Tu as aidé ta sœur hier.", synonyms: ["Vous avez aidé votre sœur hier", "Tu as aidé ta soeur hier", "Vous avez aidé votre soeur hier"] },
             { en: "I wear glasses.", fr: "Je porte des lunettes.", synonyms: [] },
             { en: "We celebrated his birthday.", fr: "Nous avons fêté son anniversaire.", synonyms: ["Nous avons célébré son anniversaire"] },
             { en: "She drives a blue car.", fr: "Elle conduit une voiture bleue.", synonyms: [] },
@@ -147,9 +142,13 @@
         }
 
         function normalizeText(text) {
-            // Normaliser: minuscules, enlever accents, espaces multiples, ponctuation
+            // Normaliser: minuscules, enlever accents, ligatures, espaces multiples, ponctuation
             return text
                 .toLowerCase()
+                .replace(/œ/g, 'oe') // Convertir ligature œ vers oe
+                .replace(/Œ/g, 'OE') // Convertir ligature Œ vers OE (majuscule)
+                .replace(/æ/g, 'ae') // Convertir ligature æ vers ae
+                .replace(/Æ/g, 'AE') // Convertir ligature Æ vers AE (majuscule)
                 .normalize('NFD')
                 .replace(/[\u0300-\u036f]/g, '') // Enlever accents
                 .replace(/[.,!?;:]/g, '') // Enlever ponctuation
