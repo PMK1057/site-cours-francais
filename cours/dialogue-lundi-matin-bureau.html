@@ -175,41 +175,27 @@
     display: inline-block;
     position: relative;
     margin: 0 1px;
-    /* S'assurer que le background est appliqué immédiatement */
+    /* Background transparent par défaut */
     background-color: transparent;
-    color: inherit;
-    /* Utiliser un pseudo-élément pour le background pour éviter le flash blanc */
-    z-index: 0;
-}
-
-.dialogue-text .word::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: transparent;
-    border-radius: 6px;
-    z-index: -1;
-    /* Pas de transition pour application immédiate */
-    transition: none;
-    /* S'assurer que le pseudo-élément est toujours présent */
-    display: block;
+    color: #2d3748;
+    /* Pas de pseudo-élément - on utilise background direct pour éviter les délais */
 }
 
 /* Mot surligné (karaoké actif) - Bleu uni */
 .dialogue-text .word.highlighted {
-    /* Ne pas changer la couleur - utiliser text-shadow pour la lisibilité */
-    /* color reste à sa valeur d'origine (#2d3748) */
+    /* FORCER la couleur d'origine - JAMAIS de blanc */
+    color: #2d3748 !important;
+    /* Background appliqué directement (pas via ::before) pour éviter les délais */
+    background-color: #a78bfa !important;
     font-weight: 600;
     letter-spacing: 0.02em;
     /* Text-shadow blanc pour rendre le texte lisible sur fond bleu */
     text-shadow: 
-        0 0 2px #ffffff,
-        0 0 4px #ffffff,
-        0 1px 2px rgba(255, 255, 255, 0.8),
-        0 0 8px rgba(255, 255, 255, 0.5);
+        0 0 3px #ffffff,
+        0 0 6px #ffffff,
+        0 1px 3px rgba(255, 255, 255, 0.9),
+        0 0 10px rgba(255, 255, 255, 0.6),
+        0 2px 4px rgba(255, 255, 255, 0.8);
     box-shadow: 
         0 2px 8px rgba(167, 139, 250, 0.3),
         0 0 0 1px rgba(167, 139, 250, 0.2);
@@ -218,12 +204,6 @@
     transition: 
         transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
         box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-    /* Le background est géré par ::before */
-}
-
-.dialogue-text .word.highlighted::before {
-    background-color: #a78bfa;
-    transition: background-color 0s;
 }
 
 /* Mot en attente (prochain) - Opacité réduite */
@@ -621,12 +601,26 @@ function updateKaraokeHighlight(lineIndex, progress) {
         
         if (shouldBeHighlighted) {
             if (!word.classList.contains('highlighted')) {
-                // Ajouter la classe qui active le ::before avec le background
-                // Plus besoin d'attendre - le text-shadow rend le texte lisible sans changer la couleur
+                // ÉTAPE 1 : Appliquer le background DIRECTEMENT via style inline AVANT la classe
+                // Cela garantit que le background est déjà là quand la classe est ajoutée
+                word.style.setProperty('background-color', '#a78bfa', 'important');
+                // Forcer un reflow pour que le background soit rendu
+                void word.offsetHeight;
+                // ÉTAPE 2 : Forcer la couleur d'origine
+                word.style.setProperty('color', '#2d3748', 'important');
+                // Forcer un autre reflow
+                void word.offsetHeight;
+                // ÉTAPE 3 : Maintenant que background et couleur sont appliqués, ajouter la classe
                 word.classList.remove('pending');
                 word.classList.add('highlighted');
+                // ÉTAPE 4 : Double vérification que tout est bien appliqué
+                word.style.setProperty('background-color', '#a78bfa', 'important');
+                word.style.setProperty('color', '#2d3748', 'important');
+            } else {
+                // S'assurer que background et couleur sont toujours appliqués
+                word.style.setProperty('background-color', '#a78bfa', 'important');
+                word.style.setProperty('color', '#2d3748', 'important');
             }
-            // Pas besoin de changer la couleur - le text-shadow fait le travail
         } else if (shouldBePending) {
             if (!word.classList.contains('pending')) {
                 word.style.removeProperty('background-color');
