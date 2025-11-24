@@ -536,11 +536,14 @@ function playAudioWithKaraoke(audio, lineIndex) {
             const duration = audio.duration;
             
             if (duration > 0) {
-                // Anticiper légèrement le surlignage (0.05s d'avance)
-                // Cela compense le délai de rendu du background
-                const anticipationOffset = 0.05 / duration;
+                // Anticiper plus agressivement le surlignage (0.15s d'avance)
+                // Cela compense le délai de rendu du background et la latence audio
+                const anticipationOffset = 0.15 / duration;
                 const progress = Math.min(1, (currentTime / duration) + anticipationOffset);
-                updateKaraokeHighlight(lineIndex, progress);
+                // Utiliser requestAnimationFrame pour synchronisation parfaite
+                requestAnimationFrame(() => {
+                    updateKaraokeHighlight(lineIndex, progress);
+                });
             }
         };
         
@@ -568,8 +571,8 @@ function updateKaraokeHighlight(lineIndex, progress) {
     const words = lineElement.querySelectorAll(`.word[data-line-index="${lineIndex}"]`);
     const wordCount = words.length;
     
-    // Utiliser Math.ceil au lieu de Math.floor pour être légèrement en avance
-    const highlightedCount = Math.ceil(wordCount * progress);
+    // Utiliser Math.ceil et ajouter 1 pour être encore plus en avance
+    const highlightedCount = Math.min(wordCount, Math.ceil(wordCount * progress) + 1);
     
     words.forEach((word, index) => {
         const shouldBeHighlighted = index < highlightedCount;
@@ -577,23 +580,30 @@ function updateKaraokeHighlight(lineIndex, progress) {
         
         if (shouldBeHighlighted) {
             if (!word.classList.contains('highlighted')) {
-                // Appliquer le style directement via JavaScript pour synchronisation parfaite
-                word.style.backgroundColor = '#a78bfa';
-                word.style.color = '#ffffff';
+                // Appliquer le style AVANT d'ajouter la classe pour synchronisation parfaite
+                // Utiliser setProperty pour forcer l'application immédiate
+                word.style.setProperty('background-color', '#a78bfa', 'important');
+                word.style.setProperty('color', '#ffffff', 'important');
+                // Forcer un reflow pour appliquer immédiatement
+                void word.offsetHeight;
                 word.classList.remove('pending');
                 word.classList.add('highlighted');
+            } else {
+                // S'assurer que le style est toujours appliqué même si la classe existe déjà
+                word.style.setProperty('background-color', '#a78bfa', 'important');
+                word.style.setProperty('color', '#ffffff', 'important');
             }
         } else if (shouldBePending) {
             if (!word.classList.contains('pending')) {
-                word.style.backgroundColor = '';
-                word.style.color = '';
+                word.style.removeProperty('background-color');
+                word.style.removeProperty('color');
                 word.classList.remove('highlighted');
                 word.classList.add('pending');
             }
         } else {
             if (word.classList.contains('highlighted') || word.classList.contains('pending')) {
-                word.style.backgroundColor = '';
-                word.style.color = '';
+                word.style.removeProperty('background-color');
+                word.style.removeProperty('color');
                 word.classList.remove('highlighted', 'pending');
             }
         }
