@@ -31,7 +31,7 @@
         const translationPhrases = [
             { en: "I drink water every day.", fr: "Je bois de l'eau tous les jours.", synonyms: [] },
             { en: "She cooked dinner last night.", fr: "Elle a préparé le dîner hier soir.", synonyms: ["Elle a cuisiné le dîner hier soir"] },
-            { en: "We play tennis on Saturdays.", fr: "Nous jouons au tennis le samedi.", synonyms: ["Nous jouons au tennis les samedis"] },
+            { en: "We play tennis on Saturdays.", fr: "Nous jouons au tennis le samedi.", synonyms: ["Nous jouons au tennis les samedis", "On joue au tennis le samedi", "On joue au tennis les samedis"] },
             { en: "He took the metro this morning.", fr: "Il a pris le métro ce matin.", synonyms: [] },
             { en: "They speak three languages.", fr: "Ils parlent trois langues.", synonyms: [] },
             { en: "You forgot your umbrella.", fr: "Tu as oublié ton parapluie.", synonyms: ["Vous avez oublié votre parapluie"] },
@@ -156,53 +156,113 @@
                 .trim();
         }
 
+        // Fonction pour jouer un son de succès
+        function playSuccessSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const now = audioContext.currentTime;
+                
+                // Créer deux oscillateurs pour un accord
+                const osc1 = audioContext.createOscillator();
+                const osc2 = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                osc1.connect(gainNode);
+                osc2.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                // Accord majeur (Do-Mi-Sol) mais plus simple avec juste Do-Mi
+                osc1.frequency.value = 523.25; // Do (C5)
+                osc2.frequency.value = 659.25; // Mi (E5)
+                
+                osc1.type = 'sine';
+                osc2.type = 'sine';
+                
+                // Enveloppe douce et courte
+                gainNode.gain.setValueAtTime(0, now);
+                gainNode.gain.linearRampToValueAtTime(0.2, now + 0.02);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                
+                osc1.start(now);
+                osc2.start(now);
+                osc1.stop(now + 0.25);
+                osc2.stop(now + 0.25);
+            } catch (error) {
+                // Si l'API Web Audio n'est pas disponible, on ignore silencieusement
+                // (certains navigateurs nécessitent une interaction utilisateur avant)
+            }
+        }
+
         // Fonction pour générer des variantes "nous" <-> "on"
         function generateNousOnVariants(text) {
             const variants = [text];
             let variantOn = text;
             
-            // Remplacer "nous avons" par "on a"
-            variantOn = variantOn.replace(/\bnous avons\b/gi, (match) => {
-                return match.toLowerCase().startsWith('n') ? 'on a' : 'On a';
+            // Mappage complet des conjugaisons nous -> on
+            const conjugaisons = [
+                // Auxiliaires
+                { nous: /\bnous avons\b/gi, on: 'on a' },
+                { nous: /\bnous sommes\b/gi, on: 'on est' },
+                { nous: /\bnous allons\b/gi, on: 'on va' },
+                // Verbes réguliers en -er
+                { nous: /\bnous jouons\b/gi, on: 'on joue' },
+                { nous: /\bnous regardons\b/gi, on: 'on regarde' },
+                { nous: /\bnous écoutons\b/gi, on: 'on écoute' },
+                { nous: /\bnous parlons\b/gi, on: 'on parle' },
+                { nous: /\bnous pensons\b/gi, on: 'on pense' },
+                { nous: /\bnous achetons\b/gi, on: 'on achète' },
+                { nous: /\bnous fêtons\b/gi, on: 'on fête' },
+                { nous: /\bnous chantons\b/gi, on: 'on chante' },
+                { nous: /\bnous voyageons\b/gi, on: 'on voyage' },
+                { nous: /\bnous aimons\b/gi, on: 'on aime' },
+                // Verbes irréguliers
+                { nous: /\bnous faisons\b/gi, on: 'on fait' },
+                { nous: /\bnous disons\b/gi, on: 'on dit' },
+                { nous: /\bnous voyons\b/gi, on: 'on voit' },
+                { nous: /\bnous savons\b/gi, on: 'on sait' },
+                { nous: /\bnous voulons\b/gi, on: 'on veut' },
+                { nous: /\bnous pouvons\b/gi, on: 'on peut' },
+                { nous: /\bnous devons\b/gi, on: 'on doit' },
+                { nous: /\bnous venons\b/gi, on: 'on vient' },
+                { nous: /\bnous mangeons\b/gi, on: 'on mange' },
+                { nous: /\bnous buvons\b/gi, on: 'on boit' },
+                { nous: /\bnous apprenons\b/gi, on: 'on apprend' },
+                { nous: /\bnous connaissons\b/gi, on: 'on connaît' }
+            ];
+            
+            // Appliquer tous les remplacements
+            conjugaisons.forEach(({ nous, on }) => {
+                variantOn = variantOn.replace(nous, (match) => {
+                    // Conserver la casse
+                    if (match[0] === match[0].toUpperCase()) {
+                        return on.charAt(0).toUpperCase() + on.slice(1);
+                    }
+                    return on;
+                });
             });
             
-            // Remplacer "nous sommes" par "on est"
-            variantOn = variantOn.replace(/\bnous sommes\b/gi, (match) => {
-                return match.toLowerCase().startsWith('n') ? 'on est' : 'On est';
-            });
-            
-            // Remplacer "nous allons" par "on va"
-            variantOn = variantOn.replace(/\bnous allons\b/gi, (match) => {
-                return match.toLowerCase().startsWith('n') ? 'on va' : 'On va';
-            });
-            
-            // Remplacer les autres verbes au présent "nous Xons" par "on X"
+            // Pour les verbes génériques qui finissent par -ons, essayer de les convertir
             variantOn = variantOn.replace(/\bnous (\w+)ons\b/gi, (match, verbe) => {
-                // Extraire la base du verbe (enlever la terminaison -ons)
+                // Ignorer si déjà remplacé
+                if (!match.toLowerCase().includes('nous')) {
+                    return match;
+                }
+                
                 const baseVerbe = verbe.toLowerCase();
-                // Trouver la forme à la 3e personne du singulier
-                // Pour la plupart des verbes en -er, on enlève juste -ons
-                // Pour les autres, c'est plus complexe, donc on fait une approche simple
+                // Pour les verbes en -er, enlever -ons et ajouter -e
                 let formeOn = baseVerbe.replace(/ons$/, 'e');
                 
-                // Cas spéciaux
-                const specialCases = {
-                    'faisons': 'fait', 'disons': 'dit', 'voyons': 'voit',
-                    'savons': 'sait', 'voulons': 'veut', 'pouvons': 'peut',
-                    'devons': 'doit', 'venons': 'vient', 'mangeons': 'mange',
-                    'buvons': 'boit', 'apprenons': 'apprend', 'connaissons': 'connaît'
-                };
+                // Cas spéciaux déjà traités ci-dessus, on les ignore
+                const dejaTraite = ['jouons', 'regardons', 'écoutons', 'parlons', 'pensons', 
+                                   'achetons', 'fêtons', 'chantons', 'voyageons', 'aimons',
+                                   'faisons', 'disons', 'voyons', 'savons', 'voulons', 'pouvons',
+                                   'devons', 'venons', 'mangeons', 'buvons', 'apprenons', 'connaissons'];
                 
-                if (specialCases[baseVerbe]) {
-                    formeOn = specialCases[baseVerbe];
+                if (dejaTraite.includes(baseVerbe)) {
+                    return match; // Laisser le remplacement précédent
                 }
                 
                 return match.toLowerCase().startsWith('n') ? `on ${formeOn}` : `On ${formeOn}`;
-            });
-            
-            // Remplacer "nous" seul (cas simple)
-            variantOn = variantOn.replace(/\bnous\b(?!\s+(?:avons|sommes|allons|faisons|disons|voyons|savons|voulons|pouvons|devons|venons|mangeons|buvons|regardons|écoutons|parlons|jouons|pensons|achetons|fêtons|chantons|voyageons|apprenons|connaissons|aimons))/gi, (match) => {
-                return match.toLowerCase() === 'nous' ? 'on' : 'On';
             });
             
             if (variantOn !== text && !variants.includes(variantOn)) {
@@ -284,7 +344,9 @@
                     ['ses', 'son'],
                     ['tous les jours', 'chaque jour'],
                     ['tous les matins', 'chaque matin'],
-                    ['toutes les semaines', 'chaque semaine']
+                    ['toutes les semaines', 'chaque semaine'],
+                    ['le samedi', 'les samedis'],
+                    ['le dimanche', 'les dimanches']
                 ];
                 
                 // Vérifier si la réponse contient des synonymes acceptables
@@ -312,6 +374,8 @@
             totalAnswered++;
             if (isCorrect) {
                 translationScore++;
+                // Jouer le son de succès
+                playSuccessSound();
             }
             
             // Afficher le résultat

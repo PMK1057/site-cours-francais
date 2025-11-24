@@ -126,6 +126,8 @@
     /* Transition uniquement pour box-shadow et transform (pas de all) */
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     position: relative;
+    /* Empêcher les transitions de se propager aux enfants */
+    isolation: isolate;
 }
 
 .dialogue-line.left .message-bubble {
@@ -215,9 +217,36 @@
     isolation: isolate;
 }
 
-/* Désactiver toutes les transitions sur les enfants des mots */
-.dialogue-text .word * {
+/* Désactiver COMPLÈTEMENT toutes les transitions sur les mots et leurs enfants */
+.dialogue-text {
+    isolation: isolate;
+    contain: layout style paint;
+}
+
+.dialogue-text .word,
+.dialogue-text .word *,
+.dialogue-text .word::before,
+.dialogue-text .word::after {
     transition: none !important;
+    transition-property: none !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+    transition-timing-function: none !important;
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    /* Force l'isolation pour empêcher les transitions héritées */
+    isolation: isolate;
+    /* Empêcher la propagation des transitions depuis les parents */
+    contain: layout style paint;
+}
+
+/* S'assurer que l'overlay n'a jamais de transition */
+.word-highlight-overlay,
+.word-highlight-overlay * {
+    transition: none !important;
+    transition-property: none !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
 }
 
 /* Animation pulse subtile sur le dernier mot surligné */
@@ -234,9 +263,16 @@
     }
 }
 
-/* Appliquer l'animation au dernier mot surligné */
-.dialogue-text .word.highlighted:last-of-type {
+/* Appliquer l'animation au dernier mot surligné - mais seulement sur l'overlay pour éviter les transitions */
+.dialogue-text .word.highlighted:last-of-type .word-highlight-overlay {
     animation: highlightPulse 1.5s ease-in-out infinite;
+    /* S'assurer que l'animation ne crée pas de transition visible */
+    animation-delay: 0.1s;
+}
+
+/* Désactiver l'animation directement sur le mot pour éviter les conflits */
+.dialogue-text .word.highlighted:last-of-type {
+    animation: none !important;
 }
 
 /* Responsive : ajuster la taille sur mobile */
@@ -683,18 +719,28 @@ function updateKaraokeHighlight(lineIndex, progress) {
                 word.appendChild(overlay);
             }
             
-            // Appliquer le background sur l'overlay (pas sur le mot)
-            overlay.style.setProperty('background-color', bg, 'important');
-            overlay.style.setProperty('transition', 'none', 'important');
-            overlay.style.setProperty('will-change', 'background-color', 'important');
-            
-            // Forcer l'overlay à ne pas hériter de transitions du parent
-            overlay.style.setProperty('transform', 'translateZ(0)', 'important');
+            // Appliquer le background sur l'overlay (pas sur le mot) - FORCER immédiatement
+            overlay.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: ${bg} !important;
+                border-radius: 6px;
+                z-index: -1;
+                pointer-events: none;
+                transition: none !important;
+                will-change: background-color;
+                transform: translateZ(0);
+                isolation: isolate;
+            `;
             
             // NE JAMAIS changer la couleur du texte - elle reste toujours #2d3748
             // Le texte reste toujours lisible grâce au contraste avec l'overlay
             word.style.setProperty('color', '#2d3748', 'important');
             word.style.setProperty('background-color', 'transparent', 'important');
+            word.style.setProperty('transition', 'none', 'important');
             
             // Gérer les classes
             if (removeClass) {
@@ -703,10 +749,19 @@ function updateKaraokeHighlight(lineIndex, progress) {
             if (className) {
                 word.classList.add(className);
             }
+            
+            // Forcer un reflow immédiat pour chaque mot
+            void word.offsetHeight;
+            void overlay.offsetHeight;
         });
         
         // Forcer un reflow final pour s'assurer que tout est rendu
         void lineElement.offsetHeight;
+        
+        // Double vérification avec requestAnimationFrame pour forcer le rendu
+        requestAnimationFrame(() => {
+            void lineElement.offsetHeight;
+        });
 }
 
 function resetKaraoke(lineIndex) {
