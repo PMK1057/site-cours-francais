@@ -200,9 +200,16 @@
 
 /* Mot surligné (karaoké actif) - Bleu uni */
 .dialogue-text .word.highlighted {
-    color: #ffffff;
+    /* Ne pas changer la couleur - utiliser text-shadow pour la lisibilité */
+    /* color reste à sa valeur d'origine (#2d3748) */
     font-weight: 600;
     letter-spacing: 0.02em;
+    /* Text-shadow blanc pour rendre le texte lisible sur fond bleu */
+    text-shadow: 
+        0 0 2px #ffffff,
+        0 0 4px #ffffff,
+        0 1px 2px rgba(255, 255, 255, 0.8),
+        0 0 8px rgba(255, 255, 255, 0.5);
     box-shadow: 
         0 2px 8px rgba(167, 139, 250, 0.3),
         0 0 0 1px rgba(167, 139, 250, 0.2);
@@ -210,8 +217,7 @@
     /* Pas de transition pour application immédiate */
     transition: 
         transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-        color 0s;
+        box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     /* Le background est géré par ::before */
 }
 
@@ -615,24 +621,12 @@ function updateKaraokeHighlight(lineIndex, progress) {
         
         if (shouldBeHighlighted) {
             if (!word.classList.contains('highlighted')) {
-                // ÉTAPE 1 : Ajouter la classe qui active le ::before avec le background
+                // Ajouter la classe qui active le ::before avec le background
+                // Plus besoin d'attendre - le text-shadow rend le texte lisible sans changer la couleur
                 word.classList.remove('pending');
                 word.classList.add('highlighted');
-                
-                // ÉTAPE 2 : Forcer le rendu du ::before en accédant à ses propriétés calculées
-                const beforeStyle = window.getComputedStyle(word, '::before');
-                const bgColor = beforeStyle.backgroundColor;
-                
-                // ÉTAPE 3 : Attendre que le background soit vraiment rendu
-                // Utiliser requestAnimationFrame pour synchroniser avec le cycle de rendu
-                requestAnimationFrame(() => {
-                    // Maintenant que le background est rendu, changer la couleur
-                    word.style.setProperty('color', '#ffffff', 'important');
-                });
-            } else {
-                // S'assurer que la couleur est toujours appliquée
-                word.style.setProperty('color', '#ffffff', 'important');
             }
+            // Pas besoin de changer la couleur - le text-shadow fait le travail
         } else if (shouldBePending) {
             if (!word.classList.contains('pending')) {
                 word.style.removeProperty('background-color');
