@@ -660,6 +660,164 @@ em {
     padding: 20px 28px;
 }
 
+/* Translation card - mêmes couleurs que l'expression du jour (violet) */
+.translation-card {
+    background: linear-gradient(145deg, #7b5cff 0%, #a689ff 100%);
+}
+
+.translation-card .game-card-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.translation-card .game-card-body {
+    padding: 28px;
+    color: white;
+    font-family: 'Georgia', serif;
+}
+
+.translation-question {
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.translation-question p {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    line-height: 1.5;
+    font-family: 'Georgia', serif;
+}
+
+.translation-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.translation-input input {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-family: 'Georgia', serif;
+}
+
+.translation-input input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.translation-input input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.translation-input button {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s;
+    margin: 0;
+    font-family: 'Georgia', serif;
+}
+
+.translation-input button:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.translation-result {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    animation: fadeIn 0.5s;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.translation-result.correct {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.translation-result.incorrect {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.translation-result p {
+    margin: 0;
+    color: white;
+    font-family: 'Georgia', serif;
+}
+
+#translation-result-explanation {
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+    text-align: left;
+}
+
+#translation-result-explanation strong {
+    color: white;
+    font-weight: 700;
+    font-size: 1em;
+}
+
+#translation-next {
+    display: block;
+    margin: 12px auto 0;
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    transition: all 0.3s;
+    font-family: 'Georgia', serif;
+}
+
+#translation-next:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.translation-progress {
+    text-align: center;
+    margin-top: 16px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-family: 'Georgia', serif;
+}
+
+.translation-progress p {
+    margin: 0;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.95);
+}
+
 .expression-header-row {
     display: flex;
     align-items: center;

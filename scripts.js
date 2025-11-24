@@ -71,7 +71,8 @@ const relatedCoursesMap = {
     // Exercices
     'exercice-cod-coi': ['cod-coi', 'exercice-pronoms-determinants'],
     'exercice-pronoms-determinants': ['exercice-cod-coi', 'exercice-conjugaison-mixte'],
-    'exercice-conjugaison-mixte': ['exercice-pronoms-determinants', 'textes_passe_compose_imparfait'],
+    'exercice-conjugaison-mixte': ['exercice-pronoms-determinants', 'exercice-traduction-a2'],
+    'exercice-traduction-a2': ['exercice-conjugaison-mixte', 'expressions-courantes'],
     
     // Connexions supplémentaires exercices-cours
     'geographie_france': ['reperes-spatiaux'],
@@ -172,6 +173,7 @@ const courseNames = {
     'exercice-cod-coi': 'Exercice COD/COI',
     'exercice-pronoms-determinants': 'Exercice Pronoms & Déterminants',
     'exercice-conjugaison-mixte': 'Exercice Conjugaison Mixte',
+    'exercice-traduction-a2': 'Exercice de Traduction A2',
     'geographie_france': 'Géographie de la France',
     'textes-climafrance': 'Conversations Professionnelles',
     'textes-courses-supermarche': 'Courses au Supermarché',

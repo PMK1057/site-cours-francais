@@ -1,0 +1,274 @@
+    <button class="back-btn" onclick="backToSection('exercices')">← Retour</button>
+    
+    <h2>🌍 Exercice de Traduction - Niveau A2</h2>
+    
+    <div class="info-box">
+        <p><strong>Traduisez les phrases suivantes de l'anglais vers le français.</strong></p>
+        <p>Une question à la fois - Accepte les synonymes (ex: étrange/bizarre)</p>
+    </div>
+
+    <div class="exercise translation-exercise">
+        <div class="game-card translation-card">
+            <div class="game-card-header">
+                <h2>🌍 Traduction Anglais → Français</h2>
+            </div>
+            <div class="game-card-body">
+                <div class="translation-question">
+                    <p id="translation-question"></p>
+                </div>
+                <div class="translation-input">
+                    <input type="text" id="translation-answer" placeholder="Écrivez votre traduction ici..." />
+                    <button id="translation-validate" onclick="validateTranslation()">Valider</button>
+                </div>
+                <div id="translation-result" class="translation-result" style="display: none;">
+                    <p id="translation-result-explanation"></p>
+                    <button id="translation-next" onclick="nextTranslation()">Suivant</button>
+                </div>
+                <div class="translation-progress">
+                    <p id="translation-progress-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Liste des phrases à traduire (en enlevant les phrases indiquées)
+        const translationPhrases = [
+            { en: "I drink water every day.", fr: "Je bois de l'eau tous les jours.", synonyms: [] },
+            { en: "She cooked dinner last night.", fr: "Elle a préparé le dîner hier soir.", synonyms: ["Elle a cuisiné le dîner hier soir"] },
+            { en: "We play tennis on Saturdays.", fr: "Nous jouons au tennis le samedi.", synonyms: ["Nous jouons au tennis les samedis"] },
+            { en: "He took the metro this morning.", fr: "Il a pris le métro ce matin.", synonyms: [] },
+            { en: "They speak three languages.", fr: "Ils parlent trois langues.", synonyms: [] },
+            { en: "You forgot your umbrella.", fr: "Tu as oublié ton parapluie.", synonyms: ["Vous avez oublié votre parapluie"] },
+            { en: "I sleep eight hours per night.", fr: "Je dors huit heures par nuit.", synonyms: ["Je dors huit heures chaque nuit"] },
+            { en: "We watched the news yesterday.", fr: "Nous avons regardé les informations hier.", synonyms: ["Nous avons regardé les actualités hier"] },
+            { en: "They sold their house.", fr: "Ils ont vendu leur maison.", synonyms: [] },
+            { en: "My father reads the newspaper.", fr: "Mon père lit le journal.", synonyms: ["Mon père lit le quotidien"] },
+            { en: "I received a letter from my friend.", fr: "J'ai reçu une lettre de mon ami.", synonyms: ["J'ai reçu une lettre de mon amie"] },
+            { en: "We listen to the radio in the car.", fr: "Nous écoutons la radio dans la voiture.", synonyms: ["Nous écoutons la radio en voiture"] },
+            { en: "He finished his project.", fr: "Il a terminé son projet.", synonyms: ["Il a fini son projet"] },
+            { en: "You drink too much coffee.", fr: "Tu bois trop de café.", synonyms: ["Vous buvez trop de café"] },
+            { en: "She met her teacher at the market.", fr: "Elle a rencontré son professeur au marché.", synonyms: ["Elle a rencontré son enseignant au marché"] },
+            { en: "I work from Monday to Friday.", fr: "Je travaille du lundi au vendredi.", synonyms: ["Je travaille de lundi à vendredi"] },
+            { en: "They traveled to Spain last month.", fr: "Ils ont voyagé en Espagne le mois dernier.", synonyms: ["Ils ont fait un voyage en Espagne le mois dernier"] },
+            { en: "We eat vegetables every day.", fr: "Nous mangeons des légumes tous les jours.", synonyms: [] },
+            { en: "I fell in the street.", fr: "Je suis tombé dans la rue.", synonyms: ["Je suis tombée dans la rue"] },
+            { en: "I wake up at six o'clock every morning.", fr: "Je me réveille à six heures tous les matins.", synonyms: ["Je me réveille à six heures chaque matin"] },
+            { en: "They bought bread at the bakery.", fr: "Ils ont acheté du pain à la boulangerie.", synonyms: [] },
+            { en: "She drinks tea with her friends.", fr: "Elle boit du thé avec ses amis.", synonyms: ["Elle boit du thé avec ses amies"] },
+            { en: "We arrived on time yesterday.", fr: "Nous sommes arrivés à l'heure hier.", synonyms: ["Nous sommes arrivées à l'heure hier"] },
+            { en: "He writes emails all day.", fr: "Il écrit des emails toute la journée.", synonyms: ["Il écrit des courriels toute la journée"] },
+            { en: "You answered all the questions.", fr: "Tu as répondu à toutes les questions.", synonyms: ["Vous avez répondu à toutes les questions"] },
+            { en: "I love French music.", fr: "J'aime la musique française.", synonyms: [] },
+            { en: "We go to the park on Sundays.", fr: "Nous allons au parc le dimanche.", synonyms: ["Nous allons au parc les dimanches"] },
+            { en: "They learned a new song.", fr: "Ils ont appris une nouvelle chanson.", synonyms: [] },
+            { en: "My mother cooks very well.", fr: "Ma mère cuisine très bien.", synonyms: [] },
+            { en: "I broke my phone.", fr: "J'ai cassé mon téléphone.", synonyms: ["J'ai cassé mon portable"] },
+            { en: "You understand everything.", fr: "Tu comprends tout.", synonyms: ["Vous comprenez tout"] },
+            { en: "He returned home late.", fr: "Il est rentré tard à la maison.", synonyms: ["Il est retourné chez lui tard"] },
+            { en: "We need more time.", fr: "Nous avons besoin de plus de temps.", synonyms: [] },
+            { en: "She lost the match.", fr: "Elle a perdu le match.", synonyms: [] },
+            { en: "I run every morning.", fr: "Je cours tous les matins.", synonyms: ["Je cours chaque matin"] },
+            { en: "They closed the door.", fr: "Ils ont fermé la porte.", synonyms: [] },
+            { en: "You have a beautiful garden.", fr: "Tu as un beau jardin.", synonyms: ["Vous avez un beau jardin"] },
+            { en: "We spent three days in Lyon.", fr: "Nous avons passé trois jours à Lyon.", synonyms: [] },
+            { en: "I swim in the pool every week.", fr: "Je nage dans la piscine chaque semaine.", synonyms: ["Je nage dans la piscine toutes les semaines"] },
+            { en: "We sing in the shower.", fr: "Nous chantons sous la douche.", synonyms: ["Nous chantons dans la douche"] },
+            { en: "He missed the train this morning.", fr: "Il a raté le train ce matin.", synonyms: ["Il a manqué le train ce matin"] },
+            { en: "They know the answer.", fr: "Ils connaissent la réponse.", synonyms: ["Ils savent la réponse"] },
+            { en: "You helped your sister yesterday.", fr: "Tu as aidé ta sœur hier.", synonyms: ["Vous avez aidé votre sœur hier"] },
+            { en: "I wear glasses.", fr: "Je porte des lunettes.", synonyms: [] },
+            { en: "We celebrated his birthday.", fr: "Nous avons fêté son anniversaire.", synonyms: ["Nous avons célébré son anniversaire"] },
+            { en: "She drives a blue car.", fr: "Elle conduit une voiture bleue.", synonyms: [] },
+            { en: "You live near the station.", fr: "Tu habites près de la gare.", synonyms: ["Vous habitez près de la gare"] },
+            { en: "They won the game.", fr: "Ils ont gagné le jeu.", synonyms: ["Ils ont gagné la partie"] },
+            { en: "He feels tired today.", fr: "Il se sent fatigué aujourd'hui.", synonyms: [] },
+            { en: "We heard a strange noise.", fr: "Nous avons entendu un bruit étrange.", synonyms: ["Nous avons entendu un bruit bizarre"] },
+            { en: "I start work at nine o'clock.", fr: "Je commence le travail à neuf heures.", synonyms: ["Je commence à travailler à neuf heures"] },
+            { en: "She became a doctor.", fr: "Elle est devenue médecin.", synonyms: [] },
+            { en: "We think about our vacation.", fr: "Nous pensons à nos vacances.", synonyms: [] },
+            { en: "You ran in the park.", fr: "Tu as couru dans le parc.", synonyms: ["Vous avez couru dans le parc"] },
+            { en: "I send messages to my friends.", fr: "J'envoie des messages à mes amis.", synonyms: ["J'envoie des messages à mes amies"] }
+        ];
+
+        let currentTranslationIndex = -1;
+        let translationScore = 0;
+        let totalAnswered = 0;
+        let usedPhrases = [];
+
+        function initTranslationGame() {
+            currentTranslationIndex = -1;
+            translationScore = 0;
+            totalAnswered = 0;
+            usedPhrases = [];
+            nextTranslation();
+        }
+
+        function nextTranslation() {
+            // Réinitialiser l'état
+            const resultDiv = document.getElementById('translation-result');
+            const questionDiv = document.getElementById('translation-question');
+            const answerInput = document.getElementById('translation-answer');
+            const validateBtn = document.getElementById('translation-validate');
+            const progressText = document.getElementById('translation-progress-text');
+            
+            if (resultDiv) resultDiv.style.display = 'none';
+            if (answerInput) {
+                answerInput.value = '';
+                answerInput.disabled = false;
+                answerInput.focus();
+            }
+            if (validateBtn) validateBtn.disabled = false;
+            
+            // Sélectionner une phrase aléatoire non encore utilisée
+            let availablePhrases = translationPhrases.filter((_, index) => !usedPhrases.includes(index));
+            
+            if (availablePhrases.length === 0) {
+                // Toutes les phrases ont été utilisées, réinitialiser
+                usedPhrases = [];
+                availablePhrases = translationPhrases;
+            }
+            
+            const randomIndex = Math.floor(Math.random() * availablePhrases.length);
+            const selectedPhrase = availablePhrases[randomIndex];
+            currentTranslationIndex = translationPhrases.indexOf(selectedPhrase);
+            usedPhrases.push(currentTranslationIndex);
+            
+            // Afficher la question
+            if (questionDiv) {
+                questionDiv.textContent = selectedPhrase.en;
+            }
+            
+            // Mettre à jour le progrès
+            if (progressText) {
+                const remaining = translationPhrases.length - usedPhrases.length;
+                progressText.textContent = `${usedPhrases.length} / ${translationPhrases.length} phrases traduites`;
+            }
+        }
+
+        function normalizeText(text) {
+            // Normaliser: minuscules, enlever accents, espaces multiples, ponctuation
+            return text
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '') // Enlever accents
+                .replace(/[.,!?;:]/g, '') // Enlever ponctuation
+                .replace(/\s+/g, ' ') // Espaces multiples -> un seul
+                .trim();
+        }
+
+        function validateTranslation() {
+            const answerInput = document.getElementById('translation-answer');
+            const resultDiv = document.getElementById('translation-result');
+            const resultExplanation = document.getElementById('translation-result-explanation');
+            const validateBtn = document.getElementById('translation-validate');
+            
+            if (!answerInput || !resultDiv || !resultExplanation || currentTranslationIndex === -1) return;
+            
+            const userAnswer = answerInput.value.trim();
+            const currentPhrase = translationPhrases[currentTranslationIndex];
+            const correctAnswer = currentPhrase.fr;
+            
+            // Désactiver l'input et le bouton
+            answerInput.disabled = true;
+            if (validateBtn) validateBtn.disabled = true;
+            
+            // Normaliser les réponses pour comparaison
+            const normalizedUserAnswer = normalizeText(userAnswer);
+            const normalizedCorrectAnswer = normalizeText(correctAnswer);
+            
+            // Vérifier la réponse exacte
+            let isCorrect = normalizedUserAnswer === normalizedCorrectAnswer;
+            
+            // Vérifier les synonymes si la réponse n'est pas exacte
+            if (!isCorrect && currentPhrase.synonyms && currentPhrase.synonyms.length > 0) {
+                for (const synonym of currentPhrase.synonyms) {
+                    if (normalizedUserAnswer === normalizeText(synonym)) {
+                        isCorrect = true;
+                        break;
+                    }
+                }
+            }
+            
+            // Vérifier également des variations de synonymes communs (étrange/bizarre, etc.)
+            if (!isCorrect) {
+                // Liste de synonymes communs à accepter
+                const commonSynonyms = [
+                    ['étrange', 'bizarre'],
+                    ['voiture', 'auto'],
+                    ['téléphone', 'portable'],
+                    ['courriels', 'emails', 'e-mails'],
+                    ['informations', 'actualités', 'nouvelles'],
+                    ['joué', 'joué au'],
+                    ['manger', 'mangeons'],
+                    ['tu', 'vous'],
+                    ['il', 'elle'],
+                    ['mes', 'mon'],
+                    ['ses', 'son'],
+                    ['tous les jours', 'chaque jour'],
+                    ['tous les matins', 'chaque matin'],
+                    ['toutes les semaines', 'chaque semaine']
+                ];
+                
+                // Vérifier si la réponse contient des synonymes acceptables
+                let modifiedCorrect = normalizedCorrectAnswer;
+                for (const synonymGroup of commonSynonyms) {
+                    for (const synonym of synonymGroup) {
+                        if (normalizedCorrectAnswer.includes(synonym)) {
+                            for (const altSynonym of synonymGroup) {
+                                if (normalizedUserAnswer.includes(altSynonym)) {
+                                    // Remplacer temporairement pour comparaison
+                                    modifiedCorrect = normalizedCorrectAnswer.replace(synonym, altSynonym);
+                                    if (normalizedUserAnswer === normalizeText(modifiedCorrect)) {
+                                        isCorrect = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        if (isCorrect) break;
+                    }
+                    if (isCorrect) break;
+                }
+            }
+            
+            totalAnswered++;
+            if (isCorrect) {
+                translationScore++;
+            }
+            
+            // Afficher le résultat
+            if (isCorrect) {
+                resultDiv.className = 'translation-result correct';
+            } else {
+                resultDiv.className = 'translation-result incorrect';
+            }
+            
+            resultExplanation.innerHTML = isCorrect 
+                ? `<strong>✅ Correct !</strong><br>${correctAnswer}`
+                : `<strong>❌ Incorrect</strong><br>La bonne réponse était : <strong>${correctAnswer}</strong>`;
+            
+            resultDiv.style.display = 'block';
+        }
+
+        // Initialiser le jeu au chargement
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initTranslationGame);
+        } else {
+            // DOM déjà chargé
+            setTimeout(initTranslationGame, 100);
+        }
+
+        // Permettre de valider avec Enter
+        setTimeout(function() {
+            const answerInput = document.getElementById('translation-answer');
+            if (answerInput) {
+                answerInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && !answerInput.disabled) {
+                        validateTranslation();
+                    }
+                });
+            }
+        }, 100);
+    </script>
+
