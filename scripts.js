@@ -2481,11 +2481,13 @@ function nextConjugation() {
     // Réinitialiser l'état
     const resultDiv = document.getElementById('conjugation-result');
     const timerDiv = document.getElementById('conjugation-timer');
+    const answerDisplayDiv = document.getElementById('conjugation-answer-display');
     const questionDiv = document.getElementById('conjugation-question');
     const answerInput = document.getElementById('conjugation-answer');
     const validateBtn = document.getElementById('conjugation-validate');
     
     if (resultDiv) resultDiv.style.display = 'none';
+    if (answerDisplayDiv) answerDisplayDiv.style.display = 'none';
     if (answerInput) {
         answerInput.value = '';
         answerInput.disabled = false;
@@ -2626,20 +2628,9 @@ function validateConjugation(timeout = false) {
                    cleanedUserAnswer === correctAnswer;
     }
     
-    // Afficher le résultat
-    if (isCorrect) {
-        resultIcon.textContent = '✅';
-        resultText.textContent = 'Correct !';
-        resultDiv.className = 'conjugation-result correct';
-    } else {
-        resultIcon.textContent = '💪';
-        if (timeout) {
-            resultText.textContent = 'Temps écoulé';
-        } else {
-            resultText.textContent = 'Presque !';
-        }
-        resultDiv.className = 'conjugation-result incorrect';
-    }
+    // Cacher le timer
+    const timerDiv = document.getElementById('conjugation-timer');
+    if (timerDiv) timerDiv.style.display = 'none';
     
     // Formater la bonne réponse avec l'apostrophe si nécessaire pour "je"
     let formattedAnswer = currentConjugation.data.reponse;
@@ -2659,9 +2650,40 @@ function validateConjugation(timeout = false) {
         }
     }
     
-    // Afficher la bonne réponse et l'explication avec mise en valeur de la réponse
+    // Afficher la bonne réponse dans l'encadré du timer
+    const answerDisplayDiv = document.getElementById('conjugation-answer-display');
+    if (answerDisplayDiv) {
+        if (isCorrect) {
+            answerDisplayDiv.textContent = `✅ ${formattedAnswer}`;
+            answerDisplayDiv.className = 'timer correct-answer-timer';
+        } else {
+            if (timeout) {
+                answerDisplayDiv.textContent = `⏱️ Temps écoulé`;
+            } else {
+                answerDisplayDiv.textContent = `💪 Presque !`;
+            }
+            answerDisplayDiv.className = 'timer incorrect-answer-timer';
+        }
+        answerDisplayDiv.style.display = 'block';
+    }
+    
+    // Afficher le résultat
+    if (isCorrect) {
+        resultIcon.textContent = '✅';
+        resultText.textContent = 'Correct !';
+        resultDiv.className = 'conjugation-result correct';
+    } else {
+        resultIcon.textContent = '💪';
+        if (timeout) {
+            resultText.textContent = 'Temps écoulé';
+        } else {
+            resultText.textContent = 'Presque !';
+        }
+        resultDiv.className = 'conjugation-result incorrect';
+    }
+    
+    // Afficher l'explication (sans la bonne réponse qui est déjà dans l'encadré)
     resultExplanation.innerHTML = `
-        <strong>Bonne réponse :</strong> <span class="correct-answer">${formattedAnswer}</span><br>
         ${currentConjugation.data.explication}
     `;
     
