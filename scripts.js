@@ -2641,9 +2641,27 @@ function validateConjugation(timeout = false) {
         resultDiv.className = 'conjugation-result incorrect';
     }
     
+    // Formater la bonne réponse avec l'apostrophe si nécessaire pour "je"
+    let formattedAnswer = currentConjugation.data.reponse;
+    if (currentConjugation.personne === 'je') {
+        // Cas où on doit utiliser "j'" au lieu de "je" (verbes commençant par une voyelle)
+        // Vérifier si la réponse commence par "ai", "aime", "ai", etc.
+        const needsApostrophe = /^(ai|aime|aimes|aimez|aiment|ai|as|a|avons|avez|ont)\s/i.test(formattedAnswer);
+        
+        if (needsApostrophe) {
+            // Remplacer "ai pris" par "j'ai pris", etc.
+            formattedAnswer = "j'" + formattedAnswer;
+        } else {
+            // Sinon, ajouter "je " au début si ce n'est pas déjà présent
+            if (!formattedAnswer.toLowerCase().startsWith('je ')) {
+                formattedAnswer = "je " + formattedAnswer;
+            }
+        }
+    }
+    
     // Afficher la bonne réponse et l'explication
     resultExplanation.innerHTML = `
-        <strong>Bonne réponse :</strong> ${currentConjugation.data.reponse}<br>
+        <strong>Bonne réponse :</strong> ${formattedAnswer}<br>
         ${currentConjugation.data.explication}
     `;
     
