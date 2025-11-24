@@ -290,6 +290,8 @@ let isPlaying = false;
 let currentLineIndex = -1;
 let audioElements = [];
 let globalSpeed = 1.0;
+let lastUpdateTime = 0;
+const UPDATE_THROTTLE = 16; // ~60fps (16ms entre chaque update)
 
 // Charger et afficher le dialogue
 async function loadDialogue() {
@@ -546,6 +548,13 @@ function playAudioWithKaraoke(audio, lineIndex) {
         const updateKaraoke = () => {
             if (!isPlaying) return;
             
+            // Throttle les mises à jour pour éviter les saccades
+            const now = performance.now();
+            if (now - lastUpdateTime < UPDATE_THROTTLE) {
+                return;
+            }
+            lastUpdateTime = now;
+            
             const currentTime = audio.currentTime;
             const duration = audio.duration;
             
@@ -554,7 +563,7 @@ function playAudioWithKaraoke(audio, lineIndex) {
                 // Cela compense le délai de rendu du background et la latence audio
                 const anticipationOffset = 0.15 / duration;
                 const progress = Math.min(1, (currentTime / duration) + anticipationOffset);
-                // Appeler directement sans requestAnimationFrame pour éviter les doubles frames
+                // Appeler directement de manière synchrone
                 updateKaraokeHighlight(lineIndex, progress);
             }
         };
@@ -586,22 +595,21 @@ function updateKaraokeHighlight(lineIndex, progress) {
     // Utiliser Math.ceil et ajouter 1 pour être encore plus en avance
     const highlightedCount = Math.min(wordCount, Math.ceil(wordCount * progress) + 1);
     
-    // BATCH UPDATE : Désactiver les transitions, appliquer tous les changements, puis réactiver
-    // Cela évite les saccades causées par les transitions multiples
-    
-    // Désactiver les transitions sur tous les mots de la ligne
-    words.forEach(word => {
+    // DÉSACTIVER TOUTES LES TRANSITIONS AVANT (batch)
+    const transitions = Array.from(words).map(word => {
+        const original = word.style.transition;
         word.style.transition = 'none';
+        return { word, original };
     });
     
-    // Appliquer tous les changements de manière synchrone
+    // Appliquer TOUS les changements sans reflow intermédiaire
     words.forEach((word, index) => {
         const shouldBeHighlighted = index < highlightedCount;
         const shouldBePending = index === highlightedCount && progress < 1;
         
         if (shouldBeHighlighted) {
             if (!word.classList.contains('highlighted')) {
-                // Application atomique : tout en une seule opération synchrone
+                // Tout en une seule opération atomique
                 word.style.setProperty('background-color', '#a78bfa', 'important');
                 word.style.setProperty('color', '#2d3748', 'important');
                 word.classList.remove('pending');
@@ -623,11 +631,12 @@ function updateKaraokeHighlight(lineIndex, progress) {
         }
     });
     
-    // Réactiver les transitions après un court délai (seulement pour les effets visuels non critiques)
-    requestAnimationFrame(() => {
-        words.forEach(word => {
-            word.style.transition = '';
-        });
+    // FORCER UN SEUL REFLOW à la fin (en accédant à une propriété qui force le rendu)
+    void lineElement.offsetHeight;
+    
+    // RÉACTIVER les transitions APRÈS (batch)
+    transitions.forEach(({ word, original }) => {
+        word.style.transition = original;
     });
 }
 
