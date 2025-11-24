@@ -585,6 +585,9 @@ function playAudioWithKaraoke(audio, lineIndex) {
     });
 }
 
+// Cache pour éviter les recalculs inutiles
+let lastHighlightState = new Map();
+
 function updateKaraokeHighlight(lineIndex, progress) {
     const lineElement = document.getElementById(`line-${lineIndex}`);
     if (!lineElement) return;
@@ -595,49 +598,51 @@ function updateKaraokeHighlight(lineIndex, progress) {
     // Utiliser Math.ceil et ajouter 1 pour être encore plus en avance
     const highlightedCount = Math.min(wordCount, Math.ceil(wordCount * progress) + 1);
     
-    // DÉSACTIVER TOUTES LES TRANSITIONS AVANT (batch)
-    const transitions = Array.from(words).map(word => {
-        const original = word.style.transition;
-        word.style.transition = 'none';
-        return { word, original };
-    });
+    // Vérifier si on a déjà appliqué cet état (évite les changements inutiles)
+    if (lastHighlightState.get(lineIndex) === highlightedCount) {
+        return; // Pas de changement nécessaire
+    }
+    lastHighlightState.set(lineIndex, highlightedCount);
     
-    // Appliquer TOUS les changements sans reflow intermédiaire
+    // APPROCHE RADICALE : Utiliser UNIQUEMENT des styles inline, pas de classes
+    // Tout appliquer avec cssText en une seule opération par mot
     words.forEach((word, index) => {
         const shouldBeHighlighted = index < highlightedCount;
         const shouldBePending = index === highlightedCount && progress < 1;
         
+        // Préparer le style complet en une seule chaîne
+        let newStyle = '';
+        
         if (shouldBeHighlighted) {
-            if (!word.classList.contains('highlighted')) {
-                // Tout en une seule opération atomique
-                word.style.setProperty('background-color', '#a78bfa', 'important');
-                word.style.setProperty('color', '#2d3748', 'important');
-                word.classList.remove('pending');
-                word.classList.add('highlighted');
-            }
+            // Style pour mot surligné : background + color en une seule opération
+            newStyle = 'background-color: #a78bfa !important; color: #2d3748 !important; transition: none;';
+            // Retirer les classes pour éviter les conflits
+            word.classList.remove('pending', 'highlighted');
+            word.classList.add('highlighted'); // Pour les autres styles CSS (font-weight, etc.)
         } else if (shouldBePending) {
-            if (!word.classList.contains('pending')) {
-                word.style.removeProperty('background-color');
-                word.style.removeProperty('color');
-                word.classList.remove('highlighted');
-                word.classList.add('pending');
-            }
+            // Style pour mot en attente
+            newStyle = 'background-color: transparent !important; color: #9ca3af !important; transition: none;';
+            word.classList.remove('highlighted', 'pending');
+            word.classList.add('pending');
         } else {
-            if (word.classList.contains('highlighted') || word.classList.contains('pending')) {
-                word.style.removeProperty('background-color');
-                word.style.removeProperty('color');
-                word.classList.remove('highlighted', 'pending');
-            }
+            // Style par défaut
+            newStyle = 'background-color: transparent !important; color: #2d3748 !important; transition: none;';
+            word.classList.remove('highlighted', 'pending');
         }
+        
+        // Appliquer TOUT le style en une seule opération atomique avec cssText
+        // On préserve les autres styles existants (padding, border-radius, etc.)
+        const baseStyle = word.style.cssText.split(';').filter(s => 
+            !s.includes('background-color') && 
+            !s.includes('color') && 
+            !s.includes('transition')
+        ).join(';');
+        
+        word.style.cssText = baseStyle + (baseStyle ? ';' : '') + newStyle;
     });
     
-    // FORCER UN SEUL REFLOW à la fin (en accédant à une propriété qui force le rendu)
+    // Forcer un seul reflow à la fin pour toute la ligne
     void lineElement.offsetHeight;
-    
-    // RÉACTIVER les transitions APRÈS (batch)
-    transitions.forEach(({ word, original }) => {
-        word.style.transition = original;
-    });
 }
 
 function resetKaraoke(lineIndex) {
