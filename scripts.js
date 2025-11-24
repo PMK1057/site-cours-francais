@@ -2659,9 +2659,9 @@ function validateConjugation(timeout = false) {
         }
     }
     
-    // Afficher la bonne réponse et l'explication
+    // Afficher la bonne réponse et l'explication avec mise en valeur de la réponse
     resultExplanation.innerHTML = `
-        <strong>Bonne réponse :</strong> ${formattedAnswer}<br>
+        <strong>Bonne réponse :</strong> <span class="correct-answer">${formattedAnswer}</span><br>
         ${currentConjugation.data.explication}
     `;
     
