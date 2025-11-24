@@ -20,8 +20,8 @@
         <select id="speed-select" onchange="updateGlobalSpeed()" style="padding: 5px 10px; border-radius: 5px; border: 1px solid #d1d5db;">
             <option value="0.5">0.5x</option>
             <option value="0.7">0.7x</option>
-            <option value="0.85" selected>0.85x</option>
-            <option value="1.0">1.0x</option>
+            <option value="0.85">0.85x</option>
+            <option value="1.0" selected>1.0x</option>
             <option value="1.2">1.2x</option>
             <option value="1.5">1.5x</option>
         </select>
@@ -192,7 +192,10 @@
     background-color: transparent;
     border-radius: 6px;
     z-index: -1;
-    transition: background-color 0s;
+    /* Pas de transition pour application immédiate */
+    transition: none;
+    /* S'assurer que le pseudo-élément est toujours présent */
+    display: block;
 }
 
 /* Mot surligné (karaoké actif) - Bleu uni */
@@ -307,7 +310,7 @@ let dialogueData = null;
 let isPlaying = false;
 let currentLineIndex = -1;
 let audioElements = [];
-let globalSpeed = 0.85;
+let globalSpeed = 1.0;
 
 // Charger et afficher le dialogue
 async function loadDialogue() {
@@ -444,6 +447,18 @@ function renderDialogue(container, dialogue) {
     }).join('');
     
     container.innerHTML = htmlContent;
+    
+    // PRÉCHARGER le background sur tous les mots pour éviter le flash blanc
+    // On applique le background transparent d'abord, puis on le rend visible quand nécessaire
+    setTimeout(() => {
+        const allWords = container.querySelectorAll('.word');
+        allWords.forEach(word => {
+            // Précharger le background en le rendant transparent mais présent
+            const beforeStyle = window.getComputedStyle(word, '::before');
+            // Forcer le navigateur à créer le pseudo-élément
+            word.style.setProperty('--bg-ready', '1');
+        });
+    }, 0);
     
     // Initialiser les éléments audio
     audioElements = correctedLines.map((line, index) => {
@@ -600,16 +615,20 @@ function updateKaraokeHighlight(lineIndex, progress) {
         
         if (shouldBeHighlighted) {
             if (!word.classList.contains('highlighted')) {
-                // Utiliser le pseudo-élément ::before pour le background
-                // Cela permet de rendre le background indépendamment de la couleur
-                const beforeElement = window.getComputedStyle(word, '::before');
-                // Appliquer le background via la classe CSS (::before)
+                // ÉTAPE 1 : Ajouter la classe qui active le ::before avec le background
                 word.classList.remove('pending');
                 word.classList.add('highlighted');
-                // Forcer un reflow pour que ::before soit rendu
-                void word.offsetHeight;
-                // Maintenant que le background est rendu, changer la couleur
-                word.style.setProperty('color', '#ffffff', 'important');
+                
+                // ÉTAPE 2 : Forcer le rendu du ::before en accédant à ses propriétés calculées
+                const beforeStyle = window.getComputedStyle(word, '::before');
+                const bgColor = beforeStyle.backgroundColor;
+                
+                // ÉTAPE 3 : Attendre que le background soit vraiment rendu
+                // Utiliser requestAnimationFrame pour synchroniser avec le cycle de rendu
+                requestAnimationFrame(() => {
+                    // Maintenant que le background est rendu, changer la couleur
+                    word.style.setProperty('color', '#ffffff', 'important');
+                });
             } else {
                 // S'assurer que la couleur est toujours appliquée
                 word.style.setProperty('color', '#ffffff', 'important');
