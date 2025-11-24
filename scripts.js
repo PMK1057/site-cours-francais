@@ -2658,7 +2658,7 @@ function validateConjugation(timeout = false) {
             if (timeout) {
                 answerDisplayDiv.textContent = `⏱️ Temps écoulé`;
             } else {
-                answerDisplayDiv.textContent = `💪 Presque !`;
+                answerDisplayDiv.textContent = `❌ La bonne réponse était : ${formattedAnswer}`;
             }
             answerDisplayDiv.className = 'timer incorrect-answer-timer';
         }
