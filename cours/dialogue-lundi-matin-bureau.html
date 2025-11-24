@@ -166,9 +166,8 @@
 
 /* Mots individuels avec transitions fluides */
 .dialogue-text .word {
+    /* Pas de transition sur background et color pour synchronisation parfaite */
     transition: 
-        background 0.1s linear,
-        color 0.1s linear,
         transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
         box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 3px 6px;
@@ -176,18 +175,26 @@
     display: inline-block;
     position: relative;
     margin: 0 1px;
+    /* S'assurer que le background est appliqué immédiatement */
+    background-color: transparent;
+    color: inherit;
 }
 
-/* Mot surligné (karaoké actif) - Dégradé violet/rose harmonieux */
+/* Mot surligné (karaoké actif) - Bleu uni */
 .dialogue-text .word.highlighted {
-    background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
-    color: #ffffff;
+    background: #a78bfa !important;
+    background-color: #a78bfa !important;
+    color: #ffffff !important;
     font-weight: 600;
     letter-spacing: 0.02em;
     box-shadow: 
         0 2px 8px rgba(167, 139, 250, 0.3),
         0 0 0 1px rgba(167, 139, 250, 0.2);
     transform: scale(1.02);
+    /* Pas de transition pour application immédiate */
+    transition: 
+        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Mot en attente (prochain) - Opacité réduite */
@@ -562,32 +569,31 @@ function updateKaraokeHighlight(lineIndex, progress) {
     const wordCount = words.length;
     
     // Utiliser Math.ceil au lieu de Math.floor pour être légèrement en avance
-    // Cela aide à compenser le délai de rendu du background
     const highlightedCount = Math.ceil(wordCount * progress);
     
     words.forEach((word, index) => {
-        // Éviter le flash blanc en appliquant les changements de manière atomique
         const shouldBeHighlighted = index < highlightedCount;
         const shouldBePending = index === highlightedCount && progress < 1;
         
-        // Ne retirer les classes que si nécessaire
         if (shouldBeHighlighted) {
-            // Ajouter highlighted directement sans retirer d'abord (évite le flash)
             if (!word.classList.contains('highlighted')) {
+                // Appliquer le style directement via JavaScript pour synchronisation parfaite
+                word.style.backgroundColor = '#a78bfa';
+                word.style.color = '#ffffff';
                 word.classList.remove('pending');
                 word.classList.add('highlighted');
-                // Forcer le rendu immédiat
-                word.offsetHeight; // Trigger reflow
             }
         } else if (shouldBePending) {
-            // Ajouter pending directement
             if (!word.classList.contains('pending')) {
+                word.style.backgroundColor = '';
+                word.style.color = '';
                 word.classList.remove('highlighted');
                 word.classList.add('pending');
             }
         } else {
-            // Retirer toutes les classes seulement si nécessaire
             if (word.classList.contains('highlighted') || word.classList.contains('pending')) {
+                word.style.backgroundColor = '';
+                word.style.color = '';
                 word.classList.remove('highlighted', 'pending');
             }
         }
