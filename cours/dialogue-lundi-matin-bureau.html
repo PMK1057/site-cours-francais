@@ -167,10 +167,10 @@
 /* Mots individuels avec transitions fluides */
 .dialogue-text .word {
     transition: 
-        background 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-        color 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        background 0.1s linear,
+        color 0.1s linear,
+        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 3px 6px;
     border-radius: 6px;
     display: inline-block;
@@ -512,6 +512,16 @@ function playAudioWithKaraoke(audio, lineIndex) {
     return new Promise((resolve, reject) => {
         audio.playbackRate = globalSpeed;
         
+        // Précharger le premier mot avant de commencer
+        const lineElement = document.getElementById(`line-${lineIndex}`);
+        if (lineElement) {
+            const firstWord = lineElement.querySelector(`.word[data-line-index="${lineIndex}"]`);
+            if (firstWord) {
+                // Préparer le premier mot (sans l'activer encore)
+                firstWord.style.willChange = 'background, color';
+            }
+        }
+        
         const updateKaraoke = () => {
             if (!isPlaying) return;
             
@@ -519,10 +529,16 @@ function playAudioWithKaraoke(audio, lineIndex) {
             const duration = audio.duration;
             
             if (duration > 0) {
-                const progress = currentTime / duration;
+                // Anticiper légèrement le surlignage (0.05s d'avance)
+                // Cela compense le délai de rendu du background
+                const anticipationOffset = 0.05 / duration;
+                const progress = Math.min(1, (currentTime / duration) + anticipationOffset);
                 updateKaraokeHighlight(lineIndex, progress);
             }
         };
+        
+        // Mettre à jour immédiatement au début
+        updateKaraoke();
         
         audio.addEventListener('timeupdate', updateKaraoke);
         audio.addEventListener('ended', () => {
@@ -544,7 +560,10 @@ function updateKaraokeHighlight(lineIndex, progress) {
     
     const words = lineElement.querySelectorAll(`.word[data-line-index="${lineIndex}"]`);
     const wordCount = words.length;
-    const highlightedCount = Math.floor(wordCount * progress);
+    
+    // Utiliser Math.ceil au lieu de Math.floor pour être légèrement en avance
+    // Cela aide à compenser le délai de rendu du background
+    const highlightedCount = Math.ceil(wordCount * progress);
     
     words.forEach((word, index) => {
         // Éviter le flash blanc en appliquant les changements de manière atomique
@@ -557,6 +576,8 @@ function updateKaraokeHighlight(lineIndex, progress) {
             if (!word.classList.contains('highlighted')) {
                 word.classList.remove('pending');
                 word.classList.add('highlighted');
+                // Forcer le rendu immédiat
+                word.offsetHeight; // Trigger reflow
             }
         } else if (shouldBePending) {
             // Ajouter pending directement
