@@ -586,17 +586,24 @@ function updateKaraokeHighlight(lineIndex, progress) {
     // Utiliser Math.ceil et ajouter 1 pour être encore plus en avance
     const highlightedCount = Math.min(wordCount, Math.ceil(wordCount * progress) + 1);
     
+    // BATCH UPDATE : Désactiver les transitions, appliquer tous les changements, puis réactiver
+    // Cela évite les saccades causées par les transitions multiples
+    
+    // Désactiver les transitions sur tous les mots de la ligne
+    words.forEach(word => {
+        word.style.transition = 'none';
+    });
+    
+    // Appliquer tous les changements de manière synchrone
     words.forEach((word, index) => {
         const shouldBeHighlighted = index < highlightedCount;
         const shouldBePending = index === highlightedCount && progress < 1;
         
         if (shouldBeHighlighted) {
             if (!word.classList.contains('highlighted')) {
-                // Application atomique synchrone : tout en une seule opération
-                // Utiliser cssText pour appliquer tous les styles en une fois
-                const existingStyle = word.style.cssText;
-                word.style.cssText = existingStyle + 'background-color: #a78bfa !important; color: #2d3748 !important;';
-                // Ajouter la classe immédiatement (synchrone)
+                // Application atomique : tout en une seule opération synchrone
+                word.style.setProperty('background-color', '#a78bfa', 'important');
+                word.style.setProperty('color', '#2d3748', 'important');
                 word.classList.remove('pending');
                 word.classList.add('highlighted');
             }
@@ -614,6 +621,13 @@ function updateKaraokeHighlight(lineIndex, progress) {
                 word.classList.remove('highlighted', 'pending');
             }
         }
+    });
+    
+    // Réactiver les transitions après un court délai (seulement pour les effets visuels non critiques)
+    requestAnimationFrame(() => {
+        words.forEach(word => {
+            word.style.transition = '';
+        });
     });
 }
 
