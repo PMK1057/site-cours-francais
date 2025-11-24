@@ -417,22 +417,26 @@ function executeScriptsInHTML(html, container, courseId = null) {
             }
         }
         
-        // Injecter une barre d'outils PDF si absente
+        // Injecter une barre d'outils PDF si absente (sauf pour les exercices)
         try {
-            const alreadyHasPrint = container.querySelector('.print-btn');
-            if (!alreadyHasPrint) {
-                const toolbar = document.createElement('div');
-                toolbar.className = 'course-toolbar print-hide';
-                toolbar.style.textAlign = 'right';
-                toolbar.style.marginBottom = '12px';
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'print-btn';
-                btn.setAttribute('aria-label', 'Télécharger ce cours en PDF');
-                btn.textContent = '🖨️ Télécharger en PDF';
-                btn.addEventListener('click', () => window.print());
-                toolbar.appendChild(btn);
-                container.insertBefore(toolbar, container.firstChild);
+            // Ne pas injecter le bouton PDF pour les exercices
+            const isExercise = courseId && (courseId.startsWith('exercice-') || courseId.includes('exercice'));
+            if (!isExercise) {
+                const alreadyHasPrint = container.querySelector('.print-btn');
+                if (!alreadyHasPrint) {
+                    const toolbar = document.createElement('div');
+                    toolbar.className = 'course-toolbar print-hide';
+                    toolbar.style.textAlign = 'right';
+                    toolbar.style.marginBottom = '12px';
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'print-btn';
+                    btn.setAttribute('aria-label', 'Télécharger ce cours en PDF');
+                    btn.textContent = '🖨️ Télécharger en PDF';
+                    btn.addEventListener('click', () => window.print());
+                    toolbar.appendChild(btn);
+                    container.insertBefore(toolbar, container.firstChild);
+                }
             }
         } catch (e) {
             console.warn('Injection bouton PDF ignorée:', e);

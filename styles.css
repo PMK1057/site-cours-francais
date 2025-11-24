@@ -244,6 +244,18 @@ nav::-webkit-scrollbar-thumb {
 }
 
 /* Catégories de textes - Organisation visuelle */
+/* Style pour le sommaire des exercices */
+.table-of-contents a:hover {
+    background: #e8dff5;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .table-of-contents ul {
+        grid-template-columns: 1fr;
+    }
+}
+
 .textes-category {
     margin-bottom: 50px;
 }

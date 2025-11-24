@@ -36,7 +36,7 @@
             { en: "They speak three languages.", fr: "Ils parlent trois langues.", synonyms: [] },
             { en: "You forgot your umbrella.", fr: "Tu as oublié ton parapluie.", synonyms: ["Vous avez oublié votre parapluie"] },
             { en: "I sleep eight hours per night.", fr: "Je dors huit heures par nuit.", synonyms: ["Je dors huit heures chaque nuit"] },
-            { en: "We watched the news yesterday.", fr: "Nous avons regardé les informations hier.", synonyms: ["Nous avons regardé les actualités hier"] },
+            { en: "We watched the news yesterday.", fr: "Nous avons regardé les informations hier.", synonyms: ["Nous avons regardé les actualités hier", "Nous avons regardé les infos hier"] },
             { en: "They sold their house.", fr: "Ils ont vendu leur maison.", synonyms: [] },
             { en: "My father reads the newspaper.", fr: "Mon père lit le journal.", synonyms: ["Mon père lit le quotidien"] },
             { en: "I received a letter from my friend.", fr: "J'ai reçu une lettre de mon ami.", synonyms: ["J'ai reçu une lettre de mon amie"] },
@@ -156,6 +156,62 @@
                 .trim();
         }
 
+        // Fonction pour générer des variantes "nous" <-> "on"
+        function generateNousOnVariants(text) {
+            const variants = [text];
+            let variantOn = text;
+            
+            // Remplacer "nous avons" par "on a"
+            variantOn = variantOn.replace(/\bnous avons\b/gi, (match) => {
+                return match.toLowerCase().startsWith('n') ? 'on a' : 'On a';
+            });
+            
+            // Remplacer "nous sommes" par "on est"
+            variantOn = variantOn.replace(/\bnous sommes\b/gi, (match) => {
+                return match.toLowerCase().startsWith('n') ? 'on est' : 'On est';
+            });
+            
+            // Remplacer "nous allons" par "on va"
+            variantOn = variantOn.replace(/\bnous allons\b/gi, (match) => {
+                return match.toLowerCase().startsWith('n') ? 'on va' : 'On va';
+            });
+            
+            // Remplacer les autres verbes au présent "nous Xons" par "on X"
+            variantOn = variantOn.replace(/\bnous (\w+)ons\b/gi, (match, verbe) => {
+                // Extraire la base du verbe (enlever la terminaison -ons)
+                const baseVerbe = verbe.toLowerCase();
+                // Trouver la forme à la 3e personne du singulier
+                // Pour la plupart des verbes en -er, on enlève juste -ons
+                // Pour les autres, c'est plus complexe, donc on fait une approche simple
+                let formeOn = baseVerbe.replace(/ons$/, 'e');
+                
+                // Cas spéciaux
+                const specialCases = {
+                    'faisons': 'fait', 'disons': 'dit', 'voyons': 'voit',
+                    'savons': 'sait', 'voulons': 'veut', 'pouvons': 'peut',
+                    'devons': 'doit', 'venons': 'vient', 'mangeons': 'mange',
+                    'buvons': 'boit', 'apprenons': 'apprend', 'connaissons': 'connaît'
+                };
+                
+                if (specialCases[baseVerbe]) {
+                    formeOn = specialCases[baseVerbe];
+                }
+                
+                return match.toLowerCase().startsWith('n') ? `on ${formeOn}` : `On ${formeOn}`;
+            });
+            
+            // Remplacer "nous" seul (cas simple)
+            variantOn = variantOn.replace(/\bnous\b(?!\s+(?:avons|sommes|allons|faisons|disons|voyons|savons|voulons|pouvons|devons|venons|mangeons|buvons|regardons|écoutons|parlons|jouons|pensons|achetons|fêtons|chantons|voyageons|apprenons|connaissons|aimons))/gi, (match) => {
+                return match.toLowerCase() === 'nous' ? 'on' : 'On';
+            });
+            
+            if (variantOn !== text && !variants.includes(variantOn)) {
+                variants.push(variantOn);
+            }
+            
+            return variants;
+        }
+
         function validateTranslation() {
             const answerInput = document.getElementById('translation-answer');
             const resultDiv = document.getElementById('translation-result');
@@ -176,8 +232,21 @@
             const normalizedUserAnswer = normalizeText(userAnswer);
             const normalizedCorrectAnswer = normalizeText(correctAnswer);
             
+            // Générer les variantes "nous" <-> "on" pour la réponse correcte et les synonymes
+            const correctVariants = generateNousOnVariants(correctAnswer);
+            
             // Vérifier la réponse exacte
             let isCorrect = normalizedUserAnswer === normalizedCorrectAnswer;
+            
+            // Vérifier les variantes nous/on de la réponse correcte
+            if (!isCorrect) {
+                for (const variant of correctVariants) {
+                    if (normalizedUserAnswer === normalizeText(variant)) {
+                        isCorrect = true;
+                        break;
+                    }
+                }
+            }
             
             // Vérifier les synonymes si la réponse n'est pas exacte
             if (!isCorrect && currentPhrase.synonyms && currentPhrase.synonyms.length > 0) {
@@ -186,6 +255,15 @@
                         isCorrect = true;
                         break;
                     }
+                    // Vérifier aussi les variantes nous/on des synonymes
+                    const synonymVariants = generateNousOnVariants(synonym);
+                    for (const variant of synonymVariants) {
+                        if (normalizedUserAnswer === normalizeText(variant)) {
+                            isCorrect = true;
+                            break;
+                        }
+                    }
+                    if (isCorrect) break;
                 }
             }
             
@@ -197,7 +275,7 @@
                     ['voiture', 'auto'],
                     ['téléphone', 'portable'],
                     ['courriels', 'emails', 'e-mails'],
-                    ['informations', 'actualités', 'nouvelles'],
+                    ['informations', 'infos', 'actualités', 'nouvelles'],
                     ['joué', 'joué au'],
                     ['manger', 'mangeons'],
                     ['tu', 'vous'],

@@ -432,8 +432,63 @@
         <div id="exercices" class="section" role="region" aria-labelledby="id-exercices">
             <h2 id="id-exercices" class="sr-only">Exercices</h2>
             
+            <!-- SOMMAIRE -->
+            <div class="table-of-contents" style="background: #f4f1ff; border: 2px solid #764ba2; border-radius: 12px; padding: 24px; margin: 0 0 30px 0; box-shadow: 0 4px 12px rgba(118,75,162,0.15);">
+                <h3 style="color: #764ba2; margin: 0 0 16px 0; font-size: 1.4em; text-align: center;">📑 Sommaire</h3>
+                <ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                    <li><a href="#traductions" onclick="event.preventDefault(); document.getElementById('traductions').scrollIntoView({behavior: 'smooth', block: 'start'});" style="color: #764ba2; text-decoration: none; padding: 8px 12px; display: block; border-radius: 6px; transition: background 0.2s; font-weight: 500;">🌍 Traductions</a></li>
+                    <li><a href="#grammaire-pronoms" onclick="event.preventDefault(); document.getElementById('grammaire-pronoms').scrollIntoView({behavior: 'smooth', block: 'start'});" style="color: #764ba2; text-decoration: none; padding: 8px 12px; display: block; border-radius: 6px; transition: background 0.2s; font-weight: 500;">💬 Grammaire et pronoms</a></li>
+                    <li><a href="#conjugaison" onclick="event.preventDefault(); document.getElementById('conjugaison-exercices').scrollIntoView({behavior: 'smooth', block: 'start'});" style="color: #764ba2; text-decoration: none; padding: 8px 12px; display: block; border-radius: 6px; transition: background 0.2s; font-weight: 500;">🔄 Conjugaison</a></li>
+                    <li><a href="#textes-trous" onclick="event.preventDefault(); document.getElementById('textes-trous').scrollIntoView({behavior: 'smooth', block: 'start'});" style="color: #764ba2; text-decoration: none; padding: 8px 12px; display: block; border-radius: 6px; transition: background 0.2s; font-weight: 500;">📝 Textes à trous</a></li>
+                </ul>
+            </div>
+            
+            <!-- 🌍 TRADUCTIONS -->
+            <div id="traductions" class="textes-category" style="margin-top: 40px;">
+                <h3 class="textes-category-title">🌍 Traductions</h3>
+                <p class="textes-category-subtitle">Traduisez des phrases de l'anglais vers le français</p>
+                <div class="section-menu">
+                    <div class="section-card level-intermediate" onclick="showCourse('exercice-traduction-a2')">
+                        <span class="level-badge">A2</span>
+                        <h3>Traduction A2</h3>
+                        <p>Anglais → Français</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 💬 GRAMMAIRE ET PRONOMS -->
+            <div id="grammaire-pronoms" class="textes-category" style="margin-top: 40px;">
+                <h3 class="textes-category-title">💬 Grammaire et pronoms</h3>
+                <p class="textes-category-subtitle">Exercices sur les pronoms et la grammaire</p>
+                <div class="section-menu">
+                    <div class="section-card level-intermediate" onclick="showCourse('exercice-cod-coi')">
+                        <span class="level-badge">B1</span>
+                        <h3>💬 Exercice COD/COI</h3>
+                        <p>COD : me, te, le, la, nous, vous, les | COI : me, te, lui, nous, vous, leur</p>
+                    </div>
+                    <div class="section-card level-intermediate" onclick="showCourse('exercice-pronoms-determinants')">
+                        <span class="level-badge">B1</span>
+                        <h3>📚 Exercice Pronoms & Déterminants</h3>
+                        <p>Tout mélangé avec traductions</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 🔄 CONJUGAISON -->
+            <div id="conjugaison-exercices" class="textes-category" style="margin-top: 40px;">
+                <h3 class="textes-category-title">🔄 Conjugaison</h3>
+                <p class="textes-category-subtitle">Exercices de conjugaison</p>
+                <div class="section-menu">
+                    <div class="section-card level-intermediate" onclick="showCourse('exercice-conjugaison-mixte')">
+                        <span class="level-badge">B1/B2</span>
+                        <h3>🔄 Exercice Conjugaison Mixte</h3>
+                        <p>Présent + Passé Composé + Imparfait</p>
+                    </div>
+                </div>
+            </div>
+            
             <!-- 📝 TEXTES À TROUS -->
-            <div class="textes-category">
+            <div id="textes-trous" class="textes-category" style="margin-top: 40px;">
                 <h3 class="textes-category-title">📝 Textes à trous</h3>
                 <p class="textes-category-subtitle">Complétez les textes en remplissant les trous</p>
                 <div class="section-menu">
@@ -446,34 +501,6 @@
                         <span class="level-badge">B2/C1</span>
                         <h3>⭐ FEMMES FRANÇAISES CÉLÈBRES</h3>
                         <p>Texte à trous avancé sur Baker, Piaf, Curie, Veil (multi-temps)</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 💡 AUTRES EXERCICES -->
-            <div class="textes-category">
-                <h3 class="textes-category-title">💡 Autres exercices</h3>
-                <p class="textes-category-subtitle">Exercices variés pour pratiquer le français</p>
-                <div class="section-menu">
-                    <div class="section-card level-intermediate" onclick="showCourse('exercice-cod-coi')">
-                        <span class="level-badge">B1</span>
-                        <h3>💬 Exercice COD/COI</h3>
-                        <p>COD : me, te, le, la, nous, vous, les | COI : me, te, lui, nous, vous, leur</p>
-                    </div>
-                    <div class="section-card level-intermediate" onclick="showCourse('exercice-pronoms-determinants')">
-                        <span class="level-badge">B1</span>
-                        <h3>📚 Exercice Pronoms & Déterminants</h3>
-                        <p>Tout mélangé avec traductions</p>
-                    </div>
-                    <div class="section-card level-intermediate" onclick="showCourse('exercice-conjugaison-mixte')">
-                        <span class="level-badge">B1/B2</span>
-                        <h3>🔄 Exercice Conjugaison Mixte</h3>
-                        <p>Présent + Passé Composé + Imparfait</p>
-                    </div>
-                    <div class="section-card level-intermediate" onclick="showCourse('exercice-traduction-a2')">
-                        <span class="level-badge">A2</span>
-                        <h3>🌍 Exercice de Traduction</h3>
-                        <p>Traduction Anglais → Français niveau A2</p>
                     </div>
                 </div>
             </div>
