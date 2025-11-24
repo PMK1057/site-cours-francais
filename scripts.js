@@ -2628,23 +2628,22 @@ function validateConjugation(timeout = false) {
     
     // Afficher le résultat
     if (isCorrect) {
-        resultIcon.textContent = '✅ Correct !';
-        resultText.textContent = 'Bonne réponse !';
+        resultIcon.textContent = '✅';
+        resultText.textContent = 'Correct !';
         resultDiv.className = 'conjugation-result correct';
     } else {
-        resultIcon.textContent = '❌ Incorrect';
+        resultIcon.textContent = '💪';
         if (timeout) {
-            resultText.textContent = 'Temps écoulé !';
+            resultText.textContent = 'Temps écoulé';
         } else {
-            resultText.textContent = 'Réponse incorrecte';
+            resultText.textContent = 'Presque !';
         }
         resultDiv.className = 'conjugation-result incorrect';
     }
     
     // Afficher la bonne réponse et l'explication
     resultExplanation.innerHTML = `
-        <strong>Bonne réponse :</strong> ${currentConjugation.data.reponse}<br><br>
-        <strong>Explication :</strong><br>
+        <strong>Bonne réponse :</strong> ${currentConjugation.data.reponse}<br>
         ${currentConjugation.data.explication}
     `;
     
