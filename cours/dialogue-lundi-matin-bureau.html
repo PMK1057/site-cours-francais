@@ -178,13 +178,26 @@
     /* S'assurer que le background est appliqué immédiatement */
     background-color: transparent;
     color: inherit;
+    /* Utiliser un pseudo-élément pour le background pour éviter le flash blanc */
+    z-index: 0;
+}
+
+.dialogue-text .word::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    border-radius: 6px;
+    z-index: -1;
+    transition: background-color 0s;
 }
 
 /* Mot surligné (karaoké actif) - Bleu uni */
 .dialogue-text .word.highlighted {
-    background: #a78bfa !important;
-    background-color: #a78bfa !important;
-    color: #ffffff !important;
+    color: #ffffff;
     font-weight: 600;
     letter-spacing: 0.02em;
     box-shadow: 
@@ -194,7 +207,14 @@
     /* Pas de transition pour application immédiate */
     transition: 
         transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0s;
+    /* Le background est géré par ::before */
+}
+
+.dialogue-text .word.highlighted::before {
+    background-color: #a78bfa;
+    transition: background-color 0s;
 }
 
 /* Mot en attente (prochain) - Opacité réduite */
@@ -580,17 +600,18 @@ function updateKaraokeHighlight(lineIndex, progress) {
         
         if (shouldBeHighlighted) {
             if (!word.classList.contains('highlighted')) {
-                // Appliquer le style AVANT d'ajouter la classe pour synchronisation parfaite
-                // Utiliser setProperty pour forcer l'application immédiate
-                word.style.setProperty('background-color', '#a78bfa', 'important');
-                word.style.setProperty('color', '#ffffff', 'important');
-                // Forcer un reflow pour appliquer immédiatement
-                void word.offsetHeight;
+                // Utiliser le pseudo-élément ::before pour le background
+                // Cela permet de rendre le background indépendamment de la couleur
+                const beforeElement = window.getComputedStyle(word, '::before');
+                // Appliquer le background via la classe CSS (::before)
                 word.classList.remove('pending');
                 word.classList.add('highlighted');
+                // Forcer un reflow pour que ::before soit rendu
+                void word.offsetHeight;
+                // Maintenant que le background est rendu, changer la couleur
+                word.style.setProperty('color', '#ffffff', 'important');
             } else {
-                // S'assurer que le style est toujours appliqué même si la classe existe déjà
-                word.style.setProperty('background-color', '#a78bfa', 'important');
+                // S'assurer que la couleur est toujours appliquée
                 word.style.setProperty('color', '#ffffff', 'important');
             }
         } else if (shouldBePending) {
