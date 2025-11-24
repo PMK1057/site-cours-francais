@@ -2588,12 +2588,10 @@ function validateConjugation(timeout = false) {
     
     const answerInput = document.getElementById('conjugation-answer');
     const resultDiv = document.getElementById('conjugation-result');
-    const resultIcon = document.getElementById('conjugation-result-icon');
-    const resultText = document.getElementById('conjugation-result-text');
     const resultExplanation = document.getElementById('conjugation-result-explanation');
     const validateBtn = document.getElementById('conjugation-validate');
     
-    if (!answerInput || !resultDiv || !resultIcon || !resultText || !resultExplanation || !currentConjugation) return;
+    if (!answerInput || !resultDiv || !resultExplanation || !currentConjugation) return;
     
     const userAnswer = answerInput.value.trim().toLowerCase();
     const correctAnswer = currentConjugation.data.reponse.toLowerCase();
@@ -2667,18 +2665,10 @@ function validateConjugation(timeout = false) {
         answerDisplayDiv.style.display = 'block';
     }
     
-    // Afficher le résultat
+    // Définir la classe du résultat (pour le style si nécessaire)
     if (isCorrect) {
-        resultIcon.textContent = '✅';
-        resultText.textContent = 'Correct !';
         resultDiv.className = 'conjugation-result correct';
     } else {
-        resultIcon.textContent = '💪';
-        if (timeout) {
-            resultText.textContent = 'Temps écoulé';
-        } else {
-            resultText.textContent = 'Presque !';
-        }
         resultDiv.className = 'conjugation-result incorrect';
     }
     
