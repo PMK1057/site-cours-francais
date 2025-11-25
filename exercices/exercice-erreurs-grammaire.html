@@ -416,40 +416,9 @@
             resultDiv.style.display = 'block';
         }
 
-        // Fonction pour jouer un son de succès (identique à celle de la traduction)
+        // Utiliser la fonction partagée pour le son de succès
         function playSuccessSound() {
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const now = audioContext.currentTime;
-                
-                // Créer deux oscillateurs pour un accord
-                const osc1 = audioContext.createOscillator();
-                const osc2 = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                osc1.connect(gainNode);
-                osc2.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                // Accord majeur (Do-Mi-Sol) mais plus simple avec juste Do-Mi
-                osc1.frequency.value = 523.25; // Do (C5)
-                osc2.frequency.value = 659.25; // Mi (E5)
-                
-                osc1.type = 'sine';
-                osc2.type = 'sine';
-                
-                // Enveloppe douce et courte
-                gainNode.gain.setValueAtTime(0, now);
-                gainNode.gain.linearRampToValueAtTime(0.2, now + 0.02);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
-                
-                osc1.start(now);
-                osc2.start(now);
-                osc1.stop(now + 0.25);
-                osc2.stop(now + 0.25);
-            } catch (error) {
-                // Si l'API Web Audio n'est pas disponible, on ignore silencieusement
-            }
+            playGrammarSuccessSound();
         }
 
         // Initialiser le jeu au chargement
@@ -461,46 +430,6 @@
         }
     </script>
 
-    <style>
-        .grammar-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        .grammar-option-btn {
-            padding: 16px 20px;
-            background: linear-gradient(135deg, #f4f1ff 0%, #e8e0f5 100%);
-            border: 2px solid #764ba2;
-            border-radius: 12px;
-            font-size: 1em;
-            color: #764ba2;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: left;
-            font-family: inherit;
-        }
-
-        .grammar-option-btn:hover:not(:disabled) {
-            background: linear-gradient(135deg, #764ba2 0%, #5a3a7a 100%);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.3);
-        }
-
-        .grammar-option-btn:disabled {
-            opacity: 0.7;
-        }
-
-        .translation-result.correct {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border: 2px solid #4caf50;
-        }
-
-        .translation-result.incorrect {
-            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
-            border: 2px solid #f44336;
-        }
-    </style>
+    <link rel="stylesheet" href="grammar-game-shared.css">
+    <script src="grammar-game-shared.js"></script>
 

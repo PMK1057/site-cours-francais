@@ -1,0 +1,397 @@
+    <button class="back-btn" onclick="backToSection('exercices')">← Retour</button>
+    
+    <h2>🔍 Erreurs de Grammaire - Niveau B1/B2 - Anglais → Français</h2>
+
+    <div class="exercise translation-exercise">
+        <div class="game-card translation-card">
+            <div class="game-card-body">
+                <div class="translation-question">
+                    <p id="grammar-question-b1"></p>
+                </div>
+                <div class="grammar-options" id="grammar-options-b1">
+                    <!-- Les options seront générées dynamiquement -->
+                </div>
+                <div id="grammar-result-b1" class="translation-result" style="display: none;">
+                    <p id="grammar-result-explanation-b1"></p>
+                    <button id="grammar-next-b1" onclick="nextGrammarQuestionB1()">Suivant</button>
+                </div>
+                <div class="translation-progress">
+                    <p id="grammar-progress-text-b1"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="grammar-game-shared.css">
+    <script src="grammar-game-shared.js"></script>
+    <script>
+        // Liste des questions avec erreurs grammaticales avancées (B1/B2)
+        const grammarQuestionsB1 = [
+            {
+                en: "I wish you were here.",
+                options: [
+                    { text: "J'aimerais que tu sois ici.", correct: true },
+                    { text: "J'aimerais que tu es ici.", correct: false, error: "Erreur : après 'que', utiliser le subjonctif 'sois' et non l'indicatif 'es'" },
+                    { text: "J'aimerais que tu seras ici.", correct: false, error: "Erreur : après 'que', utiliser le subjonctif 'sois' et non le futur 'seras'" },
+                    { text: "J'aimerais que tu être ici.", correct: false, error: "Erreur : utiliser la forme conjuguée 'sois' (subjonctif) et non l'infinitif 'être'" }
+                ]
+            },
+            {
+                en: "The book that I bought yesterday is very interesting.",
+                options: [
+                    { text: "Le livre que j'ai acheté hier est très intéressant.", correct: true },
+                    { text: "Le livre que j'ai achetée hier est très intéressant.", correct: false, error: "Erreur : 'acheté' ne s'accorde pas car le COD 'que' est placé après le verbe" },
+                    { text: "Le livre qui j'ai acheté hier est très intéressant.", correct: false, error: "Erreur : utiliser 'que' (COD) et non 'qui' (sujet) car 'livre' est l'objet de 'acheter'" },
+                    { text: "Le livre dont j'ai acheté hier est très intéressant.", correct: false, error: "Erreur : utiliser 'que' (COD) et non 'dont' (complément de nom)" }
+                ]
+            },
+            {
+                en: "I had already finished when you arrived.",
+                options: [
+                    { text: "J'avais déjà fini quand tu es arrivé.", correct: true },
+                    { text: "J'ai déjà fini quand tu es arrivé.", correct: false, error: "Erreur : utiliser le plus-que-parfait 'j'avais fini' pour une action antérieure à une autre action passée" },
+                    { text: "Je finissais déjà quand tu es arrivé.", correct: false, error: "Erreur : utiliser le plus-que-parfait 'j'avais fini' (action terminée) et non l'imparfait 'je finissais' (action en cours)" },
+                    { text: "J'avais déjà fini quand tu avais arrivé.", correct: false, error: "Erreur : avec 'arriver', utiliser 'être' (tu es) et non 'avoir' (tu as)" }
+                ]
+            },
+            {
+                en: "If I had time, I would travel more.",
+                options: [
+                    { text: "Si j'avais le temps, je voyagerais plus.", correct: true },
+                    { text: "Si j'ai le temps, je voyagerais plus.", correct: false, error: "Erreur : dans une hypothèse irréelle, utiliser l'imparfait 'j'avais' et non le présent 'j'ai'" },
+                    { text: "Si j'avais le temps, je vais voyager plus.", correct: false, error: "Erreur : dans une hypothèse irréelle, utiliser le conditionnel 'je voyagerais' et non le futur 'je vais voyager'" },
+                    { text: "Si j'aurais le temps, je voyagerais plus.", correct: false, error: "Erreur : après 'si', ne jamais utiliser le conditionnel, utiliser l'imparfait 'j'avais'" }
+                ]
+            },
+            {
+                en: "The letters that I sent were received.",
+                options: [
+                    { text: "Les lettres que j'ai envoyées ont été reçues.", correct: true },
+                    { text: "Les lettres que j'ai envoyé ont été reçues.", correct: false, error: "Erreur : 'envoyées' s'accorde avec 'lettres' car le COD 'que' est placé avant le verbe" },
+                    { text: "Les lettres que j'ai envoyées a été reçues.", correct: false, error: "Erreur : 'ont été' (pluriel) car le sujet 'lettres' est au pluriel" },
+                    { text: "Les lettres que j'ai envoyées ont été reçu.", correct: false, error: "Erreur : 'reçues' s'accorde avec 'lettres' (féminin pluriel)" }
+                ]
+            },
+            {
+                en: "It's necessary that he comes.",
+                options: [
+                    { text: "Il faut qu'il vienne.", correct: true },
+                    { text: "Il faut qu'il vient.", correct: false, error: "Erreur : après 'il faut que', utiliser le subjonctif 'vienne' et non l'indicatif 'vient'" },
+                    { text: "Il faut qu'il viendra.", correct: false, error: "Erreur : après 'il faut que', utiliser le subjonctif 'vienne' et non le futur 'viendra'" },
+                    { text: "Il faut qu'il venir.", correct: false, error: "Erreur : utiliser la forme conjuguée 'vienne' (subjonctif) et non l'infinitif 'venir'" }
+                ]
+            },
+            {
+                en: "While reading, I fell asleep.",
+                options: [
+                    { text: "En lisant, je me suis endormi.", correct: true },
+                    { text: "Pendant lisant, je me suis endormi.", correct: false, error: "Erreur : utiliser le gérondif 'en lisant' et non 'pendant lisant'" },
+                    { text: "En lire, je me suis endormi.", correct: false, error: "Erreur : utiliser le gérondif 'en lisant' (participe présent) et non 'en lire' (infinitif)" },
+                    { text: "En lisant, je suis endormi.", correct: false, error: "Erreur : avec 's'endormir', utiliser 'je me suis endormi' (passé composé pronominal)" }
+                ]
+            },
+            {
+                en: "The house was built last year.",
+                options: [
+                    { text: "La maison a été construite l'année dernière.", correct: true },
+                    { text: "La maison était construite l'année dernière.", correct: false, error: "Erreur : utiliser 'a été construite' (passif au passé composé) et non 'était construite' (imparfait)" },
+                    { text: "La maison a été construit l'année dernière.", correct: false, error: "Erreur : 'construite' s'accorde avec 'maison' (féminin)" },
+                    { text: "La maison a construite l'année dernière.", correct: false, error: "Erreur : utiliser la voix passive 'a été construite' et non 'a construite'" }
+                ]
+            },
+            {
+                en: "I would have come if I had known.",
+                options: [
+                    { text: "Je serais venu si j'avais su.", correct: true },
+                    { text: "Je suis venu si j'avais su.", correct: false, error: "Erreur : utiliser le conditionnel passé 'je serais venu' pour une action non réalisée dans le passé" },
+                    { text: "Je serais venu si je savais.", correct: false, error: "Erreur : dans une hypothèse passée, utiliser le plus-que-parfait 'j'avais su' et non l'imparfait 'je savais'" },
+                    { text: "Je serais venir si j'avais su.", correct: false, error: "Erreur : utiliser le participe passé 'venu' et non l'infinitif 'venir' dans le conditionnel passé" }
+                ]
+            },
+            {
+                en: "The people I spoke to were very kind.",
+                options: [
+                    { text: "Les personnes à qui j'ai parlé étaient très gentilles.", correct: true },
+                    { text: "Les personnes que j'ai parlé étaient très gentilles.", correct: false, error: "Erreur : utiliser 'à qui' (COI) car 'parler' se construit avec 'à' (parler à quelqu'un)" },
+                    { text: "Les personnes dont j'ai parlé étaient très gentilles.", correct: false, error: "Erreur : utiliser 'à qui' (COI) et non 'dont' (complément de nom)" },
+                    { text: "Les personnes à qui j'ai parlées étaient très gentilles.", correct: false, error: "Erreur : 'parlé' ne s'accorde pas car 'à qui' est un COI, pas un COD" }
+                ]
+            },
+            {
+                en: "I'm afraid that he won't come.",
+                options: [
+                    { text: "J'ai peur qu'il ne vienne pas.", correct: true },
+                    { text: "J'ai peur qu'il ne vient pas.", correct: false, error: "Erreur : après 'avoir peur que', utiliser le subjonctif 'vienne' et non l'indicatif 'vient'" },
+                    { text: "J'ai peur qu'il vienne pas.", correct: false, error: "Erreur : avec 'avoir peur que', utiliser la négation 'ne...pas' avec le 'ne' explétif" },
+                    { text: "J'ai peur qu'il ne viendra pas.", correct: false, error: "Erreur : après 'avoir peur que', utiliser le subjonctif 'vienne' et non le futur 'viendra'" }
+                ]
+            },
+            {
+                en: "The movie that we saw was excellent.",
+                options: [
+                    { text: "Le film que nous avons vu était excellent.", correct: true },
+                    { text: "Le film que nous avons vus était excellent.", correct: false, error: "Erreur : 'vu' ne s'accorde pas car le COD 'que' est placé après le verbe" },
+                    { text: "Le film qui nous avons vu était excellent.", correct: false, error: "Erreur : utiliser 'que' (COD) et non 'qui' (sujet) car 'film' est l'objet de 'voir'" },
+                    { text: "Le film que nous avons vue était excellent.", correct: false, error: "Erreur : 'vu' ne s'accorde pas et reste invariable car le COD est après le verbe" }
+                ]
+            },
+            {
+                en: "Before leaving, she closed the windows.",
+                options: [
+                    { text: "Avant de partir, elle a fermé les fenêtres.", correct: true },
+                    { text: "Avant partir, elle a fermé les fenêtres.", correct: false, error: "Erreur : après 'avant', utiliser 'de' + infinitif 'avant de partir'" },
+                    { text: "Avant de partant, elle a fermé les fenêtres.", correct: false, error: "Erreur : après 'avant de', utiliser l'infinitif 'partir' et non le participe présent 'partant'" },
+                    { text: "Avant partir, elle a fermé les fenêtres.", correct: false, error: "Erreur : 'avant de' nécessite la préposition 'de' avant l'infinitif" }
+                ]
+            },
+            {
+                en: "I would like you to help me.",
+                options: [
+                    { text: "J'aimerais que tu m'aides.", correct: true },
+                    { text: "J'aimerais que tu m'aide.", correct: false, error: "Erreur : après 'que', utiliser le subjonctif 'aides' (tu aides) et non l'indicatif 'aide'" },
+                    { text: "J'aimerais que tu m'aideras.", correct: false, error: "Erreur : après 'que', utiliser le subjonctif 'aides' et non le futur 'aideras'" },
+                    { text: "J'aimerais que tu m'aider.", correct: false, error: "Erreur : utiliser la forme conjuguée 'aides' (subjonctif) et non l'infinitif 'aider'" }
+                ]
+            },
+            {
+                en: "The students who passed the exam are happy.",
+                options: [
+                    { text: "Les étudiants qui ont réussi l'examen sont contents.", correct: true },
+                    { text: "Les étudiants que ont réussi l'examen sont contents.", correct: false, error: "Erreur : utiliser 'qui' (sujet) et non 'que' (COD) car 'étudiants' est le sujet de 'réussir'" },
+                    { text: "Les étudiants qui ont réussi l'examen est content.", correct: false, error: "Erreur : 'sont' (pluriel) car le sujet 'étudiants' est au pluriel" },
+                    { text: "Les étudiants qui ont réussi l'examen sont content.", correct: false, error: "Erreur : 'contents' (pluriel) car le sujet 'étudiants' est au pluriel" }
+                ]
+            },
+            {
+                en: "It's possible that she doesn't know.",
+                options: [
+                    { text: "Il est possible qu'elle ne sache pas.", correct: true },
+                    { text: "Il est possible qu'elle ne sait pas.", correct: false, error: "Erreur : après 'il est possible que', utiliser le subjonctif 'sache' et non l'indicatif 'sait'" },
+                    { text: "Il est possible qu'elle ne saura pas.", correct: false, error: "Erreur : après 'il est possible que', utiliser le subjonctif 'sache' et non le futur 'saura'" },
+                    { text: "Il est possible qu'elle ne savoir pas.", correct: false, error: "Erreur : utiliser la forme conjuguée 'sache' (subjonctif) et non l'infinitif 'savoir'" }
+                ]
+            },
+            {
+                en: "The car that I sold was old.",
+                options: [
+                    { text: "La voiture que j'ai vendue était vieille.", correct: true },
+                    { text: "La voiture que j'ai vendu était vieille.", correct: false, error: "Erreur : 'vendue' s'accorde avec 'voiture' car le COD 'que' est placé avant le verbe" },
+                    { text: "La voiture qui j'ai vendue était vieille.", correct: false, error: "Erreur : utiliser 'que' (COD) et non 'qui' (sujet) car 'voiture' est l'objet de 'vendre'" },
+                    { text: "La voiture que j'ai vendue était vieux.", correct: false, error: "Erreur : 'vieille' (féminin) car 'voiture' est féminin" }
+                ]
+            },
+            {
+                en: "I regret not having studied more.",
+                options: [
+                    { text: "Je regrette de ne pas avoir étudié davantage.", correct: true },
+                    { text: "Je regrette ne pas avoir étudié davantage.", correct: false, error: "Erreur : après 'regretter', utiliser 'de' + infinitif 'de ne pas avoir étudié'" },
+                    { text: "Je regrette de ne pas étudier davantage.", correct: false, error: "Erreur : utiliser 'avoir étudié' (infinitif passé) pour une action passée et non 'étudier' (infinitif présent)" },
+                    { text: "Je regrette de ne pas avoir étudiée davantage.", correct: false, error: "Erreur : 'étudié' reste invariable car c'est un infinitif passé, pas un participe passé" }
+                ]
+            },
+            {
+                en: "The problem is that he doesn't understand.",
+                options: [
+                    { text: "Le problème, c'est qu'il ne comprend pas.", correct: true },
+                    { text: "Le problème, c'est qu'il ne comprends pas.", correct: false, error: "Erreur : conjugaison - 'il comprend' (3e personne) et non 'il comprends' (2e personne)" },
+                    { text: "Le problème, c'est qu'il ne comprenne pas.", correct: false, error: "Erreur : après 'c'est que', utiliser l'indicatif 'comprend' et non le subjonctif 'comprenne'" },
+                    { text: "Le problème, c'est qu'il ne comprenne pas.", correct: false, error: "Erreur : 'c'est que' introduit une explication, utiliser l'indicatif et non le subjonctif" }
+                ]
+            },
+            {
+                en: "She would have succeeded if she had worked harder.",
+                options: [
+                    { text: "Elle aurait réussi si elle avait travaillé plus dur.", correct: true },
+                    { text: "Elle aurait réussi si elle travaillait plus dur.", correct: false, error: "Erreur : dans une hypothèse passée, utiliser le plus-que-parfait 'avait travaillé' et non l'imparfait 'travaillait'" },
+                    { text: "Elle a réussi si elle avait travaillé plus dur.", correct: false, error: "Erreur : utiliser le conditionnel passé 'aurait réussi' pour une action non réalisée dans le passé" },
+                    { text: "Elle aurait réussir si elle avait travaillé plus dur.", correct: false, error: "Erreur : utiliser le participe passé 'réussi' et non l'infinitif 'réussir' dans le conditionnel passé" }
+                ]
+            },
+            {
+                en: "The children that I'm taking care of are sleeping.",
+                options: [
+                    { text: "Les enfants dont je m'occupe dorment.", correct: true },
+                    { text: "Les enfants que je m'occupe dorment.", correct: false, error: "Erreur : utiliser 'dont' car 's'occuper' se construit avec 'de' (s'occuper de)" },
+                    { text: "Les enfants qui je m'occupe dorment.", correct: false, error: "Erreur : utiliser 'dont' (complément de nom avec 'de') et non 'qui' (sujet)" },
+                    { text: "Les enfants dont je m'occupe dort.", correct: false, error: "Erreur : 'dorment' (pluriel) car le sujet 'enfants' est au pluriel" }
+                ]
+            },
+            {
+                en: "It's important that you be on time.",
+                options: [
+                    { text: "Il est important que tu sois à l'heure.", correct: true },
+                    { text: "Il est important que tu es à l'heure.", correct: false, error: "Erreur : après 'il est important que', utiliser le subjonctif 'sois' et non l'indicatif 'es'" },
+                    { text: "Il est important que tu seras à l'heure.", correct: false, error: "Erreur : après 'il est important que', utiliser le subjonctif 'sois' et non le futur 'seras'" },
+                    { text: "Il est important que tu être à l'heure.", correct: false, error: "Erreur : utiliser la forme conjuguée 'sois' (subjonctif) et non l'infinitif 'être'" }
+                ]
+            },
+            {
+                en: "The books that I read were interesting.",
+                options: [
+                    { text: "Les livres que j'ai lus étaient intéressants.", correct: true },
+                    { text: "Les livres que j'ai lu étaient intéressants.", correct: false, error: "Erreur : 'lus' s'accorde avec 'livres' car le COD 'que' est placé avant le verbe" },
+                    { text: "Les livres qui j'ai lus étaient intéressants.", correct: false, error: "Erreur : utiliser 'que' (COD) et non 'qui' (sujet) car 'livres' est l'objet de 'lire'" },
+                    { text: "Les livres que j'ai lus était intéressants.", correct: false, error: "Erreur : 'étaient' (pluriel) car le sujet 'livres' est au pluriel" }
+                ]
+            },
+            {
+                en: "I'm happy that you came.",
+                options: [
+                    { text: "Je suis content que tu sois venu.", correct: true },
+                    { text: "Je suis content que tu es venu.", correct: false, error: "Erreur : après 'être content que', utiliser le subjonctif 'sois venu' et non l'indicatif 'es venu'" },
+                    { text: "Je suis content que tu viens.", correct: false, error: "Erreur : utiliser le subjonctif passé 'sois venu' pour une action passée et non le présent 'viens'" },
+                    { text: "Je suis content que tu sois venir.", correct: false, error: "Erreur : utiliser le participe passé 'venu' et non l'infinitif 'venir' dans le subjonctif passé" }
+                ]
+            },
+            {
+                en: "The house where I live is small.",
+                options: [
+                    { text: "La maison où j'habite est petite.", correct: true },
+                    { text: "La maison que j'habite est petite.", correct: false, error: "Erreur : utiliser 'où' (lieu) et non 'que' (COD) car on indique un lieu" },
+                    { text: "La maison qui j'habite est petite.", correct: false, error: "Erreur : utiliser 'où' (lieu) et non 'qui' (sujet)" },
+                    { text: "La maison dont j'habite est petite.", correct: false, error: "Erreur : utiliser 'où' (lieu) et non 'dont' (complément de nom)" }
+                ]
+            },
+            {
+                en: "I doubt that he will come.",
+                options: [
+                    { text: "Je doute qu'il vienne.", correct: true },
+                    { text: "Je doute qu'il vient.", correct: false, error: "Erreur : après 'douter que', utiliser le subjonctif 'vienne' et non l'indicatif 'vient'" },
+                    { text: "Je doute qu'il viendra.", correct: false, error: "Erreur : après 'douter que', utiliser le subjonctif 'vienne' et non le futur 'viendra'" },
+                    { text: "Je doute qu'il venir.", correct: false, error: "Erreur : utiliser la forme conjuguée 'vienne' (subjonctif) et non l'infinitif 'venir'" }
+                ]
+            },
+            {
+                en: "The woman I'm talking about is my teacher.",
+                options: [
+                    { text: "La femme dont je parle est mon professeur.", correct: true },
+                    { text: "La femme que je parle est mon professeur.", correct: false, error: "Erreur : utiliser 'dont' car 'parler' se construit avec 'de' (parler de)" },
+                    { text: "La femme qui je parle est mon professeur.", correct: false, error: "Erreur : utiliser 'dont' (complément de nom avec 'de') et non 'qui' (sujet)" },
+                    { text: "La femme à qui je parle est mon professeur.", correct: false, error: "Erreur : utiliser 'dont' (parler de) et non 'à qui' (parler à)" }
+                ]
+            },
+            {
+                en: "It's better that you leave now.",
+                options: [
+                    { text: "Il vaut mieux que tu partes maintenant.", correct: true },
+                    { text: "Il vaut mieux que tu part maintenant.", correct: false, error: "Erreur : après 'il vaut mieux que', utiliser le subjonctif 'partes' et non l'indicatif 'part'" },
+                    { text: "Il vaut mieux que tu partiras maintenant.", correct: false, error: "Erreur : après 'il vaut mieux que', utiliser le subjonctif 'partes' et non le futur 'partiras'" },
+                    { text: "Il vaut mieux que tu partir maintenant.", correct: false, error: "Erreur : utiliser la forme conjuguée 'partes' (subjonctif) et non l'infinitif 'partir'" }
+                ]
+            },
+            {
+                en: "The students that the teacher praised are happy.",
+                options: [
+                    { text: "Les étudiants que le professeur a félicités sont contents.", correct: true },
+                    { text: "Les étudiants que le professeur a félicité sont contents.", correct: false, error: "Erreur : 'félicités' s'accorde avec 'étudiants' car le COD 'que' est placé avant le verbe" },
+                    { text: "Les étudiants qui le professeur a félicités sont contents.", correct: false, error: "Erreur : utiliser 'que' (COD) et non 'qui' (sujet) car 'étudiants' est l'objet de 'féliciter'" },
+                    { text: "Les étudiants que le professeur a félicités est content.", correct: false, error: "Erreur : 'sont' (pluriel) car le sujet 'étudiants' est au pluriel" }
+                ]
+            }
+        ];
+
+        let currentGrammarIndexB1 = -1;
+        let grammarScoreB1 = 0;
+        let totalGrammarAnsweredB1 = 0;
+        let usedGrammarQuestionsB1 = [];
+
+        function initGrammarGameB1() {
+            currentGrammarIndexB1 = -1;
+            grammarScoreB1 = 0;
+            totalGrammarAnsweredB1 = 0;
+            usedGrammarQuestionsB1 = [];
+            nextGrammarQuestionB1();
+        }
+
+        function nextGrammarQuestionB1() {
+            const resultDiv = document.getElementById('grammar-result-b1');
+            const questionDiv = document.getElementById('grammar-question-b1');
+            const optionsDiv = document.getElementById('grammar-options-b1');
+            const progressText = document.getElementById('grammar-progress-text-b1');
+            
+            if (resultDiv) resultDiv.style.display = 'none';
+            if (optionsDiv) optionsDiv.innerHTML = '';
+            
+            let availableQuestions = grammarQuestionsB1.filter((_, index) => !usedGrammarQuestionsB1.includes(index));
+            
+            if (availableQuestions.length === 0) {
+                usedGrammarQuestionsB1 = [];
+                availableQuestions = grammarQuestionsB1;
+            }
+            
+            const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+            const selectedQuestion = availableQuestions[randomIndex];
+            currentGrammarIndexB1 = grammarQuestionsB1.indexOf(selectedQuestion);
+            usedGrammarQuestionsB1.push(currentGrammarIndexB1);
+            
+            if (questionDiv) {
+                questionDiv.textContent = selectedQuestion.en;
+            }
+            
+            if (optionsDiv) {
+                const shuffledOptions = [...selectedQuestion.options].sort(() => Math.random() - 0.5);
+                
+                shuffledOptions.forEach((option, index) => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'grammar-option-btn';
+                    optionButton.textContent = option.text;
+                    optionButton.onclick = () => selectGrammarOptionB1(option, optionButton);
+                    optionsDiv.appendChild(optionButton);
+                });
+            }
+            
+            if (progressText) {
+                progressText.textContent = `${usedGrammarQuestionsB1.length} / ${grammarQuestionsB1.length} questions répondues`;
+            }
+        }
+
+        function selectGrammarOptionB1(option, buttonElement) {
+            const resultDiv = document.getElementById('grammar-result-b1');
+            const resultExplanation = document.getElementById('grammar-result-explanation-b1');
+            const optionsDiv = document.getElementById('grammar-options-b1');
+            const allButtons = optionsDiv.querySelectorAll('.grammar-option-btn');
+            
+            allButtons.forEach(btn => {
+                btn.disabled = true;
+                btn.style.pointerEvents = 'none';
+            });
+            
+            totalGrammarAnsweredB1++;
+            
+            if (option.correct) {
+                grammarScoreB1++;
+                buttonElement.style.backgroundColor = '#4caf50';
+                buttonElement.style.color = 'white';
+                playGrammarSuccessSound();
+            } else {
+                buttonElement.style.backgroundColor = '#f44336';
+                buttonElement.style.color = 'white';
+                allButtons.forEach(btn => {
+                    const btnText = btn.textContent.trim();
+                    const correctOption = grammarQuestionsB1[currentGrammarIndexB1].options.find(opt => opt.correct);
+                    if (btnText === correctOption.text) {
+                        btn.style.backgroundColor = '#4caf50';
+                        btn.style.color = 'white';
+                    }
+                });
+            }
+            
+            if (option.correct) {
+                resultDiv.className = 'translation-result correct';
+                resultExplanation.innerHTML = `<strong>✅ Correct !</strong><br>${option.text}`;
+            } else {
+                resultDiv.className = 'translation-result incorrect';
+                const correctOption = grammarQuestionsB1[currentGrammarIndexB1].options.find(opt => opt.correct);
+                resultExplanation.innerHTML = `<strong>❌ Incorrect</strong><br>La bonne réponse était : <strong>${correctOption.text}</strong><br><small>${option.error || ''}</small>`;
+            }
+            
+            resultDiv.style.display = 'block';
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initGrammarGameB1);
+        } else {
+            setTimeout(initGrammarGameB1, 100);
+        }
+    </script>
+
