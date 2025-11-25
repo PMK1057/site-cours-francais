@@ -168,7 +168,7 @@
     letter-spacing: -0.01em;
 }
 
-/* Mots individuels avec transitions fluides */
+/* Mots individuels - structure avec deux textes superposés */
 .dialogue-text .word {
     /* AUCUNE transition - tout doit être instantané */
     transition: none !important;
@@ -182,7 +182,7 @@
     margin: 0 1px;
     /* Background transparent par défaut */
     background-color: transparent !important;
-    color: #2d3748 !important;
+    color: transparent !important; /* Rendre le texte de base transparent */
     /* Préparer le navigateur pour les changements rapides */
     will-change: transform;
     /* Forcer l'isolation pour éviter les héritages de transition */
@@ -190,19 +190,66 @@
     contain: layout style paint;
 }
 
-/* Mot surligné (karaoké actif) - utiliser uniquement l'overlay, jamais de background sur le mot */
-.dialogue-text .word.highlighted {
-    color: #2d3748 !important;
-    background-color: transparent !important;
+/* Texte normal (non surligné) - prend sa place dans le flux */
+.dialogue-text .word .word-text-normal {
+    position: relative;
+    z-index: 2;
+    color: #2d3748;
+    font-weight: 400;
+    opacity: 1;
+    transition: none !important;
+    transition-property: none !important;
+    transition-duration: 0s !important;
+    pointer-events: none;
+    display: inline;
+    visibility: visible;
+}
+
+/* Texte en gras (surligné) - toujours présent, superposé exactement */
+.dialogue-text .word .word-text-bold {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    color: #2d3748;
     font-weight: 600;
     letter-spacing: 0.02em;
-    transform: scale(1.02);
-    /* AUCUNE transition - tout doit être instantané */
+    opacity: 0;
+    transition: none !important;
+    transition-property: none !important;
+    transition-duration: 0s !important;
+    pointer-events: none;
+    white-space: nowrap;
+    visibility: hidden; /* Caché par défaut pour performance */
+}
+
+/* Texte en gras visible quand surligné */
+.dialogue-text .word.highlighted .word-text-bold {
+    visibility: visible;
+    opacity: 1 !important;
+}
+
+/* Mot surligné - afficher le texte en gras, cacher le normal */
+.dialogue-text .word.highlighted .word-text-normal {
+    opacity: 0 !important;
+    transition: none !important;
+}
+
+.dialogue-text .word.highlighted .word-text-bold {
+    opacity: 1 !important;
     transition: none !important;
 }
 
 /* Overlay - toujours présent avec le background, on change juste l'opacité */
 .word-highlight-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 6px;
+    z-index: 0; /* Derrière le texte mais au-dessus du background */
+    pointer-events: none;
     background-color: #a78bfa;
     box-shadow: 
         0 2px 8px rgba(167, 139, 250, 0.3),
@@ -210,6 +257,8 @@
     opacity: 0;
     transition: none !important;
     transition-property: none !important;
+    transition-duration: 0s !important;
+    contain: strict;
 }
 
 /* Overlay actif - on change UNIQUEMENT l'opacité (plus rapide que background-color) */
@@ -227,10 +276,13 @@
 }
 
 /* Mot en attente (prochain) - Opacité réduite */
-.dialogue-text .word.pending {
-    opacity: 0.4;
+.dialogue-text .word.pending .word-text-normal {
     color: #9ca3af;
-    font-weight: 400;
+    opacity: 0.4 !important;
+}
+
+.dialogue-text .word.pending .word-text-bold {
+    opacity: 0 !important;
 }
 
 /* Overlay de mise en évidence - AUCUNE transition, toujours présent */
@@ -501,8 +553,11 @@ function renderDialogue(container, dialogue) {
         const words = splitTextIntoWords(line.text);
             const wordsHTML = words.map((word, wordIndex) => {
             const isWord = word.trim().length > 0;
+            // Échapper le HTML pour les textes
+            const escapedWord = word.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
             return `<span class="word" data-word-index="${wordIndex}" data-line-index="${index}">
-                ${word}
+                <span class="word-text-normal">${escapedWord}</span>
+                <span class="word-text-bold">${escapedWord}</span>
                 <span class="word-highlight-overlay"></span>
             </span>`;
         }).join('');
