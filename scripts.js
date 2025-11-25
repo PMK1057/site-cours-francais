@@ -2585,6 +2585,50 @@ function updateTimerDisplay() {
     }
 }
 
+// Fonction pour jouer un son de succès pour la conjugaison (différent et plus long que celui de la traduction)
+function playConjugationSuccessSound() {
+    try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const now = audioContext.currentTime;
+        
+        // Créer trois oscillateurs pour un accord plus riche (Do-Mi-Sol)
+        const osc1 = audioContext.createOscillator();
+        const osc2 = audioContext.createOscillator();
+        const osc3 = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        osc1.connect(gainNode);
+        osc2.connect(gainNode);
+        osc3.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        // Accord majeur complet (Do-Mi-Sol) - plus riche que la traduction
+        osc1.frequency.value = 523.25; // Do (C5)
+        osc2.frequency.value = 659.25; // Mi (E5)
+        osc3.frequency.value = 783.99; // Sol (G5)
+        
+        osc1.type = 'sine';
+        osc2.type = 'sine';
+        osc3.type = 'sine';
+        
+        // Enveloppe plus longue et plus douce (0.6 secondes au lieu de 0.25)
+        gainNode.gain.setValueAtTime(0, now);
+        gainNode.gain.linearRampToValueAtTime(0.25, now + 0.05);
+        gainNode.gain.linearRampToValueAtTime(0.2, now + 0.3);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
+        
+        osc1.start(now);
+        osc2.start(now);
+        osc3.start(now);
+        osc1.stop(now + 0.6);
+        osc2.stop(now + 0.6);
+        osc3.stop(now + 0.6);
+    } catch (error) {
+        // Si l'API Web Audio n'est pas disponible, on ignore silencieusement
+        // (certains navigateurs nécessitent une interaction utilisateur avant)
+    }
+}
+
 function validateConjugation(timeout = false) {
     // Arrêter le timer
     if (conjugationTimerInterval) {
@@ -2674,6 +2718,8 @@ function validateConjugation(timeout = false) {
     // Définir la classe du résultat (pour le style si nécessaire)
     if (isCorrect) {
         resultDiv.className = 'conjugation-result correct';
+        // Jouer le son de succès
+        playConjugationSuccessSound();
     } else {
         resultDiv.className = 'conjugation-result incorrect';
     }

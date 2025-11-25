@@ -1,0 +1,506 @@
+    <button class="back-btn" onclick="backToSection('exercices')">← Retour</button>
+    
+    <h2>🔍 Erreurs de Grammaire - Niveau A2 - Anglais → Français</h2>
+
+    <div class="exercise translation-exercise">
+        <div class="game-card translation-card">
+            <div class="game-card-body">
+                <div class="translation-question">
+                    <p id="grammar-question"></p>
+                </div>
+                <div class="grammar-options" id="grammar-options">
+                    <!-- Les options seront générées dynamiquement -->
+                </div>
+                <div id="grammar-result" class="translation-result" style="display: none;">
+                    <p id="grammar-result-explanation"></p>
+                    <button id="grammar-next" onclick="nextGrammarQuestion()">Suivant</button>
+                </div>
+                <div class="translation-progress">
+                    <p id="grammar-progress-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Liste des questions avec erreurs grammaticales
+        const grammarQuestions = [
+            {
+                en: "I have three cats.",
+                options: [
+                    { text: "J'ai trois chats.", correct: true },
+                    { text: "J'ai trois chat.", correct: false, error: "Erreur : 'chat' doit être au pluriel 'chats'" },
+                    { text: "Je suis trois chats.", correct: false, error: "Erreur : utiliser 'avoir' (j'ai) et non 'être' (je suis)" },
+                    { text: "J'ai trois chattes.", correct: false, error: "Erreur : 'chattes' est le féminin, ici on parle de chats en général" }
+                ]
+            },
+            {
+                en: "She arrived yesterday.",
+                options: [
+                    { text: "Elle est arrivée hier.", correct: true },
+                    { text: "Elle a arrivé hier.", correct: false, error: "Erreur : avec 'arriver', utiliser 'être' (elle est) et non 'avoir' (elle a)" },
+                    { text: "Elle est arrivé hier.", correct: false, error: "Erreur : accord du participe passé - 'arrivée' avec un 'e' car le sujet est 'elle'" },
+                    { text: "Elle arrive hier.", correct: false, error: "Erreur : 'hier' indique le passé, utiliser le passé composé" }
+                ]
+            },
+            {
+                en: "We are going to eat.",
+                options: [
+                    { text: "Nous allons manger.", correct: true },
+                    { text: "Nous allons mangeons.", correct: false, error: "Erreur : après 'aller', utiliser l'infinitif 'manger' et non la conjugaison 'mangeons'" },
+                    { text: "Nous sommes aller manger.", correct: false, error: "Erreur : avec 'aller', utiliser 'nous allons' et non 'nous sommes aller'" },
+                    { text: "Nous allons à manger.", correct: false, error: "Erreur : après 'aller', pas de préposition 'à' avant l'infinitif" }
+                ]
+            },
+            {
+                en: "I need some water.",
+                options: [
+                    { text: "J'ai besoin d'eau.", correct: true },
+                    { text: "J'ai besoin de l'eau.", correct: false, error: "Erreur : avec 'besoin de', utiliser 'd'eau' (partitif) et non 'de l'eau' (défini)" },
+                    { text: "Je suis besoin d'eau.", correct: false, error: "Erreur : utiliser 'avoir besoin' (j'ai) et non 'être besoin' (je suis)" },
+                    { text: "J'ai besoin de eau.", correct: false, error: "Erreur : 'de' + voyelle devient 'd'' (d'eau)" }
+                ]
+            },
+            {
+                en: "They bought bread at the bakery.",
+                options: [
+                    { text: "Ils ont acheté du pain à la boulangerie.", correct: true },
+                    { text: "Ils ont acheté le pain à la boulangerie.", correct: false, error: "Erreur : utiliser 'du pain' (partitif) et non 'le pain' (défini) pour du pain en général" },
+                    { text: "Ils sont acheté du pain à la boulangerie.", correct: false, error: "Erreur : avec 'acheter', utiliser 'avoir' (ils ont) et non 'être' (ils sont)" },
+                    { text: "Ils ont acheté des pains à la boulangerie.", correct: false, error: "Erreur : 'du pain' (singulier) et non 'des pains' (pluriel) pour du pain en général" }
+                ]
+            },
+            {
+                en: "I just finished my homework.",
+                options: [
+                    { text: "Je viens de finir mes devoirs.", correct: true },
+                    { text: "Je viens finir mes devoirs.", correct: false, error: "Erreur : utiliser 'venir de' (passé récent) et non 'venir' seul" },
+                    { text: "Je vient de finir mes devoirs.", correct: false, error: "Erreur : conjugaison - 'je viens' avec un 's' et non 'je vient'" },
+                    { text: "Je viens de fini mes devoirs.", correct: false, error: "Erreur : après 'venir de', utiliser l'infinitif 'finir' et non le participe passé 'fini'" }
+                ]
+            },
+            {
+                en: "She lives in Paris.",
+                options: [
+                    { text: "Elle habite à Paris.", correct: true },
+                    { text: "Elle habite dans Paris.", correct: false, error: "Erreur : avec les villes, utiliser 'à' et non 'dans'" },
+                    { text: "Elle habite en Paris.", correct: false, error: "Erreur : avec les villes, utiliser 'à' et non 'en'" },
+                    { text: "Elle habite Paris.", correct: false, error: "Erreur : avec 'habiter', la préposition 'à' est nécessaire" }
+                ]
+            },
+            {
+                en: "We are French.",
+                options: [
+                    { text: "Nous sommes français.", correct: true },
+                    { text: "Nous sommes française.", correct: false, error: "Erreur : 'français' s'accorde avec le sujet - 'nous' est masculin ou mixte" },
+                    { text: "Nous sommes des français.", correct: false, error: "Erreur : avec 'être' + nationalité, pas d'article 'des'" },
+                    { text: "Nous sommes le français.", correct: false, error: "Erreur : 'français' est un adjectif, pas besoin d'article" }
+                ]
+            },
+            {
+                en: "I like chocolate.",
+                options: [
+                    { text: "J'aime le chocolat.", correct: true },
+                    { text: "J'aime chocolat.", correct: false, error: "Erreur : avec 'aimer', utiliser l'article défini 'le chocolat'" },
+                    { text: "Je aime le chocolat.", correct: false, error: "Erreur : 'je' + voyelle devient 'j'' (j'aime)" },
+                    { text: "J'aime du chocolat.", correct: false, error: "Erreur : avec 'aimer', utiliser l'article défini 'le' et non le partitif 'du'" }
+                ]
+            },
+            {
+                en: "He went to the store.",
+                options: [
+                    { text: "Il est allé au magasin.", correct: true },
+                    { text: "Il a allé au magasin.", correct: false, error: "Erreur : avec 'aller', utiliser 'être' (il est) et non 'avoir' (il a)" },
+                    { text: "Il est aller au magasin.", correct: false, error: "Erreur : participe passé de 'aller' est 'allé' et non 'aller'" },
+                    { text: "Il va au magasin.", correct: false, error: "Erreur : 'went' est au passé, utiliser le passé composé 'il est allé'" }
+                ]
+            },
+            {
+                en: "You have beautiful eyes.",
+                options: [
+                    { text: "Tu as de beaux yeux.", correct: true },
+                    { text: "Tu as des beaux yeux.", correct: false, error: "Erreur : avec un adjectif avant le nom, utiliser 'de' et non 'des'" },
+                    { text: "Tu as beau yeux.", correct: false, error: "Erreur : 'beau' s'accorde - 'beaux' au pluriel" },
+                    { text: "Tu as les beaux yeux.", correct: false, error: "Erreur : utiliser 'de beaux yeux' (partitif) et non 'les beaux yeux' (défini)" }
+                ]
+            },
+            {
+                en: "I'm going to study.",
+                options: [
+                    { text: "Je vais étudier.", correct: true },
+                    { text: "Je vais étudie.", correct: false, error: "Erreur : après 'aller', utiliser l'infinitif 'étudier' et non la conjugaison 'étudie'" },
+                    { text: "Je suis aller étudier.", correct: false, error: "Erreur : utiliser 'je vais' (présent) et non 'je suis aller' (passé composé)" },
+                    { text: "Je vais à étudier.", correct: false, error: "Erreur : après 'aller', pas de préposition 'à' avant l'infinitif" }
+                ]
+            },
+            {
+                en: "They are students.",
+                options: [
+                    { text: "Ils sont étudiants.", correct: true },
+                    { text: "Ils sont des étudiants.", correct: false, error: "Erreur : avec 'être' + profession/nom, pas d'article 'des'" },
+                    { text: "Ils sont étudiant.", correct: false, error: "Erreur : 'étudiant' s'accorde - 'étudiants' au pluriel" },
+                    { text: "Ils sont les étudiants.", correct: false, error: "Erreur : avec 'être' + nom, pas d'article défini 'les'" }
+                ]
+            },
+            {
+                en: "She drinks coffee in the morning.",
+                options: [
+                    { text: "Elle boit du café le matin.", correct: true },
+                    { text: "Elle boit le café le matin.", correct: false, error: "Erreur : utiliser 'du café' (partitif) et non 'le café' (défini) pour du café en général" },
+                    { text: "Elle boit de café le matin.", correct: false, error: "Erreur : avec 'boire', utiliser 'du café' (article partitif) et non 'de café'" },
+                    { text: "Elle boit des cafés le matin.", correct: false, error: "Erreur : 'du café' (singulier) et non 'des cafés' (pluriel) pour une boisson" }
+                ]
+            },
+            {
+                en: "We need more time.",
+                options: [
+                    { text: "Nous avons besoin de plus de temps.", correct: true },
+                    { text: "Nous avons besoin de plus temps.", correct: false, error: "Erreur : 'plus de temps' - 'de' est nécessaire entre 'plus' et le nom" },
+                    { text: "Nous sommes besoin de plus de temps.", correct: false, error: "Erreur : utiliser 'avoir besoin' (nous avons) et non 'être besoin' (nous sommes)" },
+                    { text: "Nous avons besoin plus de temps.", correct: false, error: "Erreur : 'besoin de' - la préposition 'de' est nécessaire" }
+                ]
+            },
+            {
+                en: "I'm from Spain.",
+                options: [
+                    { text: "Je viens d'Espagne.", correct: true },
+                    { text: "Je viens de Espagne.", correct: false, error: "Erreur : 'de' + voyelle devient 'd'' (d'Espagne)" },
+                    { text: "Je viens à Espagne.", correct: false, error: "Erreur : avec 'venir', utiliser 'de' (origine) et non 'à' (destination)" },
+                    { text: "Je viens en Espagne.", correct: false, error: "Erreur : avec 'venir', utiliser 'de' (origine) et non 'en' (destination)" }
+                ]
+            },
+            {
+                en: "He plays football with his friends.",
+                options: [
+                    { text: "Il joue au football avec ses amis.", correct: true },
+                    { text: "Il joue le football avec ses amis.", correct: false, error: "Erreur : avec 'jouer', utiliser 'au football' (à + le) et non 'le football'" },
+                    { text: "Il joue avec le football avec ses amis.", correct: false, error: "Erreur : 'jouer au football' - pas de double 'avec'" },
+                    { text: "Il joue à football avec ses amis.", correct: false, error: "Erreur : 'jouer au football' - 'à' + 'le' = 'au'" }
+                ]
+            },
+            {
+                en: "She is very tired.",
+                options: [
+                    { text: "Elle est très fatiguée.", correct: true },
+                    { text: "Elle est très fatigué.", correct: false, error: "Erreur : 'fatigué' s'accorde - 'fatiguée' avec un 'e' car le sujet est 'elle'" },
+                    { text: "Elle a très fatiguée.", correct: false, error: "Erreur : avec 'fatigué' (adjectif), utiliser 'être' (elle est) et non 'avoir' (elle a)" },
+                    { text: "Elle est très fatiguées.", correct: false, error: "Erreur : 'fatiguée' (singulier) et non 'fatiguées' (pluriel) car le sujet est 'elle'" }
+                ]
+            },
+            {
+                en: "We are going to the cinema.",
+                options: [
+                    { text: "Nous allons au cinéma.", correct: true },
+                    { text: "Nous allons à le cinéma.", correct: false, error: "Erreur : 'à' + 'le' devient 'au' (au cinéma)" },
+                    { text: "Nous allons dans le cinéma.", correct: false, error: "Erreur : avec 'cinéma' (lieu), utiliser 'au' et non 'dans'" },
+                    { text: "Nous allons en cinéma.", correct: false, error: "Erreur : avec 'cinéma' (masculin), utiliser 'au' et non 'en'" }
+                ]
+            },
+            {
+                en: "I want to learn French.",
+                options: [
+                    { text: "Je veux apprendre le français.", correct: true },
+                    { text: "Je veux apprendre français.", correct: false, error: "Erreur : avec 'apprendre', utiliser l'article défini 'le français'" },
+                    { text: "Je veut apprendre le français.", correct: false, error: "Erreur : conjugaison - 'je veux' avec un 'x' et non 'je veut'" },
+                    { text: "Je veux à apprendre le français.", correct: false, error: "Erreur : après 'vouloir', pas de préposition 'à' avant l'infinitif" }
+                ]
+            },
+            {
+                en: "They arrived on time.",
+                options: [
+                    { text: "Ils sont arrivés à l'heure.", correct: true },
+                    { text: "Ils ont arrivés à l'heure.", correct: false, error: "Erreur : avec 'arriver', utiliser 'être' (ils sont) et non 'avoir' (ils ont)" },
+                    { text: "Ils sont arrivé à l'heure.", correct: false, error: "Erreur : accord du participe passé - 'arrivés' avec un 's' car le sujet est 'ils'" },
+                    { text: "Ils sont arrivées à l'heure.", correct: false, error: "Erreur : 'arrivés' (masculin) car le sujet 'ils' est masculin" }
+                ]
+            },
+            {
+                en: "She has two sisters.",
+                options: [
+                    { text: "Elle a deux sœurs.", correct: true },
+                    { text: "Elle a deux sœur.", correct: false, error: "Erreur : 'sœur' doit être au pluriel 'sœurs'" },
+                    { text: "Elle est deux sœurs.", correct: false, error: "Erreur : utiliser 'avoir' (elle a) et non 'être' (elle est)" },
+                    { text: "Elle a deux soeurs.", correct: false, error: "Erreur : orthographe - 'sœurs' avec 'œ' et non 'soeurs'" }
+                ]
+            },
+            {
+                en: "I'm going to call you tomorrow.",
+                options: [
+                    { text: "Je vais t'appeler demain.", correct: true },
+                    { text: "Je vais appeler toi demain.", correct: false, error: "Erreur : utiliser le pronom 'te' (t') et non 'toi' après le verbe" },
+                    { text: "Je vais te appeler demain.", correct: false, error: "Erreur : 'te' + voyelle devient 't'' (t'appeler)" },
+                    { text: "Je vais appeler tu demain.", correct: false, error: "Erreur : utiliser le pronom 'te' (t') et non 'tu' après le verbe" }
+                ]
+            },
+            {
+                en: "We eat vegetables every day.",
+                options: [
+                    { text: "Nous mangeons des légumes tous les jours.", correct: true },
+                    { text: "Nous mangeons les légumes tous les jours.", correct: false, error: "Erreur : utiliser 'des légumes' (partitif) et non 'les légumes' (défini) pour des légumes en général" },
+                    { text: "Nous mangeons de légumes tous les jours.", correct: false, error: "Erreur : avec 'manger', utiliser 'des légumes' (article partitif) et non 'de légumes'" },
+                    { text: "Nous mangeons légumes tous les jours.", correct: false, error: "Erreur : 'des légumes' - l'article partitif 'des' est nécessaire" }
+                ]
+            },
+            {
+                en: "He is a doctor.",
+                options: [
+                    { text: "Il est médecin.", correct: true },
+                    { text: "Il est un médecin.", correct: false, error: "Erreur : avec 'être' + profession, pas d'article 'un'" },
+                    { text: "Il est le médecin.", correct: false, error: "Erreur : avec 'être' + profession, pas d'article défini 'le'" },
+                    { text: "Il est des médecins.", correct: false, error: "Erreur : 'médecin' (singulier) car le sujet est 'il' (singulier)" }
+                ]
+            },
+            {
+                en: "I just saw my friend.",
+                options: [
+                    { text: "Je viens de voir mon ami.", correct: true },
+                    { text: "Je viens voir mon ami.", correct: false, error: "Erreur : utiliser 'venir de' (passé récent) et non 'venir' seul" },
+                    { text: "Je vient de voir mon ami.", correct: false, error: "Erreur : conjugaison - 'je viens' avec un 's' et non 'je vient'" },
+                    { text: "Je viens de vu mon ami.", correct: false, error: "Erreur : après 'venir de', utiliser l'infinitif 'voir' et non le participe passé 'vu'" }
+                ]
+            },
+            {
+                en: "She works in a hospital.",
+                options: [
+                    { text: "Elle travaille dans un hôpital.", correct: true },
+                    { text: "Elle travaille à un hôpital.", correct: false, error: "Erreur : avec 'hôpital' (bâtiment), utiliser 'dans' et non 'à'" },
+                    { text: "Elle travaille en un hôpital.", correct: false, error: "Erreur : avec 'hôpital' (masculin), utiliser 'dans un' et non 'en un'" },
+                    { text: "Elle travaille un hôpital.", correct: false, error: "Erreur : avec 'travailler', la préposition 'dans' est nécessaire" }
+                ]
+            },
+            {
+                en: "We are going to travel.",
+                options: [
+                    { text: "Nous allons voyager.", correct: true },
+                    { text: "Nous allons voyageons.", correct: false, error: "Erreur : après 'aller', utiliser l'infinitif 'voyager' et non la conjugaison 'voyageons'" },
+                    { text: "Nous sommes aller voyager.", correct: false, error: "Erreur : utiliser 'nous allons' (présent) et non 'nous sommes aller' (passé composé)" },
+                    { text: "Nous allons à voyager.", correct: false, error: "Erreur : après 'aller', pas de préposition 'à' avant l'infinitif" }
+                ]
+            },
+            {
+                en: "They speak three languages.",
+                options: [
+                    { text: "Ils parlent trois langues.", correct: true },
+                    { text: "Ils parlent trois langue.", correct: false, error: "Erreur : 'langue' doit être au pluriel 'langues'" },
+                    { text: "Ils parlent des trois langues.", correct: false, error: "Erreur : avec un nombre (trois), pas d'article 'des'" },
+                    { text: "Ils parlent les trois langues.", correct: false, error: "Erreur : avec un nombre (trois), pas d'article défini 'les'" }
+                ]
+            },
+            {
+                en: "I'm going to buy some bread.",
+                options: [
+                    { text: "Je vais acheter du pain.", correct: true },
+                    { text: "Je vais acheter le pain.", correct: false, error: "Erreur : utiliser 'du pain' (partitif) et non 'le pain' (défini) pour du pain en général" },
+                    { text: "Je vais acheter de pain.", correct: false, error: "Erreur : avec 'acheter', utiliser 'du pain' (article partitif) et non 'de pain'" },
+                    { text: "Je vais acheter des pains.", correct: false, error: "Erreur : 'du pain' (singulier) et non 'des pains' (pluriel) pour du pain en général" }
+                ]
+            },
+            {
+                en: "She is very happy.",
+                options: [
+                    { text: "Elle est très heureuse.", correct: true },
+                    { text: "Elle est très heureux.", correct: false, error: "Erreur : 'heureux' s'accorde - 'heureuse' avec un 'e' car le sujet est 'elle'" },
+                    { text: "Elle a très heureuse.", correct: false, error: "Erreur : avec 'heureuse' (adjectif), utiliser 'être' (elle est) et non 'avoir' (elle a)" },
+                    { text: "Elle est très heureuses.", correct: false, error: "Erreur : 'heureuse' (singulier) et non 'heureuses' (pluriel) car le sujet est 'elle'" }
+                ]
+            }
+        ];
+
+        let currentGrammarIndex = -1;
+        let grammarScore = 0;
+        let totalGrammarAnswered = 0;
+        let usedGrammarQuestions = [];
+
+        function initGrammarGame() {
+            currentGrammarIndex = -1;
+            grammarScore = 0;
+            totalGrammarAnswered = 0;
+            usedGrammarQuestions = [];
+            nextGrammarQuestion();
+        }
+
+        function nextGrammarQuestion() {
+            // Réinitialiser l'état
+            const resultDiv = document.getElementById('grammar-result');
+            const questionDiv = document.getElementById('grammar-question');
+            const optionsDiv = document.getElementById('grammar-options');
+            const progressText = document.getElementById('grammar-progress-text');
+            
+            if (resultDiv) resultDiv.style.display = 'none';
+            if (optionsDiv) optionsDiv.innerHTML = '';
+            
+            // Sélectionner une question aléatoire non encore utilisée
+            let availableQuestions = grammarQuestions.filter((_, index) => !usedGrammarQuestions.includes(index));
+            
+            if (availableQuestions.length === 0) {
+                // Toutes les questions ont été utilisées, réinitialiser
+                usedGrammarQuestions = [];
+                availableQuestions = grammarQuestions;
+            }
+            
+            const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+            const selectedQuestion = availableQuestions[randomIndex];
+            currentGrammarIndex = grammarQuestions.indexOf(selectedQuestion);
+            usedGrammarQuestions.push(currentGrammarIndex);
+            
+            // Afficher la question
+            if (questionDiv) {
+                questionDiv.textContent = selectedQuestion.en;
+            }
+            
+            // Afficher les options
+            if (optionsDiv) {
+                // Mélanger les options pour que la bonne réponse ne soit pas toujours au même endroit
+                const shuffledOptions = [...selectedQuestion.options].sort(() => Math.random() - 0.5);
+                
+                shuffledOptions.forEach((option, index) => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'grammar-option-btn';
+                    optionButton.textContent = option.text;
+                    optionButton.onclick = () => selectGrammarOption(option, optionButton);
+                    optionsDiv.appendChild(optionButton);
+                });
+            }
+            
+            // Mettre à jour le progrès
+            if (progressText) {
+                const remaining = grammarQuestions.length - usedGrammarQuestions.length;
+                progressText.textContent = `${usedGrammarQuestions.length} / ${grammarQuestions.length} questions répondues`;
+            }
+        }
+
+        function selectGrammarOption(option, buttonElement) {
+            const resultDiv = document.getElementById('grammar-result');
+            const resultExplanation = document.getElementById('grammar-result-explanation');
+            const optionsDiv = document.getElementById('grammar-options');
+            const allButtons = optionsDiv.querySelectorAll('.grammar-option-btn');
+            
+            // Désactiver tous les boutons
+            allButtons.forEach(btn => {
+                btn.disabled = true;
+                btn.style.pointerEvents = 'none';
+            });
+            
+            totalGrammarAnswered++;
+            
+            if (option.correct) {
+                grammarScore++;
+                buttonElement.style.backgroundColor = '#4caf50';
+                buttonElement.style.color = 'white';
+                // Jouer le son de succès (même que pour la traduction)
+                playSuccessSound();
+            } else {
+                buttonElement.style.backgroundColor = '#f44336';
+                buttonElement.style.color = 'white';
+                // Trouver et mettre en évidence la bonne réponse
+                allButtons.forEach(btn => {
+                    const btnText = btn.textContent.trim();
+                    const correctOption = grammarQuestions[currentGrammarIndex].options.find(opt => opt.correct);
+                    if (btnText === correctOption.text) {
+                        btn.style.backgroundColor = '#4caf50';
+                        btn.style.color = 'white';
+                    }
+                });
+            }
+            
+            // Afficher le résultat
+            if (option.correct) {
+                resultDiv.className = 'translation-result correct';
+                resultExplanation.innerHTML = `<strong>✅ Correct !</strong><br>${option.text}`;
+            } else {
+                resultDiv.className = 'translation-result incorrect';
+                const correctOption = grammarQuestions[currentGrammarIndex].options.find(opt => opt.correct);
+                resultExplanation.innerHTML = `<strong>❌ Incorrect</strong><br>La bonne réponse était : <strong>${correctOption.text}</strong><br><small>${option.error || ''}</small>`;
+            }
+            
+            resultDiv.style.display = 'block';
+        }
+
+        // Fonction pour jouer un son de succès (identique à celle de la traduction)
+        function playSuccessSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const now = audioContext.currentTime;
+                
+                // Créer deux oscillateurs pour un accord
+                const osc1 = audioContext.createOscillator();
+                const osc2 = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                osc1.connect(gainNode);
+                osc2.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                // Accord majeur (Do-Mi-Sol) mais plus simple avec juste Do-Mi
+                osc1.frequency.value = 523.25; // Do (C5)
+                osc2.frequency.value = 659.25; // Mi (E5)
+                
+                osc1.type = 'sine';
+                osc2.type = 'sine';
+                
+                // Enveloppe douce et courte
+                gainNode.gain.setValueAtTime(0, now);
+                gainNode.gain.linearRampToValueAtTime(0.2, now + 0.02);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                
+                osc1.start(now);
+                osc2.start(now);
+                osc1.stop(now + 0.25);
+                osc2.stop(now + 0.25);
+            } catch (error) {
+                // Si l'API Web Audio n'est pas disponible, on ignore silencieusement
+            }
+        }
+
+        // Initialiser le jeu au chargement
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initGrammarGame);
+        } else {
+            // DOM déjà chargé
+            setTimeout(initGrammarGame, 100);
+        }
+    </script>
+
+    <style>
+        .grammar-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .grammar-option-btn {
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #f4f1ff 0%, #e8e0f5 100%);
+            border: 2px solid #764ba2;
+            border-radius: 12px;
+            font-size: 1em;
+            color: #764ba2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .grammar-option-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #764ba2 0%, #5a3a7a 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.3);
+        }
+
+        .grammar-option-btn:disabled {
+            opacity: 0.7;
+        }
+
+        .translation-result.correct {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #4caf50;
+        }
+
+        .translation-result.incorrect {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border: 2px solid #f44336;
+        }
+    </style>
+
