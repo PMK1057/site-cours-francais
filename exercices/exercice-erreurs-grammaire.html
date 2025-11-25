@@ -470,19 +470,48 @@
     </script>
 
     <style>
+        /* Réduire les espacements pour que tout soit visible sans scroller */
+        h2 {
+            margin: 10px 0 10px 0 !important;
+            font-size: 1.6em !important;
+        }
+        
+        .back-btn {
+            margin-bottom: 10px !important;
+        }
+        
+        .translation-exercise {
+            margin-top: 10px !important;
+        }
+        
+        .game-card-body {
+            padding: 16px 20px !important;
+        }
+        
+        .translation-question {
+            margin-bottom: 12px !important;
+        }
+        
+        .translation-question p {
+            color: #667eea;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 8px 0;
+        }
+
         .grammar-options {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin: 20px 0;
+            gap: 8px;
+            margin: 12px 0;
         }
 
         .grammar-option-btn {
-            padding: 16px 20px;
+            padding: 12px 16px;
             background: linear-gradient(135deg, #f4f1ff 0%, #e8e0f5 100%);
             border: 2px solid #764ba2;
             border-radius: 12px;
-            font-size: 1em;
+            font-size: 0.95em;
             color: #764ba2;
             cursor: pointer;
             transition: all 0.3s ease;
