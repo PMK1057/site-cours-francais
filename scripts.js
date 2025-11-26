@@ -1377,7 +1377,7 @@ const expressionsData = [
     {
         fr: "Allez-y",
         en: "Polite form of 'vas-y' used when speaking to someone you don't know or in formal situations. Uses the 'vous' form to show respect. Essential for proper French politeness when addressing strangers, older people, or in professional contexts.",
-        explanation: "Polite form of 'vas-y' used when speaking to someone you don't know or in formal situations. Uses the 'vous' form to show respect. Essential for proper French politeness when addressing strangers, older people, or in professional contexts."
+        explanation: "Polite version of 'vas-y' using the 'vous' form. Use when addressing strangers, older people, or in professional contexts."
     },
     {
         fr: "Carrément",

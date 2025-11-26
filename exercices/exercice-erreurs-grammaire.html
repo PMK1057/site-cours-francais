@@ -1747,6 +1747,152 @@
                     { text: "Ils se réveiller.", correct: false, error: "Erreur : conjugaison - 'ils se réveillent' (présent) et non 'ils se réveiller' (infinitif)" },
                     { text: "Ils se réveille.", correct: false, error: "Erreur : conjugaison - 'ils se réveillent' (pluriel) et non 'ils se réveille' (singulier)" }
                 ]
+            },
+            // Questions sur "chez" avec les professions
+            {
+                en: "I went to the hairdresser.",
+                options: [
+                    { text: "Je suis allé chez le coiffeur.", correct: true },
+                    { text: "Je suis allé au coiffeur.", correct: false, error: "Erreur : avec les professions (coiffeur, médecin, etc.), utiliser 'chez' et non 'au'" },
+                    { text: "Je suis allé à le coiffeur.", correct: false, error: "Erreur : avec les professions, utiliser 'chez le coiffeur' et non 'à le coiffeur'" },
+                    { text: "Je suis allé dans le coiffeur.", correct: false, error: "Erreur : avec les professions, utiliser 'chez' et non 'dans'" }
+                ]
+            },
+            {
+                en: "She went to the doctor.",
+                options: [
+                    { text: "Elle est allée chez le médecin.", correct: true },
+                    { text: "Elle est allée au médecin.", correct: false, error: "Erreur : avec les professions (médecin, coiffeur, etc.), utiliser 'chez' et non 'au'" },
+                    { text: "Elle est allée à le médecin.", correct: false, error: "Erreur : avec les professions, utiliser 'chez le médecin' et non 'à le médecin'" },
+                    { text: "Elle est allée dans le médecin.", correct: false, error: "Erreur : avec les professions, utiliser 'chez' et non 'dans'" }
+                ]
+            },
+            {
+                en: "We went to the dentist.",
+                options: [
+                    { text: "Nous sommes allés chez le dentiste.", correct: true },
+                    { text: "Nous sommes allés au dentiste.", correct: false, error: "Erreur : avec les professions (dentiste, médecin, etc.), utiliser 'chez' et non 'au'" },
+                    { text: "Nous sommes allés à le dentiste.", correct: false, error: "Erreur : avec les professions, utiliser 'chez le dentiste' et non 'à le dentiste'" },
+                    { text: "Nous sommes allés dans le dentiste.", correct: false, error: "Erreur : avec les professions, utiliser 'chez' et non 'dans'" }
+                ]
+            },
+            {
+                en: "He went to the doctor.",
+                options: [
+                    { text: "Il est allé chez le médecin.", correct: true },
+                    { text: "Il est allé au médecin.", correct: false, error: "Erreur : avec les professions (médecin, coiffeur, etc.), utiliser 'chez' et non 'au'" },
+                    { text: "Il est allé à le médecin.", correct: false, error: "Erreur : avec les professions, utiliser 'chez le médecin' et non 'à le médecin'" },
+                    { text: "Il est allé dans le médecin.", correct: false, error: "Erreur : avec les professions, utiliser 'chez' et non 'dans'" }
+                ]
+            },
+            {
+                en: "I'm going to the hairdresser.",
+                options: [
+                    { text: "Je vais chez le coiffeur.", correct: true },
+                    { text: "Je vais au coiffeur.", correct: false, error: "Erreur : avec les professions (coiffeur, médecin, etc.), utiliser 'chez' et non 'au'" },
+                    { text: "Je vais à le coiffeur.", correct: false, error: "Erreur : avec les professions, utiliser 'chez le coiffeur' et non 'à le coiffeur'" },
+                    { text: "Je vais dans le coiffeur.", correct: false, error: "Erreur : avec les professions, utiliser 'chez' et non 'dans'" }
+                ]
+            },
+            {
+                en: "She is at the doctor's.",
+                options: [
+                    { text: "Elle est chez le médecin.", correct: true },
+                    { text: "Elle est au médecin.", correct: false, error: "Erreur : avec les professions (médecin, coiffeur, etc.), utiliser 'chez' et non 'au'" },
+                    { text: "Elle est à le médecin.", correct: false, error: "Erreur : avec les professions, utiliser 'chez le médecin' et non 'à le médecin'" },
+                    { text: "Elle est dans le médecin.", correct: false, error: "Erreur : avec les professions, utiliser 'chez' et non 'dans'" }
+                ]
+            },
+            {
+                en: "They went to the hairdresser.",
+                options: [
+                    { text: "Ils sont allés chez le coiffeur.", correct: true },
+                    { text: "Ils sont allés au coiffeur.", correct: false, error: "Erreur : avec les professions (coiffeur, médecin, etc.), utiliser 'chez' et non 'au'" },
+                    { text: "Ils sont allés à le coiffeur.", correct: false, error: "Erreur : avec les professions, utiliser 'chez le coiffeur' et non 'à le coiffeur'" },
+                    { text: "Ils sont allés dans le coiffeur.", correct: false, error: "Erreur : avec les professions, utiliser 'chez' et non 'dans'" }
+                ]
+            },
+            {
+                en: "I'm going to the dentist.",
+                options: [
+                    { text: "Je vais chez le dentiste.", correct: true },
+                    { text: "Je vais au dentiste.", correct: false, error: "Erreur : avec les professions (dentiste, médecin, etc.), utiliser 'chez' et non 'au'" },
+                    { text: "Je vais à le dentiste.", correct: false, error: "Erreur : avec les professions, utiliser 'chez le dentiste' et non 'à le dentiste'" },
+                    { text: "Je vais dans le dentiste.", correct: false, error: "Erreur : avec les professions, utiliser 'chez' et non 'dans'" }
+                ]
+            },
+            {
+                en: "We are at the hairdresser's.",
+                options: [
+                    { text: "Nous sommes chez le coiffeur.", correct: true },
+                    { text: "Nous sommes au coiffeur.", correct: false, error: "Erreur : avec les professions (coiffeur, médecin, etc.), utiliser 'chez' et non 'au'" },
+                    { text: "Nous sommes à le coiffeur.", correct: false, error: "Erreur : avec les professions, utiliser 'chez le coiffeur' et non 'à le coiffeur'" },
+                    { text: "Nous sommes dans le coiffeur.", correct: false, error: "Erreur : avec les professions, utiliser 'chez' et non 'dans'" }
+                ]
+            },
+            {
+                en: "He is going to the doctor.",
+                options: [
+                    { text: "Il va chez le médecin.", correct: true },
+                    { text: "Il va au médecin.", correct: false, error: "Erreur : avec les professions (médecin, coiffeur, etc.), utiliser 'chez' et non 'au'" },
+                    { text: "Il va à le médecin.", correct: false, error: "Erreur : avec les professions, utiliser 'chez le médecin' et non 'à le médecin'" },
+                    { text: "Il va dans le médecin.", correct: false, error: "Erreur : avec les professions, utiliser 'chez' et non 'dans'" }
+                ]
+            },
+            // Questions sur "rentrer chez eux", "être chez soi", etc.
+            {
+                en: "They are going home.",
+                options: [
+                    { text: "Ils rentrent chez eux.", correct: true },
+                    { text: "Ils rentrent à eux.", correct: false, error: "Erreur : utiliser 'chez eux' et non 'à eux' pour dire 'à la maison'" },
+                    { text: "Ils rentrent dans eux.", correct: false, error: "Erreur : utiliser 'chez eux' et non 'dans eux' pour dire 'à la maison'" },
+                    { text: "Ils rentrent à leur maison.", correct: false, error: "Erreur : utiliser 'chez eux' et non 'à leur maison' pour dire 'à la maison'" }
+                ]
+            },
+            {
+                en: "We are going home.",
+                options: [
+                    { text: "Nous rentrons chez nous.", correct: true },
+                    { text: "Nous rentrons à nous.", correct: false, error: "Erreur : utiliser 'chez nous' et non 'à nous' pour dire 'à la maison'" },
+                    { text: "Nous rentrons dans nous.", correct: false, error: "Erreur : utiliser 'chez nous' et non 'dans nous' pour dire 'à la maison'" },
+                    { text: "Nous rentrons à notre maison.", correct: false, error: "Erreur : utiliser 'chez nous' et non 'à notre maison' pour dire 'à la maison'" }
+                ]
+            },
+            {
+                en: "I'm going home.",
+                options: [
+                    { text: "Je rentre chez moi.", correct: true },
+                    { text: "Je rentre à moi.", correct: false, error: "Erreur : utiliser 'chez moi' et non 'à moi' pour dire 'à la maison'" },
+                    { text: "Je rentre dans moi.", correct: false, error: "Erreur : utiliser 'chez moi' et non 'dans moi' pour dire 'à la maison'" },
+                    { text: "Je rentre à ma maison.", correct: false, error: "Erreur : utiliser 'chez moi' et non 'à ma maison' pour dire 'à la maison'" }
+                ]
+            },
+            {
+                en: "She is going home.",
+                options: [
+                    { text: "Elle rentre chez elle.", correct: true },
+                    { text: "Elle rentre à elle.", correct: false, error: "Erreur : utiliser 'chez elle' et non 'à elle' pour dire 'à la maison'" },
+                    { text: "Elle rentre dans elle.", correct: false, error: "Erreur : utiliser 'chez elle' et non 'dans elle' pour dire 'à la maison'" },
+                    { text: "Elle rentre à sa maison.", correct: false, error: "Erreur : utiliser 'chez elle' et non 'à sa maison' pour dire 'à la maison'" }
+                ]
+            },
+            {
+                en: "They returned home.",
+                options: [
+                    { text: "Ils sont rentrés chez eux.", correct: true },
+                    { text: "Ils sont rentrés à eux.", correct: false, error: "Erreur : utiliser 'chez eux' et non 'à eux' pour dire 'à la maison'" },
+                    { text: "Ils sont rentrés dans eux.", correct: false, error: "Erreur : utiliser 'chez eux' et non 'dans eux' pour dire 'à la maison'" },
+                    { text: "Ils sont rentrés à leur maison.", correct: false, error: "Erreur : utiliser 'chez eux' et non 'à leur maison' pour dire 'à la maison'" }
+                ]
+            },
+            {
+                en: "We returned home.",
+                options: [
+                    { text: "Nous sommes rentrés chez nous.", correct: true },
+                    { text: "Nous sommes rentrés à nous.", correct: false, error: "Erreur : utiliser 'chez nous' et non 'à nous' pour dire 'à la maison'" },
+                    { text: "Nous sommes rentrés dans nous.", correct: false, error: "Erreur : utiliser 'chez nous' et non 'dans nous' pour dire 'à la maison'" },
+                    { text: "Nous sommes rentrés à notre maison.", correct: false, error: "Erreur : utiliser 'chez nous' et non 'à notre maison' pour dire 'à la maison'" }
+                ]
             }
         ];
 
@@ -1837,19 +1983,22 @@
             if (option.correct) {
                 grammarScore++;
                 buttonElement.style.backgroundColor = '#4caf50';
-                buttonElement.style.color = 'white';
+                buttonElement.style.color = '#ffffff';
+                buttonElement.style.fontWeight = '600';
                 // Jouer le son de succès (même que pour la traduction)
                 playSuccessSound();
             } else {
                 buttonElement.style.backgroundColor = '#f44336';
-                buttonElement.style.color = 'white';
+                buttonElement.style.color = '#ffffff';
+                buttonElement.style.fontWeight = '600';
                 // Trouver et mettre en évidence la bonne réponse
                 allButtons.forEach(btn => {
                     const btnText = btn.textContent.trim();
                     const correctOption = grammarQuestions[currentGrammarIndex].options.find(opt => opt.correct);
                     if (btnText === correctOption.text) {
                         btn.style.backgroundColor = '#4caf50';
-                        btn.style.color = 'white';
+                        btn.style.color = '#ffffff';
+                        btn.style.fontWeight = '600';
                     }
                 });
             }
@@ -1962,11 +2111,12 @@
             border: 2px solid #764ba2;
             border-radius: 12px;
             font-size: 0.95em;
-            color: #764ba2;
+            color: #333333;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: left;
             font-family: inherit;
+            font-weight: 500;
         }
 
         .grammar-option-btn:hover:not(:disabled) {

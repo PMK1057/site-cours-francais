@@ -71,11 +71,12 @@
             border: 2px solid #764ba2;
             border-radius: 12px;
             font-size: 0.95em;
-            color: #764ba2;
+            color: #333333;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: left;
             font-family: inherit;
+            font-weight: 500;
         }
 
         .grammar-option-btn:hover:not(:disabled) {
@@ -480,18 +481,21 @@
             if (option.correct) {
                 grammarScoreB1++;
                 buttonElement.style.backgroundColor = '#4caf50';
-                buttonElement.style.color = 'white';
+                buttonElement.style.color = '#ffffff';
+                buttonElement.style.fontWeight = '600';
                 // Jouer le son de succès
                 playSuccessSound();
             } else {
                 buttonElement.style.backgroundColor = '#f44336';
-                buttonElement.style.color = 'white';
+                buttonElement.style.color = '#ffffff';
+                buttonElement.style.fontWeight = '600';
                 allButtons.forEach(btn => {
                     const btnText = btn.textContent.trim();
                     const correctOption = grammarQuestionsB1[currentGrammarIndexB1].options.find(opt => opt.correct);
                     if (btnText === correctOption.text) {
                         btn.style.backgroundColor = '#4caf50';
-                        btn.style.color = 'white';
+                        btn.style.color = '#ffffff';
+                        btn.style.fontWeight = '600';
                     }
                 });
             }
@@ -566,11 +570,12 @@
             border: 2px solid #764ba2;
             border-radius: 12px;
             font-size: 1em;
-            color: #764ba2;
+            color: #333333;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: left;
             font-family: inherit;
+            font-weight: 500;
         }
 
         .grammar-option-btn:hover:not(:disabled) {
