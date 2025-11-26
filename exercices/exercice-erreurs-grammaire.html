@@ -413,11 +413,11 @@
             // Afficher le résultat
             if (option.correct) {
                 resultDiv.className = 'translation-result correct';
-                resultExplanation.innerHTML = `<strong>✅ Correct !</strong><br>${option.text}`;
+                resultExplanation.innerHTML = `<div class="result-header"><span class="check-icon">✓</span><strong>Correct !</strong></div><div class="result-answer">${option.text}</div>`;
             } else {
                 resultDiv.className = 'translation-result incorrect';
                 const correctOption = grammarQuestions[currentGrammarIndex].options.find(opt => opt.correct);
-                resultExplanation.innerHTML = `<strong>❌ Incorrect</strong><br>La bonne réponse était : <strong>${correctOption.text}</strong><br><small>${option.error || ''}</small>`;
+                resultExplanation.innerHTML = `<strong>❌ Incorrect</strong><br>La bonne réponse était : <strong style="color: #667eea;">${correctOption.text}</strong><br><small>${option.error || ''}</small>`;
             }
             
             resultDiv.style.display = 'block';
@@ -540,10 +540,46 @@
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             border: 2px solid #4caf50;
         }
+        
+        .translation-result.correct .result-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .translation-result.correct .check-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #4caf50;
+            color: white;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        .translation-result.correct strong {
+            color: #4caf50;
+            font-size: 1.1em;
+        }
+        
+        .translation-result.correct .result-answer {
+            color: #667eea;
+            font-size: 1.05em;
+            font-weight: 500;
+        }
 
         .translation-result.incorrect {
             background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
             border: 2px solid #f44336;
+        }
+        
+        .translation-result.incorrect strong {
+            color: #f44336;
         }
     </style>
 
