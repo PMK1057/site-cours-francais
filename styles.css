@@ -899,64 +899,80 @@ em {
     margin-bottom: 16px;
 }
 
+/* Responsive : permettre le wrap sur petits écrans */
+@media (max-width: 600px) {
+    .conjugation-instruction {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    
+    .conjugation-answer-line {
+        flex-wrap: wrap;
+    }
+}
+
 .conjugation-instruction {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    line-height: 1.8;
+    flex-wrap: nowrap;
+    gap: 6px;
+    line-height: 1.4;
 }
 
 .instruction-text {
-    font-size: 1.1em;
+    font-size: 1em;
     color: rgba(255, 255, 255, 0.9);
     font-family: 'Georgia', serif;
+    white-space: nowrap;
 }
 
 .verb-badge {
     display: inline-block;
-    padding: 6px 16px;
+    padding: 4px 12px;
     background: rgba(255, 255, 255, 0.3);
     border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 8px;
-    font-size: 1.3em;
+    border-radius: 6px;
+    font-size: 1.1em;
     font-weight: 700;
     color: white;
     font-family: 'Georgia', serif;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
 }
 
 .tense-badge {
     display: inline-block;
-    padding: 6px 16px;
+    padding: 4px 12px;
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.4);
-    border-radius: 8px;
-    font-size: 1.1em;
+    border-radius: 6px;
+    font-size: 1em;
     font-weight: 600;
     color: white;
     font-family: 'Georgia', serif;
+    white-space: nowrap;
 }
 
 .conjugation-answer-line {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 12px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
 }
 
 .pronoun-display {
-    font-size: 1.8em;
+    font-size: 1.5em;
     font-weight: 700;
     color: white;
     font-family: 'Georgia', serif;
-    min-width: 50px;
+    min-width: 45px;
     text-align: right;
+    white-space: nowrap;
 }
 
 .conjugation-answer-line input {
