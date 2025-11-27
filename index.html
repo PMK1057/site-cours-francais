@@ -52,12 +52,18 @@
                         <h2>⚡ Conjugaison rapide</h2>
                     </div>
                     <div class="game-card-body">
-                        <div class="conjugation-question">
-                            <p id="conjugation-question"></p>
-                        </div>
-                        <div class="conjugation-input">
-                            <input type="text" id="conjugation-answer" placeholder="Ex: avez voulu (ou vous avez voulu)" />
-                            <button id="conjugation-validate" onclick="validateConjugation()">Valider</button>
+                        <div class="conjugation-prompt">
+                            <div class="conjugation-instruction">
+                                <span class="instruction-text">Conjuguez le verbe</span>
+                                <span class="verb-badge" id="conjugation-verb"></span>
+                                <span class="instruction-text">au</span>
+                                <span class="tense-badge" id="conjugation-tense"></span>
+                            </div>
+                            <div class="conjugation-answer-line">
+                                <span class="pronoun-display" id="conjugation-pronoun"></span>
+                                <input type="text" id="conjugation-answer" placeholder="ta réponse ici" />
+                                <button id="conjugation-validate" onclick="validateConjugation()">Valider</button>
+                            </div>
                         </div>
                         <div id="conjugation-timer" class="timer" style="display: none;"></div>
                         <div id="conjugation-answer-display" class="timer" style="display: none;"></div>

@@ -894,53 +894,97 @@ em {
     margin: 0;
 }
 
-/* Conjugaison rapide */
-.conjugation-question {
+/* Conjugaison rapide - Format conversationnel */
+.conjugation-prompt {
     margin-bottom: 16px;
-    text-align: center;
 }
 
-.conjugation-question p {
-    font-size: 1.5em;
-    font-weight: 600;
-    color: white;
-    margin: 0;
-    line-height: 1.5;
+.conjugation-instruction {
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    line-height: 1.8;
+}
+
+.instruction-text {
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.9);
     font-family: 'Georgia', serif;
 }
 
-.conjugation-input {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
+.verb-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    font-size: 1.3em;
+    font-weight: 700;
+    color: white;
+    font-family: 'Georgia', serif;
+    letter-spacing: 0.5px;
 }
 
-.conjugation-input input {
+.tense-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: white;
+    font-family: 'Georgia', serif;
+}
+
+.conjugation-answer-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pronoun-display {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: white;
+    font-family: 'Georgia', serif;
+    min-width: 50px;
+    text-align: right;
+}
+
+.conjugation-answer-line input {
     flex: 1;
     min-width: 200px;
-    padding: 10px 14px;
+    padding: 12px 16px;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
-    font-size: 1em;
+    font-size: 1.1em;
     transition: all 0.3s;
     background: rgba(255, 255, 255, 0.15);
     color: white;
     font-family: 'Georgia', serif;
 }
 
-.conjugation-input input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+.conjugation-answer-line input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
 }
 
-.conjugation-input input:focus {
+.conjugation-answer-line input:focus {
     outline: none;
     border-color: rgba(255, 255, 255, 0.6);
     background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
-.conjugation-input button {
-    padding: 10px 20px;
+.conjugation-answer-line button {
+    padding: 12px 24px;
     background: rgba(255, 255, 255, 0.25);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -953,10 +997,14 @@ em {
     font-family: 'Georgia', serif;
 }
 
-.conjugation-input button:hover {
+.conjugation-answer-line button:hover {
     background: rgba(255, 255, 255, 0.35);
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
+}
+
+.conjugation-answer-line button:active {
+    transform: translateY(0);
 }
 
 .timer {

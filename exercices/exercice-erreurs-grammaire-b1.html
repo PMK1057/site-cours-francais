@@ -90,6 +90,33 @@
             opacity: 0.7;
         }
 
+        /* Style pour la bonne réponse sélectionnée */
+        .grammar-option-btn.selected-correct {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%) !important;
+            border: 3px solid #2e7d32 !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4) !important;
+        }
+
+        /* Style pour la mauvaise réponse sélectionnée */
+        .grammar-option-btn.selected-incorrect {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%) !important;
+            border: 3px solid #c62828 !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4) !important;
+        }
+
+        /* Style pour la bonne réponse (quand une mauvaise réponse a été sélectionnée) */
+        .grammar-option-btn.correct-answer {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%) !important;
+            border: 3px solid #2e7d32 !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4) !important;
+        }
+
         .translation-result.correct {
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             border: 2px solid #4caf50;
@@ -448,6 +475,7 @@
                     const optionButton = document.createElement('button');
                     optionButton.className = 'grammar-option-btn';
                     optionButton.textContent = option.text;
+                    optionButton.dataset.originalText = option.text; // Stocker le texte original
                     optionButton.onclick = () => selectGrammarOptionB1(option, optionButton);
                     optionsDiv.appendChild(optionButton);
                 });
@@ -480,22 +508,26 @@
             
             if (option.correct) {
                 grammarScoreB1++;
-                buttonElement.style.backgroundColor = '#4caf50';
-                buttonElement.style.color = '#ffffff';
-                buttonElement.style.fontWeight = '600';
+                // Ajouter la classe pour la bonne réponse sélectionnée
+                buttonElement.classList.add('selected-correct');
+                const originalText = buttonElement.dataset.originalText || buttonElement.textContent.trim().replace(/^[✅❌]\s*/, '');
+                buttonElement.innerHTML = `✅ ${originalText}`;
                 // Jouer le son de succès
                 playSuccessSound();
             } else {
-                buttonElement.style.backgroundColor = '#f44336';
-                buttonElement.style.color = '#ffffff';
-                buttonElement.style.fontWeight = '600';
+                // Ajouter la classe pour la mauvaise réponse sélectionnée
+                buttonElement.classList.add('selected-incorrect');
+                const originalText = buttonElement.dataset.originalText || buttonElement.textContent.trim().replace(/^[✅❌]\s*/, '');
+                buttonElement.innerHTML = `❌ ${originalText}`;
+                const correctOption = grammarQuestionsB1[currentGrammarIndexB1].options.find(opt => opt.correct);
                 allButtons.forEach(btn => {
-                    const btnText = btn.textContent.trim();
-                    const correctOption = grammarQuestionsB1[currentGrammarIndexB1].options.find(opt => opt.correct);
-                    if (btnText === correctOption.text) {
-                        btn.style.backgroundColor = '#4caf50';
-                        btn.style.color = '#ffffff';
-                        btn.style.fontWeight = '600';
+                    const btnOriginalText = btn.dataset.originalText || btn.textContent.trim().replace(/^[✅❌]\s*/, '');
+                    if (btnOriginalText === correctOption.text) {
+                        btn.classList.add('correct-answer');
+                        // Préserver le texte original sans emoji si ce n'est pas le bouton sélectionné
+                        if (btn !== buttonElement) {
+                            btn.innerHTML = `✅ ${correctOption.text}`;
+                        }
                     }
                 });
             }

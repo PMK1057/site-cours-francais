@@ -2514,7 +2514,6 @@ function nextConjugation() {
     const resultDiv = document.getElementById('conjugation-result');
     const timerDiv = document.getElementById('conjugation-timer');
     const answerDisplayDiv = document.getElementById('conjugation-answer-display');
-    const questionDiv = document.getElementById('conjugation-question');
     const answerInput = document.getElementById('conjugation-answer');
     const validateBtn = document.getElementById('conjugation-validate');
     
@@ -2548,7 +2547,7 @@ function nextConjugation() {
         data: conjugaisons[verbe][tempsChoisi][personne]
     };
     
-    // Afficher la question - utiliser "J'" pour le passé composé avec "je"
+    // Préparer l'affichage du pronom - utiliser "J'" pour le passé composé avec "je"
     let displayPersonne = personne;
     
     // Pour le passé composé avec "je", afficher "J'" car l'auxiliaire "ai" commence par une voyelle
@@ -2559,9 +2558,19 @@ function nextConjugation() {
         displayPersonne = displayPersonne.charAt(0).toUpperCase() + displayPersonne.slice(1);
     }
     
-    // Afficher la question
-    if (questionDiv) {
-        questionDiv.textContent = `${verbe.toUpperCase()} - ${tempsChoisi.charAt(0).toUpperCase() + tempsChoisi.slice(1)} - ${displayPersonne}`;
+    // Afficher les éléments dans le nouveau format conversationnel
+    const verbElement = document.getElementById('conjugation-verb');
+    const tenseElement = document.getElementById('conjugation-tense');
+    const pronounElement = document.getElementById('conjugation-pronoun');
+    
+    if (verbElement) {
+        verbElement.textContent = verbe.toUpperCase();
+    }
+    if (tenseElement) {
+        tenseElement.textContent = tempsChoisi.charAt(0).toUpperCase() + tempsChoisi.slice(1);
+    }
+    if (pronounElement) {
+        pronounElement.textContent = displayPersonne;
     }
     
     // Incrémenter le compteur de questions
