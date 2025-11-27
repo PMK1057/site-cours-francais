@@ -175,71 +175,9 @@
     position: relative;
 }
 
-/* Bouton play/pause individuel pour chaque ligne */
-.line-play-btn {
-    position: absolute;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: 2px solid white;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    pointer-events: none;
-    top: -8px;
-}
-
-/* Position du bouton selon l'alignement */
-.dialogue-line.left .line-play-btn {
-    left: -8px;
-}
-
-.dialogue-line.right .line-play-btn {
-    right: -8px;
-    left: auto;
-}
-
-/* Afficher le bouton au survol de la ligne ou quand la ligne est active */
-.dialogue-line:hover .line-play-btn,
-.dialogue-line.active .line-play-btn {
-    opacity: 1;
-    transform: scale(1);
-    pointer-events: all;
-}
-
-.line-play-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
-}
-
-.line-play-btn.playing {
-    background: linear-gradient(135deg, #ff5e7a 0%, #ff84a3 100%);
-}
-
-.line-play-icon {
-    display: block;
-}
-
 @media (max-width: 640px) {
     .dialogue-content {
         max-width: 85%;
-    }
-    
-    .line-play-btn {
-        width: 28px;
-        height: 28px;
-        font-size: 12px;
-        top: -6px;
-        left: -6px;
     }
 }
 
@@ -716,9 +654,6 @@ function renderDialogue(container, dialogue) {
             <div class="dialogue-line ${alignment}" id="line-${index}" data-line-index="${index}">
                 <div class="speaker-avatar">${line.speaker.charAt(0)}</div>
                 <div class="dialogue-content">
-                    <button class="line-play-btn" onclick="playLine(${index})" aria-label="Jouer cette ligne">
-                        <span class="line-play-icon">▶</span>
-                    </button>
                     <div class="message-bubble">
                         <div class="speaker-name">${line.speaker}</div>
                         <div class="dialogue-text">${wordsHTML}</div>
@@ -769,23 +704,6 @@ function togglePlayAll() {
 
 async function playAll() {
     if (!dialogueData || audioElements.length === 0) return;
-    
-    // Arrêter toute ligne individuelle en cours
-    if (currentPlayingLineIndex !== -1) {
-        const audio = audioElements[currentPlayingLineIndex];
-        if (audio) {
-            audio.pause();
-            audio.currentTime = 0;
-        }
-        const btn = document.querySelector(`#line-${currentPlayingLineIndex} .line-play-btn`);
-        if (btn) {
-            btn.classList.remove('playing');
-            const icon = btn.querySelector('.line-play-icon');
-            if (icon) icon.textContent = '▶';
-        }
-        resetKaraoke(currentPlayingLineIndex);
-        currentPlayingLineIndex = -1;
-    }
     
     isPlaying = true;
     const playBtn = document.getElementById('play-all-btn');
@@ -840,24 +758,6 @@ async function playAll() {
 
 function pauseAll() {
     isPlaying = false;
-    
-    // Arrêter toute ligne individuelle en cours
-    if (currentPlayingLineIndex !== -1) {
-        const audio = audioElements[currentPlayingLineIndex];
-        if (audio) {
-            audio.pause();
-            audio.currentTime = 0;
-        }
-        const btn = document.querySelector(`#line-${currentPlayingLineIndex} .line-play-btn`);
-        if (btn) {
-            btn.classList.remove('playing');
-            const icon = btn.querySelector('.line-play-icon');
-            if (icon) icon.textContent = '▶';
-        }
-        resetKaraoke(currentPlayingLineIndex);
-        currentPlayingLineIndex = -1;
-    }
-    
     audioElements.forEach(audio => {
         if (audio) {
             audio.pause();
@@ -871,108 +771,7 @@ function pauseAll() {
     document.querySelectorAll('.dialogue-line').forEach(line => {
         line.classList.remove('active');
     });
-    // Réinitialiser tous les boutons de ligne
-    document.querySelectorAll('.line-play-btn').forEach(btn => {
-        btn.classList.remove('playing');
-        const icon = btn.querySelector('.line-play-icon');
-        if (icon) icon.textContent = '▶';
-    });
     resetAllKaraoke();
-}
-
-// Variable pour suivre quelle ligne individuelle est en cours de lecture
-let currentPlayingLineIndex = -1;
-
-// Fonction pour jouer une ligne individuelle
-async function playLine(lineIndex) {
-    // Arrêter le playAll si en cours
-    if (isPlaying) {
-        pauseAll();
-    }
-    
-    // Si une ligne est déjà en cours de lecture, l'arrêter
-    if (currentPlayingLineIndex !== -1 && currentPlayingLineIndex !== lineIndex) {
-        const previousAudio = audioElements[currentPlayingLineIndex];
-        if (previousAudio) {
-            previousAudio.pause();
-            previousAudio.currentTime = 0;
-        }
-        const previousBtn = document.querySelector(`#line-${currentPlayingLineIndex} .line-play-btn`);
-        if (previousBtn) {
-            previousBtn.classList.remove('playing');
-            const previousIcon = previousBtn.querySelector('.line-play-icon');
-            if (previousIcon) previousIcon.textContent = '▶';
-        }
-        resetKaraoke(currentPlayingLineIndex);
-    }
-    
-    // Si on clique sur la même ligne qui joue, arrêter
-    if (currentPlayingLineIndex === lineIndex) {
-        const audio = audioElements[lineIndex];
-        if (audio) {
-            audio.pause();
-            audio.currentTime = 0;
-        }
-        const btn = document.querySelector(`#line-${lineIndex} .line-play-btn`);
-        if (btn) {
-            btn.classList.remove('playing');
-            const icon = btn.querySelector('.line-play-icon');
-            if (icon) icon.textContent = '▶';
-        }
-        resetKaraoke(lineIndex);
-        currentPlayingLineIndex = -1;
-        return;
-    }
-    
-    const audio = audioElements[lineIndex];
-    const lineElement = document.getElementById(`line-${lineIndex}`);
-    const btn = document.querySelector(`#line-${lineIndex} .line-play-btn`);
-    
-    if (!audio || !lineElement) return;
-    
-    currentPlayingLineIndex = lineIndex;
-    
-    // Mettre à jour le bouton
-    if (btn) {
-        btn.classList.add('playing');
-        const icon = btn.querySelector('.line-play-icon');
-        if (icon) icon.textContent = '⏸';
-    }
-    
-    // Mettre en surbrillance la ligne
-    document.querySelectorAll('.dialogue-line').forEach(line => {
-        line.classList.remove('active');
-    });
-    lineElement.classList.add('active');
-    
-    // Scroll vers la ligne si nécessaire
-    lineElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    
-    // Réinitialiser le karaoké
-    resetKaraoke(lineIndex);
-    
-    try {
-        // Jouer l'audio avec karaoké
-        await playAudioWithKaraoke(audio, lineIndex);
-        
-        // Réinitialiser après la fin
-        if (btn) {
-            btn.classList.remove('playing');
-            const icon = btn.querySelector('.line-play-icon');
-            if (icon) icon.textContent = '▶';
-        }
-        lineElement.classList.remove('active');
-        resetKaraoke(lineIndex);
-        currentPlayingLineIndex = -1;
-    } catch (error) {
-        console.error(`Erreur lors de la lecture de la ligne ${lineIndex}:`, error);
-        if (btn) {
-            btn.classList.remove('playing');
-            const icon = btn.querySelector('.line-play-icon');
-            if (icon) icon.textContent = '▶';
-        }
-        currentPlayingLineIndex = -1;
-    }
 }
 
 function playAudioWithKaraoke(audio, lineIndex) {

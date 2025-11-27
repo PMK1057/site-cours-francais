@@ -2654,21 +2654,42 @@ function validateConjugation(timeout = false) {
     const normalizedUserAnswer = userAnswer.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     const normalizedCorrectAnswer = correctAnswer.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     
+    // VÉRIFICATION CRITIQUE : Rejeter "je ai" qui doit toujours être contracté en "j'ai"
+    // Cette vérification doit être faite AVANT de supprimer les pronoms
+    // On vérifie à la fois dans la réponse originale et normalisée
+    const hasJeAiError = /^je\s+ai\s/i.test(userAnswer) || /^je\s+ai\s/i.test(normalizedUserAnswer);
+    
     // Supprimer les pronoms sujets courants au début de la réponse de l'utilisateur
     // pour accepter "vous avez voulu" comme "avez voulu"
-    const pronouns = ['je', 'tu', 'il', 'elle', 'nous', 'vous', 'ils', 'elles', 'on'];
+    // MAIS on doit gérer "j'ai" comme un cas spécial (ne pas le traiter comme "je" + "ai")
+    const pronouns = ['tu', 'il', 'elle', 'nous', 'vous', 'ils', 'elles', 'on'];
     let cleanedUserAnswer = normalizedUserAnswer;
-    for (const pronoun of pronouns) {
-        const regex = new RegExp(`^${pronoun}\\s+`, 'i');
-        if (regex.test(cleanedUserAnswer)) {
-            cleanedUserAnswer = cleanedUserAnswer.replace(regex, '').trim();
-            break;
+    
+    // Traiter "j'ai" comme un cas spécial - le remplacer par "ai" pour la comparaison
+    // On accepte "j'ai" (avec apostrophe) ou "j ai" (sans apostrophe mais avec espace)
+    // mais on rejette "je ai" (déjà détecté plus haut)
+    if (/^j'?\s*ai\s/i.test(cleanedUserAnswer) && !hasJeAiError) {
+        // Remplacer "j'ai " ou "j ai " par "ai " pour la comparaison
+        cleanedUserAnswer = cleanedUserAnswer.replace(/^j'?\s*ai\s/i, 'ai ').trim();
+    } else {
+        // Pour les autres pronoms, supprimer normalement
+        for (const pronoun of pronouns) {
+            const regex = new RegExp(`^${pronoun}\\s+`, 'i');
+            if (regex.test(cleanedUserAnswer)) {
+                cleanedUserAnswer = cleanedUserAnswer.replace(regex, '').trim();
+                break;
+            }
+        }
+        // Si c'est "je" suivi d'autre chose que "ai", on peut le supprimer aussi
+        // mais seulement si ce n'est pas "je ai" (déjà détecté plus haut)
+        if (!hasJeAiError && /^je\s+/i.test(cleanedUserAnswer)) {
+            cleanedUserAnswer = cleanedUserAnswer.replace(/^je\s+/i, '').trim();
         }
     }
     
     // Si timeout, la réponse est toujours incorrecte
     let isCorrect = false;
-    if (!timeout) {
+    if (!timeout && !hasJeAiError) {
         // Accepter la réponse exacte OU la réponse sans pronom
         isCorrect = normalizedUserAnswer === normalizedCorrectAnswer || 
                    userAnswer === correctAnswer ||
