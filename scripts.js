@@ -2562,6 +2562,7 @@ function nextConjugation() {
     const verbElement = document.getElementById('conjugation-verb');
     const tenseElement = document.getElementById('conjugation-tense');
     const pronounElement = document.getElementById('conjugation-pronoun');
+    const conjugationCard = document.querySelector('.conjugation-card');
     
     if (verbElement) {
         verbElement.textContent = verbe.toUpperCase();
@@ -2571,6 +2572,19 @@ function nextConjugation() {
     }
     if (pronounElement) {
         pronounElement.textContent = displayPersonne;
+    }
+    
+    // Changer la couleur de la carte selon le temps
+    if (conjugationCard) {
+        // Retirer toutes les classes de temps
+        conjugationCard.classList.remove('tense-present', 'tense-passe-compose');
+        
+        // Ajouter la classe correspondante au temps
+        if (tempsChoisi === 'présent') {
+            conjugationCard.classList.add('tense-present');
+        } else if (tempsChoisi === 'passé composé') {
+            conjugationCard.classList.add('tense-passe-compose');
+        }
     }
     
     // Incrémenter le compteur de questions

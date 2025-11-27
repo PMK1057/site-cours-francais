@@ -650,8 +650,19 @@ em {
     padding: 14px 28px;
 }
 
-/* Conjugation card - même dégradé que le bouton de menu actif */
+/* Conjugation card - couleur change selon le temps */
 .conjugation-card {
+    background: var(--grad-advanced); /* Par défaut : rouge (passé composé) */
+    transition: background 0.5s ease;
+}
+
+/* Présent : bleu-violet comme l'expression du jour */
+.conjugation-card.tense-present {
+    background: linear-gradient(145deg, #7b5cff 0%, #a689ff 100%);
+}
+
+/* Passé composé : rouge (défaut) */
+.conjugation-card.tense-passe-compose {
     background: var(--grad-advanced);
 }
 
