@@ -516,9 +516,9 @@
             {
                 en: "I went down the stairs.",
                 options: [
-                    { text: "Je suis descendu les escaliers.", correct: true },
-                    { text: "J'ai descendu les escaliers.", correct: false, error: "Erreur : avec 'descendre' (mouvement), utiliser 'être' (je suis) et non 'avoir' (j'ai)" },
-                    { text: "Je suis descendus les escaliers.", correct: false, error: "Erreur : accord du participe passé - 'descendu' (masculin singulier) car le sujet est 'je' (masculin)" },
+                    { text: "J'ai descendu les escaliers.", correct: true },
+                    { text: "Je suis descendu les escaliers.", correct: false, error: "Erreur : avec 'descendre' + COD (les escaliers), utiliser 'avoir' (j'ai) et non 'être' (je suis). 'Être' s'utilise seulement quand 'descendre' est intransitif (sans COD)" },
+                    { text: "J'ai descendus les escaliers.", correct: false, error: "Erreur : accord du participe passé - 'descendu' (invariable) car avec 'avoir' + COD placé après, pas d'accord" },
                     { text: "Je descends les escaliers.", correct: false, error: "Erreur : 'went down' est au passé, utiliser le passé composé" }
                 ]
             },
@@ -2170,10 +2170,19 @@
         .translation-result.incorrect {
             background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
             border: 2px solid #f44336;
+            color: #333 !important;
         }
         
         .translation-result.incorrect strong {
             color: #f44336;
+        }
+        
+        .translation-result.incorrect small {
+            color: #666 !important;
+        }
+        
+        .translation-result.incorrect p {
+            color: #333 !important;
         }
     </style>
 

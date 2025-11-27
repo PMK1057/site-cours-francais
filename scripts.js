@@ -497,6 +497,32 @@ function executeScriptsInHTML(html, container, courseId = null) {
                     console.error('Erreur lors de l\'exécution d\'un script:', scriptError);
                 }
             });
+            
+            // Initialiser explicitement les mini-jeux après injection du HTML
+            // Cela garantit la réinitialisation même quand on revient via le cache
+            if (courseId) {
+                setTimeout(() => {
+                    try {
+                        // Traduction A2
+                        if (courseId === 'exercice-traduction-a2' && typeof initTranslationGame === 'function') {
+                            console.log('Réinitialisation du jeu de traduction A2');
+                            initTranslationGame();
+                        }
+                        // Grammaire A2
+                        else if (courseId === 'exercice-erreurs-grammaire' && typeof initGrammarGame === 'function') {
+                            console.log('Réinitialisation du jeu de grammaire A2');
+                            initGrammarGame();
+                        }
+                        // Grammaire B1/B2
+                        else if (courseId === 'exercice-erreurs-grammaire-b1' && typeof initGrammarGameB1 === 'function') {
+                            console.log('Réinitialisation du jeu de grammaire B1/B2');
+                            initGrammarGameB1();
+                        }
+                    } catch (initError) {
+                        console.error('Erreur lors de l\'initialisation du mini-jeu:', initError);
+                    }
+                }, 250); // Délai suffisant après l'injection du HTML et l'exécution des scripts
+            }
         }, 150);
     } catch (error) {
         console.error('Erreur dans executeScriptsInHTML:', error);
@@ -2522,12 +2548,12 @@ function nextConjugation() {
         data: conjugaisons[verbe][tempsChoisi][personne]
     };
     
-    // Afficher la question - utiliser "je/j'" pour éviter les incohérences avec "avoir"
+    // Afficher la question - utiliser "J'" pour le passé composé avec "je"
     let displayPersonne = personne;
     
-    // Pour le verbe "avoir" avec "je", afficher "je/j'" pour éviter "JE AI"
-    if (verbe === "avoir" && personne === "je") {
-        displayPersonne = "je/j'";
+    // Pour le passé composé avec "je", afficher "J'" car l'auxiliaire "ai" commence par une voyelle
+    if (tempsChoisi === "passé composé" && personne === "je") {
+        displayPersonne = "J'";
     } else {
         // Capitaliser la première lettre de la personne
         displayPersonne = displayPersonne.charAt(0).toUpperCase() + displayPersonne.slice(1);
