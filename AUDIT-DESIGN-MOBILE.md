@@ -199,3 +199,49 @@
 3. Optimiser les images si nécessaire
 4. Vérifier les dialogues (DialoguePlayer.jsx) sur mobile
 
+---
+
+## 🎮 CORRECTIONS JEU DE CONJUGAISON
+
+### Problèmes identifiés
+
+1. **`.conjugation-instruction`** : `flex-wrap: nowrap` empêchait le retour à la ligne sur mobile
+2. **`.conjugation-answer-line`** : `flex-wrap: nowrap` + `min-width: 200px` sur l'input causait des débordements
+3. **Bouton "Valider"** : Largeur fixe qui ne s'adaptait pas sur mobile
+4. **Pronoun display** : `min-width: 45px` + `text-align: right` causait des problèmes d'alignement
+5. **Badges** : `white-space: nowrap` sans `flex-shrink: 0` pouvait causer des débordements
+6. **Timer et résultats** : Tailles de police non adaptées sur mobile
+
+### Corrections appliquées
+
+#### @media (max-width: 768px) - Tablette
+- `.conjugation-instruction` : `flex-wrap: wrap` + taille réduite
+- `.conjugation-answer-line` : `flex-wrap: wrap` + input en pleine largeur
+- `.pronoun-display` : `width: 100%` + `text-align: center` + `margin-bottom`
+- Input : `width: 100%` + `min-width: 0` + padding réduit
+- Bouton : `width: 100%` + padding réduit
+- Timer : taille réduite
+- Résultats : padding réduit
+
+#### @media (max-width: 480px) - Mobile
+- Tous les éléments encore plus compacts
+- Font-sizes réduits progressivement
+- Paddings minimisés
+- Badges plus petits
+
+### Résultats
+
+**Avant (375px) :**
+- Instruction : débordement horizontal
+- Input : min-width 200px trop large
+- Bouton : débordement possible
+- Layout : éléments côte à côte qui ne rentrent pas
+
+**Après (375px) :**
+- Instruction : wrap automatique, tout visible
+- Input : pleine largeur, utilisable
+- Bouton : pleine largeur, facile à cliquer
+- Layout : empilé verticalement, tout accessible
+
+✅ **Le jeu de conjugaison est maintenant entièrement responsive !**
+

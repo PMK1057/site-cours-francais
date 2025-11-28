@@ -711,7 +711,20 @@ async function playAll() {
     playBtn.classList.add('playing');
     playIcon.textContent = '⏸';
     
-    for (let i = 0; i < audioElements.length; i++) {
+    // Trouver où on en est : si un audio est en cours de lecture, reprendre depuis là
+    let startIndex = 0;
+    if (currentLineIndex >= 0 && currentLineIndex < audioElements.length) {
+        const currentAudio = audioElements[currentLineIndex];
+        if (currentAudio && currentAudio.currentTime > 0 && currentAudio.currentTime < currentAudio.duration) {
+            // Reprendre depuis la ligne en cours
+            startIndex = currentLineIndex;
+        } else {
+            // Sinon, continuer depuis la ligne suivante
+            startIndex = currentLineIndex + 1;
+        }
+    }
+    
+    for (let i = startIndex; i < audioElements.length; i++) {
         if (!isPlaying) break; // Arrêt si pause
         
         currentLineIndex = i;
@@ -729,8 +742,10 @@ async function playAll() {
         // Scroll vers la ligne
         lineElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
         
-        // Réinitialiser le karaoké
-        resetKaraoke(i);
+        // Réinitialiser le karaoké seulement si on recommence depuis le début de la ligne
+        if (audio.currentTime === 0 || i !== startIndex) {
+            resetKaraoke(i);
+        }
         
         // Jouer l'audio avec karaoké
         try {
@@ -758,33 +773,35 @@ async function playAll() {
 
 function pauseAll() {
     isPlaying = false;
+    // Ne PAS remettre currentTime à 0 - juste mettre en pause
     audioElements.forEach(audio => {
         if (audio) {
             audio.pause();
-            audio.currentTime = 0;
+            // audio.currentTime reste à sa position actuelle
         }
     });
     const playBtn = document.getElementById('play-all-btn');
     const playIcon = document.getElementById('play-all-icon');
     playBtn.classList.remove('playing');
     playIcon.textContent = '▶';
-    document.querySelectorAll('.dialogue-line').forEach(line => {
-        line.classList.remove('active');
-    });
-    resetAllKaraoke();
+    // Ne pas retirer la classe 'active' pour garder visuellement où on en est
+    // document.querySelectorAll('.dialogue-line').forEach(line => {
+    //     line.classList.remove('active');
+    // });
+    // Ne pas réinitialiser le karaoké pour garder le surlignage actuel
+    // resetAllKaraoke();
 }
 
 function playAudioWithKaraoke(audio, lineIndex) {
     return new Promise((resolve, reject) => {
         audio.playbackRate = globalSpeed;
         
-        // Précharger le premier mot avant de commencer
-        const lineElement = document.getElementById(`line-${lineIndex}`);
-        if (lineElement) {
-            const firstWord = lineElement.querySelector(`.word[data-line-index="${lineIndex}"]`);
-            if (firstWord) {
-                // Préparer le premier mot (sans l'activer encore)
-                firstWord.style.willChange = 'background, color';
+        // Si l'audio est déjà en cours (reprise après pause), mettre à jour le karaoké immédiatement
+        if (audio.currentTime > 0 && audio.currentTime < audio.duration) {
+            const duration = audio.duration;
+            if (duration > 0) {
+                const progress = audio.currentTime / duration;
+                updateKaraokeHighlight(lineIndex, progress);
             }
         }
         
@@ -802,9 +819,8 @@ function playAudioWithKaraoke(audio, lineIndex) {
             const duration = audio.duration;
             
             if (duration > 0) {
-                // Anticiper plus agressivement le surlignage (0.15s d'avance)
-                // Cela compense le délai de rendu du background et la latence audio
-                const anticipationOffset = 0.15 / duration;
+                // Anticiper légèrement le surlignage pour une meilleure synchronisation
+                const anticipationOffset = 0.1 / duration;
                 const progress = Math.min(1, (currentTime / duration) + anticipationOffset);
                 // Appeler directement de manière synchrone
                 updateKaraokeHighlight(lineIndex, progress);
@@ -836,10 +852,15 @@ function updateKaraokeHighlight(lineIndex, progress) {
     if (!lineElement) return;
     
     const words = lineElement.querySelectorAll(`.word[data-line-index="${lineIndex}"]`);
-    const wordCount = words.length;
+    // Filtrer seulement les mots (pas les espaces)
+    const actualWords = Array.from(words).filter(w => w.textContent.trim().length > 0);
+    const wordCount = actualWords.length;
     
-    // Utiliser Math.ceil et ajouter 1 pour être encore plus en avance
-    const highlightedCount = Math.min(wordCount, Math.ceil(wordCount * progress) + 1);
+    if (wordCount === 0) return;
+    
+    // Calculer le nombre de mots à surligner de manière plus précise
+    // Utiliser Math.floor pour un surlignage progressif plus fluide
+    const highlightedCount = Math.min(wordCount, Math.floor(wordCount * progress));
     
     // Vérifier si on a déjà appliqué cet état (évite les changements inutiles)
     if (lastHighlightState.get(lineIndex) === highlightedCount) {
@@ -853,7 +874,8 @@ function updateKaraokeHighlight(lineIndex, progress) {
     // Préparer tous les changements d'abord
     const updates = [];
     
-    words.forEach((word, index) => {
+    // Utiliser actualWords au lieu de words pour ignorer les espaces
+    actualWords.forEach((word, index) => {
         const shouldBeHighlighted = index < highlightedCount;
         const shouldBePending = index === highlightedCount && progress < 1;
         const isHighlighted = word.classList.contains('highlighted');

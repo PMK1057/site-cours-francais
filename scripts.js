@@ -2479,10 +2479,12 @@ let conjugationTimerInterval = null;
 let conjugationQuestionCount = 0;
 let conjugationTimeLeft = 20;
 let conjugationEnterHandler = null;
+let conjugationStreak = 0; // Série de bonnes réponses consécutives
 
 // Jeu de conjugaison rapide
 function initConjugationGame() {
     conjugationQuestionCount = 0;
+    conjugationStreak = 0; // Réinitialiser le streak
     
     // Arrêter le timer s'il est en cours (IMPORTANT: éviter les fuites)
     if (conjugationTimerInterval) {
@@ -2492,6 +2494,12 @@ function initConjugationGame() {
     
     // Réinitialiser le temps restant
     conjugationTimeLeft = 20;
+    
+    // Masquer l'affichage du streak
+    const streakDisplay = document.getElementById('conjugation-streak');
+    if (streakDisplay) {
+        streakDisplay.style.display = 'none';
+    }
     
     nextConjugation();
     
@@ -2547,9 +2555,11 @@ function nextConjugation() {
     const answerDisplayDiv = document.getElementById('conjugation-answer-display');
     const answerInput = document.getElementById('conjugation-answer');
     const validateBtn = document.getElementById('conjugation-validate');
+    const successAnimation = document.getElementById('conjugation-success-animation');
     
     if (resultDiv) resultDiv.style.display = 'none';
     if (answerDisplayDiv) answerDisplayDiv.style.display = 'none';
+    if (successAnimation) successAnimation.style.display = 'none';
     if (answerInput) {
         answerInput.value = '';
         answerInput.disabled = false;
@@ -2680,6 +2690,80 @@ function updateTimerDisplay() {
     } else {
         timerDiv.classList.remove('warning');
     }
+}
+
+// Fonction pour mettre à jour l'affichage du streak
+function updateStreakDisplay(streak) {
+    const streakDisplay = document.getElementById('conjugation-streak');
+    const streakText = streakDisplay ? streakDisplay.querySelector('.streak-text') : null;
+    const streakIcon = streakDisplay ? streakDisplay.querySelector('.streak-icon') : null;
+    
+    if (!streakDisplay || !streakText) return;
+    
+    if (streak === 0) {
+        streakDisplay.style.display = 'none';
+        return;
+    }
+    
+    // Afficher le streak
+    streakDisplay.style.display = 'flex';
+    
+    // Messages selon le niveau de streak
+    let message = '';
+    let iconSize = '1.2em';
+    
+    if (streak === 1) {
+        message = 'Bonne réponse !';
+    } else if (streak === 2) {
+        message = '2 bonnes réponses !';
+    } else if (streak === 3) {
+        message = '🔥 Série de 3 !';
+        iconSize = '1.4em';
+    } else if (streak === 5) {
+        message = '🔥🔥 Série de 5 ! Excellent !';
+        iconSize = '1.6em';
+    } else if (streak === 10) {
+        message = '🔥🔥🔥 Série de 10 ! Incroyable !';
+        iconSize = '1.8em';
+    } else if (streak === 20) {
+        message = '🔥🔥🔥🔥 Série de 20 ! Tu es un champion !';
+        iconSize = '2em';
+    } else if (streak >= 50) {
+        message = `🔥🔥🔥🔥🔥 Série de ${streak} ! LÉGENDAIRE !`;
+        iconSize = '2.2em';
+    } else {
+        message = `🔥 Série de ${streak} !`;
+        iconSize = '1.3em';
+    }
+    
+    streakText.textContent = message;
+    if (streakIcon) {
+        streakIcon.style.fontSize = iconSize;
+    }
+    
+    // Animation de pulse pour les streaks importants
+    if (streak >= 3) {
+        streakDisplay.classList.add('streak-pulse');
+        setTimeout(() => {
+            streakDisplay.classList.remove('streak-pulse');
+        }, 600);
+    }
+}
+
+// Fonction pour afficher l'animation de succès
+function showSuccessAnimation() {
+    const successAnimation = document.getElementById('conjugation-success-animation');
+    if (!successAnimation) return;
+    
+    // Afficher l'animation
+    successAnimation.style.display = 'flex';
+    successAnimation.classList.add('animate');
+    
+    // Masquer après l'animation
+    setTimeout(() => {
+        successAnimation.style.display = 'none';
+        successAnimation.classList.remove('animate');
+    }, 1000);
 }
 
 // Fonction pour jouer un son de succès pour la conjugaison (différent et plus long que celui de la traduction)
@@ -2838,8 +2922,18 @@ function validateConjugation(timeout = false) {
         resultDiv.className = 'conjugation-result correct';
         // Jouer le son de succès
         playConjugationSuccessSound();
+        
+        // Gérer le streak (série de bonnes réponses)
+        conjugationStreak++;
+        updateStreakDisplay(conjugationStreak);
+        
+        // Animation de succès
+        showSuccessAnimation();
     } else {
         resultDiv.className = 'conjugation-result incorrect';
+        // Réinitialiser le streak en cas d'erreur
+        conjugationStreak = 0;
+        updateStreakDisplay(0);
     }
     
     // Afficher l'explication (sans la bonne réponse qui est déjà dans l'encadré)

@@ -934,18 +934,6 @@ em {
     margin-bottom: 16px;
 }
 
-/* Responsive : permettre le wrap sur petits écrans */
-@media (max-width: 600px) {
-    .conjugation-instruction {
-        flex-wrap: wrap;
-        gap: 4px;
-    }
-    
-    .conjugation-answer-line {
-        flex-wrap: wrap;
-    }
-}
-
 .conjugation-instruction {
     text-align: center;
     margin-bottom: 16px;
@@ -976,6 +964,7 @@ em {
     font-family: 'Georgia', serif;
     letter-spacing: 0.3px;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .tense-badge {
@@ -989,6 +978,7 @@ em {
     color: white;
     font-family: 'Georgia', serif;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .conjugation-answer-line {
@@ -1008,6 +998,7 @@ em {
     min-width: 45px;
     text-align: right;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .conjugation-answer-line input {
@@ -1046,6 +1037,225 @@ em {
     transition: all 0.3s;
     margin: 0;
     font-family: 'Georgia', serif;
+    flex-shrink: 0;
+}
+
+/* Streak display */
+.streak-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 12px 0;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: white;
+    font-family: 'Georgia', serif;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.streak-icon {
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+}
+
+.streak-text {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.streak-pulse {
+    animation: streakPulse 0.6s ease-out;
+}
+
+@keyframes streakPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Animation de succès */
+.success-animation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    pointer-events: none;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-checkmark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.5);
+}
+
+.success-animation.animate .success-checkmark {
+    animation: checkmarkScale 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes checkmarkScale {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Confettis pour les grandes séries (optionnel, peut être activé plus tard) */
+@keyframes confetti {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-200px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive : corrections pour le jeu de conjugaison */
+@media (max-width: 768px) {
+    .conjugation-instruction {
+        flex-wrap: wrap;
+        gap: 4px;
+        font-size: 0.95em;
+    }
+    
+    .instruction-text {
+        font-size: 0.9em;
+        white-space: normal;
+    }
+    
+    .verb-badge {
+        font-size: 1em;
+        padding: 4px 10px;
+    }
+    
+    .tense-badge {
+        font-size: 0.9em;
+        padding: 4px 10px;
+    }
+    
+    .conjugation-answer-line {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .pronoun-display {
+        font-size: 1.3em;
+        min-width: 40px;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 4px;
+    }
+    
+    .conjugation-answer-line input {
+        min-width: 0;
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 1em;
+    }
+    
+    .conjugation-answer-line button {
+        width: 100%;
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+    
+    /* Timer et résultats sur tablette */
+    .timer {
+        font-size: 1.1em;
+        padding: 6px 14px;
+    }
+    
+    .conjugation-result {
+        padding: 10px 14px;
+    }
+    
+    #conjugation-result-explanation {
+        font-size: 0.88em;
+    }
+    
+    #conjugation-next {
+        padding: 8px 18px;
+        font-size: 0.92em;
+    }
+}
+
+@media (max-width: 480px) {
+    .conjugation-instruction {
+        font-size: 0.85em;
+        gap: 3px;
+    }
+    
+    .instruction-text {
+        font-size: 0.85em;
+    }
+    
+    .verb-badge {
+        font-size: 0.9em;
+        padding: 3px 8px;
+    }
+    
+    .tense-badge {
+        font-size: 0.85em;
+        padding: 3px 8px;
+    }
+    
+    .pronoun-display {
+        font-size: 1.2em;
+    }
+    
+    .conjugation-answer-line input {
+        padding: 8px 12px;
+        font-size: 0.95em;
+    }
+    
+    .conjugation-answer-line button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+    
+    /* Timer et résultats sur petits écrans */
+    .timer {
+        font-size: 1em;
+        padding: 6px 12px;
+    }
+    
+    .conjugation-result {
+        padding: 10px 12px;
+    }
+    
+    #conjugation-result-explanation {
+        font-size: 0.85em;
+    }
+    
+    #conjugation-next {
+        padding: 6px 16px;
+        font-size: 0.9em;
+    }
 }
 
 .conjugation-answer-line button:hover {

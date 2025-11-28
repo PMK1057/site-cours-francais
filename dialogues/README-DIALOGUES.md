@@ -107,5 +107,77 @@ Les paramètres ElevenLabs utilisés :
 
 ---
 
+## 🔄 Réutiliser le Code de Dialogue Sans Duplication
+
+### ❓ Question : "Si je duplique le style d'un dialogue, est-ce que je vais dupliquer tout le code ?"
+
+**Réponse : NON !** Le code est conçu pour être réutilisé. Voici comment :
+
+### ✅ Méthode 1 : Réutiliser le même fichier HTML (Recommandé)
+
+Le fichier `dialogue-lundi-matin-bureau.html` contient tout le code JavaScript et CSS nécessaire. Pour créer un nouveau dialogue :
+
+1. **Copier le fichier HTML** :
+   ```bash
+   cp cours/dialogue-lundi-matin-bureau.html cours/dialogue-nouveau.html
+   ```
+
+2. **Modifier uniquement les données** :
+   - Le fichier charge automatiquement les données depuis `dialogue-data.json`
+   - Il suffit d'ajouter un nouveau dialogue dans `dialogue-data.json` avec un `id` différent
+   - Le code JavaScript reste identique et fonctionne pour tous les dialogues
+
+3. **Ajouter une entrée dans `index.html`** :
+   ```html
+   <div class="section-card" onclick="showCourse('dialogue-nouveau')">
+       <h3>💼 NOUVEAU DIALOGUE</h3>
+       <p>Description du nouveau dialogue</p>
+   </div>
+   ```
+
+**Avantage** : Aucune duplication de code ! Le même JavaScript/CSS sert pour tous les dialogues.
+
+### ✅ Méthode 2 : Extraire le code dans un fichier JS séparé (Optionnel)
+
+Si vous voulez vraiment éviter toute duplication, vous pouvez :
+
+1. **Créer `dialogues/dialogue-player.js`** avec tout le code JavaScript
+2. **Créer `dialogues/dialogue-styles.css`** avec tout le CSS
+3. **Les inclure dans chaque fichier HTML de dialogue** :
+   ```html
+   <link rel="stylesheet" href="../dialogues/dialogue-styles.css">
+   <script src="../dialogues/dialogue-player.js"></script>
+   ```
+
+**Avantage** : Un seul fichier JS/CSS pour tous les dialogues, mise à jour centralisée.
+
+### 📝 Structure Recommandée
+
+```
+cours/
+├── dialogue-lundi-matin-bureau.html  (code complet)
+├── dialogue-supermarche.html          (code complet, même structure)
+└── dialogue-restaurant.html          (code complet, même structure)
+
+dialogues/
+├── dialogue-data.json                 (TOUS les dialogues ici)
+│   ├── { id: "dialogue1", ... }
+│   ├── { id: "dialogue2", ... }
+│   └── { id: "dialogue3", ... }
+└── audio/
+    ├── dialogue1_line0.mp3
+    ├── dialogue2_line0.mp3
+    └── ...
+```
+
+### 🎯 Résumé
+
+- **Le code JavaScript/CSS est identique** pour tous les dialogues
+- **Seules les données changent** (dans `dialogue-data.json`)
+- **Aucune duplication nécessaire** : chaque fichier HTML peut utiliser le même code
+- **Facile à maintenir** : une modification du code profite à tous les dialogues
+
+---
+
 **Tout est automatique ! Il suffit d'envoyer vos dialogues dans le chat. 🎯**
 
