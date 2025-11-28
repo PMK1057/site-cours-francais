@@ -231,154 +231,36 @@
     letter-spacing: -0.01em;
 }
 
-/* Mots individuels - structure avec deux textes superposés */
+/* Mots individuels - SIMPLIFIÉ SANS TRANSITIONS */
 .dialogue-text .word {
-    /* AUCUNE transition - tout doit être instantané */
-    transition: none !important;
-    transition-property: none !important;
-    transition-duration: 0s !important;
     padding: 3px 6px;
     border-radius: 6px;
     display: inline-block;
     position: relative;
-    z-index: 1;
     margin: 0 1px;
-    /* Background transparent par défaut */
-    background-color: transparent !important;
-    color: transparent !important; /* Rendre le texte de base transparent */
-    /* Préparer le navigateur pour les changements rapides */
-    will-change: transform;
-    /* Forcer l'isolation pour éviter les héritages de transition */
-    isolation: isolate;
-    contain: layout style paint;
-}
-
-/* Texte normal (non surligné) - prend sa place dans le flux */
-.dialogue-text .word .word-text-normal {
-    position: relative;
-    z-index: 2;
+    background-color: transparent;
     color: #2d3748;
     font-weight: 400;
-    opacity: 1;
-    transition: none !important;
-    transition-property: none !important;
-    transition-duration: 0s !important;
-    pointer-events: none;
-    display: inline;
-    visibility: visible;
 }
 
-/* Texte en gras (surligné) - toujours présent, superposé exactement */
-.dialogue-text .word .word-text-bold {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    color: #2d3748;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    opacity: 0;
-    transition: none !important;
-    transition-property: none !important;
-    transition-duration: 0s !important;
-    pointer-events: none;
-    white-space: nowrap;
-    visibility: hidden; /* Caché par défaut pour performance */
-}
-
-/* Texte en gras visible quand surligné */
-.dialogue-text .word.highlighted .word-text-bold {
-    visibility: visible;
-    opacity: 1 !important;
-}
-
-/* Mot surligné - afficher le texte en gras, cacher le normal */
-.dialogue-text .word.highlighted .word-text-normal {
-    opacity: 0 !important;
-    transition: none !important;
-}
-
-.dialogue-text .word.highlighted .word-text-bold {
-    opacity: 1 !important;
-    transition: none !important;
-}
-
-/* Overlay - toujours présent avec le background, on change juste l'opacité */
-.word-highlight-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 6px;
-    z-index: 0; /* Derrière le texte mais au-dessus du background */
-    pointer-events: none;
-    background-color: #a78bfa;
+/* Mot surligné - BACKGROUND VIOLET/ROSE VISIBLE */
+.dialogue-text .word.highlighted {
+    background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
     box-shadow: 
         0 2px 8px rgba(167, 139, 250, 0.3),
         0 0 0 1px rgba(167, 139, 250, 0.2);
-    opacity: 0;
-    transition: none !important;
-    transition-property: none !important;
-    transition-duration: 0s !important;
-    contain: strict;
-}
-
-/* Overlay actif - on change UNIQUEMENT l'opacité (plus rapide que background-color) */
-.dialogue-text .word.highlighted .word-highlight-overlay {
-    opacity: 1 !important;
-    transition: none !important;
-    transition-property: none !important;
-}
-
-/* Overlay inactif - opacité à 0 */
-.dialogue-text .word:not(.highlighted) .word-highlight-overlay {
-    opacity: 0 !important;
-    transition: none !important;
-    transition-property: none !important;
 }
 
 /* Mot en attente (prochain) - Opacité réduite */
-.dialogue-text .word.pending .word-text-normal {
-    color: #9ca3af;
+.dialogue-text .word.pending {
+    color: #9ca3af !important;
     opacity: 0.4 !important;
 }
 
-.dialogue-text .word.pending .word-text-bold {
-    opacity: 0 !important;
-}
-
-/* Overlay de mise en évidence - AUCUNE transition, toujours présent */
-.word-highlight-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 6px;
-    z-index: -1;
-    pointer-events: none;
-    background-color: transparent;
-    transition: none !important;
-    transition-property: none !important;
-    transition-duration: 0s !important;
-    transition-delay: 0s !important;
-    will-change: background-color;
-    transform: translateZ(0);
-    isolation: isolate;
-    /* Forcer le rendu immédiat */
-    opacity: 1 !important;
-    visibility: visible !important;
-    /* Empêcher tout héritage de transition */
-    contain: strict;
-}
-
-/* Désactiver COMPLÈTEMENT toutes les transitions sur les mots et leurs enfants */
-.dialogue-text {
-    isolation: isolate;
-    contain: layout style paint;
-}
-
+/* DÉSACTIVER TOUTES LES TRANSITIONS - ABSOLUMENT AUCUNE */
+.dialogue-text,
 .dialogue-text .word,
 .dialogue-text .word *,
 .dialogue-text .word::before,
@@ -388,51 +270,20 @@
     transition-duration: 0s !important;
     transition-delay: 0s !important;
     transition-timing-function: none !important;
+    animation: none !important;
     animation-duration: 0s !important;
     animation-delay: 0s !important;
-    /* Force l'isolation pour empêcher les transitions héritées */
-    isolation: isolate;
-    /* Empêcher la propagation des transitions depuis les parents */
-    contain: layout style paint;
 }
 
-/* S'assurer que l'overlay n'a jamais de transition */
-.word-highlight-overlay,
-.word-highlight-overlay * {
-    transition: none !important;
-    transition-property: none !important;
-    transition-duration: 0s !important;
-    transition-delay: 0s !important;
-}
-
-/* Animation pulse subtile sur le dernier mot surligné */
-@keyframes highlightPulse {
-    0%, 100% {
-        box-shadow: 
-            0 2px 8px rgba(167, 139, 250, 0.3),
-            0 0 0 1px rgba(167, 139, 250, 0.2);
-    }
-    50% {
-        box-shadow: 
-            0 4px 16px rgba(167, 139, 250, 0.5),
-            0 0 0 2px rgba(167, 139, 250, 0.3);
-    }
-}
-
-/* Appliquer l'animation au dernier mot surligné - mais seulement sur l'overlay pour éviter les transitions */
-.dialogue-text .word.highlighted:last-of-type .word-highlight-overlay {
-    animation: highlightPulse 1.5s ease-in-out infinite;
-    /* S'assurer que l'animation ne crée pas de transition visible */
-    animation-delay: 0.1s;
-}
-
-/* Désactiver l'animation directement sur le mot pour éviter les conflits */
-.dialogue-text .word.highlighted:last-of-type {
-    animation: none !important;
-}
+/* Animation pulse supprimée - plus nécessaire avec le CSS simplifié */
 
 /* Responsive : ajuster la taille sur mobile */
 @media (max-width: 640px) {
+    .dialogue-container {
+        padding: 20px 15px;
+        margin: 20px auto;
+    }
+    
     .dialogue-text {
         font-size: 16px;
         line-height: 1.7;
@@ -440,16 +291,34 @@
     
     .dialogue-text .word {
         padding: 2px 5px;
+        margin: 0;
+    }
+    
+    .dialogue-line {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .speaker-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+    
+    .message-bubble {
+        padding: 12px 15px;
     }
     
     .dialogue-controls-sticky {
         top: 10px;
         padding: 0 10px;
+        max-width: 100%;
     }
     
     .dialogue-controls-content {
         padding: 10px 15px;
         gap: 10px;
+        flex-wrap: wrap;
     }
     
     .play-all-btn {
@@ -465,6 +334,16 @@
     .speed-control select {
         padding: 4px 8px;
         font-size: 12px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .course-intro {
+        font-size: 0.85rem;
+        margin-bottom: 20px;
     }
 }
 
@@ -643,11 +522,8 @@ function renderDialogue(container, dialogue) {
             const isWord = word.trim().length > 0;
             // Échapper le HTML pour les textes
             const escapedWord = word.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-            return `<span class="word" data-word-index="${wordIndex}" data-line-index="${index}">
-                <span class="word-text-normal">${escapedWord}</span>
-                <span class="word-text-bold">${escapedWord}</span>
-                <span class="word-highlight-overlay"></span>
-            </span>`;
+            // SIMPLIFIÉ : juste un span avec la classe word
+            return `<span class="word" data-word-index="${wordIndex}" data-line-index="${index}">${escapedWord}</span>`;
         }).join('');
         
         return `
@@ -665,24 +541,6 @@ function renderDialogue(container, dialogue) {
     }).join('');
     
     container.innerHTML = htmlContent;
-    
-    // CRÉER les overlays pour tous les mots dès le début
-    // Cela évite de les créer à la volée et garantit qu'ils sont prêts
-    setTimeout(() => {
-        const allWords = container.querySelectorAll('.word');
-        allWords.forEach(word => {
-            // S'assurer que l'overlay existe
-            if (!word.querySelector('.word-highlight-overlay')) {
-                const overlay = document.createElement('span');
-                overlay.className = 'word-highlight-overlay';
-                overlay.style.cssText = 'position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: transparent; border-radius: 6px; z-index: -1; pointer-events: none; transition: none !important; will-change: background-color; transform: translateZ(0);';
-                word.style.position = 'relative';
-                word.style.zIndex = '1';
-                word.style.isolation = 'isolate';
-                word.appendChild(overlay);
-            }
-        });
-    }, 0);
     
     // Initialiser les éléments audio
     audioElements = correctedLines.map((line, index) => {
@@ -904,19 +762,8 @@ function updateKaraokeHighlight(lineIndex, progress) {
     
     if (updates.length === 0) return;
     
-    // APPROCHE SIMPLE : Utiliser UNIQUEMENT les classes CSS, JAMAIS de styles inline
-    // Le CSS gère tout, y compris le background de l'overlay
+    // SIMPLIFIÉ : Utiliser UNIQUEMENT les classes CSS - le CSS gère le background
     updates.forEach(({ word, class: className, removeClass }) => {
-        // S'assurer que l'overlay existe (devrait déjà exister depuis renderDialogue)
-        let overlay = word.querySelector('.word-highlight-overlay');
-        if (!overlay) {
-            overlay = document.createElement('span');
-            overlay.className = 'word-highlight-overlay';
-            word.style.position = 'relative';
-            word.style.zIndex = '1';
-            word.appendChild(overlay);
-        }
-        
         // Gérer UNIQUEMENT les classes - le CSS fait tout le reste
         if (removeClass) {
             word.classList.remove(...removeClass.split(' '));
@@ -925,9 +772,6 @@ function updateKaraokeHighlight(lineIndex, progress) {
             word.classList.add(className);
         }
     });
-    
-    // Forcer un reflow immédiat pour que les classes CSS soient appliquées
-    void lineElement.offsetHeight;
 }
 
 function resetKaraoke(lineIndex) {
@@ -937,28 +781,12 @@ function resetKaraoke(lineIndex) {
     const words = lineElement.querySelectorAll(`.word[data-line-index="${lineIndex}"]`);
     words.forEach(word => {
         word.classList.remove('highlighted', 'pending');
-        // Réinitialiser l'overlay
-        const overlay = word.querySelector('.word-highlight-overlay');
-        if (overlay) {
-            overlay.style.setProperty('background-color', 'transparent', 'important');
-        }
-        // S'assurer que le texte reste dans sa couleur normale
-        word.style.setProperty('color', '#2d3748', 'important');
-        word.style.setProperty('background-color', 'transparent', 'important');
     });
 }
 
 function resetAllKaraoke() {
     document.querySelectorAll('.word').forEach(word => {
         word.classList.remove('highlighted', 'pending');
-        // Réinitialiser l'overlay
-        const overlay = word.querySelector('.word-highlight-overlay');
-        if (overlay) {
-            overlay.style.setProperty('background-color', 'transparent', 'important');
-        }
-        // S'assurer que le texte reste dans sa couleur normale
-        word.style.setProperty('color', '#2d3748', 'important');
-        word.style.setProperty('background-color', 'transparent', 'important');
     });
 }
 

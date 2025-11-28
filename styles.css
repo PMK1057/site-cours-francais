@@ -674,6 +674,93 @@ em {
     padding: 14px 28px;
 }
 
+/* Grammar card - couleur orange/jaune */
+.grammar-card {
+    background: linear-gradient(145deg, #ffa726 0%, #ffcc80 100%);
+}
+
+.grammar-card .game-card-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+/* Grammar prompt styles */
+.grammar-prompt {
+    margin-bottom: 16px;
+}
+
+.grammar-question-display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.grammar-question-label {
+    font-size: 0.95em;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 8px;
+    font-family: 'Georgia', serif;
+}
+
+.grammar-question-text {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: white;
+    font-family: 'Georgia', serif;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    display: inline-block;
+    min-width: 200px;
+}
+
+.grammar-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.grammar-home-option-btn {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: all 0.3s;
+    text-align: left;
+    font-family: 'Georgia', serif;
+    width: 100%;
+}
+
+.grammar-home-option-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateX(4px);
+}
+
+.grammar-home-option-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.grammar-home-option-btn.correct {
+    background: rgba(76, 175, 80, 0.8);
+    border-color: rgba(76, 175, 80, 1);
+    color: white;
+}
+
+.grammar-home-option-btn.incorrect {
+    background: rgba(244, 67, 54, 0.8);
+    border-color: rgba(244, 67, 54, 1);
+    color: white;
+}
+
 /* Conjugation card - couleur change selon le temps */
 .conjugation-card {
     background: var(--grad-advanced); /* Par défaut : rouge (passé composé) */
@@ -1135,7 +1222,7 @@ em {
     }
 }
 
-/* Responsive : corrections pour le jeu de conjugaison */
+/* Responsive : corrections pour les mini-jeux */
 @media (max-width: 768px) {
     .conjugation-instruction {
         flex-wrap: wrap;
@@ -1161,6 +1248,16 @@ em {
     .conjugation-answer-line {
         flex-wrap: wrap;
         gap: 8px;
+    }
+    
+    .grammar-question-text {
+        font-size: 1.1em;
+        padding: 10px 12px;
+    }
+    
+    .grammar-home-option-btn {
+        font-size: 0.95em;
+        padding: 10px 14px;
     }
     
     .pronoun-display {

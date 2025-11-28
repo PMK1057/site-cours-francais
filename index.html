@@ -54,6 +54,35 @@
                     </div>
                 </div>
 
+                <!-- Grammaire rapide -->
+                <div class="game-card grammar-card">
+                    <div class="game-card-header">
+                        <h2>🔍 Grammaire rapide</h2>
+                    </div>
+                    <div class="game-card-body">
+                        <div class="grammar-prompt">
+                            <div class="grammar-question-display">
+                                <p class="grammar-question-label">Traduisez en français :</p>
+                                <p class="grammar-question-text" id="grammar-home-question"></p>
+                            </div>
+                            <div class="grammar-options-container" id="grammar-home-options">
+                                <!-- Les options seront générées dynamiquement -->
+                            </div>
+                        </div>
+                        <div id="grammar-home-streak" class="streak-display" style="display: none;">
+                            <span class="streak-icon">🔥</span>
+                            <span class="streak-text"></span>
+                        </div>
+                        <div id="grammar-home-success-animation" class="success-animation" style="display: none;">
+                            <div class="success-checkmark">✓</div>
+                        </div>
+                        <div id="grammar-home-result" class="conjugation-result" style="display: none;">
+                            <p id="grammar-home-explanation"></p>
+                            <button id="grammar-home-next" onclick="nextGrammarHomeQuestion()">Suivant</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Conjugaison rapide -->
                 <div class="game-card conjugation-card">
                     <div class="game-card-header">

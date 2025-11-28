@@ -2548,6 +2548,211 @@ function initConjugationGame() {
     document.addEventListener('keydown', conjugationEnterHandler);
 }
 
+// ==================== JEU DE GRAMMAIRE (PAGE D'ACCUEIL) ====================
+
+// Initialiser le jeu de grammaire
+function initGrammarHomeGame() {
+    currentGrammarHomeIndex = -1;
+    grammarHomeStreak = 0;
+    usedGrammarHomeQuestions = [];
+    
+    // Masquer l'affichage du streak
+    const streakDisplay = document.getElementById('grammar-home-streak');
+    if (streakDisplay) {
+        streakDisplay.style.display = 'none';
+    }
+    
+    nextGrammarHomeQuestion();
+}
+
+// Passer à la question suivante
+function nextGrammarHomeQuestion() {
+    const resultDiv = document.getElementById('grammar-home-result');
+    const questionDiv = document.getElementById('grammar-home-question');
+    const optionsDiv = document.getElementById('grammar-home-options');
+    const successAnimation = document.getElementById('grammar-home-success-animation');
+    
+    if (resultDiv) resultDiv.style.display = 'none';
+    if (optionsDiv) optionsDiv.innerHTML = '';
+    if (successAnimation) successAnimation.style.display = 'none';
+    
+    // Sélectionner une question aléatoire non encore utilisée
+    let availableQuestions = grammarHomeQuestions.filter((_, index) => !usedGrammarHomeQuestions.includes(index));
+    
+    if (availableQuestions.length === 0) {
+        // Toutes les questions ont été utilisées, réinitialiser
+        usedGrammarHomeQuestions = [];
+        availableQuestions = grammarHomeQuestions;
+    }
+    
+    const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+    const selectedQuestion = availableQuestions[randomIndex];
+    currentGrammarHomeIndex = grammarHomeQuestions.indexOf(selectedQuestion);
+    usedGrammarHomeQuestions.push(currentGrammarHomeIndex);
+    
+    // Afficher la question
+    if (questionDiv) {
+        questionDiv.textContent = selectedQuestion.en;
+    }
+    
+    // Afficher les options (mélangées)
+    if (optionsDiv) {
+        const shuffledOptions = [...selectedQuestion.options].sort(() => Math.random() - 0.5);
+        
+        shuffledOptions.forEach((option) => {
+            const optionButton = document.createElement('button');
+            optionButton.className = 'grammar-home-option-btn';
+            optionButton.textContent = option.text;
+            optionButton.onclick = () => selectGrammarHomeOption(option, optionButton);
+            optionsDiv.appendChild(optionButton);
+        });
+    }
+}
+
+// Sélectionner une option
+function selectGrammarHomeOption(option, buttonElement) {
+    const resultDiv = document.getElementById('grammar-home-result');
+    const explanationDiv = document.getElementById('grammar-home-explanation');
+    const optionsDiv = document.getElementById('grammar-home-options');
+    
+    if (!resultDiv || !explanationDiv || !optionsDiv) return;
+    
+    // Désactiver tous les boutons
+    const allButtons = optionsDiv.querySelectorAll('.grammar-home-option-btn');
+    allButtons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.pointerEvents = 'none';
+    });
+    
+    if (option.correct) {
+        // Bonne réponse
+        buttonElement.classList.add('correct');
+        grammarHomeStreak++;
+        updateGrammarHomeStreakDisplay(grammarHomeStreak);
+        showGrammarHomeSuccessAnimation();
+        playGrammarHomeSuccessSound();
+    } else {
+        // Mauvaise réponse
+        buttonElement.classList.add('incorrect');
+        grammarHomeStreak = 0;
+        updateGrammarHomeStreakDisplay(0);
+        
+        // Trouver et mettre en évidence la bonne réponse
+        allButtons.forEach(btn => {
+            const btnText = btn.textContent.trim();
+            const correctOption = grammarHomeQuestions[currentGrammarHomeIndex].options.find(opt => opt.correct);
+            if (btnText === correctOption.text) {
+                btn.classList.add('correct');
+            }
+        });
+    }
+    
+    // Afficher l'explication
+    if (option.correct) {
+        explanationDiv.textContent = "✅ Excellente réponse !";
+    } else {
+        explanationDiv.textContent = option.error || "❌ Réponse incorrecte.";
+    }
+    
+    resultDiv.style.display = 'block';
+}
+
+// Mettre à jour l'affichage du streak
+function updateGrammarHomeStreakDisplay(streak) {
+    const streakDisplay = document.getElementById('grammar-home-streak');
+    const streakText = streakDisplay ? streakDisplay.querySelector('.streak-text') : null;
+    const streakIcon = streakDisplay ? streakDisplay.querySelector('.streak-icon') : null;
+    
+    if (!streakDisplay || !streakText) return;
+    
+    if (streak === 0) {
+        streakDisplay.style.display = 'none';
+        return;
+    }
+    
+    streakDisplay.style.display = 'flex';
+    
+    let message = '';
+    let iconSize = '1.2em';
+    
+    if (streak === 1) {
+        message = 'Bonne réponse !';
+    } else if (streak === 2) {
+        message = '2 bonnes réponses !';
+    } else if (streak === 3) {
+        message = '🔥 Série de 3 !';
+        iconSize = '1.4em';
+    } else if (streak === 5) {
+        message = '🔥🔥 Série de 5 ! Excellent !';
+        iconSize = '1.6em';
+    } else if (streak >= 10) {
+        message = `🔥🔥🔥 Série de ${streak} ! Incroyable !`;
+        iconSize = '1.8em';
+    } else {
+        message = `🔥 Série de ${streak} !`;
+        iconSize = '1.3em';
+    }
+    
+    streakText.textContent = message;
+    if (streakIcon) {
+        streakIcon.style.fontSize = iconSize;
+    }
+    
+    if (streak >= 3) {
+        streakDisplay.classList.add('streak-pulse');
+        setTimeout(() => {
+            streakDisplay.classList.remove('streak-pulse');
+        }, 600);
+    }
+}
+
+// Afficher l'animation de succès
+function showGrammarHomeSuccessAnimation() {
+    const successAnimation = document.getElementById('grammar-home-success-animation');
+    if (!successAnimation) return;
+    
+    successAnimation.style.display = 'flex';
+    successAnimation.classList.add('animate');
+    
+    setTimeout(() => {
+        successAnimation.style.display = 'none';
+        successAnimation.classList.remove('animate');
+    }, 1000);
+}
+
+// Son de succès pour la grammaire
+function playGrammarHomeSuccessSound() {
+    try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const now = audioContext.currentTime;
+        
+        const osc1 = audioContext.createOscillator();
+        const osc2 = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        osc1.connect(gainNode);
+        osc2.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        osc1.frequency.value = 523.25; // Do (C5)
+        osc2.frequency.value = 659.25; // Mi (E5)
+        
+        osc1.type = 'sine';
+        osc2.type = 'sine';
+        
+        gainNode.gain.setValueAtTime(0, now);
+        gainNode.gain.linearRampToValueAtTime(0.2, now + 0.02);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+        
+        osc1.start(now);
+        osc2.start(now);
+        osc1.stop(now + 0.25);
+        osc2.stop(now + 0.25);
+    } catch (error) {
+        // Ignorer silencieusement
+    }
+}
+
 function nextConjugation() {
     // Réinitialiser l'état
     const resultDiv = document.getElementById('conjugation-result');
@@ -2944,6 +3149,86 @@ function validateConjugation(timeout = false) {
     resultDiv.style.display = 'block';
 }
 
+// Variables globales pour le jeu de grammaire (page d'accueil)
+let grammarHomeQuestions = [
+    {
+        en: "I have three cats.",
+        options: [
+            { text: "J'ai trois chats.", correct: true },
+            { text: "J'ai trois chat.", correct: false, error: "Erreur : 'chat' doit être au pluriel 'chats'" },
+            { text: "Je suis trois chats.", correct: false, error: "Erreur : utiliser 'avoir' (j'ai) et non 'être' (je suis)" },
+            { text: "J'ai trois chattes.", correct: false, error: "Erreur : 'chattes' est le féminin, ici on parle de chats en général" }
+        ]
+    },
+    {
+        en: "She arrived yesterday.",
+        options: [
+            { text: "Elle est arrivée hier.", correct: true },
+            { text: "Elle a arrivé hier.", correct: false, error: "Erreur : avec 'arriver', utiliser 'être' (elle est) et non 'avoir' (elle a)" },
+            { text: "Elle est arrivé hier.", correct: false, error: "Erreur : accord du participe passé - 'arrivée' avec un 'e' car le sujet est 'elle'" },
+            { text: "Elle arrive hier.", correct: false, error: "Erreur : 'hier' indique le passé, utiliser le passé composé" }
+        ]
+    },
+    {
+        en: "We are going to eat.",
+        options: [
+            { text: "Nous allons manger.", correct: true },
+            { text: "Nous allons mangeons.", correct: false, error: "Erreur : après 'aller', utiliser l'infinitif 'manger' et non la conjugaison 'mangeons'" },
+            { text: "Nous sommes aller manger.", correct: false, error: "Erreur : avec 'aller', utiliser 'nous allons' et non 'nous sommes aller'" },
+            { text: "Nous allons à manger.", correct: false, error: "Erreur : après 'aller', pas de préposition 'à' avant l'infinitif" }
+        ]
+    },
+    {
+        en: "I need some water.",
+        options: [
+            { text: "J'ai besoin d'eau.", correct: true },
+            { text: "J'ai besoin de l'eau.", correct: false, error: "Erreur : avec 'besoin de', utiliser 'd'eau' (partitif) et non 'de l'eau' (défini)" },
+            { text: "Je suis besoin d'eau.", correct: false, error: "Erreur : utiliser 'avoir besoin' (j'ai) et non 'être besoin' (je suis)" },
+            { text: "J'ai besoin de eau.", correct: false, error: "Erreur : 'de' + voyelle devient 'd'' (d'eau)" }
+        ]
+    },
+    {
+        en: "She lives in Paris.",
+        options: [
+            { text: "Elle habite à Paris.", correct: true },
+            { text: "Elle habite dans Paris.", correct: false, error: "Erreur : avec les villes, utiliser 'à' et non 'dans'" },
+            { text: "Elle habite en Paris.", correct: false, error: "Erreur : avec les villes, utiliser 'à' et non 'en'" },
+            { text: "Elle habite Paris.", correct: false, error: "Erreur : avec 'habiter', la préposition 'à' est nécessaire" }
+        ]
+    },
+    {
+        en: "I like chocolate.",
+        options: [
+            { text: "J'aime le chocolat.", correct: true },
+            { text: "J'aime chocolat.", correct: false, error: "Erreur : avec 'aimer', utiliser l'article défini 'le chocolat'" },
+            { text: "Je aime le chocolat.", correct: false, error: "Erreur : 'je' + voyelle devient 'j'' (j'aime)" },
+            { text: "J'aime du chocolat.", correct: false, error: "Erreur : avec 'aimer', utiliser l'article défini 'le' et non le partitif 'du'" }
+        ]
+    },
+    {
+        en: "He went to the store.",
+        options: [
+            { text: "Il est allé au magasin.", correct: true },
+            { text: "Il a allé au magasin.", correct: false, error: "Erreur : avec 'aller', utiliser 'être' (il est) et non 'avoir' (il a)" },
+            { text: "Il est aller au magasin.", correct: false, error: "Erreur : participe passé de 'aller' est 'allé' et non 'aller'" },
+            { text: "Il va au magasin.", correct: false, error: "Erreur : 'went' est au passé, utiliser le passé composé 'il est allé'" }
+        ]
+    },
+    {
+        en: "I want to learn French.",
+        options: [
+            { text: "Je veux apprendre le français.", correct: true },
+            { text: "Je veux apprendre français.", correct: false, error: "Erreur : avec 'apprendre', utiliser l'article défini 'le français'" },
+            { text: "Je veut apprendre le français.", correct: false, error: "Erreur : conjugaison - 'je veux' avec un 'x' et non 'je veut'" },
+            { text: "Je veux à apprendre le français.", correct: false, error: "Erreur : après 'vouloir', pas de préposition 'à' avant l'infinitif" }
+        ]
+    }
+];
+
+let currentGrammarHomeIndex = -1;
+let grammarHomeStreak = 0;
+let usedGrammarHomeQuestions = [];
+
 // Variable pour suivre si l'expression a été initialisée avec succès
 let expressionInitialized = false;
 let expressionInitAttempts = 0;
@@ -3013,6 +3298,7 @@ async function initHomeGames() {
     }
     
     initConjugationGame();
+    initGrammarHomeGame();
     
     // Vérifications multiples pour forcer l'affichage si nécessaire
     const checkAndRetry = () => {
