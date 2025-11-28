@@ -1397,8 +1397,8 @@ const expressionsData = [
     },
     {
         fr: "Vas-y",
-        en: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'. Very common in conversations to show you're ready to listen or support someone's action.",
-        explanation: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'."
+        en: "Go ahead, do it, I'm listening",
+        explanation: "Encouraging expression used to give permission or encourage someone to proceed. Can mean 'go ahead', 'do it', or 'I'm listening'. Very common in conversations to show you're ready to listen or support someone's action."
     },
     {
         fr: "Allez-y",
