@@ -2478,6 +2478,7 @@ let conjugationTimer = null;
 let conjugationTimerInterval = null;
 let conjugationQuestionCount = 0;
 let conjugationTimeLeft = 20;
+let conjugationEnterHandler = null;
 
 // Jeu de conjugaison rapide
 function initConjugationGame() {
@@ -2507,6 +2508,36 @@ function initConjugationGame() {
             }
         });
     }
+    
+    // Permettre de cliquer sur "Suivant" avec Enter quand il est visible
+    // Supprimer l'ancien listener s'il existe
+    if (conjugationEnterHandler) {
+        document.removeEventListener('keydown', conjugationEnterHandler);
+    }
+    
+    // Créer le nouveau handler
+    conjugationEnterHandler = function(e) {
+        // Vérifier si on est dans le contexte de la conjugaison
+        const conjugationCard = document.querySelector('.conjugation-card');
+        if (!conjugationCard || !conjugationCard.offsetParent) {
+            return; // La carte n'est pas visible
+        }
+        
+        if (e.key === 'Enter') {
+            const nextBtn = document.getElementById('conjugation-next');
+            const resultDiv = document.getElementById('conjugation-result');
+            
+            // Si le bouton "Suivant" est visible et cliquable
+            if (nextBtn && resultDiv && resultDiv.style.display !== 'none' && 
+                !nextBtn.disabled && nextBtn.offsetParent !== null) {
+                e.preventDefault();
+                nextBtn.click();
+            }
+        }
+    };
+    
+    // Ajouter le listener
+    document.addEventListener('keydown', conjugationEnterHandler);
 }
 
 function nextConjugation() {
@@ -2547,12 +2578,29 @@ function nextConjugation() {
         data: conjugaisons[verbe][tempsChoisi][personne]
     };
     
-    // Préparer l'affichage du pronom - utiliser "J'" pour le passé composé avec "je"
+    // Préparer l'affichage du pronom
     let displayPersonne = personne;
     
-    // Pour le passé composé avec "je", afficher "J'" car l'auxiliaire "ai" commence par une voyelle
+    // Pour le passé composé avec "je", vérifier l'auxiliaire
+    // "J'" seulement si l'auxiliaire est "avoir" (réponse commence par "ai")
+    // "Je" si l'auxiliaire est "être" (réponse commence par "suis", "es", "est", etc.)
     if (tempsChoisi === "passé composé" && personne === "je") {
-        displayPersonne = "J'";
+        if (currentConjugation && currentConjugation.data && currentConjugation.data.reponse) {
+            const reponse = currentConjugation.data.reponse.toLowerCase().trim();
+            // Si la réponse commence par "ai " (auxiliaire avoir), utiliser "J'"
+            if (reponse.startsWith("ai ")) {
+                displayPersonne = "J'";
+            } else {
+                // Sinon (auxiliaire être : "suis", "es", "est", etc.), garder "Je"
+                displayPersonne = "Je";
+            }
+        } else {
+            // Par défaut si les données ne sont pas disponibles
+            displayPersonne = "Je";
+        }
+    } else if (personne === "je") {
+        // Pour le présent ou autres temps avec "je", capitaliser
+        displayPersonne = "Je";
     } else {
         // Capitaliser la première lettre de la personne
         displayPersonne = displayPersonne.charAt(0).toUpperCase() + displayPersonne.slice(1);
