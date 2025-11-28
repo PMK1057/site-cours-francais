@@ -2550,6 +2550,8 @@ function initConjugationGame() {
 
 // ==================== JEU DE GRAMMAIRE (PAGE D'ACCUEIL) ====================
 
+let grammarHomeEnterHandler = null;
+
 // Initialiser le jeu de grammaire
 function initGrammarHomeGame() {
     currentGrammarHomeIndex = -1;
@@ -2563,6 +2565,36 @@ function initGrammarHomeGame() {
     }
     
     nextGrammarHomeQuestion();
+    
+    // Permettre de cliquer sur "Suivant" avec Enter quand il est visible
+    // Supprimer l'ancien listener s'il existe
+    if (grammarHomeEnterHandler) {
+        document.removeEventListener('keydown', grammarHomeEnterHandler);
+    }
+    
+    // Créer le nouveau handler
+    grammarHomeEnterHandler = function(e) {
+        // Vérifier si on est dans le contexte de la grammaire
+        const grammarCard = document.querySelector('.grammar-card');
+        if (!grammarCard || !grammarCard.offsetParent) {
+            return; // La carte n'est pas visible
+        }
+        
+        if (e.key === 'Enter') {
+            const nextBtn = document.getElementById('grammar-home-next');
+            const resultDiv = document.getElementById('grammar-home-result');
+            
+            // Si le bouton "Suivant" est visible et cliquable
+            if (nextBtn && resultDiv && resultDiv.style.display !== 'none' && 
+                !nextBtn.disabled && nextBtn.offsetParent !== null) {
+                e.preventDefault();
+                nextBtn.click();
+            }
+        }
+    };
+    
+    // Ajouter le listener
+    document.addEventListener('keydown', grammarHomeEnterHandler);
 }
 
 // Passer à la question suivante
