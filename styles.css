@@ -372,7 +372,6 @@ th {
     font-weight: 600;
 }
 
-
 td {
     padding: 12px 15px;
     border-bottom: 1px solid #ddd;
@@ -380,6 +379,31 @@ td {
 
 tr:hover {
     background: #f5f5f5;
+}
+
+/* Sur mobile, wrapper scrollable pour les tables larges */
+@media (max-width: 768px) {
+    /* Les tables dans les cours peuvent être wrappées dans un div avec overflow */
+    table {
+        min-width: 100%;
+    }
+    
+    /* Si une table est trop large, elle scrollera horizontalement */
+    .course-content table,
+    .section table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+    
+    .course-content table thead,
+    .course-content table tbody,
+    .course-content table tr {
+        display: table;
+        width: 100%;
+        table-layout: auto;
+    }
 }
 
 /* Boxes spéciaux */
@@ -1408,6 +1432,181 @@ em {
     
     body {
         padding-bottom: 45px;
+    }
+}
+
+/* ============================================
+   CORRECTIONS MOBILE - PROBLÈMES D'IMBRICATION
+   ============================================ */
+
+/* Réduction des paddings sur tablette et mobile */
+@media (max-width: 768px) {
+    /* Container principal - réduction padding */
+    .container {
+        padding: 0 12px;
+        margin: 20px auto;
+    }
+    
+    /* Sections - réduction padding */
+    .section {
+        padding: 20px 16px;
+        margin-bottom: 20px;
+    }
+    
+    /* Contenu des cours - réduction padding */
+    .course-content {
+        padding: 20px 16px;
+        margin-bottom: 20px;
+    }
+    
+    /* Boxes d'information - réduction padding */
+    .info-box,
+    .example-box,
+    .warning-box {
+        padding: 12px 14px;
+        margin: 15px 0;
+    }
+    
+    /* Game cards - réduction padding */
+    .game-card-body {
+        padding: 20px 16px;
+    }
+    
+    .game-card-header {
+        padding: 20px 16px;
+    }
+    
+    /* Expression cards */
+    .expression-card .game-card-body,
+    .conjugation-card .game-card-body,
+    .translation-card .game-card-body {
+        padding: 20px 16px;
+    }
+    
+    /* Date card */
+    .date-card .game-card-body {
+        padding: 12px 16px;
+    }
+    
+    /* Tables - padding réduit */
+    table {
+        font-size: 0.9em;
+    }
+    
+    th, td {
+        padding: 8px 10px;
+    }
+    
+    /* Exercices - padding réduit */
+    .exercise {
+        padding: 16px;
+        margin: 20px 0;
+    }
+    
+    .question {
+        padding: 12px;
+        margin: 15px 0;
+    }
+}
+
+/* Réduction encore plus importante sur petits mobiles */
+@media (max-width: 480px) {
+    /* Container - padding minimal */
+    .container {
+        padding: 0 8px;
+        margin: 15px auto;
+    }
+    
+    /* Sections - padding minimal mais lisible */
+    .section {
+        padding: 16px 12px;
+        border-radius: 12px;
+    }
+    
+    /* Contenu des cours - padding minimal */
+    .course-content {
+        padding: 16px 12px;
+        border-radius: 12px;
+    }
+    
+    /* Boxes - padding minimal */
+    .info-box,
+    .example-box,
+    .warning-box {
+        padding: 10px 12px;
+        margin: 12px 0;
+    }
+    
+    /* Game cards - padding minimal */
+    .game-card-body {
+        padding: 16px 12px;
+    }
+    
+    .game-card-header {
+        padding: 16px 12px;
+    }
+    
+    .expression-card .game-card-body,
+    .conjugation-card .game-card-body,
+    .translation-card .game-card-body {
+        padding: 16px 12px;
+    }
+    
+    .date-card .game-card-body {
+        padding: 10px 12px;
+    }
+    
+    /* Tables - padding très réduit */
+    th, td {
+        padding: 6px 8px;
+        font-size: 0.85em;
+    }
+    
+    /* Exercices - padding minimal */
+    .exercise {
+        padding: 12px;
+        margin: 15px 0;
+    }
+    
+    .question {
+        padding: 10px;
+        margin: 12px 0;
+    }
+    
+    /* Titres - taille réduite */
+    h2 {
+        font-size: 1.6em;
+        margin: 20px 0 15px 0;
+    }
+    
+    h3 {
+        font-size: 1.3em;
+        margin: 15px 0 12px 0;
+    }
+    
+    h4 {
+        font-size: 1.1em;
+        margin: 12px 0 8px 0;
+    }
+    
+    /* Paragraphes - espacement réduit */
+    p {
+        margin-bottom: 12px;
+        line-height: 1.7;
+    }
+}
+
+/* Correction pour les text-container dans les cours HTML individuels */
+@media (max-width: 768px) {
+    .text-container {
+        padding: 20px 16px !important;
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .text-container {
+        padding: 16px 12px !important;
     }
 }
 
