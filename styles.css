@@ -644,6 +644,74 @@ em {
     color: white;
     font-weight: 600;
     letter-spacing: 0.55px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Animation pour l'icône de jeu (manette) */
+.game-icon {
+    display: inline-block;
+    animation: gameIconPulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+}
+
+@keyframes gameIconPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+    }
+}
+
+/* Animation spécifique pour la grammaire (vert) */
+.grammar-card .game-icon {
+    animation: gameIconPulseGreen 2s ease-in-out infinite;
+}
+
+@keyframes gameIconPulseGreen {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 8px rgba(76, 175, 80, 0.8));
+    }
+}
+
+/* Animation spécifique pour la conjugaison (rouge/bleu selon le temps) */
+.conjugation-card .game-icon {
+    animation: gameIconPulseRed 2s ease-in-out infinite;
+}
+
+.conjugation-card.tense-present .game-icon {
+    animation: gameIconPulsePurple 2s ease-in-out infinite;
+}
+
+@keyframes gameIconPulseRed {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 8px rgba(255, 94, 122, 0.8));
+    }
+}
+
+@keyframes gameIconPulsePurple {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 8px rgba(123, 92, 255, 0.8));
+    }
 }
 
 /* Expression card - entièrement violet */
@@ -682,18 +750,22 @@ em {
 .grammar-card .game-card-header {
     background: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.grammar-card .game-card-header h2 {
+    font-size: 1.5em;
 }
 
 /* Grammar prompt styles */
 .grammar-prompt {
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 }
 
 .grammar-question-display {
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -709,11 +781,11 @@ em {
 }
 
 .grammar-question-text {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 700;
     color: white;
     font-family: 'Georgia', serif;
-    padding: 8px 14px;
+    padding: 6px 12px;
     background: rgba(255, 255, 255, 0.15);
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
@@ -724,18 +796,18 @@ em {
 .grammar-options-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: 6px;
+    margin-bottom: 8px;
 }
 
 .grammar-home-option-btn {
-    padding: 12px 16px;
+    padding: 10px 14px;
     background: rgba(255, 255, 255, 0.2);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 0.95em;
     font-weight: 500;
     transition: all 0.3s;
     text-align: left;
@@ -785,8 +857,12 @@ em {
 .conjugation-card .game-card-header {
     background: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.conjugation-card .game-card-header h2 {
+    font-size: 1.5em;
 }
 
 .game-card-body {
@@ -807,8 +883,15 @@ em {
 .translation-card .game-card-header {
     background: transparent;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+/* Animation pour l'icône de jeu dans les exercices */
+h2 .game-icon {
+    display: inline-block;
+    animation: gameIconPulsePurple 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
 }
 
 .translation-card .game-card-body {
@@ -1023,12 +1106,12 @@ em {
 
 /* Conjugaison rapide - Format conversationnel */
 .conjugation-prompt {
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 }
 
 .conjugation-instruction {
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1077,7 +1160,7 @@ em {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     flex-wrap: nowrap;
     justify-content: center;
 }
@@ -1138,12 +1221,12 @@ em {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin: 12px 0;
-    padding: 10px 16px;
+    margin: 8px 0;
+    padding: 8px 14px;
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.4);
     border-radius: 12px;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: 700;
     color: white;
     font-family: 'Georgia', serif;
@@ -1407,12 +1490,17 @@ em {
 }
 
 .conjugation-result {
-    margin-top: 12px;
-    padding: 12px 16px;
+    margin-top: 8px;
+    padding: 10px 14px;
     border-radius: 12px;
     animation: fadeIn 0.5s;
     background: rgba(255, 255, 255, 0.15);
     border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.conjugation-result p {
+    margin: 0 0 8px 0;
+    font-size: 0.9em;
 }
 
 .conjugation-result.correct {
@@ -1432,10 +1520,18 @@ em {
 }
 
 #conjugation-result-explanation {
-    font-size: 0.9em;
-    line-height: 1.5;
+    font-size: 0.85em;
+    line-height: 1.4;
     color: rgba(255, 255, 255, 0.95);
-    margin: 0;
+    margin: 0 0 8px 0;
+    text-align: left;
+}
+
+#grammar-home-explanation {
+    font-size: 0.85em;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 0 8px 0;
     text-align: left;
 }
 
