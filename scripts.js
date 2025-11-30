@@ -3182,80 +3182,9 @@ function validateConjugation(timeout = false) {
 }
 
 // Variables globales pour le jeu de grammaire (page d'accueil)
-let grammarHomeQuestions = [
-    {
-        en: "I have three cats.",
-        options: [
-            { text: "J'ai trois chats.", correct: true },
-            { text: "J'ai trois chat.", correct: false, error: "Erreur : 'chat' doit être au pluriel 'chats'" },
-            { text: "Je suis trois chats.", correct: false, error: "Erreur : utiliser 'avoir' (j'ai) et non 'être' (je suis)" },
-            { text: "J'ai trois chattes.", correct: false, error: "Erreur : 'chattes' est le féminin, ici on parle de chats en général" }
-        ]
-    },
-    {
-        en: "She arrived yesterday.",
-        options: [
-            { text: "Elle est arrivée hier.", correct: true },
-            { text: "Elle a arrivé hier.", correct: false, error: "Erreur : avec 'arriver', utiliser 'être' (elle est) et non 'avoir' (elle a)" },
-            { text: "Elle est arrivé hier.", correct: false, error: "Erreur : accord du participe passé - 'arrivée' avec un 'e' car le sujet est 'elle'" },
-            { text: "Elle arrive hier.", correct: false, error: "Erreur : 'hier' indique le passé, utiliser le passé composé" }
-        ]
-    },
-    {
-        en: "We are going to eat.",
-        options: [
-            { text: "Nous allons manger.", correct: true },
-            { text: "Nous allons mangeons.", correct: false, error: "Erreur : après 'aller', utiliser l'infinitif 'manger' et non la conjugaison 'mangeons'" },
-            { text: "Nous sommes aller manger.", correct: false, error: "Erreur : avec 'aller', utiliser 'nous allons' et non 'nous sommes aller'" },
-            { text: "Nous allons à manger.", correct: false, error: "Erreur : après 'aller', pas de préposition 'à' avant l'infinitif" }
-        ]
-    },
-    {
-        en: "I need some water.",
-        options: [
-            { text: "J'ai besoin d'eau.", correct: true },
-            { text: "J'ai besoin de l'eau.", correct: false, error: "Erreur : avec 'besoin de', utiliser 'd'eau' (partitif) et non 'de l'eau' (défini)" },
-            { text: "Je suis besoin d'eau.", correct: false, error: "Erreur : utiliser 'avoir besoin' (j'ai) et non 'être besoin' (je suis)" },
-            { text: "J'ai besoin de eau.", correct: false, error: "Erreur : 'de' + voyelle devient 'd'' (d'eau)" }
-        ]
-    },
-    {
-        en: "She lives in Paris.",
-        options: [
-            { text: "Elle habite à Paris.", correct: true },
-            { text: "Elle habite dans Paris.", correct: false, error: "Erreur : avec les villes, utiliser 'à' et non 'dans'" },
-            { text: "Elle habite en Paris.", correct: false, error: "Erreur : avec les villes, utiliser 'à' et non 'en'" },
-            { text: "Elle habite Paris.", correct: false, error: "Erreur : avec 'habiter', la préposition 'à' est nécessaire" }
-        ]
-    },
-    {
-        en: "I like chocolate.",
-        options: [
-            { text: "J'aime le chocolat.", correct: true },
-            { text: "J'aime chocolat.", correct: false, error: "Erreur : avec 'aimer', utiliser l'article défini 'le chocolat'" },
-            { text: "Je aime le chocolat.", correct: false, error: "Erreur : 'je' + voyelle devient 'j'' (j'aime)" },
-            { text: "J'aime du chocolat.", correct: false, error: "Erreur : avec 'aimer', utiliser l'article défini 'le' et non le partitif 'du'" }
-        ]
-    },
-    {
-        en: "He went to the store.",
-        options: [
-            { text: "Il est allé au magasin.", correct: true },
-            { text: "Il a allé au magasin.", correct: false, error: "Erreur : avec 'aller', utiliser 'être' (il est) et non 'avoir' (il a)" },
-            { text: "Il est aller au magasin.", correct: false, error: "Erreur : participe passé de 'aller' est 'allé' et non 'aller'" },
-            { text: "Il va au magasin.", correct: false, error: "Erreur : 'went' est au passé, utiliser le passé composé 'il est allé'" }
-        ]
-    },
-    {
-        en: "I want to learn French.",
-        options: [
-            { text: "Je veux apprendre le français.", correct: true },
-            { text: "Je veux apprendre français.", correct: false, error: "Erreur : avec 'apprendre', utiliser l'article défini 'le français'" },
-            { text: "Je veut apprendre le français.", correct: false, error: "Erreur : conjugaison - 'je veux' avec un 'x' et non 'je veut'" },
-            { text: "Je veux à apprendre le français.", correct: false, error: "Erreur : après 'vouloir', pas de préposition 'à' avant l'infinitif" }
-        ]
-    }
-];
+// ⚠️ IMPORTANT : Les questions sont maintenant dans grammar-questions-a2.js
+// Le jeu utilise grammarQuestionsA2 qui est chargé depuis ce fichier partagé
+let grammarHomeQuestions = typeof grammarQuestionsA2 !== 'undefined' ? grammarQuestionsA2 : [];
 
 let currentGrammarHomeIndex = -1;
 let grammarHomeStreak = 0;
