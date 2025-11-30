@@ -130,14 +130,16 @@
                 const originalText = buttonElement.dataset.originalText || buttonElement.textContent.trim().replace(/^[✅❌]\s*/, '');
                 buttonElement.innerHTML = `❌ ${originalText}`;
                 // Trouver et mettre en évidence la bonne réponse
-                const correctOption = grammarQuestions[currentGrammarIndex].options.find(opt => opt.correct);
+                // Trouver toutes les options correctes (peut y en avoir plusieurs)
+                const correctOptions = grammarQuestions[currentGrammarIndex].options.filter(opt => opt.correct);
                 allButtons.forEach(btn => {
                     const btnOriginalText = btn.dataset.originalText || btn.textContent.trim().replace(/^[✅❌]\s*/, '');
-                    if (btnOriginalText === correctOption.text) {
+                    const matchingCorrectOption = correctOptions.find(opt => opt.text === btnOriginalText);
+                    if (matchingCorrectOption) {
                         btn.classList.add('correct-answer');
                         // Préserver le texte original sans emoji si ce n'est pas le bouton sélectionné
                         if (btn !== buttonElement) {
-                            btn.innerHTML = `✅ ${correctOption.text}`;
+                            btn.innerHTML = `✅ ${matchingCorrectOption.text}`;
                         }
                     }
                 });
@@ -149,8 +151,10 @@
                 resultExplanation.innerHTML = `<div class="result-header"><span class="check-icon">✓</span><strong>Correct !</strong></div><div class="result-answer">${option.text}</div>`;
             } else {
                 resultDiv.className = 'translation-result incorrect';
-                const correctOption = grammarQuestions[currentGrammarIndex].options.find(opt => opt.correct);
-                resultExplanation.innerHTML = `<strong>❌ Incorrect</strong><br>La bonne réponse était : <strong style="color: #667eea;">${correctOption.text}</strong><br><small>${option.error || ''}</small>`;
+                // Trouver toutes les options correctes (peut y en avoir plusieurs)
+                const correctOptions = grammarQuestions[currentGrammarIndex].options.filter(opt => opt.correct);
+                const correctTexts = correctOptions.map(opt => opt.text).join(' ou ');
+                resultExplanation.innerHTML = `<strong>❌ Incorrect</strong><br>La bonne réponse était : <strong style="color: #667eea;">${correctTexts}</strong><br><small>${option.error || ''}</small>`;
             }
             
             resultDiv.style.display = 'block';

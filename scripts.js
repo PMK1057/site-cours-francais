@@ -2669,11 +2669,12 @@ function selectGrammarHomeOption(option, buttonElement) {
         grammarHomeStreak = 0;
         updateGrammarHomeStreakDisplay(0);
         
-        // Trouver et mettre en évidence la bonne réponse
+        // Trouver et mettre en évidence toutes les bonnes réponses (peut y en avoir plusieurs)
+        const correctOptions = grammarHomeQuestions[currentGrammarHomeIndex].options.filter(opt => opt.correct);
         allButtons.forEach(btn => {
             const btnText = btn.textContent.trim();
-            const correctOption = grammarHomeQuestions[currentGrammarHomeIndex].options.find(opt => opt.correct);
-            if (btnText === correctOption.text) {
+            const isCorrect = correctOptions.some(opt => opt.text === btnText);
+            if (isCorrect) {
                 btn.classList.add('correct');
             }
         });

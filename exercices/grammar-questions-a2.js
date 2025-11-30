@@ -560,8 +560,8 @@ const grammarQuestionsA2 = [
         en: "I arrived late.",
         options: [
             { text: "Je suis arrivé en retard.", correct: true },
+            { text: "Je suis arrivée en retard.", correct: true },
             { text: "J'ai arrivé en retard.", correct: false, error: "Erreur : avec 'arriver', utiliser 'être' (je suis) et non 'avoir' (j'ai)" },
-            { text: "Je suis arrivée en retard.", correct: false, error: "Erreur : accord du participe passé - 'arrivé' (masculin) si le sujet 'je' est masculin" },
             { text: "J'arrive en retard.", correct: false, error: "Erreur : 'arrived' est au passé, utiliser le passé composé" }
         ]
     },
